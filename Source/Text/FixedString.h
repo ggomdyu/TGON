@@ -2,90 +2,85 @@
 
 #include <type_traits>
 #include <array>
+#include <string_view>
+#include <span>
 
 #include "StringTraits.h"
 
 namespace tg
 {
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType = BasicStringTraits<_CharType>>
-class BasicFixedString
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits = BasicStringTraits<_Char>>
+class BasicFixedString final
 {
-    static_assert(std::is_same<_CharType, typename _StringTraitsType::ValueType>::value, "_StringTraitsType's character type doesn't match with the _CharType.");
+    static_assert(std::is_same<_Char, typename _StringTraits::CharType>::value, "_StringTraits's character type doesn't match with _Char.");
 
 /**@section Type */
 public:
-    using StringTraitsType = _StringTraitsType;
-    using ValueType = _CharType;
-    using Iterator = _CharType*;
-    using ConstIterator = const _CharType*;
-    using ReferenceType = _CharType&;
-    using ConstReferenceType = const _CharType&;
+    using CharType = _StringTraits;
 
 /**@section Constructor */
 public:
     constexpr BasicFixedString() noexcept = default;
-    BasicFixedString(const _CharType* str, int32_t count);
-    BasicFixedString(const _CharType* str);
-    BasicFixedString(const std::basic_string_view<_CharType>& str);
-    BasicFixedString(_CharType ch, int32_t chCount);
+    BasicFixedString(const _Char* str, int32_t count);
+    BasicFixedString(const _Char* str);
+    BasicFixedString(const std::basic_string_view<_Char>& str);
+    BasicFixedString(_Char ch, int32_t chCount);
     template <int32_t _CharBufferSize2>
-    BasicFixedString(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& str);
+    BasicFixedString(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str);
 
 /**@section Operator */
 public:
-    BasicFixedString& operator=(const std::basic_string_view<_CharType>& rhs);
+    BasicFixedString& operator=(const std::basic_string_view<_Char>& str);
     template <int32_t _CharBufferSize2>
-    BasicFixedString& operator=(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs);
-    const BasicFixedString operator+(const std::basic_string_view<_CharType>& rhs) const;
+    BasicFixedString& operator=(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str);
+    BasicFixedString operator+(const std::basic_string_view<_Char>& str) const;
     template <int32_t _CharBufferSize2>
-    const BasicFixedString operator+(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const;
-    const BasicFixedString operator+(_CharType rhs) const;
-    BasicFixedString& operator+=(const std::basic_string_view<_CharType>& rhs);
+    BasicFixedString operator+(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const;
+    BasicFixedString operator+(_Char ch) const;
+    BasicFixedString& operator+=(const std::basic_string_view<_Char>& str);
     template <int32_t _CharBufferSize2>
-    BasicFixedString& operator+=(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs);
-    BasicFixedString& operator+=(_CharType ch);
-    bool operator!=(const std::basic_string_view<_CharType>& rhs) const;
+    BasicFixedString& operator+=(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str);
+    BasicFixedString& operator+=(_Char ch);
+    bool operator!=(const std::basic_string_view<_Char>& str) const;
     template <int32_t _CharBufferSize2>
-    bool operator!=(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const;
-    bool operator==(const std::basic_string_view<_CharType>& rhs) const;
+    bool operator!=(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const;
+    bool operator==(const std::basic_string_view<_Char>& str) const;
     template <int32_t _CharBufferSize2>
-    bool operator==(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const;
-    _CharType operator[](int32_t index) const;
-    _CharType& operator[](int32_t index);
-    operator std::basic_string<_CharType>() const noexcept;
-    operator std::basic_string_view<_CharType>() const noexcept;
+    bool operator==(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const;
+    _Char operator[](int32_t index) const;
+    _Char& operator[](int32_t index);
+    operator std::basic_string<_Char>() const noexcept;
+    operator std::basic_string_view<_Char>() const noexcept;
+    operator std::span<_Char>() const noexcept;
+    operator std::span<_Char, _CharBufferSize>() const noexcept;
 
 /**@section Method */
 public:
     template <int32_t _CharBufferSize2>
-    BasicFixedString<_CharType, _CharBufferSize + _CharBufferSize2, _StringTraitsType> Expand(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const;
+    [[nodiscard]] BasicFixedString<_Char, _CharBufferSize + _CharBufferSize2, _StringTraits> Expand(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const;
     template <int32_t _CharBufferSize2>
-    int32_t CompareTo(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& str) const;
-    int32_t CompareTo(const std::basic_string_view<_CharType>& str) const;
-    int32_t IndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex = 0) const;
-    int32_t IndexOf(_CharType ch, int32_t startIndex = 0) const;
-    template <typename _PredicateType>
-    int32_t IndexOfAny(const _PredicateType& predicate, int32_t startIndex = 0) const;
-    int32_t LastIndexOf(const std::basic_string_view<_CharType>& str) const;
-    int32_t LastIndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex) const;
-    int32_t LastIndexOf(_CharType ch) const;
-    int32_t LastIndexOf(_CharType ch, int32_t startIndex) const;
-    template <typename _PredicateType>
-    int32_t LastIndexOfAny(const _PredicateType& predicate) const;
-    template <typename _PredicateType>
-    int32_t LastIndexOfAny(const _PredicateType& predicate, int32_t startIndex) const;
-    const _CharType* Data() const noexcept;
-    int32_t Length() const noexcept;
-    constexpr int32_t Capacity() const noexcept;
-    Iterator Begin() noexcept;
-    Iterator End() noexcept;
-    ConstIterator CBegin() const noexcept;
-    ConstIterator CEnd() const noexcept;
+    [[nodiscard]] int32_t CompareTo(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const;
+    [[nodiscard]] int32_t CompareTo(const std::basic_string_view<_Char>& str) const;
+    [[nodiscard]] int32_t IndexOf(const std::basic_string_view<_Char>& str, int32_t startIndex = 0) const;
+    [[nodiscard]] int32_t IndexOf(_Char ch, int32_t startIndex = 0) const;
+    template <typename _Predicate>
+    [[nodiscard]] int32_t IndexOfAny(const _Predicate& predicate, int32_t startIndex = 0) const;
+    [[nodiscard]] int32_t LastIndexOf(const std::basic_string_view<_Char>& str) const;
+    [[nodiscard]] int32_t LastIndexOf(const std::basic_string_view<_Char>& str, int32_t startIndex) const;
+    [[nodiscard]] int32_t LastIndexOf(_Char ch) const;
+    [[nodiscard]] int32_t LastIndexOf(_Char ch, int32_t startIndex) const;
+    template <typename _Predicate>
+    [[nodiscard]] int32_t LastIndexOfAny(const _Predicate& predicate) const;
+    template <typename _Predicate>
+    [[nodiscard]] int32_t LastIndexOfAny(const _Predicate& predicate, int32_t startIndex) const;
+    [[nodiscard]] const _Char* Data() const noexcept;
+    [[nodiscard]] int32_t Length() const noexcept;
+    [[nodiscard]] constexpr int32_t Capacity() const noexcept;
 
 /**@section Variable */
 protected:
-    std::array<_CharType, _CharBufferSize> m_str = {};
+    std::array<_Char, _CharBufferSize> m_str = {};
     int32_t m_strLen = 0;
 };
 
@@ -95,16 +90,16 @@ namespace detail
 template <typename>
 struct IsBasicFixedString : std::false_type {};
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-struct IsBasicFixedString<BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>> : std::true_type {};
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+struct IsBasicFixedString<BasicFixedString<_Char, _CharBufferSize, _StringTraits>> : std::true_type {};
 
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType = BasicStringTraits<_CharType>>
-BasicFixedString(const _CharType(&)[_CharBufferSize]) -> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>;
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits = BasicStringTraits<_Char>>
+BasicFixedString(const _Char(&)[_CharBufferSize]) -> BasicFixedString<_Char, _CharBufferSize, _StringTraits>;
 
 template <typename _Type>
-constexpr bool IsBasicFixedString = detail::IsBasicFixedString<_Type>::value;
+concept IsBasicFixedString = detail::IsBasicFixedString<_Type>::value;
 
 using FixedString8 = BasicFixedString<char, 8>;
 using FixedString16 = BasicFixedString<char, 16>;
@@ -119,18 +114,18 @@ using FixedString4096 = BasicFixedString<char, 4096>;
 using FixedString8192 = BasicFixedString<char, 8192>;
 using FixedString16384 = BasicFixedString<char, 16384>;
 
-using WFixedString8 = BasicFixedString<wchar_t, 8>;
-using WFixedString16 = BasicFixedString<wchar_t, 16>;
-using WFixedString32 = BasicFixedString<wchar_t, 32>;
-using WFixedString64 = BasicFixedString<wchar_t, 64>;
-using WFixedString128 = BasicFixedString<wchar_t, 128>;
-using WFixedString256 = BasicFixedString<wchar_t, 256>;
-using WFixedString512 = BasicFixedString<wchar_t, 512>;
-using WFixedString1024 = BasicFixedString<wchar_t, 1024>;
-using WFixedString2048 = BasicFixedString<wchar_t, 2048>;
-using WFixedString4096 = BasicFixedString<wchar_t, 4096>;
-using WFixedString8192 = BasicFixedString<wchar_t, 8192>;
-using WFixedString16384 = BasicFixedString<wchar_t, 16384>;
+using U8FixedString8 = BasicFixedString<char8_t, 8>;
+using U8FixedString16 = BasicFixedString<char8_t, 16>;
+using U8FixedString32 = BasicFixedString<char8_t, 32>;
+using U8FixedString64 = BasicFixedString<char8_t, 64>;
+using U8FixedString128 = BasicFixedString<char8_t, 128>;
+using U8FixedString256 = BasicFixedString<char8_t, 256>;
+using U8FixedString512 = BasicFixedString<char8_t, 512>;
+using U8FixedString1024 = BasicFixedString<char8_t, 1024>;
+using U8FixedString2048 = BasicFixedString<char8_t, 2048>;
+using U8FixedString4096 = BasicFixedString<char8_t, 4096>;
+using U8FixedString8192 = BasicFixedString<char8_t, 8192>;
+using U8FixedString16384 = BasicFixedString<char8_t, 16384>;
 
 using U16FixedString8 = BasicFixedString<char16_t, 8>;
 using U16FixedString16 = BasicFixedString<char16_t, 16>;
@@ -158,267 +153,255 @@ using U32FixedString4096 = BasicFixedString<char32_t, 4096>;
 using U32FixedString8192 = BasicFixedString<char32_t, 8192>;
 using U32FixedString16384 = BasicFixedString<char32_t, 16384>;
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const _CharType* str, int32_t count) :
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>::BasicFixedString(const _Char* str, int32_t count) :
     m_strLen(count)
 {
-    _StringTraitsType::Append(str, count, m_str.data(), 0, static_cast<int32_t>(m_str.size()));
+    _StringTraits::Append(str, count, m_str.data(), 0, static_cast<int32_t>(m_str.size()));
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const _CharType* str) :
-    BasicFixedString(std::basic_string_view<_CharType>(str))
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>::BasicFixedString(const _Char* str) :
+    BasicFixedString(std::basic_string_view<_Char>(str))
 {
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const std::basic_string_view<_CharType>& str) :
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>::BasicFixedString(const std::basic_string_view<_Char>& str) :
     BasicFixedString(str.data(), static_cast<int32_t>(str.length()))
 {
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(_CharType ch, int32_t chCount) :
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>::BasicFixedString(_Char ch, int32_t chCount) :
     m_strLen(chCount)
 {
-    _StringTraitsType::Append(ch, chCount, m_str.data(), 0, _CharBufferSize);
+    _StringTraits::Append(ch, chCount, m_str.data(), 0, _CharBufferSize);
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
 template <int32_t _CharBufferSize2>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) :
-    BasicFixedString({rhs.Data(), rhs.Length()})
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>::BasicFixedString(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) :
+    BasicFixedString({str.Data(), str.Length()})
 {
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
 template <int32_t _CharBufferSize2>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator=(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs)
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>& BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator=(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str)
 {
-    this->Assign(rhs);
+    this->Assign(str);
     return *this;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator=(const std::basic_string_view<_CharType>& rhs)
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>& BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator=(const std::basic_string_view<_Char>& str)
 {
-    this->Assign(rhs);
+    this->Assign(str);
     return *this;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
 template <int32_t _CharBufferSize2>
-inline const BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const
+BasicFixedString<_Char, _CharBufferSize, _StringTraits> BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator+(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const
 {
-    return (BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>(*this) += rhs);
+    return (BasicFixedString<_Char, _CharBufferSize, _StringTraits>(*this) += str);
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline const BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+(const std::basic_string_view<_CharType>& rhs) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits> BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator+(const std::basic_string_view<_Char>& str) const
 {
-    return (BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>(*this) += rhs);
+    return (BasicFixedString<_Char, _CharBufferSize, _StringTraits>(*this) += str);
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline const BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+(_CharType ch) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits> BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator+(_Char ch) const
 {
-    return (BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>(*this) += ch);
+    return (BasicFixedString<_Char, _CharBufferSize, _StringTraits>(*this) += ch);
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
 template <int32_t _CharBufferSize2>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+=(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs)
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>& BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator+=(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str)
 {
-    return this->operator+=({rhs.Data(), rhs.Length()});
+    return this->operator+=({str.Data(), str.Length()});
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+=(const std::basic_string_view<_CharType>& rhs)
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>& BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator+=(const std::basic_string_view<_Char>& str)
 {
-    _StringTraitsType::Append(rhs.data(), static_cast<int32_t>(rhs.length()), m_str.data(), m_strLen, static_cast<int32_t>(m_str.size()));
-    m_strLen += static_cast<int32_t>(rhs.length());
+    _StringTraits::Append(str.data(), static_cast<int32_t>(str.length()), m_str.data(), m_strLen, static_cast<int32_t>(m_str.size()));
+    m_strLen += static_cast<int32_t>(str.length());
 
     return *this;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+=(_CharType rhs)
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>& BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator+=(_Char ch)
 {
-    _StringTraitsType::Append(rhs, 1, m_str.data(), m_strLen, _CharBufferSize);
+    _StringTraits::Append(ch, 1, m_str.data(), m_strLen, _CharBufferSize);
     m_strLen += 1;
 
     return *this;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator!=(const std::basic_string_view<_CharType>& rhs) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+bool BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator!=(const std::basic_string_view<_Char>& str) const
 {
-    return !this->operator==(rhs);
+    return !this->operator==(str);
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
 template <int32_t _CharBufferSize2>
-inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator!=(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const
+bool BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator!=(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const
 {
-    return !this->operator==(rhs);
+    return !this->operator==(str);
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
 template <int32_t _CharBufferSize2>
-inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator==(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const
+bool BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator==(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const
 {
-    return _StringTraitsType::Compare(m_str.data(), m_strLen, rhs.Data(), rhs.Length()) == 0;
+    return _StringTraits::Compare(m_str.data(), m_strLen, str.Data(), str.Length()) == 0;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator==(const std::basic_string_view<_CharType>& rhs) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+bool BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator==(const std::basic_string_view<_Char>& str) const
 {
-    return _StringTraitsType::Compare(m_str.data(), m_strLen, rhs.data(), rhs.length()) == 0;
+    return _StringTraits::Compare(m_str.data(), m_strLen, str.data(), str.length()) == 0;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline _CharType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator[](int32_t index) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+_Char BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator[](int32_t index) const
 {
     return m_str[index];
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline _CharType& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator[](int32_t index)
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+_Char& BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator[](int32_t index)
 {
     return m_str[index];
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator std::basic_string<_CharType>() const noexcept
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator std::basic_string<_Char>() const noexcept
 {
     return {m_str.data(), static_cast<size_t>(m_strLen)};
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator std::basic_string_view<_CharType>() const noexcept
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator std::basic_string_view<_Char>() const noexcept
 {
     return {m_str.data(), static_cast<size_t>(m_strLen)};
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator std::span<_Char>() const noexcept
+{
+    return m_str;
+}
+
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator std::span<_Char, _CharBufferSize>() const noexcept
+{
+    return m_str;
+}
+
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
 template <int32_t _CharBufferSize2>
-inline BasicFixedString<_CharType, _CharBufferSize + _CharBufferSize2, _StringTraitsType> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Expand(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const
+BasicFixedString<_Char, _CharBufferSize + _CharBufferSize2, _StringTraits> BasicFixedString<_Char, _CharBufferSize, _StringTraits>::Expand(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const
 {
-    return BasicFixedString<_CharType, _CharBufferSize + _CharBufferSize2, _StringTraitsType>(*this) += rhs;
+    return BasicFixedString<_Char, _CharBufferSize + _CharBufferSize2, _StringTraits>(*this) += str;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
 template <int32_t _CharBufferSize2>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CompareTo(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& str) const
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::CompareTo(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const
 {
-    return _StringTraitsType::Compare(m_str.data(), m_strLen, str.Data(), str.Length());
+    return _StringTraits::Compare(m_str.data(), m_strLen, str.Data(), str.Length());
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CompareTo(const std::basic_string_view<_CharType>& str) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::CompareTo(const std::basic_string_view<_Char>& str) const
 {
-    return _StringTraitsType::Compare(m_str.data(), m_strLen, str.length(), str.data());
+    return _StringTraits::Compare(m_str.data(), m_strLen, str.length(), str.data());
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-template <typename _PredicateType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IndexOfAny(const _PredicateType& predicate, int32_t startIndex) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+template <typename _Predicate>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::IndexOfAny(const _Predicate& predicate, int32_t startIndex) const
 {
-    return _StringTraitsType::IndexOfAny(m_str.data() + startIndex, m_strLen - startIndex, predicate) + startIndex;
+    return _StringTraits::IndexOfAny(m_str.data() + startIndex, m_strLen - startIndex, predicate) + startIndex;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IndexOf(_CharType ch, int32_t startIndex) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::IndexOf(_Char ch, int32_t startIndex) const
 {
-    ValueType str[] = {ch, 0};
-    return _StringTraitsType::IndexOf(m_str.data() + startIndex, m_strLen - startIndex, str, 1) + startIndex;
+    _Char str[] = {ch, 0};
+    return _StringTraits::IndexOf(m_str.data() + startIndex, m_strLen - startIndex, str, 1) + startIndex;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::IndexOf(const std::basic_string_view<_Char>& str, int32_t startIndex) const
 {
-    return _StringTraitsType::IndexOf(m_str.data() + startIndex, m_strLen - startIndex, str, str.length()) + startIndex;
+    return _StringTraits::IndexOf(m_str.data() + startIndex, m_strLen - startIndex, str, str.length()) + startIndex;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(_CharType ch, int32_t startIndex) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::LastIndexOf(_Char ch, int32_t startIndex) const
 {
-    ValueType str[] = {ch, 0};
-    return _StringTraitsType::LastIndexOf(m_str.data(), startIndex + 1, str, 1);
+    _Char str[] = {ch, 0};
+    return _StringTraits::LastIndexOf(m_str.data(), startIndex + 1, str, 1);
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(const std::basic_string_view<_CharType>& str) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::LastIndexOf(const std::basic_string_view<_Char>& str) const
 {
-    return _StringTraitsType::LastIndexOf(m_str.data(), m_strLen, str, str.length());
+    return _StringTraits::LastIndexOf(m_str.data(), m_strLen, str, str.length());
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::LastIndexOf(const std::basic_string_view<_Char>& str, int32_t startIndex) const
 {
-    return _StringTraitsType::LastIndexOf(m_str.data(), startIndex, str, str.length());
+    return _StringTraits::LastIndexOf(m_str.data(), startIndex, str, str.length());
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(_CharType ch) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::LastIndexOf(_Char ch) const
 {
-    return _StringTraitsType::LastIndexOf(m_str.data(), m_strLen, &ch, 1);
+    return _StringTraits::LastIndexOf(m_str.data(), m_strLen, &ch, 1);
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-template <typename _PredicateType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOfAny(const _PredicateType& predicate) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+template <typename _Predicate>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::LastIndexOfAny(const _Predicate& predicate) const
 {
-    return _StringTraitsType::LastIndexOfAny(m_str.data(), m_strLen, predicate);
+    return _StringTraits::LastIndexOfAny(m_str.data(), m_strLen, predicate);
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-template <typename _PredicateType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOfAny(const _PredicateType& predicate, int32_t startIndex) const
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+template <typename _Predicate>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::LastIndexOfAny(const _Predicate& predicate, int32_t startIndex) const
 {
-    return _StringTraitsType::LastIndexOfAny(m_str.data(), startIndex, predicate);
+    return _StringTraits::LastIndexOfAny(m_str.data(), startIndex, predicate);
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline const _CharType* BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Data() const noexcept
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+const _Char* BasicFixedString<_Char, _CharBufferSize, _StringTraits>::Data() const noexcept
 {
     return m_str.data();
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Length() const noexcept
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::Length() const noexcept
 {
     return m_strLen;
 }
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-constexpr int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Capacity() const noexcept
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
+constexpr int32_t BasicFixedString<_Char, _CharBufferSize, _StringTraits>::Capacity() const noexcept
 {
     return _CharBufferSize;
-}
-
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Iterator BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Begin() noexcept
-{
-    return m_str.data();
-}
- 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Iterator BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::End() noexcept
-{
-    return m_str.data() + m_strLen;
-}
-
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIterator BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CBegin() const noexcept
-{
-    return m_str.data();
-}
-
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIterator BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CEnd() const noexcept
-{
-    return m_str.data() + m_strLen;
 }
 
 }

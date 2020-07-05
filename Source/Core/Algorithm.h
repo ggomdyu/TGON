@@ -9,18 +9,16 @@
 namespace tg
 {
 
-template <typename _ValueType>
-constexpr _ValueType AlignOf(const _ValueType& value, std::size_t alignment)
+template <typename _Value>
+constexpr _Value AlignOf(const _Value& value, size_t alignment)
 {
     return (value + alignment - 1) & ~(alignment - 1);
 }
 
-template <typename _CharType>
-constexpr bool IsPalindrome(const _CharType* str, std::size_t strLen)
+template <typename _Char>
+constexpr bool IsPalindrome(const _Char* str, size_t strLen)
 {
-    std::size_t halfStrLen = strLen / 2;
-
-    for (std::size_t i = 0; i < halfStrLen; ++i)
+    for (size_t i = 0; i < strLen / 2; ++i)
     {
         if (str[i] != str[strLen - i])
         {
@@ -30,27 +28,27 @@ constexpr bool IsPalindrome(const _CharType* str, std::size_t strLen)
     return true;
 }
 
-template <std::size_t _TupleIndex = 0,  typename _CallbackType, typename... _ArgTypes>
-inline typename std::enable_if<_TupleIndex == sizeof...(_ArgTypes)>::type ForEach(std::tuple<_ArgTypes...>& tuple, const _CallbackType& callback) noexcept
+template <size_t _TupleIndex = 0, typename _Callback, typename... _Args> requires (_TupleIndex == sizeof...(_Args))
+void ForEach(std::tuple<_Args...>& tuple, const _Callback& callback) noexcept
 {
 }
 
-template <std::size_t _TupleIndex = 0,  typename _CallbackType, typename... _ArgTypes>
-inline typename std::enable_if<_TupleIndex < sizeof...(_ArgTypes)>::type ForEach(std::tuple<_ArgTypes...>& tuple, const _CallbackType& callback) noexcept
+template <size_t _TupleIndex = 0, typename _Callback, typename... _Args> requires (_TupleIndex < sizeof...(_Args))
+void ForEach(std::tuple<_Args...>& tuple, const _Callback& callback) noexcept
 {
     callback(std::get<_TupleIndex>(tuple));
-    ForEach<_TupleIndex + 1, _CallbackType, _ArgTypes...>(tuple, callback);
+    ForEach<_TupleIndex + 1, _Callback, _Args...>(tuple, callback);
 }
 
-template <typename... _ArgTypes, typename _CallbackType>
-inline void ForEach(std::pair<_ArgTypes...>& pair, const _CallbackType& callback)
+template <typename... _Args, typename _Callback>
+void ForEach(std::pair<_Args...>& pair, const _Callback& callback)
 {
     callback(pair.first);
     callback(pair.second);
 }
 
-template <typename _IteratorType, typename _CallbackType>
-inline void ForEach(_IteratorType beginIter, _IteratorType endIter, const _CallbackType& callback)
+template <typename _Iter, typename _Callback>
+void ForEach(_Iter beginIter, _Iter endIter, const _Callback& callback)
 {
     while (beginIter != endIter)
     {
@@ -60,20 +58,20 @@ inline void ForEach(_IteratorType beginIter, _IteratorType endIter, const _Callb
     }
 }
 
-template <typename _ContainerType, typename _CallbackType>
-inline void ForEach(_ContainerType& container, const _CallbackType& callback)
+template <typename _Container, typename _Callback>
+void ForEach(_Container& container, const _Callback& callback)
 {
     ForEach(container.begin(), container.end(), callback);
 }
 
-template <typename _ContainerType, typename _CallbackType>
-inline void ForEach(const _ContainerType& container, const _CallbackType& callback)
+template <typename _Container, typename _Callback>
+void ForEach(const _Container& container, const _Callback& callback)
 {
     ForEach(container.cbegin(), container.cend(), callback);
 }
 
-template <typename _ContainerType, typename _PredicateType>
-inline void EraseAll(_ContainerType& container, const _PredicateType& predicate)
+template <typename _Container, typename _Predicate>
+void EraseAll(_Container& container, const _Predicate& predicate)
 {
     for (auto iter = container.begin(); iter != container.end();)
     {
@@ -88,8 +86,8 @@ inline void EraseAll(_ContainerType& container, const _PredicateType& predicate)
     }
 }
 
-template <typename _ContainerType, typename _PredicateType, typename _CallbackType>
-inline void FindAll(_ContainerType& container, const _PredicateType& predicate, const _CallbackType& callback)
+template <typename _Container, typename _Predicate, typename _Callback>
+void FindAll(_Container& container, const _Predicate& predicate, const _Callback& callback)
 {
     for (auto iter = container.begin(); iter != container.end(); ++iter)
     {
@@ -100,8 +98,8 @@ inline void FindAll(_ContainerType& container, const _PredicateType& predicate, 
     }
 }
 
-template <typename _ArrayElementType, std::size_t _ArraySize>
-constexpr std::size_t GetArraySize(const _ArrayElementType(&)[_ArraySize]) noexcept
+template <typename _ArrayElem, size_t _ArraySize>
+constexpr size_t GetArraySize(const _ArrayElem(&)[_ArraySize]) noexcept
 {
     return _ArraySize;
 }
@@ -112,29 +110,29 @@ constexpr std::array<std::decay_t<std::common_type_t<_Args...>>, sizeof...(_Args
     return {std::forward<_Args>(rhs)...};
 }
 
-template <typename _EnumType, std::enable_if_t<std::is_enum<_EnumType>::value>* = nullptr>
-constexpr std::underlying_type_t<_EnumType> UnderlyingCast(_EnumType value) noexcept
+template <typename _Enum> requires std::is_enum_v<_Enum>
+constexpr std::underlying_type_t<_Enum> UnderlyingCast(_Enum value) noexcept
 {
-    return static_cast<std::underlying_type_t<_EnumType>>(value);
+    return static_cast<std::underlying_type_t<_Enum>>(value);
 }
 
 template <typename _Type>
-inline void Swap(_Type& lhs, _Type& rhs) noexcept(std::is_nothrow_move_constructible<_Type>::value && std::is_nothrow_move_assignable<_Type>::value)
+void Swap(_Type& lhs, _Type& rhs) noexcept(std::is_nothrow_move_constructible<_Type>::value && std::is_nothrow_move_assignable<_Type>::value)
 {
     _Type temp = std::move(lhs);
     lhs = std::move(rhs);
     rhs = std::move(temp);
 }
 
-template <typename _IteratorType, typename _ValueType>
-inline bool BinarySearch(_IteratorType begin, _IteratorType end, const _ValueType& value)
+template <typename _Iter, typename _Value>
+bool BinarySearch(_Iter begin, _Iter end, const _Value& value)
 {
     begin = std::lower_bound(begin, end, value);
     return !(begin == end) && !(value < *begin);
 }
 
-template <typename _IteratorType, typename _ValueType, typename _PredicateType>
-inline bool BinarySearch(_IteratorType begin, _IteratorType end, const _ValueType& value, _PredicateType predicate)
+template <typename _Iter, typename _Value, typename _Predicate>
+bool BinarySearch(_Iter begin, _Iter end, const _Value& value, _Predicate predicate)
 {
     begin = std::lower_bound(begin, end, value, predicate);
     return !(begin == end) && !predicate(*begin, value);

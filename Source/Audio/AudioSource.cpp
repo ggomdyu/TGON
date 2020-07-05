@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.h"
 
 #if TGON_PLATFORM_MACOS
-#   include <OpenAL/alc.h>
+#include <OpenAL/alc.h>
 #else
-#   include <AL/alc.h>
+#include <AL/alc.h>
 #endif
 
 #include "AudioSource.h"
@@ -30,7 +30,7 @@ AudioSource::~AudioSource()
     if (m_alSource != 0)
     {
         this->Stop();
-        TGON_AL_ERROR_CHECK(alDeleteSources(1, &m_alSource))
+        alDeleteSources(1, &m_alSource);
     }
 }
 
@@ -44,13 +44,14 @@ AudioSource& AudioSource::operator=(AudioSource&& rhs) noexcept
 
 std::optional<AudioSource> AudioSource::Create()
 {
-    auto alSource = CreateALSource();
-    if (alSource.has_value() == false)
+    ALuint alSource;
+    alGenSources(1, &alSource);
+    if (alGetError() != AL_NO_ERROR)
     {
         return {};
     }
 
-    return AudioSource(*alSource);
+    return AudioSource(alSource);
 }
 
 void AudioSource::Play()
@@ -147,7 +148,7 @@ float AudioSource::GetTotalProgressInSeconds() const
         return 0.0f;
     }
     
-    return static_cast<float>(m_audioClip->GetData().size()) / (m_audioClip->GetSamplingRate() * m_audioClip->GetChannels() * (static_cast<float>(m_audioClip->GetBitsPerSample()) * 0.125f));
+    return static_cast<float>(m_audioClip->m_audioDataBytes) / (m_audioClip->GetSamplingRate() * m_audioClip->GetChannels() * (static_cast<float>(m_audioClip->GetBitsPerSample()) * 0.125f));
 }
 
 void AudioSource::SetPitch(float pitch)
@@ -184,18 +185,6 @@ bool AudioSource::IsLoop() const
     TGON_AL_ERROR_CHECK(alGetSourcei(m_alSource, AL_LOOPING, &isLoop))
 
     return isLoop == AL_TRUE ? true : false;
-}
-
-std::optional<ALuint> AudioSource::CreateALSource()
-{
-    ALuint alSource;
-    TGON_AL_ERROR_CHECK(alGenSources(1, &alSource));
-    if (alGetError() != AL_NO_ERROR)
-    {
-        return {};
-    }
-
-    return alSource;
 }
 
 }

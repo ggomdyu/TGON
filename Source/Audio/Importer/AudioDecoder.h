@@ -1,29 +1,22 @@
 #pragma once
 
-#include "Core/RuntimeObject.h"
-
 namespace tg
 {
 
-class AudioDecoder :
-    public RuntimeObject
+class AudioDecoder
 {
-public:
-    TGON_DECLARE_RTTI(AudioDecoder)
-    
 /**@section Constructor */
 public:
-    AudioDecoder(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
-    AudioDecoder(AudioDecoder&&) = default;
+    AudioDecoder(std::shared_ptr<std::byte> audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
     
 /**@section Method */
 public:
-    std::shared_ptr<std::byte> GetAudioData() noexcept;
-    std::shared_ptr<const std::byte> GetAudioData() const noexcept;
-    int32_t GetAudioDataBytes() const noexcept;
-    int32_t GetBitsPerSample() const noexcept;
-    int32_t GetChannels() const noexcept;
-    int32_t GetSamplingRate() const noexcept;
+    [[nodiscard]] std::shared_ptr<std::byte> GetAudioData() noexcept;
+    [[nodiscard]] std::shared_ptr<const std::byte> GetAudioData() const noexcept;
+    [[nodiscard]] int32_t GetAudioDataBytes() const noexcept;
+    [[nodiscard]] int32_t GetBitsPerSample() const noexcept;
+    [[nodiscard]] int32_t GetChannels() const noexcept;
+    [[nodiscard]] int32_t GetSamplingRate() const noexcept;
 
 /**@section Variable */
 protected:
@@ -34,8 +27,8 @@ protected:
     int32_t m_samplingRate = 0;
 };
 
-inline AudioDecoder::AudioDecoder(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept :
-    m_audioData(audioData),
+inline AudioDecoder::AudioDecoder(std::shared_ptr<std::byte> audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept :
+    m_audioData(std::move(audioData)),
     m_audioDataBytes(audioDataBytes),
     m_bitsPerSample(bitsPerSample),
     m_channels(channels),

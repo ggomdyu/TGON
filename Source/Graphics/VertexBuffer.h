@@ -1,10 +1,10 @@
 #pragma once
 
 #include <vector>
-#include <gsl/span>
+#include <span>
 
 #if TGON_GRAPHICS_OPENGL
-#   include "OpenGL/OpenGLVertexBuffer.h"
+#include "OpenGL/OpenGLVertexBuffer.h"
 #endif
 
 namespace tg
@@ -62,38 +62,37 @@ class VertexBuffer final :
 /**@section Constructor */
 public:
     VertexBuffer();
-    VertexBuffer(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
-    VertexBuffer(VertexBuffer&& rhs) noexcept;
+    VertexBuffer(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayouts);
+    VertexBuffer(const VertexBuffer& rhs) = delete;
+    VertexBuffer(VertexBuffer&& rhs) noexcept = default;
     
 /**@section Destructor */
 public:
     ~VertexBuffer();
 
 /**@section Operator */
-protected:
-    VertexBuffer& operator=(VertexBuffer&& rhs) noexcept;
+public:
+    VertexBuffer& operator=(const VertexBuffer& rhs) = delete;
+    VertexBuffer& operator=(VertexBuffer&& rhs) noexcept = default;
 
 /**@section Method */
 public:
     [[nodiscard]] PlatformVertexBuffer& GetPlatformDependency() noexcept;
     [[nodiscard]] const PlatformVertexBuffer& GetPlatformDependency() const noexcept;
     template <typename _Type>
-    void SetData(const gsl::span<_Type>& data, bool isDynamicUsage);
+    void SetData(const std::span<_Type>& data, bool isDynamicUsage);
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
     void SetLayoutDescriptor(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
     void Use();
     void Unuse();
 
-private:
-    void Destroy();
-    
 /**@section Variable */
 private:
-    std::vector<VertexBufferLayoutDescriptor> m_vertexBufferLayoutDescs;
+    std::vector<VertexBufferLayoutDescriptor> m_vertexBufferLayouts;
 };
 
 template <typename _Type>
-inline void VertexBuffer::SetData(const gsl::span<_Type>& data, bool isDynamicUsage)
+inline void VertexBuffer::SetData(const std::span<_Type>& data, bool isDynamicUsage)
 {
     this->SetData(data.data(), data.size() * sizeof(_Type), isDynamicUsage);
 }

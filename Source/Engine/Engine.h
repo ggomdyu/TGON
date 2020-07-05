@@ -2,10 +2,13 @@
 
 #include <vector>
 
-#include "Module.h"
-#include "EngineConfig.h"
+#include "Platform/WindowStyle.h"
+#include "Graphics/VideoMode.h"
 
-#define TGON_DECLARE_ENGINE(className)\
+#include "Input.h"
+#include "Module.h"
+
+#define TGON_ENGINE(className)\
     namespace tg\
     {\
     \
@@ -20,106 +23,112 @@
 namespace tg
 {
 
+struct EngineConfiguration final
+{
+    WindowStyle windowStyle;
+    InputMode inputMode;
+    VideoMode videoMode;
+};
+
 class Engine :
     public RuntimeObject
 {
 public:
-    TGON_DECLARE_RTTI(Engine)
-
-/* @section Type */
-private:
-    using ModuleUnit = size_t;
-    using ModuleCache = std::vector<std::unique_ptr<Module>>;
+    TGON_RTTI(Engine)
 
 /**@section Constructor */
 public:
-    explicit Engine(const EngineConfig& engineConfig) noexcept;
+    explicit Engine(const EngineConfiguration& engineConfig) noexcept;
+    Engine(const Engine& rhs) = delete;
+    Engine(Engine&& rhs) = delete;
 
 /**@section Destructor */
 public:
-    virtual ~Engine() = 0;
+    ~Engine() override;
+
+/**@section Operator */
+public:
+    Engine& operator=(const Engine& rhs) = delete;
+    Engine& operator=(Engine&& rhs) = delete;
 
 /**@section Method */
 public:
+    /**
+     * @brief   Initialize the object.
+     */
     virtual void Initialize();
-    virtual void Destroy();
+
+    /**
+     * @brief   Update the frame of the object.
+     */
     virtual void Update();
+
+    /**
+     * @brief   Adds a module to the object.
+     * @param args  Arguments for construct the specified type of module.
+     * @return  The added module.
+     */
     template <typename _ModuleType, typename... _ArgTypes>
     _ModuleType* AddModule(_ArgTypes&&... args);
+
+    /**
+     * @brief   Finds the module of the specified type.
+     * @return  The type of module to retrieve or nullptr.
+     */
     template <typename _ModuleType>
-    _ModuleType* FindModule() noexcept;
+    [[nodiscard]] _ModuleType* FindModule() noexcept;
+
+    /**
+     * @brief   Finds the module of the specified type.
+     * @return  The type of module to retrieve or nullptr.
+     */
     template <typename _ModuleType>
-    const _ModuleType* FindModule() const noexcept;
-    template <typename _ModuleType>
-    bool RemoveModule();
-    void RemoveAllModule();
-    const EngineConfig& GetEngineConfig() const noexcept;
+    [[nodiscard]] const _ModuleType* FindModule() const noexcept;
+
+    /**
+     * @brief   Gets the configuration of the engine.
+     */
+    [[nodiscard]] const EngineConfiguration& GetEngineConfiguration() const noexcept;
 
 private:
-    template <typename _ModuleType>
-    ModuleUnit GetModuleUnit() const;
+    void RemoveAllModule();
 
 /**@section Variable */
 private:
-    EngineConfig m_engineConfig;
-    mutable ModuleCache m_moduleCache;
-    inline static ModuleUnit m_maxModuleUnit;
+    EngineConfiguration m_engineConfig;
+    std::vector<std::unique_ptr<Module>> m_modules;
 };
     
 template <typename _ModuleType, typename... _ArgTypes>
-inline _ModuleType* Engine::AddModule(_ArgTypes&&... args)
+_ModuleType* Engine::AddModule(_ArgTypes&&... args)
 {
-    auto moduleUnit = GetModuleUnit<_ModuleType>();
     auto module = std::make_unique<_ModuleType>(std::forward<_ArgTypes>(args)...);
-    m_moduleCache[moduleUnit] = std::move(module);
-    m_moduleCache[moduleUnit]->Initialize();
-    
-    return m_moduleCache[moduleUnit].get();
+    auto* rawModule = module.get();
+    m_modules.push_back(std::move(module));
+
+    rawModule->Initialize();
+
+    return rawModule;
 }
 
 template <typename _ModuleType>
-inline _ModuleType* Engine::FindModule() noexcept
+_ModuleType* Engine::FindModule() noexcept
 {
-    auto moduleUnit = GetModuleUnit<_ModuleType>();
-    if (moduleUnit >= m_moduleCache.size() || m_moduleCache[moduleUnit] == nullptr)
+    for (auto& module : m_modules)
     {
-        return nullptr;
+        if (module->GetRtti() == GetRtti<_ModuleType>())
+        {
+            return reinterpret_cast<_ModuleType*>(module.get());
+        }
     }
 
-    return std::static_pointer_cast<_ModuleType>(m_moduleCache[moduleUnit]);
+    return nullptr;
 }
 
 template <typename _ModuleType>
-inline const _ModuleType* Engine::FindModule() const noexcept
+const _ModuleType* Engine::FindModule() const noexcept
 {
     return const_cast<Engine*>(this)->FindModule<_ModuleType>();
-}
-
-template<typename _ModuleType>
-inline bool Engine::RemoveModule()
-{
-    auto moduleUnit = GetModuleUnit<_ModuleType>();
-    auto& module = m_moduleCache[moduleUnit];
-    if (module == nullptr)
-    {
-        return false;
-    }
-
-    module = nullptr;
-    return true;
-}
-
-template<typename _ModuleType>
-inline Engine::ModuleUnit Engine::GetModuleUnit() const
-{
-    static ModuleUnit moduleUnit = [&]()
-    {
-        const ModuleUnit ret = m_maxModuleUnit;
-        m_moduleCache.resize(++m_maxModuleUnit);
-        return ret;
-    } ();
-
-    return moduleUnit;
 }
 
 }

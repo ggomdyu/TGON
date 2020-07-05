@@ -8,7 +8,7 @@ namespace tg
 
 struct WindowStyle final
 {
-    std::string title = u8"Hello world!";
+    std::u8string title = u8"Hello world!";
     int32_t x = 0;
     int32_t y = 0;
     int32_t width = 838;

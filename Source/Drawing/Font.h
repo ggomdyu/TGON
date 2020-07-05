@@ -5,12 +5,8 @@
 namespace tg
 {
 
-class Font final :
-    public RuntimeObject
+class Font final
 {
-public:
-    TGON_DECLARE_RTTI(Font)
-    
 /**@section Constructor */
 public:
     template <typename _ContainerType>

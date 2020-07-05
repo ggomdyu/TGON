@@ -7,16 +7,18 @@ class NonCopyable
 {
 /**@section Constructor */
 public:
-    constexpr NonCopyable() = default;
+    NonCopyable() = default;
     NonCopyable(const NonCopyable&) = delete;
+    NonCopyable(NonCopyable&&) = default;
 
 /**@section Destructor */
 public:
     ~NonCopyable() = default;
-
+    
 /**@section Operator */
 public:
-    NonCopyable& operator=(const NonCopyable&) = delete;
+    NonCopyable& operator=(const NonCopyable&) noexcept = delete;
+    NonCopyable& operator=(NonCopyable&&) noexcept = default;
 };
 
 }

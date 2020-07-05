@@ -1,10 +1,7 @@
 #pragma once
 
-#include <gsl/span>
+#include <span>
 #include <memory>
-#include <optional>
-
-#include "Core/RuntimeObject.h"
 
 typedef unsigned int ALuint;
 
@@ -22,40 +19,35 @@ enum class AudioFormat
     Opus,
 };
 
-class AudioClip final :
-    public RuntimeObject
+class AudioClip final
 {
-public:
-    TGON_DECLARE_RTTI(AudioClip)
-    
+    friend class AudioSource;
+
 /**@section Constructor */
 public:
-    AudioClip(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
+    AudioClip(std::shared_ptr<std::byte> audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
+    AudioClip(const AudioClip& rhs) = delete;
     AudioClip(AudioClip&& rhs) noexcept;
     
 /**@section Operator */
 public:
+    AudioClip& operator=(const AudioClip& rhs) noexcept = delete;
     AudioClip& operator=(AudioClip&& rhs) noexcept;
 
 /**@section Destructor */
 public:
-    ~AudioClip() override;
+    ~AudioClip();
 
 /**@section Method */
 public:
-    static std::shared_ptr<AudioClip> Create(const char* filePath);
-    static std::shared_ptr<AudioClip> Create(const gsl::span<const std::byte>& fileData);
-    static std::shared_ptr<AudioClip> Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
-    gsl::span<std::byte> GetData() noexcept;
-    gsl::span<const std::byte> GetData() const noexcept;
-    int32_t GetBitsPerSample() const noexcept;
-    int32_t GetChannels() const noexcept;
-    int32_t GetSamplingRate() const noexcept;
-    ALuint GetNativeBuffer() const noexcept;
+    static std::shared_ptr<AudioClip> Create(const char8_t* path);
+    static std::shared_ptr<AudioClip> Create(const std::span<const std::byte>& audioData);
+    static std::shared_ptr<AudioClip> Create(const std::span<const std::byte>& audioData, AudioFormat audioFormat);
+    [[nodiscard]] int32_t GetBitsPerSample() const noexcept;
+    [[nodiscard]] int32_t GetChannels() const noexcept;
+    [[nodiscard]] int32_t GetSamplingRate() const noexcept;
+    [[nodiscard]] ALuint GetNativeBuffer() const noexcept;
    
-private:
-    static ALuint CreateALBuffer();
-
 /**@section Variable */
 protected:
     ALuint m_alBufferId = 0;

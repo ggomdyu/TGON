@@ -2,74 +2,73 @@
 
 #include <cstdint>
 #include <cassert>
-#include <cstdio>
 #include <cmath>
 #include <string>
-#include <gsl/span>
+#include <span>
+#include <array>
+#include <fmt/format.h>
 
 #include "Core/ExpressionTemplate.h"
-
-#if _MSC_VER
-#   define TGON_SPRINTF sprintf_s
-#else
-#   define TGON_SPRINTF snprintf
-#endif
+#include "Core/Concepts.h"
 
 namespace tg
 {
     
-template <typename _ValueType>
+template <typename _Value> requires IsArithmetic<_Value>
 struct BasicVector2
 {
+/**@section Type */
+public:
+    using ValueType = _Value;
+
 /**@section Constructor */
 public:
     constexpr BasicVector2() noexcept = default;
-    constexpr BasicVector2(const _ValueType& scalar) noexcept;
-    constexpr BasicVector2(const _ValueType& x, const _ValueType& y) noexcept;
-    template <typename _DerivedExpressionType>
-    constexpr BasicVector2(const BaseExpression<_DerivedExpressionType>& expression);
+    constexpr BasicVector2(const _Value& scalar) noexcept;
+    constexpr BasicVector2(const _Value& x, const _Value& y) noexcept;
+    template <typename _ExpressionTemplate> requires IsExpressionTemplate<_ExpressionTemplate>
+    constexpr BasicVector2(const _ExpressionTemplate& expression);
 
 /**@section Operator */
 public:
-    constexpr const AddExpression<BasicVector2, BasicVector2> operator+(const BasicVector2& rhs) const noexcept;
-    constexpr const SubtractExpression<BasicVector2, BasicVector2> operator-(const BasicVector2& rhs) const noexcept;
-    friend constexpr const BasicVector2 operator*(const _ValueType& scalar, const BasicVector2& v) noexcept;
-    constexpr const BasicVector2 operator*(const _ValueType& scalar) const noexcept;
-    constexpr const BasicVector2 operator-(const _ValueType& scalar) const;
-    constexpr const BasicVector2 operator+(const _ValueType& scalar) const;
-    constexpr const BasicVector2 operator/(const _ValueType& scalar) const;
-    constexpr const BasicVector2 operator-() const noexcept;
+    constexpr ExpressionTemplate<Plus, BasicVector2, BasicVector2> operator+(const BasicVector2& rhs) const noexcept;
+    constexpr ExpressionTemplate<Minus, BasicVector2, BasicVector2> operator-(const BasicVector2& rhs) const noexcept;
+    constexpr BasicVector2 operator*(const _Value& scalar) const noexcept;
+    constexpr BasicVector2 operator/(const _Value& scalar) const;
+    friend constexpr BasicVector2 operator*(const _Value& lhs, const BasicVector2<_Value>& rhs) noexcept;
+    friend constexpr BasicVector2 operator/(const _Value& lhs, const BasicVector2<_Value>& rhs);
+    constexpr BasicVector2 operator-() const noexcept;
     BasicVector2& operator+=(const BasicVector2& rhs) noexcept;
     BasicVector2& operator-=(const BasicVector2& rhs) noexcept;
     BasicVector2& operator*=(const BasicVector2& rhs) noexcept;
-    BasicVector2& operator*=(_ValueType scalar) noexcept;
-    BasicVector2& operator/=(_ValueType scalar);
+    BasicVector2& operator*=(_Value scalar) noexcept;
+    BasicVector2& operator/=(_Value scalar);
     constexpr bool operator==(const BasicVector2& rhs) const noexcept;
     constexpr bool operator!=(const BasicVector2& rhs) const noexcept;
-    _ValueType& operator[](int32_t index) noexcept;
-    _ValueType operator[](int32_t index) const noexcept;
+    _Value& operator[](int32_t index) noexcept;
+    _Value operator[](int32_t index) const noexcept;
     
 /**@section Method */
 public:
-    static constexpr const BasicVector2 Reflect(const BasicVector2& inDirection, const BasicVector2& inPlaneNormal) noexcept;
-    static constexpr _ValueType Dot(const BasicVector2& v1, const BasicVector2& v2) noexcept;
-    constexpr _ValueType Dot(const BasicVector2& v) const noexcept;
-    static _ValueType Angle(const BasicVector2& v1, const BasicVector2& v2) noexcept;
-    static _ValueType Distance(const BasicVector2& v1, const BasicVector2& v2) noexcept;
-    _ValueType Distance(const BasicVector2& v) const noexcept;
-    _ValueType& At(int32_t index);
-    _ValueType At(int32_t index) const;
-    _ValueType Length() const noexcept;
-    _ValueType LengthSq() const noexcept;
+    [[nodiscard]] static constexpr BasicVector2 Reflect(const BasicVector2& inDirection, const BasicVector2& inPlaneNormal) noexcept;
+    [[nodiscard]] static constexpr _Value Dot(const BasicVector2& v1, const BasicVector2& v2) noexcept;
+    [[nodiscard]] constexpr _Value Dot(const BasicVector2& v) const noexcept;
+    [[nodiscard]] static _Value Angle(const BasicVector2& v1, const BasicVector2& v2) noexcept;
+    [[nodiscard]] static _Value Distance(const BasicVector2& v1, const BasicVector2& v2) noexcept;
+    [[nodiscard]] _Value Distance(const BasicVector2& v) const noexcept;
+    [[nodiscard]] _Value& At(int32_t index);
+    [[nodiscard]] _Value At(int32_t index) const;
+    [[nodiscard]] _Value Length() const noexcept;
+    [[nodiscard]] _Value LengthSq() const noexcept;
     void Normalize();
-    const BasicVector2 Normalized() const;
-    int32_t ToString(const gsl::span<char>& destStr) const;
-    int32_t ToString(char* destStr, size_t destStrBufferLen) const;
-    std::string ToString() const;
+    [[nodiscard]] BasicVector2 Normalized() const;
+    int32_t ToString(const std::span<char8_t>& destStr) const;
+    int32_t ToString(char8_t* destStr, size_t destStrBufferLen) const;
+    [[nodiscard]] std::u8string ToString() const;
 
 /**@section Variable */
 public:
-	_ValueType x{}, y{};
+	_Value x{}, y{};
 };
 
 using I32Vector2 = BasicVector2<int32_t>;
@@ -78,81 +77,74 @@ using IVector2 = BasicVector2<int>;
 using Vector2 = BasicVector2<float>;
 using DVector2 = BasicVector2<double>;
 
-template <typename... _Types>
-BasicVector2(_Types...) -> BasicVector2<std::common_type_t<_Types...>>;
+template <typename... _Args>
+BasicVector2(_Args...) -> BasicVector2<std::common_type_t<_Args...>>;
 
-template <typename _ValueType>
-constexpr BasicVector2<_ValueType>::BasicVector2(const _ValueType& scalar) noexcept :
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr BasicVector2<_Value>::BasicVector2(const _Value& scalar) noexcept :
     x(scalar),
     y(scalar)
 {
 }
 
-template <typename _ValueType>
-constexpr BasicVector2<_ValueType>::BasicVector2(const _ValueType& x, const _ValueType& y) noexcept :
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr BasicVector2<_Value>::BasicVector2(const _Value& x, const _Value& y) noexcept :
     x(x),
     y(y)
 {
 }
 
-template <typename _ValueType>
-template <typename _DerivedExpressionType>
-constexpr BasicVector2<_ValueType>::BasicVector2(const BaseExpression<_DerivedExpressionType>& expression) :
-    x(expression[0]),
-    y(expression[1])
+template <typename _Value> requires IsArithmetic<_Value>
+template <typename _ExpressionTemplate> requires IsExpressionTemplate<_ExpressionTemplate>
+constexpr BasicVector2<_Value>::BasicVector2(const _ExpressionTemplate& expression) :
+    BasicVector2(expression[0], expression[1])
 {
 }
 
-template <typename _ValueType>
-constexpr const AddExpression<BasicVector2<_ValueType>, BasicVector2<_ValueType>> BasicVector2<_ValueType>::operator+(const BasicVector2& rhs) const noexcept
-{
-    return {*this, rhs};
-}
-
-template <typename _ValueType>
-constexpr const SubtractExpression<BasicVector2<_ValueType>, BasicVector2<_ValueType>> BasicVector2<_ValueType>::operator-(const BasicVector2& rhs) const noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr ExpressionTemplate<Plus, BasicVector2<_Value>, BasicVector2<_Value>> BasicVector2<_Value>::operator+(const BasicVector2& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-template <typename _ValueType>
-constexpr const BasicVector2<_ValueType> operator*(const _ValueType& scalar, const BasicVector2<_ValueType>& v) noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr ExpressionTemplate<Minus, BasicVector2<_Value>, BasicVector2<_Value>> BasicVector2<_Value>::operator-(const BasicVector2& rhs) const noexcept
 {
-    return v * scalar;
+    return {*this, rhs};
 }
 
-template <typename _ValueType>
-constexpr const BasicVector2<_ValueType> BasicVector2<_ValueType>::operator*(const _ValueType& scalar) const noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr BasicVector2<_Value> BasicVector2<_Value>::operator*(const _Value& scalar) const noexcept
 {
     return BasicVector2(x * scalar, y * scalar);
 }
-
-template <typename _ValueType>
-constexpr const BasicVector2<_ValueType> BasicVector2<_ValueType>::operator-(const _ValueType& scalar) const
-{
-    return BasicVector2(x - scalar, y - scalar);
-}
-
-template <typename _ValueType>
-constexpr const BasicVector2<_ValueType> BasicVector2<_ValueType>::operator+(const _ValueType& scalar) const
-{
-    return BasicVector2(x + scalar, y + scalar);
-}
     
-template <typename _ValueType>
-constexpr const BasicVector2<_ValueType> BasicVector2<_ValueType>::operator/(const _ValueType& scalar) const
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr BasicVector2<_Value> BasicVector2<_Value>::operator/(const _Value& scalar) const
 {
     return BasicVector2(x / scalar, y / scalar);
 }
 
-template <typename _ValueType>
-constexpr const BasicVector2<_ValueType> BasicVector2<_ValueType>::operator-() const noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr BasicVector2<_Value> operator*(const _Value& lhs, const BasicVector2<_Value>& rhs) noexcept
+{
+    return rhs * lhs;
+}
+
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr BasicVector2<_Value> operator/(const _Value& lhs, const BasicVector2<_Value>& rhs) noexcept
+{
+    return rhs / lhs;
+}
+
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr BasicVector2<_Value> BasicVector2<_Value>::operator-() const noexcept
 {
     return BasicVector2(-x, -y);
 }
 
-template <typename _ValueType>
-inline BasicVector2<_ValueType>& BasicVector2<_ValueType>::operator+=(const BasicVector2& rhs) noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+BasicVector2<_Value>& BasicVector2<_Value>::operator+=(const BasicVector2& rhs) noexcept
 {
     x += rhs.x;
     y += rhs.y;
@@ -160,8 +152,8 @@ inline BasicVector2<_ValueType>& BasicVector2<_ValueType>::operator+=(const Basi
     return *this;
 }
 
-template <typename _ValueType>
-inline BasicVector2<_ValueType>& BasicVector2<_ValueType>::operator-=(const BasicVector2& rhs) noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+BasicVector2<_Value>& BasicVector2<_Value>::operator-=(const BasicVector2& rhs) noexcept
 {
     x -= rhs.x;
     y -= rhs.y;
@@ -169,8 +161,8 @@ inline BasicVector2<_ValueType>& BasicVector2<_ValueType>::operator-=(const Basi
     return *this;
 }
     
-template <typename _ValueType>
-inline BasicVector2<_ValueType>& BasicVector2<_ValueType>::operator*=(const BasicVector2& rhs) noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+BasicVector2<_Value>& BasicVector2<_Value>::operator*=(const BasicVector2& rhs) noexcept
 {
     x *= rhs.x;
     y *= rhs.y;
@@ -178,8 +170,8 @@ inline BasicVector2<_ValueType>& BasicVector2<_ValueType>::operator*=(const Basi
     return *this;
 }
 
-template <typename _ValueType>
-inline BasicVector2<_ValueType>& BasicVector2<_ValueType>::operator*=(_ValueType scalar) noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+BasicVector2<_Value>& BasicVector2<_Value>::operator*=(_Value scalar) noexcept
 {
     x *= scalar;
     y *= scalar;
@@ -187,8 +179,8 @@ inline BasicVector2<_ValueType>& BasicVector2<_ValueType>::operator*=(_ValueType
     return *this;
 }
 
-template <typename _ValueType>
-inline BasicVector2<_ValueType>& BasicVector2<_ValueType>::operator/=(_ValueType scalar)
+template <typename _Value> requires IsArithmetic<_Value>
+BasicVector2<_Value>& BasicVector2<_Value>::operator/=(_Value scalar)
 {
     x /= scalar;
     y /= scalar;
@@ -196,131 +188,130 @@ inline BasicVector2<_ValueType>& BasicVector2<_ValueType>::operator/=(_ValueType
     return *this;
 }
 
-template <typename _ValueType>
-constexpr bool BasicVector2<_ValueType>::operator==(const BasicVector2& rhs) const noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr bool BasicVector2<_Value>::operator==(const BasicVector2& rhs) const noexcept
 {
     return (x == rhs.x && y == rhs.y);
 }
 
-template <typename _ValueType>
-constexpr bool BasicVector2<_ValueType>::operator!=(const BasicVector2& rhs) const noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr bool BasicVector2<_Value>::operator!=(const BasicVector2& rhs) const noexcept
 {
     return !(*this == rhs);
 }
 
-template <typename _ValueType>
-inline _ValueType& BasicVector2<_ValueType>::operator[](int32_t index) noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+_Value& BasicVector2<_Value>::operator[](int32_t index) noexcept
 {
     return *(&x + index);
 }
 
-template <typename _ValueType>
-inline _ValueType BasicVector2<_ValueType>::operator[](int32_t index) const noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+_Value BasicVector2<_Value>::operator[](int32_t index) const noexcept
 {
     return *(&x + index);
 }
 
-template <typename _ValueType>
-constexpr const BasicVector2<_ValueType> BasicVector2<_ValueType>::Reflect(const BasicVector2& inDirection, const BasicVector2& inPlaneNormal) noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr BasicVector2<_Value> BasicVector2<_Value>::Reflect(const BasicVector2& inDirection, const BasicVector2& inPlaneNormal) noexcept
 {
     return inDirection + Dot(-inDirection, inPlaneNormal) * 2 * inPlaneNormal;
 }
 
-template <typename _ValueType>
-constexpr _ValueType BasicVector2<_ValueType>::Dot(const BasicVector2& v1, const BasicVector2& v2) noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr _Value BasicVector2<_Value>::Dot(const BasicVector2& v1, const BasicVector2& v2) noexcept
 {
     return v1.Dot(v2);
 }
 
-template <typename _ValueType>
-constexpr _ValueType BasicVector2<_ValueType>::Dot(const BasicVector2& v) const noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+constexpr _Value BasicVector2<_Value>::Dot(const BasicVector2& v) const noexcept
 {
     return (x * v.x) + (y * v.y);
 }
 
-template <typename _ValueType>
-inline _ValueType BasicVector2<_ValueType>::Angle(const BasicVector2& v1, const BasicVector2& v2) noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+_Value BasicVector2<_Value>::Angle(const BasicVector2& v1, const BasicVector2& v2) noexcept
 {
     return std::acos(v1.Dot(v2) / (v1.Length() * v2.Length()));
 }
 
-template <typename _ValueType>
-inline _ValueType BasicVector2<_ValueType>::Distance(const BasicVector2& v1, const BasicVector2& v2) noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+_Value BasicVector2<_Value>::Distance(const BasicVector2& v1, const BasicVector2& v2) noexcept
 {
     return BasicVector2(v1 - v2).Length();
 }
     
-template <typename _ValueType>
-inline _ValueType BasicVector2<_ValueType>::Distance(const BasicVector2& v) const noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+_Value BasicVector2<_Value>::Distance(const BasicVector2& v) const noexcept
 {
     return BasicVector2(*this - v).Length();
 }
 
-template <typename _ValueType>
-inline _ValueType& BasicVector2<_ValueType>::At(int32_t index)
+template <typename _Value> requires IsArithmetic<_Value>
+_Value& BasicVector2<_Value>::At(int32_t index)
 {
-    assert((index < 2 && index > -1) && "BasicVector2 index out of range");
-    
+    assert(index < 2 && index > -1);
     return *(&x + index);
 }
 
-template <typename _ValueType>
-inline _ValueType BasicVector2<_ValueType>::At(int32_t index) const
+template <typename _Value> requires IsArithmetic<_Value>
+_Value BasicVector2<_Value>::At(int32_t index) const
 {
-    assert((index < 2 && index > -1) && "BasicVector2 index out of range");
-    
+    assert(index < 2 && index > -1);
     return *(&x + index);
 }
 
-template <typename _ValueType>
-inline _ValueType BasicVector2<_ValueType>::Length() const noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+_Value BasicVector2<_Value>::Length() const noexcept
 {
     return std::sqrtf(this->LengthSq());
 }
 
-template <typename _ValueType>
-inline _ValueType BasicVector2<_ValueType>::LengthSq() const noexcept
+template <typename _Value> requires IsArithmetic<_Value>
+_Value BasicVector2<_Value>::LengthSq() const noexcept
 {
     return (x * x) + (y * y);
 }
 
-template <typename _ValueType>
-inline void BasicVector2<_ValueType>::Normalize()
+template <typename _Value> requires IsArithmetic<_Value>
+void BasicVector2<_Value>::Normalize()
 {
-    _ValueType length = this->Length();
+    _Value length = this->Length();
     
     x = x / length;
     y = y / length;
 }
 
-template <typename _ValueType>
-inline const BasicVector2<_ValueType> BasicVector2<_ValueType>::Normalized() const
+template <typename _Value> requires IsArithmetic<_Value>
+BasicVector2<_Value> BasicVector2<_Value>::Normalized() const
 {
-    _ValueType length = this->Length();
-    
+    _Value length = this->Length();
     return Vector2(x / length, y / length);
 }
 
-template <typename _ValueType>
-inline int32_t BasicVector2<_ValueType>::ToString(const gsl::span<char>& destStr) const
+template <typename _Value> requires IsArithmetic<_Value>
+int32_t BasicVector2<_Value>::ToString(const std::span<char8_t>& destStr) const
 {
     return this->ToString(&destStr[0], destStr.size());
 }
 
-template <typename _ValueType>
-inline int32_t BasicVector2<_ValueType>::ToString(char* destStr, size_t destStrBufferLen) const
+template <typename _Value> requires IsArithmetic<_Value>
+std::u8string BasicVector2<_Value>::ToString() const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f", x, y);
-}
+    std::array<char8_t, 1024> str{};
+    const int32_t strLen = this->ToString(str);
 
-template <typename _ValueType>
-inline std::string BasicVector2<_ValueType>::ToString() const
-{
-    std::array<char, 1024> str;
-    int32_t strLen = this->ToString(str);
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
+template <typename _Value> requires IsArithmetic<_Value>
+int32_t BasicVector2<_Value>::ToString(char8_t* destStr, size_t destStrBufferLen) const
+{
+    const auto destStrLen = fmt::format_to_n(destStr, sizeof(destStr[0]) * (destStrBufferLen - 1), u8"{} {}", x, y).size;
+    destStr[destStrLen] = u8'\0';
+
+    return static_cast<int32_t>(destStrLen);
 }
 
-#undef TGON_SPRINTF
+}

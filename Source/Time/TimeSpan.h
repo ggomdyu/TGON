@@ -35,36 +35,36 @@ public:
 
 /**@section Method */
 public:
-    static constexpr int32_t Compare(const TimeSpan& lhs, const TimeSpan& rhs) noexcept;
-    constexpr int32_t CompareTo(const TimeSpan& value) const noexcept;
-    constexpr int32_t GetDays() const noexcept;
-    constexpr int32_t GetHours() const noexcept;
-    constexpr int32_t GetMinutes() const noexcept;
-    constexpr int32_t GetSeconds() const noexcept;
-    constexpr int32_t GetMilliseconds() const noexcept;
-    constexpr int64_t GetTicks() const noexcept;
-    constexpr double GetTotalDays() const noexcept;
-    constexpr double GetTotalHours() const noexcept;
-    constexpr double GetTotalMinutes() const noexcept;
-    constexpr double GetTotalSeconds() const noexcept;
-    constexpr double GetTotalMilliseconds() const noexcept;
-    constexpr TimeSpan Add(const TimeSpan& timeSpan) const noexcept;
-    constexpr TimeSpan Divide(double divisor) const noexcept;
-    constexpr double Divide(const TimeSpan& timeSpan) const noexcept;
-    constexpr TimeSpan Multiply(double factor) const noexcept;
-    constexpr TimeSpan Negate() const noexcept;
-    constexpr TimeSpan Subtract(const TimeSpan& timeSpan) const noexcept;
-    constexpr TimeSpan Duration() const noexcept;
-    static constexpr TimeSpan FromDays(double value) noexcept;
-    static constexpr TimeSpan FromHours(double value) noexcept;
-    static constexpr TimeSpan FromMinutes(double value) noexcept;
-    static constexpr TimeSpan FromSeconds(double value) noexcept;
-    static constexpr TimeSpan FromMilliseconds(double value) noexcept;
-    static constexpr TimeSpan FromTicks(int64_t value) noexcept;
-    constexpr size_t GetHashCode() const noexcept;
-    static constexpr TimeSpan GetMaxValue() noexcept;
-    static constexpr TimeSpan GetMinValue() noexcept;
-    static constexpr TimeSpan GetZero() noexcept;
+    [[nodiscard]] static constexpr int32_t Compare(const TimeSpan& lhs, const TimeSpan& rhs) noexcept;
+    [[nodiscard]] constexpr int32_t CompareTo(const TimeSpan& value) const noexcept;
+    [[nodiscard]] constexpr int32_t GetDays() const noexcept;
+    [[nodiscard]] constexpr int32_t GetHours() const noexcept;
+    [[nodiscard]] constexpr int32_t GetMinutes() const noexcept;
+    [[nodiscard]] constexpr int32_t GetSeconds() const noexcept;
+    [[nodiscard]] constexpr int32_t GetMilliseconds() const noexcept;
+    [[nodiscard]] constexpr int64_t GetTicks() const noexcept;
+    [[nodiscard]] constexpr double GetTotalDays() const noexcept;
+    [[nodiscard]] constexpr double GetTotalHours() const noexcept;
+    [[nodiscard]] constexpr double GetTotalMinutes() const noexcept;
+    [[nodiscard]] constexpr double GetTotalSeconds() const noexcept;
+    [[nodiscard]] constexpr double GetTotalMilliseconds() const noexcept;
+    [[nodiscard]] constexpr TimeSpan Add(const TimeSpan& timeSpan) const noexcept;
+    [[nodiscard]] constexpr TimeSpan Divide(double divisor) const noexcept;
+    [[nodiscard]] constexpr double Divide(const TimeSpan& timeSpan) const noexcept;
+    [[nodiscard]] constexpr TimeSpan Multiply(double factor) const noexcept;
+    [[nodiscard]] constexpr TimeSpan Negate() const noexcept;
+    [[nodiscard]] constexpr TimeSpan Subtract(const TimeSpan& timeSpan) const noexcept;
+    [[nodiscard]] constexpr TimeSpan Duration() const noexcept;
+    [[nodiscard]] static constexpr TimeSpan FromDays(double value) noexcept;
+    [[nodiscard]] static constexpr TimeSpan FromHours(double value) noexcept;
+    [[nodiscard]] static constexpr TimeSpan FromMinutes(double value) noexcept;
+    [[nodiscard]] static constexpr TimeSpan FromSeconds(double value) noexcept;
+    [[nodiscard]] static constexpr TimeSpan FromMilliseconds(double value) noexcept;
+    [[nodiscard]] static constexpr TimeSpan FromTicks(int64_t value) noexcept;
+    [[nodiscard]] constexpr size_t GetHashCode() const noexcept;
+    [[nodiscard]] static constexpr TimeSpan GetMaxValue() noexcept;
+    [[nodiscard]] static constexpr TimeSpan GetMinValue() noexcept;
+    [[nodiscard]] static constexpr TimeSpan GetZero() noexcept;
     //string ToString();
     //string ToString(string format);
     //string ToString(string format, IFormatProvider formatProvider);
@@ -328,7 +328,7 @@ constexpr TimeSpan TimeSpan::FromTicks(int64_t value) noexcept
 
 constexpr int64_t TimeSpan::TimeToTicks(int32_t hour, int32_t minute, int32_t second) noexcept
 {
-    int64_t totalSeconds = (static_cast<int64_t>(hour) * 3600) + (static_cast<int64_t>(minute) * 60) * (static_cast<int64_t>(second));
+    const int64_t totalSeconds = (static_cast<int64_t>(hour) * 3600) + (static_cast<int64_t>(minute) * 60) * (static_cast<int64_t>(second));
     return totalSeconds * TicksPerSecond;
 }
 

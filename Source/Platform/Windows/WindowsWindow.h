@@ -4,36 +4,35 @@
 #    define WIN32_LEAN_AND_MEAN
 #endif
 
-#include "Core/NonCopyable.h"
-
 #include "Windows.h"
 
 namespace tg
 {
 
-class WindowsWindow :
-    private NonCopyable
+class WindowsWindow
 {
 /**@section Constructor */
-protected:
-    explicit WindowsWindow(const struct WindowStyle& windowStyle) noexcept;
+public:
+    explicit WindowsWindow(HWND wndHandle) noexcept;
+    WindowsWindow(const WindowsWindow& rhs) = delete;
     WindowsWindow(WindowsWindow&& rhs) noexcept;
+
+/**@section Destructor */
+public:
+    ~WindowsWindow() = default;
 
 /**@section Operator */
 public:
+    WindowsWindow& operator=(const WindowsWindow& rhs) = delete;
     WindowsWindow& operator=(WindowsWindow&& rhs) noexcept;
 
 /**@section Method */
 public:
-    void SetRawWindowStyle(DWORD rawWindowStyle);
-    void SetRawWindowStyleEx(DWORD rawWindowStyleEx);
-    LONG_PTR GetRawWindowStyle() const;
-    LONG_PTR GetRawWindowStyleEx() const;
+    void SetNativeWindowStyle(DWORD nativeWindowStyle);
+    void SetNativeExtendedWindowStyle(DWORD nativeExtendedWindowStyle);
     void SetUserData(void* data);
-
-/**@section Event handler */
-public:
-    LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
+    [[nodiscard]] DWORD GetNativeWindowStyle() const;
+    [[nodiscard]] DWORD GetNativeExtendedWindowStyle() const;
 
 /**@section Variable */
 protected:

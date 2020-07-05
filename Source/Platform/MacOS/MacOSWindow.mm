@@ -1,10 +1,10 @@
 #include "PrecompiledHeader.h"
 
-#include <AppKit/NSWindow.h>
-#include <Cocoa/Cocoa.h>
-#include <memory>
 #include <cstdint>
 #include <cstring>
+#include <memory>
+#include <AppKit/NSWindow.h>
+#include <Cocoa/Cocoa.h>
 
 #include "../Window.h"
 
@@ -13,13 +13,10 @@
 }
 
 @property (readonly, assign) tg::Window* window;
-
 - (id)initWithWindow:(tg::Window*)window;
-
 @end
 
 @implementation WindowDelegate
-
 - (id)initWithWindow:(tg::Window*)window
 {
     self = [super init];
@@ -35,7 +32,7 @@
 {
     if (_window->OnResize != nullptr)
     {
-        auto extent = _window->GetClientSize();
+        const auto extent = _window->GetClientSize();
         _window->OnResize(extent.width, extent.height);
     }
 }
@@ -44,7 +41,7 @@
 {
     if (_window->OnMove != nullptr)
     {
-        auto pos = _window->GetPosition();
+        const auto pos = _window->GetPosition();
         _window->OnMove(pos.x, pos.y);
     }
 }
@@ -89,7 +86,7 @@ namespace
 
 constexpr NSWindowStyleMask ConvertWindowStyleToNative(const WindowStyle& windowStyle) noexcept
 {
-    NSWindowStyleMask nativeWindowStyleMask = static_cast<NSWindowStyleMask>(0);
+    NSWindowStyleMask nativeWindowStyleMask = {};
     
     if (windowStyle.hasCaption == true)
     {

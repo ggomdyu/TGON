@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "Platform/Environment.h"
-
 #include "TaskModule.h"
 
 namespace tg

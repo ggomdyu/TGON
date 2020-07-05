@@ -4,7 +4,7 @@ namespace tg
 {
 
 
-constexpr std::string_view Path::GetPathRoot(const std::string_view& path) noexcept
+constexpr std::u8string_view Path::GetPathRoot(const std::u8string_view& path) noexcept
 {
     //int len = 2;
 
@@ -36,10 +36,10 @@ constexpr std::string_view Path::GetPathRoot(const std::string_view& path) noexc
     //} else
     //    return Directory.GetCurrentDirectory ().Substring (0, 2);// + path.Substring (0, len);
     //return path.Substring (0, len);
-    return "";
+    return u8"";
 }
 
-constexpr int32_t Path::GetRootLength(const std::string_view& path) noexcept
+constexpr int32_t Path::GetRootLength(const std::u8string_view& path) noexcept
 {
     return path.length() > 0 && Path::IsDirectorySeparator(path[0]) ? 1 : 0;
 }

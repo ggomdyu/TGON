@@ -10,11 +10,11 @@ public:
     WindowsPath() = delete;
     
 /**@section Variable */
-public:
-    static constexpr char DirectorySeparatorChar = '\\';
-    static constexpr char AltDirectorySeparatorChar = '/';
-    static constexpr char VolumeSeparatorChar = ':';
-    static constexpr char PathSeparator = ';';
+protected:
+    static constexpr char8_t DirectorySeparatorChar = u8'\\';
+    static constexpr char8_t AltDirectorySeparatorChar = u8'/';
+    static constexpr char8_t VolumeSeparatorChar = u8':';
+    static constexpr char8_t PathSeparator = u8';';
 };
 
 using PlatformPath = WindowsPath;

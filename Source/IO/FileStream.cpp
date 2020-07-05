@@ -7,22 +7,22 @@
 namespace tg
 {
 
-FileStream::FileStream(const char* path, FileMode mode) :
+FileStream::FileStream(const char8_t* path, FileMode mode) :
     FileStream(path, mode, (mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite), DefaultShare, DefaultBufferSize, DefaultFileOption)
 {
 }
 
-FileStream::FileStream(const char* path, FileMode mode, FileAccess access) :
+FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access) :
     FileStream(path, mode, access, DefaultShare, DefaultBufferSize, DefaultFileOption)
 {
 }
 
-FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileShare share) :
+FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share) :
     FileStream(path, mode, access, share, DefaultBufferSize, DefaultFileOption)
 {
 }
 
-FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize) :
+FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize) :
     FileStream(path, mode, access, share, bufferSize, DefaultFileOption)
 {
 }
@@ -48,24 +48,22 @@ FileStream::FileStream(FileStream&& rhs) noexcept :
 
 FileStream::~FileStream()
 {
-    this->Close();
+    InternalClose();
 }
 
 FileStream& FileStream::operator=(FileStream&& rhs) noexcept
 {
-    this->Close();
-    
-    m_nativeHandle = rhs.m_nativeHandle;
-    m_buffer = std::move(rhs.m_buffer);
+    std::swap(m_nativeHandle, rhs.m_nativeHandle);
+    std::swap(m_buffer, rhs.m_buffer);
+    std::swap(m_fileName, rhs.m_fileName);
+
     m_bufferSize = rhs.m_bufferSize;
     m_readPos = rhs.m_readPos;
     m_readLen = rhs.m_readLen;
     m_writePos = rhs.m_writePos;
     m_filePos = rhs.m_filePos;
     m_access = rhs.m_access;
-    m_fileName = std::move(rhs.m_fileName);
 
-    rhs.m_nativeHandle = nullptr;
     rhs.m_bufferSize = 0;
     rhs.m_readPos = 0;
     rhs.m_readLen = 0;
@@ -141,7 +139,7 @@ int64_t FileStream::Seek(int64_t offset, SeekOrigin origin)
     {
         // If we've read the buffer once before, then the seek offset is automatically moved to the end of the buffer.
         // So we must adjust the offset to set the seek offset as required.
-        offset -= m_readLen - m_readPos;
+        offset -= static_cast<int64_t>(m_readLen) - m_readPos;
     }
     
     m_readPos = m_readLen = 0;
@@ -149,7 +147,7 @@ int64_t FileStream::Seek(int64_t offset, SeekOrigin origin)
     return InternalSeek(offset, origin);
 }
 
-const std::string& FileStream::Name() const noexcept
+const std::u8string& FileStream::Name() const noexcept
 {
     return m_fileName;
 }
@@ -159,7 +157,7 @@ void FileStream::Flush()
     this->Flush(false);
 }
 
-std::vector<std::byte>& FileStream::GetBuffer() noexcept
+std::vector<std::byte>& FileStream::GetBuffer()
 {
     if (m_buffer.empty())
     {
@@ -181,7 +179,7 @@ int32_t FileStream::Read(std::byte* buffer, int32_t count)
     {
         this->FlushWriteBuffer();
     
-        auto readBytes = this->InternalRead(&this->GetBuffer()[0], m_bufferSize);
+        const auto readBytes = this->InternalRead(&this->GetBuffer()[0], m_bufferSize);
         m_readPos = 0;
         m_readLen = leftReadBufferSpace = readBytes;
 
@@ -197,7 +195,7 @@ int32_t FileStream::Read(std::byte* buffer, int32_t count)
     // Copied less than the required bytes?
     if (copiedBytes < count)
     {
-        int32_t moreReadBytes = this->InternalRead(buffer + m_readPos + copiedBytes, count - copiedBytes);
+        const int32_t moreReadBytes = this->InternalRead(buffer + m_readPos + copiedBytes, count - copiedBytes);
         copiedBytes += moreReadBytes;
 
         m_readLen = 0;
@@ -216,12 +214,12 @@ int32_t FileStream::ReadByte()
         return -1;
     }
 
-    int32_t leftReadBufferSpace = m_readLen - m_readPos;
+    const int32_t leftReadBufferSpace = m_readLen - m_readPos;
     if (leftReadBufferSpace == 0)
     {
         this->FlushWriteBuffer();
 
-        auto readBytes = this->InternalRead(&this->GetBuffer()[0], m_bufferSize);
+        const auto readBytes = this->InternalRead(&this->GetBuffer()[0], m_bufferSize);
         m_readPos = 0;
         m_readLen = readBytes;
 
@@ -245,7 +243,7 @@ bool FileStream::Write(const std::byte* buffer, int32_t count)
 
     if (m_writePos > 0)
     {
-        int32_t numBytes = m_bufferSize - m_writePos;
+        const int32_t numBytes = m_bufferSize - m_writePos;
         if (numBytes > 0)
         {
             // If the specified buffer can be stored into the m_buffer directly
@@ -255,13 +253,11 @@ bool FileStream::Write(const std::byte* buffer, int32_t count)
                 m_writePos += count;
                 return true;
             }
-            else
-            {
-                std::memcpy(&GetBuffer()[m_writePos], buffer, static_cast<size_t>(numBytes));
-                m_writePos += numBytes;
-                buffer += numBytes;
-                count -= numBytes;
-            }
+
+            std::memcpy(&GetBuffer()[m_writePos], buffer, static_cast<size_t>(numBytes));
+            m_writePos += numBytes;
+            buffer += numBytes;
+            count -= numBytes;
         }
 
         this->FlushWriteBuffer();
@@ -306,7 +302,7 @@ void FileStream::FlushReadBuffer()
     }
 
     // We must rewind the seek pointer if a write occured.
-    int32_t rewindOffset = m_readPos - m_readLen;
+    const int32_t rewindOffset = m_readPos - m_readLen;
     if (rewindOffset != 0)
     {
         this->InternalSeek(rewindOffset, SeekOrigin::Current);

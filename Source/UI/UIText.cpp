@@ -12,18 +12,18 @@ class TextBlock final
 /**@section Constructor */
 public:
     TextBlock() = default;
-    TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment);
+    TextBlock(const std::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment);
     
 /**@section Method */
 public:
-    void SetText(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment);
+    void SetText(const std::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment);
     void Clear();
     const I32Rect& GetRect() const noexcept;
     const I32Rect& GetContentRect() const noexcept;
     const std::vector<CharacterInfo>& GetCharacterInfos() const noexcept;
     
 private:
-    int32_t TryAddTextLine(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect);
+    int32_t TryAddTextLine(const std::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect);
     void PopBackLine();
     void ProcessTextAlignment(TextAlignment textAlignment);
     void ProcessLineBreakMode(LineBreakMode lineBreakMode);
@@ -37,14 +37,14 @@ private:
     int32_t m_iterIndex = 0;
 };
 
-TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment)
+TextBlock::TextBlock(const std::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment)
 {
     this->SetText(characters, fontAtlas, fontSize, rect, lineBreakMode, textAlignment);
 }
 
 UIText::~UIText() = default;
 
-void TextBlock::SetText(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment)
+void TextBlock::SetText(const std::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment)
 {
     this->Clear();
     
@@ -53,7 +53,7 @@ void TextBlock::SetText(const gsl::span<const char32_t>& characters, const std::
  
     // TODO: First of all, we must check whether the text spill over.
     
-    gsl::span<const char32_t> characterSpan = characters;
+    std::span<const char32_t> characterSpan = characters;
     while (true)
     {
         bool isTextSpillOver = m_contentRect.height > rect.height;
@@ -125,7 +125,7 @@ void TextBlock::PopBackLine()
     m_lineInfos.pop_back();
 }
 
-int32_t TextBlock::TryAddTextLine(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect)
+int32_t TextBlock::TryAddTextLine(const std::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect)
 {
     int32_t yMin = INT32_MAX;
     int32_t yMax = -INT32_MAX;

@@ -9,7 +9,7 @@ extern std::unique_ptr<Engine> CreateEngine();
 
 Application::Application() :
     m_engine(CreateEngine()),
-    m_rootWindow(std::make_unique<Window>(m_engine->GetEngineConfig().windowStyle))
+    m_rootWindow(std::make_unique<Window>(m_engine->GetEngineConfiguration().windowStyle))
 {
 }
 
@@ -24,22 +24,17 @@ void Application::Initialize()
     m_engine->Initialize();
 }
 
-void Application::Destroy()
+void Application::ShowMessageBox(const char8_t* message)
 {
-    m_engine->Destroy();
+    ShowMessageBox(u8"", message);
 }
 
-void Application::ShowMessageBox(const char* message)
+void Application::ShowMessageBox(const char8_t* message, MessageBoxIcon messageBoxIcon)
 {
-    ShowMessageBox("", message);
+    ShowMessageBox(u8"", message, messageBoxIcon);
 }
 
-void Application::ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon)
-{
-    ShowMessageBox("", message, messageBoxIcon);
-}
-
-void Application::ShowMessageBox(const char* title, const char* message)
+void Application::ShowMessageBox(const char8_t* title, const char8_t* message)
 {
     ShowMessageBox(title, message, MessageBoxIcon::Informational);
 }

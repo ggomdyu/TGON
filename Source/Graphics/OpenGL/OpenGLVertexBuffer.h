@@ -12,17 +12,24 @@ class OpenGLVertexBuffer :
     private NonCopyable
 {
 /**@section Constructor */
-protected:
+public:
     explicit OpenGLVertexBuffer(GLuint vertexBufferHandle) noexcept;
+    OpenGLVertexBuffer(const OpenGLVertexBuffer& rhs) = delete;
     OpenGLVertexBuffer(OpenGLVertexBuffer&& rhs) noexcept;
     
+/**@section Destructor */
+public:
+    ~OpenGLVertexBuffer() = default;
+    
 /**@section Operator */
-protected:
+public:
+    OpenGLVertexBuffer& operator=(const OpenGLVertexBuffer& rhs) = delete;
     OpenGLVertexBuffer& operator=(OpenGLVertexBuffer&& rhs) noexcept;
 
 /**@section Method */
 public:
-    GLuint GetVertexBufferHandle() const noexcept;
+    [[nodiscard]] static GLuint CreateVertexBufferHandle();
+    [[nodiscard]] GLuint GetVertexBufferHandle() const noexcept;
 
 /**@section Variable */
 protected:

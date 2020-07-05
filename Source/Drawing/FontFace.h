@@ -6,7 +6,6 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include "Core/RuntimeObject.h"
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
 
@@ -30,23 +29,21 @@ struct GlyphData final
     std::unique_ptr<std::byte[]> bitmap;
 };
 
-class FontFace final :
-    public RuntimeObject
+class FontFace final
 {
-public:
-    TGON_DECLARE_RTTI(FontFace)
-    
 /**@section Constructor */
 public:
     FontFace(FT_Face fontFace, int32_t fontSize) noexcept;
+    FontFace(const FontFace& rhs) = delete;
     FontFace(FontFace&& rhs) noexcept;
 
 /**@section Destructor */
 public:
-    ~FontFace() override;
+    ~FontFace();
 
 /**@section Operator */
 public:
+    FontFace& operator=(const FontFace& rhs) = delete;
     FontFace& operator=(FontFace&& rhs) noexcept;
 
 /**@section Method */

@@ -9,15 +9,15 @@
 namespace tg
 {
 
-class UIElement :
-    public RuntimeObject
+class UIElement
 {
-public:
-    TGON_DECLARE_RTTI(UIElement)
-
 /**@section Constructor */
 public:
     UIElement();
+
+/**@section Constructor */
+public:
+    virtual ~UIElement() = default;
 
 /**@section Method */
 public:

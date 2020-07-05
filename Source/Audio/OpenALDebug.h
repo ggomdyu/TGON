@@ -11,7 +11,7 @@
         auto errorCode = alGetError();\
         if (errorCode != AL_NO_ERROR)\
         {\
-            tg::Debug::WriteLine(fmt::format("Failed to invoke AL Function. (Code:{0}, Expression:{1})", errorCode, #expression));\
+            tg::Debug::WriteLine(fmt::format(u8"Failed to invoke AL Function. (Code:{0}, Expression:{1})", errorCode, reinterpret_cast<const char8_t*>(#expression)));\
         }\
     }
 #else

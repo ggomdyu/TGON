@@ -9,18 +9,6 @@
 
 namespace tg
 {
-namespace
-{
-
-GLuint CreateIndexBufferHandle()
-{
-    GLuint vertexBufferHandle;
-    TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));
-
-    return vertexBufferHandle;
-}
-
-}
 
 OpenGLIndexBuffer::OpenGLIndexBuffer(GLuint indexBufferHandle) noexcept :
     m_indexBufferHandle(indexBufferHandle)
@@ -35,11 +23,17 @@ OpenGLIndexBuffer::OpenGLIndexBuffer(OpenGLIndexBuffer&& rhs) noexcept :
 
 OpenGLIndexBuffer& OpenGLIndexBuffer::operator=(OpenGLIndexBuffer&& rhs) noexcept
 {
-    m_indexBufferHandle = rhs.m_indexBufferHandle;
-
-    rhs.m_indexBufferHandle = 0;
+    std::swap(m_indexBufferHandle, rhs.m_indexBufferHandle);
 
     return *this;
+}
+
+GLuint OpenGLIndexBuffer::CreateIndexBufferHandle()
+{
+    GLuint vertexBufferHandle;
+    TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));
+
+    return vertexBufferHandle;
 }
 
 GLuint OpenGLIndexBuffer::GetIndexBufferHandle() const noexcept
@@ -50,6 +44,12 @@ GLuint OpenGLIndexBuffer::GetIndexBufferHandle() const noexcept
 IndexBuffer::IndexBuffer() :
     OpenGLIndexBuffer(CreateIndexBufferHandle())
 {
+}
+
+IndexBuffer::~IndexBuffer()
+{
+    TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_indexBufferHandle));
+    m_indexBufferHandle = 0;
 }
 
 void IndexBuffer::SetData(const void* data, int32_t dataBytes, bool isDynamicUsage)
@@ -66,15 +66,6 @@ void IndexBuffer::Use()
 void IndexBuffer::Unuse()
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
-}
-
-void IndexBuffer::Destroy()
-{
-    if (m_indexBufferHandle != 0)
-    {
-        TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_indexBufferHandle));
-        m_indexBufferHandle = 0;
-    }
 }
 
 }

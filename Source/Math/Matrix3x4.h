@@ -15,7 +15,7 @@
 namespace tg
 {
 
-struct Matrix3x4
+struct alignas(64) Matrix3x4
 {
 /**@section Constructor */
 public:
@@ -56,9 +56,9 @@ public:
     static Matrix3x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ) noexcept;
     static constexpr Matrix3x4 OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept;
     static constexpr Matrix3x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept;
-    int32_t ToString(const gsl::span<char>& destStr) const;
+    int32_t ToString(const std::span<char>& destStr) const;
     int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
-    std::string ToString() const;
+    [[nodiscard]] std::string ToString() const;
 
 /**@section Variable */
 public:
@@ -371,7 +371,7 @@ constexpr const Matrix3x4 Matrix3x4::Scale(float x, float y, float z) noexcept
     );
 }
 
-inline int32_t Matrix3x4::ToString(const gsl::span<char>& destStr) const
+inline int32_t Matrix3x4::ToString(const std::span<char>& destStr) const
 {
     return this->ToString(&destStr[0], destStr.size());
 }

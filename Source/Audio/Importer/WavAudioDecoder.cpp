@@ -6,9 +6,9 @@
 namespace tg
 {
 
-std::optional<WavAudioDecoder> WavAudioDecoder::Create(const gsl::span<const std::byte>& fileData)
+std::optional<WavAudioDecoder> WavAudioDecoder::Create(const std::span<const std::byte>& fileData)
 {
-    if (WavAudioDecoder::IsWav(fileData) == false)
+    if (IsWav(fileData) == false)
     {
         return {};
     }
@@ -61,7 +61,7 @@ std::optional<WavAudioDecoder> WavAudioDecoder::Create(const gsl::span<const std
     return WavAudioDecoder(std::move(audioData), audioDataBytes, bitsPerSample, channels, samplingRate);
 }
 
-bool WavAudioDecoder::IsWav(const gsl::span<const std::byte>& fileData)
+bool WavAudioDecoder::IsWav(const std::span<const std::byte>& fileData)
 {
     if (fileData.size() < 16)
     {

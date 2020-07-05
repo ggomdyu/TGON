@@ -1,7 +1,7 @@
 #pragma once
 
 #if TGON_GRAPHICS_OPENGL
-#   include "OpenGL/OpenGLRenderTarget.h"
+#include "OpenGL/OpenGLRenderTarget.h"
 #endif
 
 #include "Texture.h"

@@ -7,12 +7,19 @@ namespace tg
 
 class IComparable
 {
+/**@section Constructor */
+public:
+    IComparable(const IComparable&) = default;
+    IComparable(IComparable&&) = default;
+
 /**@section Destructor */
 public:
     virtual ~IComparable() = default;
 
 /**@section Operator */
 public:
+    IComparable& operator=(const IComparable&) = default;
+    IComparable& operator=(IComparable&&) = default;
     bool operator==(const IComparable* rhs) const;
     bool operator!=(const IComparable* rhs) const;
     

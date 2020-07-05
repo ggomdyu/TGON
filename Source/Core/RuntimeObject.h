@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RTTI.h"
+#include "Rtti.h"
 
 namespace tg
 {
@@ -15,29 +15,31 @@ public:
 /**@section Constructor */
 public:
     RuntimeObject() noexcept = default;
-    RuntimeObject(RuntimeObject&& rhs) noexcept = default;
+    RuntimeObject(const RuntimeObject& rhs) = delete;
+    RuntimeObject(RuntimeObject&& rhs) = default;
 
 /**@section Destructor */
 public:
     virtual ~RuntimeObject() = default;
-    
+
 /**@section Operator */
 public:
-    RuntimeObject& operator=(RuntimeObject&& rhs) noexcept = default;
+    RuntimeObject& operator=(const RuntimeObject& rhs) = delete;
+    RuntimeObject& operator=(RuntimeObject&& rhs) = default;
 
 /**@section Method */
 public:
-    virtual const RTTI* GetRTTI() const = 0;
+    [[nodiscard]] virtual const Rtti* GetRtti() const = 0;
 };
 
 }
 
-#define TGON_DECLARE_RTTI(classType)\
+#define TGON_RTTI(classType)\
     using Super = This;\
     using This = classType;\
     \
-    const tg::RTTI* GetRTTI() const override\
+    const tg::Rtti* GetRtti() const override\
     {\
-        static_assert(std::is_same_v<std::remove_const_t<std::remove_pointer_t<decltype(this)>>, This>, "TGON_DECLARE_RTTI didn't received the owner type as a parameter.");\
-        return tg::GetRTTI<classType>();\
+        static_assert(std::is_same_v<std::remove_const_t<std::remove_pointer_t<decltype(this)>>, This>, "TGON_RTTI didn't receive the owner type as a parameter.");\
+        return tg::GetRtti<classType>();\
     }

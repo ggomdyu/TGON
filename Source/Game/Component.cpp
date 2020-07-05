@@ -1,33 +1,31 @@
 #include "PrecompiledHeader.h"
 
-#include "Game/GameObject.h"
-
 #include "Component.h"
 
 namespace tg
 {
 
-Component::Component(const std::shared_ptr<GameObject>& gameObject) noexcept :
+Component::Component(GameObject* gameObject) noexcept :
     m_gameObject(gameObject)
 {
 }
 
-void Component::SetGameObject(const std::shared_ptr<GameObject>& gameObject) noexcept
+void Component::SetGameObject(GameObject* gameObject) noexcept
 {
     m_gameObject = gameObject;
 }
 
-std::weak_ptr<GameObject> Component::GetGameObject() noexcept
+GameObject* Component::GetGameObject() noexcept
 {
     return m_gameObject;
 }
 
-std::weak_ptr<const GameObject> Component::GetGameObject() const noexcept
+const GameObject* Component::GetGameObject() const noexcept
 {
     return m_gameObject;
 }
 
-void Component::SetAcitve(bool isActive) noexcept
+void Component::SetActive(bool isActive) noexcept
 {
     m_isActive = isActive;
 }

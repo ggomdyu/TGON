@@ -10,20 +10,6 @@ Gamepad::Gamepad(gainput::InputDevicePad* nativeGamepad) noexcept :
 {
 }
 
-Gamepad::Gamepad(Gamepad&& rhs) noexcept :
-    m_nativeGamepad(rhs.m_nativeGamepad)
-{
-}
-
-Gamepad& tg::Gamepad::operator=(Gamepad&& rhs) noexcept
-{
-    m_nativeGamepad = rhs.m_nativeGamepad;
-
-    rhs.m_nativeGamepad = nullptr;
-
-    return *this;
-}
-
 void Gamepad::Update()
 {
 }

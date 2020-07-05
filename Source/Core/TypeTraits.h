@@ -11,14 +11,14 @@ namespace detail
 template <typename>
 struct IsBasicString : std::false_type {};
 
-template <typename _CharType, typename _TraitsType, typename _AllocatorType>
-struct IsBasicString<std::basic_string<_CharType, _TraitsType, _AllocatorType>> : std::true_type {};
+template <typename _Char, typename _Traits, typename _Allocator>
+struct IsBasicString<std::basic_string<_Char, _Traits, _Allocator>> : std::true_type {};
 
 template <typename>
 struct IsBasicStringView : std::false_type {};
 
-template <typename _CharType>
-struct IsBasicStringView<std::basic_string_view<_CharType>> : std::true_type {};
+template <typename _Char>
+struct IsBasicStringView<std::basic_string_view<_Char>> : std::true_type {};
 
 template <typename _Type>
 struct RemoveAllPointers
@@ -37,50 +37,49 @@ struct RemoveAllPointers<_Type*>
 template <typename>
 struct FunctionTraits;
 
-template <typename _ReturnType, typename... _ArgTypes>
-struct FunctionTraits<_ReturnType(_ArgTypes...)>
+template <typename _Return, typename... _Args>
+struct FunctionTraits<_Return(_Args...)>
 {
 /**@section Type */
 public:
-    using ReturnType = _ReturnType;
-    using FunctionType = _ReturnType(_ArgTypes...);
-    using FunctionPtrType = _ReturnType(*)(_ArgTypes...);
+    using ReturnType = _Return;
+    using FunctionType = _Return(_Args...);
     
 /**@section Variable */
 public:
     static constexpr bool IsMemberFunction = false;
     static constexpr bool IsFunctor = false;
-    static constexpr size_t ArgumentCount = sizeof...(_ArgTypes);
+    static constexpr size_t ArgumentCount = sizeof...(_Args);
 };
 
-template <typename _ReturnType, typename... _ArgTypes>
-struct FunctionTraits<_ReturnType(*)(_ArgTypes...)> : FunctionTraits<_ReturnType(_ArgTypes...)> {};
+template <typename _Return, typename... _Args>
+struct FunctionTraits<_Return(*)(_Args...)> : FunctionTraits<_Return(_Args...)> {};
 
-template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
-    FunctionTraits<std::remove_cv_t<_ReturnType(_ArgTypes...)>>
+template <typename _Return, typename _Class, typename... _Args>
+struct FunctionTraits<_Return(_Class::*)(_Args...)> :
+    FunctionTraits<std::remove_cv_t<_Return(_Args...)>>
 {
 /**@section Type */
 public:
-    using ClassType = _ClassType;
+    using ClassType = _Class;
     
 /**@section Variable */
 public:
     static constexpr bool IsMemberFunction = true;
 };
 
-template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const> : FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> {};
+template <typename _Return, typename _Class, typename... _Args>
+struct FunctionTraits<_Return(_Class::*)(_Args...) const> : FunctionTraits<_Return(_Class::*)(_Args...)> {};
     
-template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) volatile> : FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> {};
+template <typename _Return, typename _Class, typename... _Args>
+struct FunctionTraits<_Return(_Class::*)(_Args...) volatile> : FunctionTraits<_Return(_Class::*)(_Args...)> {};
 
-template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const volatile> : FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> {};
+template <typename _Return, typename _Class, typename... _Args>
+struct FunctionTraits<_Return(_Class::*)(_Args...) const volatile> : FunctionTraits<_Return(_Class::*)(_Args...)> {};
 
-template <typename _FunctionType>
+template <typename _Function>
 struct FunctionTraits :
-    FunctionTraits<decltype(&_FunctionType::operator())>
+    FunctionTraits<decltype(&_Function::operator())>
 {
 /**@section Variable */
 public:
@@ -96,9 +95,6 @@ constexpr bool IsBasicStringView = detail::IsBasicStringView<_Type>::value;
 
 template <typename _Type>
 using RemoveAllPointers = typename detail::RemoveAllPointers<_Type>::Type;
-
-template <typename _Type>
-using RemoveCvref = std::remove_cv_t<std::remove_reference_t<_Type>>;
 
 template <typename _Type>
 using Pure = std::remove_cv_t<RemoveAllPointers<std::decay_t<_Type>>>;

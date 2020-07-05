@@ -14,7 +14,7 @@ class TimerModule :
 	public Module
 {
 public:
-    TGON_DECLARE_RTTI(TimerModule)
+    TGON_RTTI(TimerModule)
 
 /**@section Struct */
 private:

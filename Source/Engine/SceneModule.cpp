@@ -16,7 +16,7 @@ void Scene::Update()
     }
 }
 
-void SceneModule::Update()
+void SceneManager::Update()
 {
     if (m_activeScene != nullptr)
     {
@@ -24,15 +24,15 @@ void SceneModule::Update()
     }
 }
 
-void SceneModule::NewScene(NewSceneSetup newSceneSetup)
+void SceneManager::NewScene(NewSceneSetup newSceneSetup)
 {
 }
 
-void SceneModule::OpenScene(const std::string& path, OpenSceneMode openSceneMode)
+void SceneManager::OpenScene(const std::string& path, OpenSceneMode openSceneMode)
 {
 }
 
-std::shared_ptr<GameObject> SceneModule::Instantiate()
-{
-}
+//std::shared_ptr<GameObject> SceneModule::Instantiate()
+//{
+//}
 }

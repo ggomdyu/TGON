@@ -1,22 +1,20 @@
 #pragma once
 
 #include <cstdint>
-#include <cassert>
 #include <cmath>
-#include <gsl/span>
+#include <span>
+#include <array>
+
+#if TGON_USING_SIMD
+#include "Core/Simd.h"
+#endif
 
 #include "Vector3.h"
-
-#if _MSC_VER
-#   define TGON_SPRINTF sprintf_s
-#else
-#   define TGON_SPRINTF snprintf
-#endif
 
 namespace tg
 {
 
-struct Matrix4x4
+struct alignas(16) Matrix4x4
 {
 /**@section Constructor */
 public:
@@ -25,42 +23,45 @@ public:
                         float m10, float m11, float m12, float m13,
                         float m20, float m21, float m22, float m23,
                         float m30, float m31, float m32, float m33) noexcept;
+    explicit Matrix4x4(const std::span<const float>& m) noexcept;
+    template <typename _Expression> requires IsExpressionTemplate<_Expression>
+    constexpr Matrix4x4(const _Expression& expression);
 
 /**@section Operator */
 public:
-    Matrix4x4 operator+(const Matrix4x4&) const noexcept;
-    Matrix4x4 operator-(const Matrix4x4&) const noexcept;
-    Matrix4x4 operator*(const Matrix4x4&) const noexcept;
-    Matrix4x4& operator+=(const Matrix4x4&) noexcept;
-    Matrix4x4& operator-=(const Matrix4x4&) noexcept;
-    Matrix4x4& operator*=(const Matrix4x4&) noexcept;
-    constexpr bool operator==(const Matrix4x4&) const noexcept;
-    constexpr bool operator!=(const Matrix4x4&) const noexcept;
-    float* operator[](std::size_t index);
-    const float* operator[](std::size_t index) const;
+    constexpr ExpressionTemplate<Plus, Matrix4x4, Matrix4x4> operator+(const Matrix4x4& rhs) const noexcept;
+    constexpr ExpressionTemplate<Minus, Matrix4x4, Matrix4x4> operator-(const Matrix4x4& rhs) const noexcept;
+    Matrix4x4 operator*(const Matrix4x4& rhs) const noexcept;
+    Matrix4x4& operator+=(const Matrix4x4& rhs) noexcept;
+    Matrix4x4& operator-=(const Matrix4x4& rhs) noexcept;
+    Matrix4x4& operator*=(const Matrix4x4& rhs) noexcept;
+    bool operator==(const Matrix4x4& rhs) const noexcept;
+    bool operator!=(const Matrix4x4& rhs) const noexcept;
+    float& operator[](int32_t index);
+    float operator[](int32_t index) const;
 
 /**@section Method */
 public:
-    static constexpr const Matrix4x4 Identity() noexcept;
-    static constexpr const Matrix4x4 Zero() noexcept;
-    static constexpr const Matrix4x4 Translate(float x, float y, float z) noexcept;
-    static const Matrix4x4 Rotate(float yaw, float pitch, float roll) noexcept;
-    static const Matrix4x4 RotateX(float radian) noexcept;
-    static const Matrix4x4 RotateY(float radian) noexcept;
-    static const Matrix4x4 RotateZ(float radian) noexcept;
-    static constexpr const Matrix4x4 Scale(float x, float y, float z) noexcept;
-    static constexpr const Matrix4x4 Transposed(const Matrix4x4& matrix) noexcept;
+    [[nodiscard]] static constexpr Matrix4x4 Identity() noexcept;
+    [[nodiscard]] static constexpr Matrix4x4 Zero() noexcept;
+    [[nodiscard]] static Matrix4x4 Translate(float x, float y, float z) noexcept;
+    [[nodiscard]] static Matrix4x4 Rotate(float yaw, float pitch, float roll) noexcept;
+    [[nodiscard]] static Matrix4x4 RotateX(float radian) noexcept;
+    [[nodiscard]] static Matrix4x4 RotateY(float radian) noexcept;
+    [[nodiscard]] static Matrix4x4 RotateZ(float radian) noexcept;
+    [[nodiscard]] static Matrix4x4 Scale(float x, float y, float z) noexcept;
+    [[nodiscard]] static Matrix4x4 Transposed(const Matrix4x4& matrix) noexcept;
     void Transpose() noexcept;
-    static constexpr const Matrix4x4 Inverse();
-    static Matrix4x4 LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept;
-    static Matrix4x4 LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept;
-    static Matrix4x4 PerspectiveLH(float fovy, float aspect, float nearZ, float farZ) noexcept;
-    static Matrix4x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ) noexcept;
-    static constexpr Matrix4x4 OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept;
-    static constexpr Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept;
-    int32_t ToString(const gsl::span<char>& destStr) const;
-    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
-    std::string ToString() const;
+    [[nodiscard]] static Matrix4x4 Inverse();
+    [[nodiscard]] static Matrix4x4 LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept;
+    [[nodiscard]] static Matrix4x4 LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept;
+    [[nodiscard]] static Matrix4x4 PerspectiveLH(float fovy, float aspect, float nearZ, float farZ) noexcept;
+    [[nodiscard]] static Matrix4x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ) noexcept;
+    [[nodiscard]] static Matrix4x4 OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept;
+    [[nodiscard]] static Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept;
+    int32_t ToString(const std::span<char8_t>& destStr) const;
+    int32_t ToString(char8_t* destStr, size_t destStrBufferLen) const;
+    [[nodiscard]] std::u8string ToString() const;
 
 /**@section Variable */
 public:
@@ -70,6 +71,17 @@ public:
           m30, m31, m32, m33;
 };
 
+template <typename _Expression> requires IsExpressionTemplate<_Expression>
+constexpr Matrix4x4::Matrix4x4(const _Expression& expression) :
+    Matrix4x4(
+        expression[0], expression[1], expression[2], expression[3],
+        expression[4], expression[5], expression[6], expression[7],
+        expression[8], expression[9], expression[10], expression[11],
+        expression[12], expression[13], expression[14], expression[15]
+    )
+{
+}
+
 constexpr Matrix4x4::Matrix4x4() noexcept :
     m00(1.0f), m01(0.0f), m02(0.0f), m03(0.0f),
     m10(0.0f), m11(1.0f), m12(0.0f), m13(0.0f),
@@ -77,6 +89,25 @@ constexpr Matrix4x4::Matrix4x4() noexcept :
     m30(0.0f), m31(0.0f), m32(0.0f), m33(1.0f)
 {
 }
+
+inline Matrix4x4::Matrix4x4(const std::span<const float>& m) noexcept
+#if TGON_USING_SIMD
+{
+    // Faster 2.0x
+    StoreSimdRegister(&m00, LoadSimdRegister(&m[0]));
+    StoreSimdRegister(&m10, LoadSimdRegister(&m[4]));
+    StoreSimdRegister(&m20, LoadSimdRegister(&m[8]));
+    StoreSimdRegister(&m30, LoadSimdRegister(&m[12]));
+}
+#else
+    :
+    m00(m[0]), m01(m[1]), m02(m[2]), m03(m[3]),
+    m10(m[4]), m11(m[5]), m12(m[6]), m13(m[7]),
+    m20(m[8]), m21(m[9]), m22(m[10]), m23(m[11]),
+    m30(m[12]), m31(m[13]), m32(m[14]), m33(m[15])
+{
+}
+#endif
 
 constexpr Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
                                float m10, float m11, float m12, float m13,
@@ -89,19 +120,54 @@ constexpr Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
 {
 }
 
-inline Matrix4x4 Matrix4x4::operator-(const Matrix4x4& rhs) const noexcept
+constexpr ExpressionTemplate<Plus, Matrix4x4, Matrix4x4> Matrix4x4::operator+(const Matrix4x4& rhs) const noexcept
 {
-    return Matrix4x4(
-        m00 - rhs.m00, m01 - rhs.m01, m02 - rhs.m02, m03 - rhs.m03,
-        m10 - rhs.m10, m11 - rhs.m11, m12 - rhs.m12, m13 - rhs.m13,
-        m20 - rhs.m20, m21 - rhs.m21, m22 - rhs.m22, m23 - rhs.m23,
-        m30 - rhs.m30, m31 - rhs.m31, m32 - rhs.m32, m33 - rhs.m33
-    );
+    return {*this, rhs};
+}
+
+constexpr ExpressionTemplate<Minus, Matrix4x4, Matrix4x4> Matrix4x4::operator-(const Matrix4x4& rhs) const noexcept
+{
+    return {*this, rhs};
 }
 
 inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const noexcept
 {
-    return Matrix4x4(
+#if TGON_USING_SIMD
+    Matrix4x4 ret;
+    auto r0 = LoadSimdRegister(&rhs.m00);
+    auto r1 = LoadSimdRegister(&rhs.m10);
+    auto r2 = LoadSimdRegister(&rhs.m20);
+    auto r3 = LoadSimdRegister(&rhs.m30);
+
+    auto l = LoadSimdRegister(&m00);
+    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
+    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
+    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
+    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
+    StoreSimdRegister(&ret.m00, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+
+    l = LoadSimdRegister(&m10);
+    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
+    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
+    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
+    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
+    StoreSimdRegister(&ret.m10, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+
+    l = LoadSimdRegister(&m20);
+    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
+    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
+    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
+    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
+    StoreSimdRegister(&ret.m20, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+
+    l = LoadSimdRegister(&m30);
+    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
+    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
+    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
+    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
+    StoreSimdRegister(&ret.m30, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+#else
+   return Matrix4x4(
         (m00 * rhs.m00) + (m01 * rhs.m10) + (m02 * rhs.m20) + (m03 * rhs.m30),
         (m00 * rhs.m01) + (m01 * rhs.m11) + (m02 * rhs.m21) + (m03 * rhs.m31),
         (m00 * rhs.m02) + (m01 * rhs.m12) + (m02 * rhs.m22) + (m03 * rhs.m32),
@@ -122,24 +188,41 @@ inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const noexcept
         (m30 * rhs.m02) + (m31 * rhs.m12) + (m32 * rhs.m22) + (m33 * rhs.m32),
         (m30 * rhs.m03) + (m31 * rhs.m13) + (m32 * rhs.m23) + (m33 * rhs.m33)
     );
+#endif
 }
 
 inline Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& rhs) noexcept
 {
+#if TGON_USING_SIMD
+    // 속도향상 없음
+    StoreSimdRegister(&m00, AddSimdRegister(LoadSimdRegister(&m00), LoadSimdRegister(&rhs.m00)));
+    StoreSimdRegister(&m10, AddSimdRegister(LoadSimdRegister(&m10), LoadSimdRegister(&rhs.m10)));
+    StoreSimdRegister(&m20, AddSimdRegister(LoadSimdRegister(&m20), LoadSimdRegister(&rhs.m20)));
+    StoreSimdRegister(&m30, AddSimdRegister(LoadSimdRegister(&m30), LoadSimdRegister(&rhs.m30)));
+#else
     m00 += rhs.m00; m01 += rhs.m01; m02 += rhs.m02; m03 += rhs.m03;
     m10 += rhs.m10; m11 += rhs.m11; m12 += rhs.m12; m13 += rhs.m13;
     m20 += rhs.m20; m21 += rhs.m21; m22 += rhs.m22; m23 += rhs.m23;
     m30 += rhs.m30; m31 += rhs.m31; m32 += rhs.m32; m33 += rhs.m33;
+#endif
 
     return *this;
 }
 
 inline Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& rhs) noexcept
 {
+#if TGON_USING_SIMD
+    // 속도향상 없음
+    StoreSimdRegister(&m00, SubtractSimdRegister(LoadSimdRegister(&m00), LoadSimdRegister(&rhs.m00)));
+    StoreSimdRegister(&m10, SubtractSimdRegister(LoadSimdRegister(&m10), LoadSimdRegister(&rhs.m10)));
+    StoreSimdRegister(&m20, SubtractSimdRegister(LoadSimdRegister(&m20), LoadSimdRegister(&rhs.m20)));
+    StoreSimdRegister(&m30, SubtractSimdRegister(LoadSimdRegister(&m30), LoadSimdRegister(&rhs.m30)));
+#else
     m00 -= rhs.m00; m01 -= rhs.m01; m02 -= rhs.m02; m03 -= rhs.m03;
     m10 -= rhs.m10; m11 -= rhs.m11; m12 -= rhs.m12; m13 -= rhs.m13;
     m20 -= rhs.m20; m21 -= rhs.m21; m22 -= rhs.m22; m23 -= rhs.m23;
     m30 -= rhs.m30; m31 -= rhs.m31; m32 -= rhs.m32; m33 -= rhs.m33;
+#endif
 
     return *this;
 }
@@ -184,8 +267,8 @@ inline Matrix4x4 Matrix4x4::LookAtRH(const Vector3& eyePt, const Vector3& lookAt
 
 inline Matrix4x4 Matrix4x4::PerspectiveLH(float fovy, float aspect, float nearZ, float farZ) noexcept
 {
-    float scaleY = 1.0f / std::tan(fovy * 0.5f);
-    float scaleX = scaleY / aspect;
+    const float scaleY = 1.0f / std::tan(fovy * 0.5f);
+    const float scaleX = scaleY / aspect;
 
     return Matrix4x4(
         scaleX, 0.0f,   0.0f,                               0.0f,
@@ -197,8 +280,8 @@ inline Matrix4x4 Matrix4x4::PerspectiveLH(float fovy, float aspect, float nearZ,
 
 inline Matrix4x4 Matrix4x4::PerspectiveRH(float fovy, float aspect, float nearZ, float farZ) noexcept
 {
-    float scaleY = 1.0f / std::tan(fovy * 0.5f);
-    float scaleX = scaleY / aspect;
+    const float scaleY = 1.0f / std::tan(fovy * 0.5f);
+    const float scaleX = scaleY / aspect;
 
     return Matrix4x4(
         scaleX, 0.0f,   0.0f,                               0.0f,
@@ -208,11 +291,11 @@ inline Matrix4x4 Matrix4x4::PerspectiveRH(float fovy, float aspect, float nearZ,
     );
 }
     
-constexpr Matrix4x4 Matrix4x4::OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept
+inline Matrix4x4 Matrix4x4::OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept
 {
-    float width = right - left;
-    float height = bottom - top;
-    float depth = farZ - nearZ;
+    const float width = right - left;
+    const float height = bottom - top;
+    const float depth = farZ - nearZ;
     
     return Matrix4x4(
         2 / width,  0.0f,           0.0f,               0.0f,
@@ -222,10 +305,10 @@ constexpr Matrix4x4 Matrix4x4::OrthographicRH(float left, float right, float top
     );
 }
 
-constexpr Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept
+inline Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept
 {
-    float halfWidth = width * 0.5f;
-    float halfHeight = height * 0.5f;
+    const float halfWidth = width * 0.5f;
+    const float halfHeight = height * 0.5f;
 
     return Matrix4x4(
         halfWidth,      0.0f,           0.0f,           0.0f,
@@ -235,68 +318,125 @@ constexpr Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float hei
     );
 }
 
-constexpr const Matrix4x4 Matrix4x4::Transposed(const Matrix4x4& matrix) noexcept
+inline Matrix4x4 Matrix4x4::Transposed(const Matrix4x4& matrix) noexcept
 {
+#if TGON_USING_SIMD
+    // Faster 1.5x
+    Matrix4x4 ret;
+    auto r1 = LoadSimdRegister(&matrix.m00);
+    auto r2 = LoadSimdRegister(&matrix.m10);
+    auto r3 = LoadSimdRegister(&matrix.m20);
+    auto r4 = LoadSimdRegister(&matrix.m30);
+
+    auto r5 = ShuffleSimdRegister(r1, r2, ShuffleMask(0, 1, 0, 1));
+    auto r6 = ShuffleSimdRegister(r1, r2, ShuffleMask(2, 3, 2, 3));
+    auto r7 = ShuffleSimdRegister(r3, r4, ShuffleMask(0, 1, 0, 1));
+    auto r8 = ShuffleSimdRegister(r3, r4, ShuffleMask(2, 3, 2, 3));
+
+    StoreSimdRegister(&ret.m00, ShuffleSimdRegister(r5, r7, ShuffleMask(0, 2, 0, 2)));
+    StoreSimdRegister(&ret.m10, ShuffleSimdRegister(r5, r7, ShuffleMask(1, 3, 1, 3)));
+    StoreSimdRegister(&ret.m20, ShuffleSimdRegister(r6, r8, ShuffleMask(0, 2, 0, 2)));
+    StoreSimdRegister(&ret.m30, ShuffleSimdRegister(r6, r8, ShuffleMask(1, 3, 1, 3)));
+
+    return ret;
+#else
     return Matrix4x4(
         matrix.m00, matrix.m10, matrix.m20, matrix.m30,
         matrix.m01, matrix.m11, matrix.m21, matrix.m31,
         matrix.m02, matrix.m12, matrix.m22, matrix.m32,
         matrix.m03, matrix.m13, matrix.m23, matrix.m33
     );
+#endif
 }
 
 inline void Matrix4x4::Transpose() noexcept
 {
+#if TGON_USING_SIMD
+    // Faster 2.2x
+    auto r1 = LoadSimdRegister(&m00);
+    auto r2 = LoadSimdRegister(&m10);
+    auto r3 = LoadSimdRegister(&m20);
+    auto r4 = LoadSimdRegister(&m30);
+
+    auto r5 = ShuffleSimdRegister(r1, r2, ShuffleMask(0, 1, 0, 1));
+    auto r6 = ShuffleSimdRegister(r1, r2, ShuffleMask(2, 3, 2, 3));
+    auto r7 = ShuffleSimdRegister(r3, r4, ShuffleMask(0, 1, 0, 1));
+    auto r8 = ShuffleSimdRegister(r3, r4, ShuffleMask(2, 3, 2, 3));
+
+    StoreSimdRegister(&m00, ShuffleSimdRegister(r5, r7, ShuffleMask(0, 2, 0, 2)));
+    StoreSimdRegister(&m10, ShuffleSimdRegister(r5, r7, ShuffleMask(1, 3, 1, 3)));
+    StoreSimdRegister(&m20, ShuffleSimdRegister(r6, r8, ShuffleMask(0, 2, 0, 2)));
+    StoreSimdRegister(&m30, ShuffleSimdRegister(r6, r8, ShuffleMask(1, 3, 1, 3)));
+#else
     *this = Transposed(*this);
-}
+#endif
 
-//#if TGON_SUPPORT_SSE 1
-//inline Matrix4x4::Matrix4x4()
-//{
-//    _mm_storeu_ps(&m00, _mm_set_ps(0.0f, 0.0f, 0.0f, 1.0f));
-//    _mm_storeu_ps(&m10, _mm_set_ps(0.0f, 0.0f, 1.0f, 0.0f));
-//    _mm_storeu_ps(&m20, _mm_set_ps(0.0f, 1.0f, 0.0f, 0.0f));
-//    _mm_storeu_ps(&m30, _mm_set_ps(1.0f, 0.0f, 0.0f, 0.0f));
-//}
-//#else
-//inline Matrix4x4::Matrix4x4() :
-//    m00(1.0f), m01(0.0f), m02(0.0f), m03(0.0f),
-//    m10(0.0f), m11(1.0f), m12(0.0f), m13(0.0f),
-//    m20(0.0f), m21(0.0f), m22(1.0f), m23(0.0f),
-//    m30(0.0f), m31(0.0f), m32(0.0f), m33(1.0f)
-//{
-//}
-
-inline Matrix4x4 Matrix4x4::operator+(const Matrix4x4& rhs) const noexcept
-{
-//#if TGON_SUPPORT_SSE
-//    Matrix4x4 ret;
-//
-//    _mm_storeu_ps(&ret.m00, _mm_add_ps(_mm_loadu_ps(&m00), _mm_loadu_ps(&rhs.m00)));
-//    _mm_storeu_ps(&ret.m10, _mm_add_ps(_mm_loadu_ps(&m10), _mm_loadu_ps(&rhs.m10)));
-//    _mm_storeu_ps(&ret.m20, _mm_add_ps(_mm_loadu_ps(&m20), _mm_loadu_ps(&rhs.m20)));
-//    _mm_storeu_ps(&ret.m30, _mm_add_ps(_mm_loadu_ps(&m30), _mm_loadu_ps(&rhs.m30)));
-//
-//    return ret;
-//#else
-    return Matrix4x4(
-        m00 + rhs.m00, m01 + rhs.m01, m02 + rhs.m02, m03 + rhs.m03,
-        m10 + rhs.m10, m11 + rhs.m11, m12 + rhs.m12, m13 + rhs.m13,
-        m20 + rhs.m20, m21 + rhs.m21, m22 + rhs.m22, m23 + rhs.m23,
-        m30 + rhs.m30, m31 + rhs.m31, m32 + rhs.m32, m33 + rhs.m33
-    );
-//#endif
 }
 
 inline Matrix4x4& Matrix4x4::operator*=(const Matrix4x4& rhs) noexcept
 {
-    *this = (*this) * rhs;
+#if TGON_USING_SIMD
+    auto r0 = LoadSimdRegister(&rhs.m00);
+    auto r1 = LoadSimdRegister(&rhs.m10);
+    auto r2 = LoadSimdRegister(&rhs.m20);
+    auto r3 = LoadSimdRegister(&rhs.m30);
+
+    auto l = LoadSimdRegister(&m00);
+    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
+    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
+    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
+    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
+    StoreSimdRegister(&m00, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+
+    l = LoadSimdRegister(&m10);
+    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
+    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
+    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
+    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
+    StoreSimdRegister(&m10, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+
+    l = LoadSimdRegister(&m20);
+    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
+    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
+    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
+    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
+    StoreSimdRegister(&m20, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+
+    l = LoadSimdRegister(&m30);
+    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
+    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
+    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
+    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
+    StoreSimdRegister(&m30, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+#else
+    *this = Matrix4x4(
+        (m00 * rhs.m00) + (m01 * rhs.m10) + (m02 * rhs.m20) + (m03 * rhs.m30),
+        (m00 * rhs.m01) + (m01 * rhs.m11) + (m02 * rhs.m21) + (m03 * rhs.m31),
+        (m00 * rhs.m02) + (m01 * rhs.m12) + (m02 * rhs.m22) + (m03 * rhs.m32),
+        (m00 * rhs.m03) + (m01 * rhs.m13) + (m02 * rhs.m23) + (m03 * rhs.m33),
+
+        (m10 * rhs.m00) + (m11 * rhs.m10) + (m12 * rhs.m20) + (m13 * rhs.m30),
+        (m10 * rhs.m01) + (m11 * rhs.m11) + (m12 * rhs.m21) + (m13 * rhs.m31),
+        (m10 * rhs.m02) + (m11 * rhs.m12) + (m12 * rhs.m22) + (m13 * rhs.m32),
+        (m10 * rhs.m03) + (m11 * rhs.m13) + (m12 * rhs.m23) + (m13 * rhs.m33),
+
+        (m20 * rhs.m00) + (m21 * rhs.m10) + (m22 * rhs.m20) + (m23 * rhs.m30),
+        (m20 * rhs.m01) + (m21 * rhs.m11) + (m22 * rhs.m21) + (m23 * rhs.m31),
+        (m20 * rhs.m02) + (m21 * rhs.m12) + (m22 * rhs.m22) + (m23 * rhs.m32),
+        (m20 * rhs.m03) + (m21 * rhs.m13) + (m22 * rhs.m23) + (m23 * rhs.m33),
+
+        (m30 * rhs.m00) + (m31 * rhs.m10) + (m32 * rhs.m20) + (m33 * rhs.m30),
+        (m30 * rhs.m01) + (m31 * rhs.m11) + (m32 * rhs.m21) + (m33 * rhs.m31),
+        (m30 * rhs.m02) + (m31 * rhs.m12) + (m32 * rhs.m22) + (m33 * rhs.m32),
+        (m30 * rhs.m03) + (m31 * rhs.m13) + (m32 * rhs.m23) + (m33 * rhs.m33)
+    );
+#endif
     return *this;
 }
 
-constexpr bool Matrix4x4::operator==(const Matrix4x4& rhs) const noexcept
+inline bool Matrix4x4::operator==(const Matrix4x4& rhs) const noexcept
 {
-    for (int i = 0; i < 16; ++i)
+    for (int32_t i = 0; i < 16; ++i)
     {
         if ((&(m00))[i] != (&(rhs.m00))[i])
         {
@@ -306,22 +446,22 @@ constexpr bool Matrix4x4::operator==(const Matrix4x4& rhs) const noexcept
     return true;
 }
 
-constexpr bool Matrix4x4::operator!=(const Matrix4x4& rhs) const noexcept
+inline bool Matrix4x4::operator!=(const Matrix4x4& rhs) const noexcept
 {
     return !this->operator==(rhs);
 }
 
-inline float* Matrix4x4::operator[](std::size_t index)
+inline float& Matrix4x4::operator[](int32_t index)
 {
-    return &m00 + (index * 4);
+    return *(&m00 + index);
 }
 
-inline const float* Matrix4x4::operator[](std::size_t index) const
+inline float Matrix4x4::operator[](int32_t index) const
 {
     return const_cast<Matrix4x4*>(this)->operator[](index);
 }
 
-constexpr const Matrix4x4 Matrix4x4::Translate(float x, float y, float z) noexcept
+inline Matrix4x4 Matrix4x4::Translate(float x, float y, float z) noexcept
 {
     return Matrix4x4(
         1.0f,   0.0f,   0.0f,   0.0f,
@@ -331,17 +471,17 @@ constexpr const Matrix4x4 Matrix4x4::Translate(float x, float y, float z) noexce
     );
 }
 
-constexpr const Matrix4x4 Matrix4x4::Identity() noexcept
+constexpr Matrix4x4 Matrix4x4::Identity() noexcept
 {
     return Matrix4x4(
-        1.0f,   0.0f,   0.0f,   0.0f,
-        0.0f,   1.0f,   0.0f,   0.0f,
-        0.0f,   0.0f,   1.0f,   0.0f,
-        0.0f,   0.0f,   0.0f,   1.0f
+        1.0f, 0.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f, 0.0f,
+        0.0f, 0.0f, 0.0f, 1.0f
     );
 }
 
-constexpr const Matrix4x4 Matrix4x4::Zero() noexcept
+constexpr Matrix4x4 Matrix4x4::Zero() noexcept
 {
     return Matrix4x4(
         0.0f,   0.0f,   0.0f,   0.0f,
@@ -351,16 +491,16 @@ constexpr const Matrix4x4 Matrix4x4::Zero() noexcept
     );
 }
 
-inline const Matrix4x4 Matrix4x4::Rotate(float yaw, float pitch, float roll) noexcept
+inline Matrix4x4 Matrix4x4::Rotate(float yaw, float pitch, float roll) noexcept
 {
-    float cosA = std::cos(yaw);
-    float sinA = std::sin(yaw);
+    const float cosA = std::cos(yaw);
+    const float sinA = std::sin(yaw);
     
-    float cosB = std::cos(pitch);
-    float sinB = std::sin(pitch);
+    const float cosB = std::cos(pitch);
+    const float sinB = std::sin(pitch);
     
-    float cosC = std::cos(roll);
-    float sinC = std::sin(roll);
+    const float cosC = std::cos(roll);
+    const float sinC = std::sin(roll);
     
     return Matrix4x4(
         cosB * cosC,                            cosB * -sinC,                           sinB,           0.0f,
@@ -370,10 +510,10 @@ inline const Matrix4x4 Matrix4x4::Rotate(float yaw, float pitch, float roll) noe
     );
 }
 
-inline const Matrix4x4 Matrix4x4::RotateX(float radian) noexcept
+inline Matrix4x4 Matrix4x4::RotateX(float radian) noexcept
 {
-    float cosA = std::cos(radian);
-    float sinA = std::sin(radian);
+    const float cosA = std::cos(radian);
+    const float sinA = std::sin(radian);
 
     return Matrix4x4(
         1.0f,   0.0f,   0.0f,   0.0f,
@@ -383,10 +523,10 @@ inline const Matrix4x4 Matrix4x4::RotateX(float radian) noexcept
     );
 }
 
-inline const Matrix4x4 Matrix4x4::RotateY(float radian) noexcept
+inline Matrix4x4 Matrix4x4::RotateY(float radian) noexcept
 {
-    float cosA = std::cos(radian);
-    float sinA = std::sin(radian);
+    const float cosA = std::cos(radian);
+    const float sinA = std::sin(radian);
 
     return Matrix4x4(
         cosA,   0.0f,   sinA,   0.0f,
@@ -396,10 +536,10 @@ inline const Matrix4x4 Matrix4x4::RotateY(float radian) noexcept
     );
 }
 
-inline const Matrix4x4 Matrix4x4::RotateZ(float radian) noexcept
+inline Matrix4x4 Matrix4x4::RotateZ(float radian) noexcept
 {
-    float cosA = std::cos(radian);
-    float sinA = std::sin(radian);
+    const float cosA = std::cos(radian);
+    const float sinA = std::sin(radian);
 
     return Matrix4x4(
         cosA,   -sinA,  0.0f,   0.0f,
@@ -409,7 +549,7 @@ inline const Matrix4x4 Matrix4x4::RotateZ(float radian) noexcept
     );
 }
 
-constexpr const Matrix4x4 Matrix4x4::Scale(float x, float y, float z) noexcept
+inline Matrix4x4 Matrix4x4::Scale(float x, float y, float z) noexcept
 {
     return Matrix4x4(
         x,      0.0f,   0.0f,   0.0f,
@@ -419,23 +559,25 @@ constexpr const Matrix4x4 Matrix4x4::Scale(float x, float y, float z) noexcept
     );
 }
 
-inline int32_t Matrix4x4::ToString(const gsl::span<char>& destStr) const
+inline int32_t Matrix4x4::ToString(const std::span<char8_t>& destStr) const
 {
     return this->ToString(&destStr[0], destStr.size());
 }
 
-inline int32_t Matrix4x4::ToString(char* destStr, std::size_t destStrBufferLen) const
+inline int32_t Matrix4x4::ToString(char8_t* destStr, size_t destStrBufferLen) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f", m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+    const auto destStrLen = fmt::format_to_n(destStr, sizeof(destStr[0]) * (destStrBufferLen - 1), "{}\t\t{}\t\t{}\t\t{}\n{}\t\t{}\t\t{}\t\t{}\n{}\t\t{}\t\t{}\t\t{}\n{}\t\t{}\t\t{}\t\t{}", m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33).size;
+    destStr[destStrLen] = u8'\0';
+
+    return static_cast<int32_t>(destStrLen);
 }
 
-inline std::string Matrix4x4::ToString() const
+inline std::u8string Matrix4x4::ToString() const
 {
-    std::array<char, 2048> str;
-    int32_t strLen = this->ToString(str);
+    std::array<char8_t, 2048> str{};
+    const int32_t strLen = this->ToString(str);
+
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
 }
-
-#undef TGON_SPRINTF

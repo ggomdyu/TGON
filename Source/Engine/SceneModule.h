@@ -2,7 +2,6 @@
 
 #include <string>
 
-#include "Core/RuntimeObject.h"
 #include "Core/Delegate.h"
 #include "Game/GameObject.h"
 
@@ -27,7 +26,7 @@ class Scene :
     public RuntimeObject
 {
 public:
-    TGON_DECLARE_RTTI(Scene)
+    TGON_RTTI(Scene)
 
 /**@section Method */
 public:
@@ -38,12 +37,14 @@ private:
     std::vector<std::shared_ptr<GameObject>> m_gameObjects;
 };
 
-class SceneModule :
+class SceneManager :
     public Module
 {
 public:
-    TGON_DECLARE_RTTI(SceneModule)
+    TGON_RTTI(SceneManager)
 
+/**@section Type */
+public:
     using NewSceneCreatedCallback = Delegate<void(const std::shared_ptr<Scene>&, NewSceneSetup)>;
     using SceneOpeningCallback = Delegate<void(const std::shared_ptr<Scene>&, OpenSceneMode)>;
     using SceneOpenCallback = Delegate<void(const std::shared_ptr<Scene>&, OpenSceneMode)>;

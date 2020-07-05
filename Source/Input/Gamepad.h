@@ -13,19 +13,14 @@ class Gamepad final :
 /**@section Constructor */
 public:
     explicit Gamepad(gainput::InputDevicePad* nativeGamePad) noexcept;
-    Gamepad(Gamepad&& rhs) noexcept;
     
-/**@section Operator */
-public:
-    Gamepad& operator=(Gamepad&& rhs) noexcept;
-
 /**@section Method */
 public:
-    void Update();
     void Vibrate(float leftMotor, float rightMotor);
-    bool IsButtonDown(int32_t buttonNumber) const;
-    bool IsButtonHold(int32_t buttonNumber) const;
-    bool IsButtonUp(int32_t buttonNumber) const;
+    void Update();
+    [[nodiscard]] bool IsButtonDown(int32_t buttonNumber) const;
+    [[nodiscard]] bool IsButtonHold(int32_t buttonNumber) const;
+    [[nodiscard]] bool IsButtonUp(int32_t buttonNumber) const;
 
 /**@section Variable */
 private:

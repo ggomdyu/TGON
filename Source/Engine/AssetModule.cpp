@@ -13,7 +13,7 @@ AssetModule::AssetModule() :
         auto fontFactory = FontFactory::Create();
         if (fontFactory.has_value() == false)
         {
-            Debug::Fail("Failed to create FontFactory.");
+            Debug::Fail(u8"Failed to create FontFactory.");
         }
 
         return std::move(*fontFactory);

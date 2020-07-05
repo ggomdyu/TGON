@@ -7,12 +7,12 @@
 #pragma once
 #include <cassert>
 
-#include "String/FixedString.h"
+#include "Text/FixedString.h"
 #include "Diagnostics/Debug.h"
 
 #include "../Test.h"
 
-namespace tgon
+namespace tg
 {
 
 class FixedStringTest :
@@ -58,6 +58,11 @@ public:
         assert(a != FixedString256("abcdefab"));
         assert(a != FixedString256("abcdefabcg"));
 
+        FixedString256 b = "abc";
+        assert(b.Length() == 3);
+        b += "234x234";
+        assert(b.Length() == 10);
+
 //        FixedString16 b = "abcdefab";
 //        assert(a.CompareTo(b) == 1);
 //        b += "c";
@@ -71,4 +76,4 @@ private:
 
 };
 
-} /* namespace tgon */
+}

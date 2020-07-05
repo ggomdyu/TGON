@@ -17,60 +17,60 @@ public:
     
 /**@section Method */
 public:
-    template <typename _HandlerType>
-    static void EnumerateDirectories(const char* path, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateDirectories(const char* path, const char* searchPattern, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateDirectories(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFiles(const char* path, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFiles(const char* path, const char* searchPattern, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFiles(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFileSystemEntries(const char* path, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFileSystemEntries(const char* path, const char* searchPattern, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFileSystemEntries(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler);
+    template <typename _Callback>
+    static void EnumerateDirectories(const char8_t* path, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFiles(const char8_t* path, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFiles(const char8_t* path, const char8_t* searchPattern, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFiles(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFileSystemEntries(const char8_t* path, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& callback);
 };
 
-template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateDirectories(const char* path, const _HandlerType& handler)
+template <typename _Callback>
+void FileSystemEnumerable::EnumerateDirectories(const char8_t* path, const _Callback& callback)
 {
-    FileSystemEnumerable::EnumerateDirectories(path, "*", handler);
+    FileSystemEnumerable::EnumerateDirectories(path, u8"*", callback);
 }
 
-template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateDirectories(const char* path, const char* searchPattern, const _HandlerType& handler)
+template <typename _Callback>
+void FileSystemEnumerable::EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, const _Callback& callback)
 {
-    FileSystemEnumerable::EnumerateDirectories(path, searchPattern, SearchOption::TopDirectoryOnly, handler);
+    FileSystemEnumerable::EnumerateDirectories(path, searchPattern, SearchOption::TopDirectoryOnly, callback);
 }
 
-template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateFiles(const char* path, const _HandlerType& handler)
+template <typename _Callback>
+void FileSystemEnumerable::EnumerateFiles(const char8_t* path, const _Callback& callback)
 {
-    FileSystemEnumerable::EnumerateFiles(path, "*", handler);
+    FileSystemEnumerable::EnumerateFiles(path, u8"*", callback);
 }
 
-template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateFiles(const char* path, const char* searchPattern, const _HandlerType& handler)
+template <typename _Callback>
+void FileSystemEnumerable::EnumerateFiles(const char8_t* path, const char8_t* searchPattern, const _Callback& callback)
 {
-    FileSystemEnumerable::EnumerateFiles(path, searchPattern, SearchOption::TopDirectoryOnly, handler);
+    FileSystemEnumerable::EnumerateFiles(path, searchPattern, SearchOption::TopDirectoryOnly, callback);
 }
 
-template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char* path, const _HandlerType& handler)
+template <typename _Callback>
+void FileSystemEnumerable::EnumerateFileSystemEntries(const char8_t* path, const _Callback& callback)
 {
-    FileSystemEnumerable::EnumerateFileSystemEntries(path, "*", handler);
+    FileSystemEnumerable::EnumerateFileSystemEntries(path, u8"*", callback);
 }
 
-template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char* path, const char* searchPattern, const _HandlerType& handler)
+template <typename _Callback>
+void FileSystemEnumerable::EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, const _Callback& callback)
 {
-    FileSystemEnumerable::EnumerateFileSystemEntries(path, searchPattern, SearchOption::TopDirectoryOnly, handler);
+    FileSystemEnumerable::EnumerateFileSystemEntries(path, searchPattern, SearchOption::TopDirectoryOnly, callback);
 }
 
 }
@@ -78,5 +78,5 @@ inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char* path, c
 #if TGON_PLATFORM_WINDOWS
 #include "Windows/WindowsFileSystemEnumerable.inl"
 #elif TGON_PLATFORM_MACOS
-#include "Unix/UnixFileSystemEnumerable.inl"
+#include "Posix/PosixFileSystemEnumerable.inl"
 #endif

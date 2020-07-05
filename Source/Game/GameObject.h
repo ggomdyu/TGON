@@ -2,99 +2,118 @@
 
 #include <vector>
 
+#include "Core/RuntimeObject.h"
 #include "Text/StringHash.h"
-
-#include "Game/Transform.h"
 
 namespace tg
 {
+
+class Component;
 
 class GameObject :
     public RuntimeObject
 {
 public:
-    TGON_DECLARE_RTTI(GameObject)
+    TGON_RTTI(GameObject)
 
 /**@section Constructor */
 public:
-    GameObject() noexcept;
-    explicit GameObject(const StringHash& name);
-    explicit GameObject(StringHash&& name) noexcept;
-    explicit GameObject(const std::shared_ptr<Transform>& transform) noexcept;
+    explicit GameObject(StringHash name = {});
 
 /**@section Method */
 public:
+    /**
+     * @brief   Initializes the object.
+     */
     virtual void Initialize() {}
-    virtual void Update();
-    template <typename _ComponentType, typename... _ArgTypes>
-    _ComponentType* AddComponent(_ArgTypes&&... args);
-    template <typename _ComponentType>
-    bool RemoveComponent();
-    template <typename _ComponentType>
-    _ComponentType* FindComponent();
-    template <typename _ComponentType>
-    const _ComponentType* FindComponent() const;
-    void SetName(const StringHash& name);
-    void SetName(StringHash&& name);
-    void SetActive(bool isActive) noexcept;
-    Transform* GetTransform() noexcept;
-    const Transform* GetTransform() const noexcept;
-    const StringHash& GetName() const noexcept;
-    GameObject* GetParent() noexcept;
-    const GameObject* GetParent() const noexcept;
-    bool IsActive() const noexcept;
 
-private:
-    bool RemoveComponent(size_t componentId);
-    std::shared_ptr<Component> FindComponent(size_t componentId);
+    /**
+     * @brief   Updates the frame of the object.
+     */
+    virtual void Update();
+
+    /**
+     * @brief   Adds a component to the object.
+     * @param args  Arguments for construct the specified type of component.
+     * @return  The added component.
+     */
+    template <typename _Component, typename... _Args>
+    _Component* AddComponent(_Args&&... args);
+
+    /**
+     * @brief   Finds the component of the specified type.
+     * @return  The type of component to retrieve or nullptr.
+     */
+    template <typename _Component>
+    [[nodiscard]] _Component* FindComponent();
+
+    /**
+     * @brief   Finds the component of the specified type.
+     * @return  The type of component to retrieve or nullptr.
+     */
+    template <typename _Component>
+    [[nodiscard]] const _Component* FindComponent() const;
+
+    /**
+     * @brief   Sets the name of the object.
+     */
+    void SetName(StringHash name);
+
+    /**
+     * @brief   Sets the name of the object.
+     */
+    void SetActive(bool isActive) noexcept;
+
+    /**
+     * @brief   Gets the name of the object.
+     */
+    [[nodiscard]] const StringHash& GetName() const noexcept;
+
+    /**
+    * @brief   Gets the active state of the object.
+    */
+    [[nodiscard]] bool IsActive() const noexcept;
 
 /**@section Variable */
 protected:
     StringHash m_name;
-    bool m_isActive;
-    std::unique_ptr<Transform> m_transform;
-    GameObject* m_parent;
+    bool m_isActive = true;
+    GameObject* m_parent = nullptr;
     std::vector<std::unique_ptr<Component>> m_components;
 };
 
-template <typename _ComponentType, typename... _ArgTypes>
-inline _ComponentType* GameObject::AddComponent(_ArgTypes&&... args)
+template <typename _Component, typename... _Args>
+_Component* GameObject::AddComponent(_Args&&... args)
 {
-    auto component = std::make_unique<_ComponentType>(std::forward<_ArgTypes>(args)...);
-    component->SetGameObject(this->shared_from_this());
+    auto component = std::make_unique<_Component>(std::forward<_Args>(args)...);
+    auto rawComponent = component.get();
+    component->SetGameObject(this);
     component->Initialize();
 
-    m_components.insert(std::lower_bound(m_components.begin(), m_components.end(), tg::GetRTTI<_ComponentType>()->GetHashCode(), [&](const std::shared_ptr<Component>& lhs, size_t rhs)
+    m_components.push_back(std::move(component));
+
+    return rawComponent;
+}
+
+template <typename _Component>
+_Component* GameObject::FindComponent()
+{
+    auto componentId = tg::GetRtti<_Component>()->GetHashCode();
+    for (auto& component : m_components)
     {
-        return lhs->GetRTTI()->GetHashCode() < rhs;
-    }), std::move(component));
+        if (component->GetRtti()->GetHashCode() == componentId)
+        {
+            return component.get();
+        }
+    }
 
-    return component;
+    return nullptr;
 }
 
-template <typename _ComponentType>
-inline bool GameObject::RemoveComponent()
+template <typename _Component>
+const _Component* GameObject::FindComponent() const
 {
-    return this->RemoveComponent(tg::GetRTTI<_ComponentType>()->GetHashCode());
+    return const_cast<GameObject*>(this)->FindComponent<_Component>();
 }
 
-template <typename _ComponentType>
-inline const _ComponentType* GameObject::FindComponent() const
-{
-    return const_cast<GameObject*>(this)->FindComponent<_ComponentType>();
-}
-
-template <typename _ComponentType>
-inline _ComponentType* GameObject::FindComponent()
-{
-    auto component = this->FindComponent(tg::GetRTTI<_ComponentType>()->GetHashCode());
-    return std::static_pointer_cast<_ComponentType>(component);
-}
-
-template <>
-inline Transform* GameObject::FindComponent()
-{
-    return m_transform.get();
-}
-    
 }

@@ -5,7 +5,7 @@
 #include "Math/Vector4.h"
 
 #if TGON_GRAPHICS_OPENGL
-#   include "OpenGL/OpenGLShaderProgram.h"
+#include "OpenGL/OpenGLShaderProgram.h"
 #endif
 
 namespace tg

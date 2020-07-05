@@ -51,11 +51,12 @@ class FileStream :
 {
 /**@section Constructor */
 public:
-    FileStream(const char* path, FileMode mode);
-    FileStream(const char* path, FileMode mode, FileAccess access);
-    FileStream(const char* path, FileMode mode, FileAccess access, FileShare share);
-    FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize);
-    FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options);
+    FileStream(const char8_t* path, FileMode mode);
+    FileStream(const char8_t* path, FileMode mode, FileAccess access);
+    FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share);
+    FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize);
+    FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options);
+    FileStream(const FileStream& rhs) = delete;
     FileStream(FileStream&& rhs) noexcept;
 
 /**@section Destructor */
@@ -64,36 +65,38 @@ public:
     
 /**@section Operator */
 public:
+    FileStream& operator=(const FileStream& rhs) = delete;
     FileStream& operator=(FileStream&& rhs) noexcept;
     bool operator==(const FileStream& rhs) const noexcept;
     bool operator!=(const FileStream& rhs) const noexcept;
 
 /**@section Method */
 public:
-    bool CanRead() const override;
-    bool CanSeek() const override;
-    bool CanWrite() const override;
+    [[nodiscard]] bool CanRead() const override;
+    [[nodiscard]] bool CanSeek() const override;
+    [[nodiscard]] bool CanWrite() const override;
     bool SetLength(int64_t value) override;
-    int64_t Length() const override;
-    int64_t Position() const override;
+    [[nodiscard]] int64_t Length() const override;
+    [[nodiscard]] int64_t Position() const override;
     int32_t Read(std::byte* buffer, int32_t count) override;
     int32_t ReadByte() override;
     bool Write(const std::byte* buffer, int32_t count) override;
     bool WriteByte(std::byte value) override;
     int64_t Seek(int64_t offset, SeekOrigin origin) override;
     void Close() override;
-    const std::string& Name() const noexcept;
+    [[nodiscard]] const std::u8string& Name() const noexcept;
     void Flush() override;
     void Flush(bool flushToDisk);
-    bool IsClosed() const noexcept;
+    [[nodiscard]] bool IsClosed() const noexcept;
     
 protected:
-    std::vector<std::byte>& GetBuffer() noexcept;
+    [[nodiscard]] std::vector<std::byte>& GetBuffer();
     void FlushWriteBuffer();
     void FlushReadBuffer();
     int32_t InternalRead(std::byte* buffer, int32_t count);
     int32_t InternalWrite(const std::byte* buffer, int32_t count);
     int64_t InternalSeek(int64_t offset, SeekOrigin origin);
+    void InternalClose();
     void InternalFlush();
     bool InternalSetLength(int64_t value);
 
@@ -111,7 +114,7 @@ protected:
     int32_t m_writePos;
     int64_t m_filePos;
     FileAccess m_access;
-    std::string m_fileName;    
+    std::u8string m_fileName;    
 };
 
 }

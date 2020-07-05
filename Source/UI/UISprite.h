@@ -14,9 +14,6 @@ namespace tg
 class UISprite final :
     public UIElement
 {
-public:
-    TGON_DECLARE_RTTI(UISprite)
-
 /**@section Constructor */
 public:
     UISprite() = default;

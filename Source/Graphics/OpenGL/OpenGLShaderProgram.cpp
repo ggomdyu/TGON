@@ -38,14 +38,14 @@ GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
     return programId;
 }
 
-std::string GetShaderLog(GLuint shaderId)
+std::u8string GetShaderLog(GLuint shaderId)
 {
     int32_t infoLogLen;
     TGON_GL_ERROR_CHECK(glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &infoLogLen));
 
-    std::string infoLog;
+    std::u8string infoLog;
     infoLog.resize(infoLogLen + 1);
-    TGON_GL_ERROR_CHECK(glGetShaderInfoLog(shaderId, infoLogLen, nullptr, &infoLog[0]));
+    TGON_GL_ERROR_CHECK(glGetShaderInfoLog(shaderId, infoLogLen, nullptr, reinterpret_cast<char*>(&infoLog[0])));
 
     return infoLog;
 }
@@ -68,7 +68,7 @@ GLuint CompileShader(GLenum shaderType, const char* shaderCode)
     TGON_GL_ERROR_CHECK(glCompileShader(shaderId));
     if (IsShaderCompileSucceed(shaderId) == false)
     {
-        Debug::WriteLine(fmt::format("Failed to invoke glCompileShader. ({0})", GetShaderLog(shaderId)));
+        Debug::WriteLine(fmt::format(u8"Failed to invoke glCompileShader. ({0})", GetShaderLog(shaderId)));
         return 0;
     }
 

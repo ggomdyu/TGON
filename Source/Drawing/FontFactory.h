@@ -7,12 +7,8 @@
 namespace tg
 {
 
-class FontFactory final :
-    public RuntimeObject
+class FontFactory final
 {
-public:
-    TGON_DECLARE_RTTI(FontFactory)
-
 /**@section Constructor */
 private:
     explicit FontFactory(FT_Library library) noexcept;
@@ -22,7 +18,7 @@ public:
     static std::optional<FontFactory> Create();
     template <typename _ContainerType>
     std::shared_ptr<Font> CreateFont(_ContainerType&& fileData) const;
-    std::shared_ptr<Font> CreateFont(const char* filePath) const;
+    std::shared_ptr<Font> CreateFont(const char8_t* filePath) const;
 
 /**@section Variable */
 private:
@@ -30,7 +26,7 @@ private:
 };
 
 template<typename _ContainerType>
-inline std::shared_ptr<Font> FontFactory::CreateFont(_ContainerType&& fileData) const
+std::shared_ptr<Font> FontFactory::CreateFont(_ContainerType&& fileData) const
 {
     return std::make_shared<Font>(m_library, std::forward<_ContainerType>(fileData));
 }

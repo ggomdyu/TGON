@@ -11,7 +11,7 @@ class RendererComponent :
 	public Component
 {
 public:
-    TGON_DECLARE_RTTI(RendererComponent)
+    TGON_RTTI(RendererComponent)
 
 /**@section Constructor */
 public:

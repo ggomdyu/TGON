@@ -11,18 +11,19 @@
 namespace tg
 {
 
-std::string Path::Combine(const std::string_view& path1, const std::string_view& path2)
+std::u8string Path::Combine(const std::u8string_view& path1, const std::u8string_view& path2)
 {
-    std::array<char, 8192> str;
-    auto strLen = Combine(path1, path2, str.data(), static_cast<int32_t>(str.size()));
+    std::array<char8_t, 8192> str{};
+    const auto strLen = Combine(path1, path2, str.data(), static_cast<int32_t>(str.size()));
+
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
-int32_t Path::Combine(const std::string_view& path1, const std::string_view& path2, char* destStr, int32_t destStrBufferLen)
+int32_t Path::Combine(const std::u8string_view& path1, const std::u8string_view& path2, char8_t* destStr, int32_t destStrBufferLen)
 {
     if (path2.length() == 0)
     {
-        int32_t destStrLen = static_cast<int32_t>(path1.length());
+        const auto destStrLen = static_cast<int32_t>(path1.length());
         if (destStrLen + 1 > destStrBufferLen)
         {
             return 0;
@@ -45,10 +46,10 @@ int32_t Path::Combine(const std::string_view& path1, const std::string_view& pat
 
     auto index = static_cast<int32_t>(path1.size());
 
-    auto path1Seperator = path1[path1.length() - 1];
-    auto path2Seperator = path2[0];
-    bool hasSeperator = (path1Seperator == DirectorySeparatorChar) || (path1Seperator == AltDirectorySeparatorChar) || (path2Seperator == DirectorySeparatorChar) || (path2Seperator == AltDirectorySeparatorChar);
-    if (!hasSeperator)
+    const auto path1Separator = path1[path1.length() - 1];
+    const auto path2Separator = path2[0];
+    const auto hasSeparator = (path1Separator == DirectorySeparatorChar) || (path1Separator == AltDirectorySeparatorChar) || (path2Separator == DirectorySeparatorChar) || (path2Separator == AltDirectorySeparatorChar);
+    if (!hasSeparator)
     {
         if (index + 1 + static_cast<int32_t>(path2.length()) > destStrBufferLen)
         {
@@ -72,14 +73,15 @@ int32_t Path::Combine(const std::string_view& path1, const std::string_view& pat
     return index + static_cast<int32_t>(path2.length());
 }
 
-std::string Path::ChangeExtension(const std::string_view& path, const std::string_view& extension)
+std::u8string Path::ChangeExtension(const std::u8string_view& path, const std::u8string_view& extension)
 {
-    std::array<char, 8192> str;
-    auto strLen = ChangeExtension(path, extension, str.data(), static_cast<int32_t>(str.size()));
+    std::array<char8_t, 8192> str{};
+    const auto strLen = ChangeExtension(path, extension, str.data(), static_cast<int32_t>(str.size()));
+
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
-int32_t Path::ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr, int32_t destStrBufferLen)
+int32_t Path::ChangeExtension(const std::u8string_view& path, const std::u8string_view& extension, char8_t* destStr, int32_t destStrBufferLen)
 {
     if (path.length() == 0)
     {
@@ -90,18 +92,18 @@ int32_t Path::ChangeExtension(const std::string_view& path, const std::string_vi
         return 0;
     }
     
-    size_t extensionStartIndex = path.length();
-    for (int32_t i = static_cast<int32_t>(extensionStartIndex) - 1; i >= 0; --i)
+    auto extensionStartIndex = static_cast<int32_t>(path.length());
+    for (int32_t i = extensionStartIndex - 1; i >= 0; --i)
     {
         if (path[i] == '.')
         {
-            extensionStartIndex = static_cast<size_t>(i);
+            extensionStartIndex = i;
             break;
         }
     }
     
-    bool extensionHasDot = extension.length() > 0 && extension[0] == '.';
-    size_t requiredDestStrBufferLen = extensionStartIndex + (extensionHasDot ? extension.length() + 1 : extension.length() + 2);
+    const bool extensionHasDot = extension.length() > 0 && extension[0] == '.';
+    const int32_t requiredDestStrBufferLen = extensionStartIndex + static_cast<int32_t>(extensionHasDot ? extension.length() + 1 : extension.length() + 2);
     if (requiredDestStrBufferLen > destStrBufferLen)
     {
         return 0;
@@ -126,29 +128,29 @@ int32_t Path::ChangeExtension(const std::string_view& path, const std::string_vi
     return strLen;
 }
 
-std::string Path::GetFullPath(const std::string_view& path)
+std::u8string Path::GetFullPath(const std::u8string_view& path)
 {
     if (path.length() <= 0)
     {
         return {};
     }
     
-    std::string collapsedString;
-    if (!Path::IsPathRooted(path))
+    std::u8string collapsedString;
+    if (!IsPathRooted(path))
     {
-        std::array<char, 8192> str;
-        int32_t collapsedStringLen = Path::Combine(Directory::GetCurrentDirectory(), path, str.data(), static_cast<int32_t>(str.size()));
-        collapsedString = RemoveRelativeSegments(std::string_view(&str[0], collapsedStringLen));
+        std::array<char8_t, 8192> str{};
+        const auto collapsedStringLen = Combine(Directory::GetCurrentDirectory(), path, str.data(), static_cast<int32_t>(str.size()));
+        collapsedString = RemoveRelativeSegments(std::u8string_view(&str[0], collapsedStringLen));
     }
     else
     {
         collapsedString = RemoveRelativeSegments(path);
     }
     
-    return collapsedString.length() == 0 ? "/" : collapsedString;
+    return collapsedString.length() == 0 ? u8"/" : collapsedString;
 }
 
-std::string Path::GetFullPath(const std::string_view& path, const std::string_view& basePath)
+std::u8string Path::GetFullPath(const std::u8string_view& path, const std::u8string_view& basePath)
 {
     auto combinedPath = Combine(basePath, path);
     if (combinedPath.length() == 0)
@@ -159,7 +161,7 @@ std::string Path::GetFullPath(const std::string_view& path, const std::string_vi
     return GetFullPath(combinedPath);
 }
 
-int32_t Path::GetRandomFileName(char* destStr, int32_t destStrBufferLen)
+int32_t Path::GetRandomFileName(char8_t* destStr, int32_t destStrBufferLen)
 {
     constexpr int32_t requiredDestStrBufferLen = 13;
     if (destStrBufferLen < requiredDestStrBufferLen)
@@ -168,10 +170,10 @@ int32_t Path::GetRandomFileName(char* destStr, int32_t destStrBufferLen)
     }
     
     auto r = Random();
-    int32_t strLen = requiredDestStrBufferLen - 1;
+    const int32_t strLen = requiredDestStrBufferLen - 1;
     for (int32_t i = 0; i < strLen; ++i)
     {
-        destStr[i] = char(r.Next(0, 1) == 0 ? r.Next('a', 'z') : r.Next('0', '9'));
+        destStr[i] = static_cast<char8_t>(r.Next(0, 1) == 0 ? r.Next('a', 'z') : r.Next('0', '9'));
     }
     
     destStr[8] = '.';
@@ -180,17 +182,18 @@ int32_t Path::GetRandomFileName(char* destStr, int32_t destStrBufferLen)
     return strLen;
 }
 
-std::string Path::GetRandomFileName()
+std::u8string Path::GetRandomFileName()
 {
-    std::array<char, 8192> str;
-    auto strLen = GetRandomFileName(str.data(), static_cast<int32_t>(str.size()));
+    std::array<char8_t, 8192> str{};
+    const auto strLen = GetRandomFileName(str.data(), static_cast<int32_t>(str.size()));
+
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
-std::string Path::GetTempPath()
+std::u8string Path::GetTempPath()
 {
-    std::array<char, 8192> str;
-    auto strLen = GetTempPath(str.data(), static_cast<int32_t>(str.size()));
+    std::array<char8_t, 8192> str{};
+    const auto strLen = GetTempPath(str.data(), static_cast<int32_t>(str.size()));
     if (strLen == -1)
     {
         return {};
@@ -199,14 +202,15 @@ std::string Path::GetTempPath()
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
-int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)
+int32_t Path::GetTempPath(char8_t* destStr, int32_t destStrBufferLen)
 {
-    const char tempEnvVarName[] = "TMPDIR";
+    const char8_t tempEnvVarName[] = u8"TMPDIR";
+
     auto tempEnvVarValue = Environment::GetEnvironmentVariable(tempEnvVarName);
     if (!tempEnvVarValue)
     {
-        const char defaultTempPath[] = "/tmp/";
-        if (std::extent_v<decltype(defaultTempPath)> > destStrBufferLen)
+        const char8_t defaultTempPath[] = u8"/tmp/";
+        if (static_cast<int32_t>(std::extent_v<decltype(defaultTempPath)>) > destStrBufferLen)
         {
             return 0;
         }
@@ -215,9 +219,9 @@ int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)
         return static_cast<int32_t>(std::extent_v<decltype(defaultTempPath)>) - 1;
     }
     
-    if (Path::IsDirectorySeparator((*tempEnvVarValue)[tempEnvVarValue->length() - 1]))
+    if (IsDirectorySeparator((*tempEnvVarValue)[tempEnvVarValue->length() - 1]))
     {
-        if (tempEnvVarValue->length() + 1 > destStrBufferLen)
+        if (static_cast<int32_t>(tempEnvVarValue->length()) + 1 > destStrBufferLen)
         {
             return 0;
         }
@@ -229,46 +233,46 @@ int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)
     }
     else
     {
-        if (tempEnvVarValue->length() + 2 > destStrBufferLen)
+        if (static_cast<int32_t>(tempEnvVarValue->length()) + 2 > destStrBufferLen)
         {
             return 0;
         }
         
         memcpy(destStr, tempEnvVarValue->data(), tempEnvVarValue->size());
-        destStr[tempEnvVarValue->size()] = Path::DirectorySeparatorChar;
+        destStr[tempEnvVarValue->size()] = DirectorySeparatorChar;
         destStr[tempEnvVarValue->size() + 1] = '\0';
         
         return static_cast<int32_t>(tempEnvVarValue->size());
     }
 }
 
-std::string Path::RemoveRelativeSegments(const std::string_view& path)
+std::u8string Path::RemoveRelativeSegments(const std::u8string_view& path)
 {
-    std::string ret;
+    std::u8string ret;
     for (decltype(path.length()) i = 0; i < path.length(); ++i)
     {
-        char c = path[i];
-        if (Path::IsDirectorySeparator(c) && i + 1 < path.length())
+        char8_t c = path[i];
+        if (IsDirectorySeparator(c) && i + 1 < path.length())
         {
             // Ignore the '/'
-            if (Path::IsDirectorySeparator(path[i + 1]))
+            if (IsDirectorySeparator(path[i + 1]))
             {
                 continue;
             }
             
             // Ignore the "./"
-            if (i + 2 >= path.length() || (Path::IsDirectorySeparator(path[i + 2]) && path[i + 1] == '.'))
+            if (i + 2 >= path.length() || (IsDirectorySeparator(path[i + 2]) && path[i + 1] == '.'))
             {
                 ++i;
                 continue;
             }
             
-            if (i + 3 < path.length() && Path::IsDirectorySeparator(path[i + 3]) && path[i + 2] == '.' && path[i + 1] == '.')
+            if (i + 3 < path.length() && IsDirectorySeparator(path[i + 3]) && path[i + 2] == '.' && path[i + 1] == '.')
             {
                 int32_t j = ret.length() == 0 ? 0 : static_cast<int32_t>(ret.length()) - 1;
                 for (; j >= 0; --j)
                 {
-                    if (Path::IsDirectorySeparator(ret[j]))
+                    if (IsDirectorySeparator(ret[j]))
                     {
                         ret.resize(static_cast<size_t>(j));
                         break;
@@ -286,9 +290,9 @@ std::string Path::RemoveRelativeSegments(const std::string_view& path)
         }
 
         // Normalize the directory separator
-        if (c == Path::AltDirectorySeparatorChar)
+        if (c == AltDirectorySeparatorChar)
         {
-            c = Path::DirectorySeparatorChar;
+            c = DirectorySeparatorChar;
         }
         
         ret += c;

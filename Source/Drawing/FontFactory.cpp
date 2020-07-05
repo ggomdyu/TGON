@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.h"
 
+#include "Core/Algorithm.h"
 #include "IO/File.h"
 
 #include "FontFactory.h"
@@ -37,7 +38,7 @@ constexpr int32_t ConvertFTPixelModeToBits(FT_Pixel_Mode pixelMode) noexcept
         32, // FT_PIXEL_MODE_BGRA
     };
 
-    return bytesTable[static_cast<int32_t>(pixelMode)];
+    return bytesTable[UnderlyingCast(pixelMode)];
 }
 
 FontFactory::FontFactory(FT_Library library) noexcept :
@@ -63,7 +64,7 @@ std::optional<FontFactory> FontFactory::Create()
     return FontFactory(library);
 }
 
-std::shared_ptr<Font> FontFactory::CreateFont(const char* filePath) const
+std::shared_ptr<Font> FontFactory::CreateFont(const char8_t* filePath) const
 {
     auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
     if (fileData.has_value() == false)

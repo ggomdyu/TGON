@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <optional>
-#include <gsl/span>
+#include <span>
 
 #include "Version.h"
 
@@ -83,42 +83,42 @@ public:
 
 /**@section Method */
 public:
-    static bool SetEnvironmentVariable(const char* name, const char* value);
-    static bool SetEnvironmentVariable(const char* name, const char* value, EnvironmentVariableTarget target);
-    static std::optional<int32_t> GetEnvironmentVariable(const char* name, char* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetEnvironmentVariable(const char* name, const gsl::span<char>& destStr);
-    static std::optional<std::string> GetEnvironmentVariable(const char* name);
-    static std::optional<std::string> GetEnvironmentVariable(const char* name, EnvironmentVariableTarget target);
-    static std::string GetCurrentDirectory();
-    static std::optional<int32_t> GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetCurrentDirectory(const gsl::span<char>& destStr);
-    static std::string GetFolderPath(SpecialFolder folder);
-    static std::optional<int32_t> GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetFolderPath(SpecialFolder folder, const gsl::span<char>& destStr);
-    static std::string_view GetNewLine();
+    static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value);
+    static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value, EnvironmentVariableTarget target);
+    static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, const std::span<char8_t>& destStr);
+    static std::optional<std::u8string> GetEnvironmentVariable(const char8_t* name);
+    static std::optional<std::u8string> GetEnvironmentVariable(const char8_t* name, EnvironmentVariableTarget target);
+    static std::u8string GetCurrentDirectory();
+    static std::optional<int32_t> GetCurrentDirectory(char8_t* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetCurrentDirectory(const std::span<char8_t>& destStr);
+    static std::u8string GetFolderPath(SpecialFolder folder);
+    static std::optional<int32_t> GetFolderPath(SpecialFolder folder, char8_t* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetFolderPath(SpecialFolder folder, const std::span<char8_t>& destStr);
+    static std::u8string_view GetNewLine();
     static int32_t GetSystemPageSize();
     static int32_t GetCurrentManagedThreadId();
-    static std::string GetUserName();
-    static std::optional<int32_t> GetUserName(char* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetUserName(const gsl::span<char>& destStr);
-    static std::string GetMachineName();
-    static std::optional<int32_t> GetMachineName(char* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetMachineName(const gsl::span<char>& destStr);
-    static std::string GetUserDomainName();
-    static std::optional<int32_t> GetUserDomainName(char* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetUserDomainName(const gsl::span<char>& destStr);
-    static const std::string& GetCommandLine();
-    static const std::vector<std::string>& GetCommandLineArgs();
+    static std::u8string GetUserName();
+    static std::optional<int32_t> GetUserName(char8_t* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetUserName(const std::span<char8_t>& destStr);
+    static std::u8string GetMachineName();
+    static std::optional<int32_t> GetMachineName(char8_t* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetMachineName(const std::span<char8_t>& destStr);
+    static std::u8string GetUserDomainName();
+    static std::optional<int32_t> GetUserDomainName(char8_t* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetUserDomainName(const std::span<char8_t>& destStr);
+    static const std::u8string& GetCommandLine();
+    static const std::vector<std::u8string>& GetCommandLineArgs();
     [[noreturn]] static void Exit(int32_t exitCode);
     static int64_t GetTickCount();
     static int32_t GetProcessorCount();
     static bool Is64BitProcess();
     static bool Is64BitOperatingSystem();
-    [[noreturn]] static void FailFast(const char* message);
-    [[noreturn]] static void FailFast(const char* message, const std::exception& exception);
-    static int32_t GetStackTrace(char* destStr, int32_t destStrBufferLen);
-    static std::string GetStackTrace();
-    static std::string GetSystemDirectory();
+    [[noreturn]] static void FailFast(const char8_t* message);
+    [[noreturn]] static void FailFast(const char8_t* message, const std::exception& exception);
+    static int32_t GetStackTrace(char8_t* destStr, int32_t destStrBufferLen);
+    static std::u8string GetStackTrace();
+    static std::u8string GetSystemDirectory();
     //public static IDictionary GetEnvironmentVariables();
     //public static IDictionary GetEnvironmentVariables(EnvironmentVariableTarget target);
     //public static void SetEnvironmentVariable(
@@ -135,7 +135,7 @@ public:
     //public static OperatingSystem OSVersion{ get; }
     static bool GetUserInteractive();
     //public static long WorkingSet{ get; }
-    static std::vector<std::string> GetLogicalDrives();
+    static std::vector<std::u8string> GetLogicalDrives();
 };
 
 }

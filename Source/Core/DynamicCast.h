@@ -16,7 +16,7 @@ inline _CastToType DynamicCast(_CastFromType&& ptr) noexcept
 template <typename _CastToType, typename _CastFromType, typename std::enable_if_t<!std::is_convertible_v<_CastFromType, _CastToType>>* = nullptr>
 inline _CastToType DynamicCast(_CastFromType&& ptr) noexcept
 {
-    const RTTI* rtti = ptr->GetRTTI();
+    const Rtti* rtti = ptr->GetRTTI();
     while (rtti != nullptr)
     {
         if (rtti == GetRTTI<_CastToType>())

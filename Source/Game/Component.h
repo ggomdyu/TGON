@@ -1,39 +1,33 @@
 #pragma once
 
-#include <memory>
-
-#include "Core/RuntimeObject.h"
+#include "Game/GameObject.h"
 
 namespace tg
 {
 
-class GameObject;
-
 class Component :
-    public RuntimeObject,
-    public std::enable_shared_from_this<Component>
+    public RuntimeObject
 {
 public:
-    TGON_DECLARE_RTTI(Component)
+    TGON_RTTI(Component)
 
 /**@section Constructor */
 public:
-    Component() noexcept = default;
-    Component(const std::shared_ptr<GameObject>& gameObject) noexcept;
+    explicit Component(GameObject* gameObject = nullptr) noexcept;
 
 /**@section Method */
 public:
     virtual void Initialize() {}
     virtual void Update() {}
-    void SetGameObject(const std::shared_ptr<GameObject>& gameObject) noexcept;
-    void SetAcitve(bool isActive) noexcept;
-    std::weak_ptr<GameObject> GetGameObject() noexcept;
-    std::weak_ptr<const GameObject> GetGameObject() const noexcept;
-    bool IsActive() const noexcept;
+    void SetGameObject(GameObject* gameObject) noexcept;
+    void SetActive(bool isActive) noexcept;
+    [[nodiscard]] GameObject* GetGameObject() noexcept;
+    [[nodiscard]] const GameObject* GetGameObject() const noexcept;
+    [[nodiscard]] bool IsActive() const noexcept;
 
 /**@section Variable */
 protected:
-    std::weak_ptr<GameObject> m_gameObject;
+    GameObject* m_gameObject;
     bool m_isActive = true;
 };
 

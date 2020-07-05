@@ -50,9 +50,6 @@ struct LineInfo
 class UIText final :
     public UIElement
 {
-public:
-    TGON_DECLARE_RTTI(UIText)
-
 /**@section Constructor */
 public:
     UIText();

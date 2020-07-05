@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <optional>
 #include <memory>
+#include <array>
 #include <stb_rect_pack.h>
 
 #include "Core/NonCopyable.h"

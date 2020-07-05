@@ -10,28 +10,28 @@ namespace tg
 
 void Debug::Assert(bool condition)
 {
-    Assert(condition, {"", 0}, {"", 0});
+    Assert(condition, {u8"", 0}, {u8"", 0});
 }
 
-void Debug::Assert(bool condition, const std::string_view& message)
+void Debug::Assert(bool condition, const std::u8string_view& message)
 {
-    Assert(condition, message, {"", 0});
+    Assert(condition, message, {u8"", 0});
 }
 
-void Debug::Fail(const std::string_view& message)
+void Debug::Fail(const std::u8string_view& message)
 {
-    Fail(message, {"", 0});
+    Fail(message, {u8"", 0});
 }
 
-void Debug::Fail(const std::string_view& message, const std::string_view& detailMessage)
+void Debug::Fail(const std::u8string_view& message, const std::u8string_view& detailMessage)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-    auto str = fmt::format("---- DEBUG ASSERTION FAILED ----\n---- Assert Short Message ----\n{0}\n---- Assert Long Message ----\n{1}\n", message, detailMessage);
+    const auto str = fmt::format(u8"---- DEBUG ASSERTION FAILED ----\n---- Assert Short Message ----\n{0}\n---- Assert Long Message ----\n{1}\n", message, detailMessage);
     
     std::lock_guard lockGuard(m_mutex);
 
     // Ignore the indent when printing the failure message
-    auto prevIndentLevel = m_indentLevel;
+    const auto prevIndentLevel = m_indentLevel;
     m_indentLevel = 0;
     {
         Write(str);

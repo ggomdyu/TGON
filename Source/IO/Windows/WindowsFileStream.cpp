@@ -15,16 +15,16 @@ thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
 namespace
 {
 
-HANDLE CreateFileOpenHandle(const char* path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+HANDLE CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(std::char_traits<char8_t>::length(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return INVALID_HANDLE_VALUE;
     }
 
-    auto desiredAccess = (access == FileAccess::Read) ? GENERIC_READ : (access == FileAccess::Write) ? GENERIC_WRITE : GENERIC_READ | GENERIC_WRITE;
+    const auto desiredAccess = (access == FileAccess::Read) ? GENERIC_READ : (access == FileAccess::Write) ? GENERIC_WRITE : GENERIC_READ | GENERIC_WRITE;
 
-    bool useSecurityAttributes = UnderlyingCast(share) & UnderlyingCast(FileShare::Inheritable);
+    const bool useSecurityAttributes = UnderlyingCast(share) & UnderlyingCast(FileShare::Inheritable);
     SECURITY_ATTRIBUTES securityAttributes {};
     if (useSecurityAttributes)
     {
@@ -37,14 +37,14 @@ HANDLE CreateFileOpenHandle(const char* path, FileMode mode, FileAccess access, 
     
     // The named pipe on Windows allows the server to impersonate the client.
     // So we have to add the below flags because of this security vulnerability.
-    DWORD flagsAndAttributes = UnderlyingCast(options) | SECURITY_SQOS_PRESENT | SECURITY_ANONYMOUS;
+    const DWORD flagsAndAttributes = UnderlyingCast(options) | SECURITY_SQOS_PRESENT | SECURITY_ANONYMOUS;
 
     return CreateFileW(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
 }
 
 }
 
-FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
+FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access, share, options)),
     m_bufferSize(bufferSize),
     m_readPos(0),
@@ -56,13 +56,13 @@ FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileS
 {
     if (m_nativeHandle == INVALID_HANDLE_VALUE)
     {
-        Debug::WriteLine("Could not create the file handle.");
+        Debug::WriteLine(u8"Could not create the file handle.");
         return;
     }
 
     if (GetFileType(m_nativeHandle) != FILE_TYPE_DISK)
     {
-        Debug::WriteLine("The FileStream instance is not a file.");
+        Debug::WriteLine(u8"The FileStream instance is not a file.");
     }
 }
 
@@ -90,13 +90,7 @@ int64_t FileStream::Length() const
 
 void FileStream::Close()
 {
-    this->FlushWriteBuffer();
-
-    if (m_nativeHandle != INVALID_HANDLE_VALUE)
-    {
-        CloseHandle(m_nativeHandle);
-        m_nativeHandle = INVALID_HANDLE_VALUE;
-    }
+    this->InternalClose();
 }
 
 void FileStream::FlushWriteBuffer()
@@ -151,9 +145,20 @@ int64_t FileStream::InternalSeek(int64_t offset, SeekOrigin origin)
     return newFilePointer.QuadPart;
 }
 
+void FileStream::InternalClose()
+{
+    this->FlushWriteBuffer();
+
+    if (m_nativeHandle != INVALID_HANDLE_VALUE)
+    {
+        CloseHandle(m_nativeHandle);
+        m_nativeHandle = INVALID_HANDLE_VALUE;
+    }
+}
+
 bool FileStream::InternalSetLength(int64_t value)
 {
-    auto prevFilePos = m_filePos;
+    const auto prevFilePos = m_filePos;
     if (m_filePos != value)
     {
         if (this->InternalSeek(value, SeekOrigin::Begin) == -1)

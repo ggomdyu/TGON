@@ -7,13 +7,13 @@
 #include "Window.h"
 
 #if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsApplication.h"
+#include "Windows/WindowsApplication.h"
 #elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSApplication.h"
+#include "MacOS/MacOSApplication.h"
 #elif TGON_PLATFORM_ANDROID
-#   include "Android/AndroidApplication.h"
+#include "Android/AndroidApplication.h"
 #elif TGON_PLATFORM_IOS
-#   include "IOS/IOSApplication.h"
+#include "IOS/IOSApplication.h"
 #endif
 
 namespace tg
@@ -39,13 +39,12 @@ public:
     [[nodiscard]] const PlatformApplication& GetPlatformDependency() const noexcept;
     static Application& GetInstance();
     void Initialize();
-    void Destroy();
     void MessageLoop();
-    [[noreturn]] static void Terminate();
-    static void ShowMessageBox(const char* message);
-    static void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon);
-    static void ShowMessageBox(const char* title, const char* message);
-    static void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon);
+    static void Terminate();
+    static void ShowMessageBox(const char8_t* message);
+    static void ShowMessageBox(const char8_t* message, MessageBoxIcon messageBoxIcon);
+    static void ShowMessageBox(const char8_t* title, const char8_t* message);
+    static void ShowMessageBox(const char8_t* title, const char8_t* message, MessageBoxIcon messageBoxIcon);
     static std::shared_ptr<Engine> GetEngine() noexcept;
     static std::shared_ptr<Window> GetRootWindow() noexcept;
     

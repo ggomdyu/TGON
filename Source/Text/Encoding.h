@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <vector>
 #include <unordered_map>
-#include <gsl/span>
+#include <span>
 
 #include "Core/RuntimeObject.h"
 
@@ -13,57 +13,57 @@ struct UConverter;
 namespace tg
 {
 
-class Encoding final :
-    public RuntimeObject
+class Encoding final
 {
-public:
-    TGON_DECLARE_RTTI(Encoding)
-
 /**@section Constructor */
 public:
-    explicit Encoding(const char* codePageName);
+    explicit Encoding(const char8_t* codePageName);
     explicit Encoding(int32_t codePage);
     explicit Encoding(UConverter* converter) noexcept;
+    Encoding(const Encoding& rhs) = delete;
+    Encoding(Encoding&& rhs) = delete;
 
 /**@section Destructor */
 public:
-    ~Encoding() override;
+    ~Encoding();
 
 /**@section Operator */
 public:
+    Encoding& operator=(const Encoding& rhs) = delete;
+    Encoding& operator=(Encoding&& rhs) = delete;
     bool operator==(const Encoding& rhs) const noexcept;
     bool operator!=(const Encoding& rhs) const noexcept;
 
 /**@section Method */
 public:
-    static const Encoding& GetEncoding(int32_t codePage);
-    static const Encoding& GetEncoding(const char* codePageName) noexcept(false);
-    static std::vector<std::byte> Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* bytes, int32_t count);
+    [[nodiscard]] static const Encoding* GetEncoding(int32_t codePage);
+    [[nodiscard]] static const Encoding* GetEncoding(const char8_t* codePageName);
+    [[nodiscard]] static std::vector<std::byte> Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* bytes, int32_t count);
     static int32_t Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* srcBytes, int32_t srcBytesCount, std::byte* destBytes, int32_t destBytesCount);
-    static int32_t Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const gsl::span<std::byte>& srcBytes, const gsl::span<std::byte>& destBytes);
-    std::vector<char32_t> GetChars(const std::byte* bytes, int32_t count) const;
-    std::vector<char32_t> GetChars(const gsl::span<std::byte>& bytes) const;
-    int32_t GetCharCount(const std::byte* bytes, int32_t count) const;
-    int32_t GetCharCount(const gsl::span<std::byte>& bytes) const;
-    const std::string_view& GetEncodingName() const noexcept;
-    int32_t GetCodePage() const noexcept;
-    size_t GetHashCode() const noexcept;
-    static const Encoding& UTF8();
-    static const Encoding& UTF32();
-    static const Encoding& Unicode();
-    static const Encoding& BigEndianUnicode();
-    bool IsSingleByte() const noexcept;
+    static int32_t Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::span<std::byte>& srcBytes, const std::span<std::byte>& destBytes);
+    [[nodiscard]] std::vector<char32_t> GetChars(const std::byte* bytes, int32_t count) const;
+    [[nodiscard]] std::vector<char32_t> GetChars(const std::span<std::byte>& bytes) const;
+    [[nodiscard]] int32_t GetCharCount(const std::byte* bytes, int32_t count) const;
+    [[nodiscard]] int32_t GetCharCount(const std::span<std::byte>& bytes) const;
+    [[nodiscard]] const std::u8string_view& GetEncodingName() const noexcept;
+    [[nodiscard]] int32_t GetCodePage() const noexcept;
+    [[nodiscard]] size_t GetHashCode() const noexcept;
+    [[nodiscard]] static const Encoding& UTF8();
+    [[nodiscard]] static const Encoding& UTF32();
+    [[nodiscard]] static const Encoding& Unicode();
+    [[nodiscard]] static const Encoding& BigEndianUnicode();
+    [[nodiscard]] bool IsSingleByte() const noexcept;
 
 private:
-    static UConverter* CreateUConverter(const char* codePageName);
-    static UConverter* CreateUConverter(int32_t codePage);
-    int32_t GetMinCharByte() const noexcept;
-    int32_t GetMaxCharByte() const noexcept;
+    [[nodiscard]] static UConverter* CreateUConverter(const char8_t* codePageName);
+    [[nodiscard]] static UConverter* CreateUConverter(int32_t codePage);
+    [[nodiscard]] int32_t GetMinCharByte() const noexcept;
+    [[nodiscard]] int32_t GetMaxCharByte() const noexcept;
 
 /**@section Variable */
 private:
     UConverter* m_converter = nullptr;
-    std::string_view m_encodingName;
+    std::u8string_view m_encodingName;
     static std::unordered_map<int32_t, Encoding> m_encodingTable;
 };
 

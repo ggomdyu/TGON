@@ -1,15 +1,11 @@
 #pragma once
 
-#include <string>
-
-#include "Core/NonCopyable.h"
 #include "Platform/Windows/Windows.h"
 
 namespace tg
 {
 
-class SafeFileHandle :
-    private NonCopyable
+class SafeFileHandle
 {
 /**@section Constructor */
 public:
@@ -66,6 +62,8 @@ inline SafeFileHandle& SafeFileHandle::operator=(SafeFileHandle&& rhs) noexcept
 {
     m_handle = rhs.m_handle;
     rhs.m_handle = INVALID_HANDLE_VALUE;
+
+    return *this;
 }
 
 inline bool SafeFileHandle::operator==(const SafeFileHandle& rhs) const noexcept

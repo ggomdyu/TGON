@@ -1,11 +1,12 @@
 #include "PrecompiledHeader.h"
 
 #include <sstream>
+#include <tuple>
 #include <array>
 #include <fmt/format.h>
-#if TGON_SUPPORT_DWMAPI
-#   include <dwmapi.h>
-#   pragma comment(lib, "dwmapi.lib")
+#if TGON_USING_DWMAPI
+#include <dwmapi.h>
+#pragma comment(lib, "dwmapi.lib")
 #endif
 
 #include "Diagnostics/Debug.h"
@@ -14,36 +15,38 @@
 
 namespace tg
 {
-
-void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
+namespace
 {
-    *rawExtendedWindowStyle = 0;
-    *rawWindowStyle = 0;
+
+constexpr std::tuple<DWORD, DWORD> ConvertWindowStyleToNative(const WindowStyle& windowStyle) noexcept
+{
+    DWORD nativeWindowStyle = 0;
+    DWORD nativeExtendedWindowStyle = 0;
 
     // Create a normal window style.
     {
-        *rawWindowStyle |= WS_VISIBLE;
+        nativeWindowStyle |= WS_VISIBLE;
 
         if (windowStyle.resizeable)
         {
-            *rawWindowStyle |= WS_THICKFRAME;
+            nativeWindowStyle |= WS_THICKFRAME;
         }
 
         if (!windowStyle.hasCaption)
         {
-            *rawWindowStyle |= WS_POPUP;
+            nativeWindowStyle |= WS_POPUP;
         }
         else
         {
-            *rawWindowStyle |= WS_OVERLAPPED;
-            *rawWindowStyle |= WS_CAPTION;
+            nativeWindowStyle |= WS_OVERLAPPED;
+            nativeWindowStyle |= WS_CAPTION;
         }
 
         if (windowStyle.enableSystemButton)
         {
-            *rawWindowStyle |= WS_SYSMENU;
-            *rawWindowStyle |= WS_MINIMIZEBOX;
-            *rawWindowStyle |= WS_MAXIMIZEBOX;
+            nativeWindowStyle |= WS_SYSMENU;
+            nativeWindowStyle |= WS_MINIMIZEBOX;
+            nativeWindowStyle |= WS_MAXIMIZEBOX;
         }
     }
 
@@ -51,40 +54,40 @@ void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindow
     {
         if (windowStyle.topMost)
         {
-            *rawExtendedWindowStyle |= WS_EX_TOPMOST;
+            nativeExtendedWindowStyle |= WS_EX_TOPMOST;
         }
     }
+
+    return {nativeWindowStyle , nativeExtendedWindowStyle};
 }
 
 HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr)
 {
-    // Convert the WindowStyle to the native window style.
-    DWORD rawWindowStyle, rawExtendedWindowStyle;
-    ConvertWindowStyleToNative(windowStyle, &rawWindowStyle, &rawExtendedWindowStyle);
-
     I32Vector2 windowPos(windowStyle.x, windowStyle.y);
     if (windowStyle.showMiddle)
     {
-        // Set the window position to middle of the screen.
+        // Set window position to the middle of the screen.
         windowPos.x = (GetSystemMetrics(SM_CXSCREEN) - windowStyle.width) / 2;
         windowPos.y = (GetSystemMetrics(SM_CYSCREEN) - windowStyle.height) / 2;
     }
 
-    wchar_t utf16Title[4096];
-    if (MultiByteToWideChar(CP_UTF8, 0, windowStyle.title.data(), -1, utf16Title, static_cast<int>(std::extent_v<decltype(utf16Title)>)) == 0)
+    std::array<wchar_t, 4096> utf16Title{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(windowStyle.title.data()), -1, &utf16Title[0], static_cast<int>(utf16Title.size())) == 0)
     {
         return {};
     }
 
-    // Convert the client size to window size.
-    RECT windowSize {0, 0, windowStyle.width, windowStyle.height};
-    AdjustWindowRect(&windowSize, rawWindowStyle, FALSE);
+    auto [nativeWindowStyle, nativeExtendedWindowStyle] = ConvertWindowStyleToNative(windowStyle);
 
-    HWND wndHandle = ::CreateWindowExW(
-        rawExtendedWindowStyle,
+    // Convert client size to window size.
+    RECT windowSize {0, 0, windowStyle.width, windowStyle.height};
+    AdjustWindowRect(&windowSize, nativeWindowStyle, FALSE);
+
+    HWND const wndHandle = ::CreateWindowExW(
+        nativeExtendedWindowStyle,
         className,
-        utf16Title,
-        rawWindowStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
+        &utf16Title[0],
+        nativeWindowStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
         windowPos.x,
         windowPos.y,
         windowSize.right - windowSize.left,
@@ -94,25 +97,26 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
         instanceHandle,
         extraParam
 	);
-
-    if (wndHandle == nullptr)
-    {
-        Debug::WriteLine(fmt::format("Failed to invoke CreateWindowExW. (Code: {0})", GetLastError()));
-    }
-
     return wndHandle;
 }
 
-WindowsWindow::WindowsWindow(const WindowStyle& windowStyle) noexcept :
-    m_wndHandle(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr)))
+}
+
+WindowsWindow::WindowsWindow(HWND wndHandle) noexcept :
+    m_wndHandle(wndHandle)
 {
-    this->SetUserData(this);
 }
 
 WindowsWindow::WindowsWindow(WindowsWindow&& rhs) noexcept :
     m_wndHandle(rhs.m_wndHandle)
 {
     rhs.m_wndHandle = nullptr;
+}
+
+Window::Window(const WindowStyle& windowStyle) :
+    PlatformWindow(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr), L"TGON", this))
+{
+    this->SetUserData(this);
 }
 
 bool Window::operator==(const Window& rhs) const noexcept
@@ -127,128 +131,29 @@ bool Window::operator!=(const Window& rhs) const noexcept
 
 WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
 {
-    m_wndHandle = rhs.m_wndHandle;
+    std::swap(m_wndHandle, rhs.m_wndHandle);
     
-    rhs.m_wndHandle = nullptr;
-
     return *this;
 }
 
-void WindowsWindow::SetRawWindowStyle(DWORD rawWindowStyle)
+void WindowsWindow::SetNativeWindowStyle(DWORD nativeWindowStyle)
 {
-    SetWindowLongPtrW(m_wndHandle, GWL_STYLE, rawWindowStyle);
+    SetWindowLongPtrW(m_wndHandle, GWL_STYLE, nativeWindowStyle);
 }
 
-void WindowsWindow::SetRawWindowStyleEx(DWORD rawWindowStyleEx)
+void WindowsWindow::SetNativeExtendedWindowStyle(DWORD nativeExtendedWindowStyle)
 {
-    SetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE, rawWindowStyleEx);
+    SetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE, nativeExtendedWindowStyle);
 }
 
-LONG_PTR WindowsWindow::GetRawWindowStyle() const
+DWORD WindowsWindow::GetNativeWindowStyle() const
 {
-    return GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
+    return static_cast<DWORD>(GetWindowLongPtrW(m_wndHandle, GWL_STYLE));
 }
 
-LONG_PTR WindowsWindow::GetRawWindowStyleEx() const
+DWORD WindowsWindow::GetNativeExtendedWindowStyle() const
 {
-    return GetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE);
-}
-
-LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-    auto downcastedMe = reinterpret_cast<Window*>(this);
-
-    switch (msg)
-    {
-    case WM_CREATE:
-        break;
-
-    case WM_SYSCOMMAND:
-    {
-        switch (wParam)
-        {
-        case SC_MINIMIZE:
-            {
-                if (downcastedMe->OnMinimize != nullptr)
-                {
-                    downcastedMe->OnMinimize();
-                }
-            }
-            break;
-
-        case SC_MAXIMIZE:
-            {
-                if (downcastedMe->OnMaximize != nullptr)
-                {
-                    downcastedMe->OnMaximize();
-                }
-            }
-            break;
-        }
-    }
-    break;
-
-    case WM_SETFOCUS:
-        {
-            if (downcastedMe->OnGetFocus != nullptr)
-            {
-                downcastedMe->OnGetFocus();
-            }
-        }
-        break;
-
-    case WM_KILLFOCUS:
-        {
-            if (downcastedMe->OnLoseFocus != nullptr)
-            {
-                downcastedMe->OnLoseFocus();
-            }
-        }
-        break;
-
-    case WM_MOVE:
-        {
-            if (downcastedMe->OnMove != nullptr)
-            {
-                downcastedMe->OnMove(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
-            }
-        }
-        break;
-
-    case WM_SIZE:
-        {
-            if (downcastedMe->OnResize != nullptr)
-            {
-                downcastedMe->OnResize(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
-            }
-        }
-        break;
-
-    case WM_CLOSE:
-        {
-            if (downcastedMe->OnWillClose != nullptr)
-            {
-                downcastedMe->OnWillClose();
-            }
-        }
-        break;
-
-    case WM_DESTROY:
-        {
-            if (downcastedMe->OnDidClose != nullptr)
-            {
-                downcastedMe->OnDidClose();
-            }
-
-            downcastedMe->Close();
-
-            // Destroy the message queue and quit the loop.
-            PostQuitMessage(0);
-        }
-        break;
-    }
-
-    return DefWindowProcW(wndHandle, msg, wParam, lParam);
+    return static_cast<DWORD>(GetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE));
 }
 
 void WindowsWindow::SetUserData(void* data)
@@ -258,61 +163,59 @@ void WindowsWindow::SetUserData(void* data)
 
 void Window::BringToFront()
 {
-    // SetForegroundWindow, BringWindowToTop doesn't work as expected, therefore we will use a hack.
-    bool isTopMost = this->IsTopMost();
+    const bool isTopMost = this->IsTopMost();
     this->SetTopMost(true);
     this->SetTopMost(isTopMost);
 }
 
 void Window::Flash()
 {
-    FLASHWINFO fwi {0};
-    fwi.cbSize = sizeof(FLASHWINFO);
-    fwi.dwFlags = FLASHW_CAPTION;
-    fwi.dwTimeout = 0;
-    fwi.hwnd = m_wndHandle;
-    fwi.uCount = 1;
+    FLASHWINFO fwi
+    {
+        .cbSize = sizeof(FLASHWINFO),
+        .hwnd = m_wndHandle,
+        .dwFlags = FLASHW_CAPTION,
+        .uCount = 1,
+        .dwTimeout = 0,
+    };
 
     FlashWindowEx(&fwi);
 }
 
-void Window::GetPosition(int32_t* x, int32_t* y) const
+I32Vector2 Window::GetPosition() const
 {
     RECT rt;
     GetWindowRect(m_wndHandle, &rt);
 
-    *x = rt.left;
-    *y = rt.top;
+    return {rt.left, rt.top};
 }
 
-void Window::GetClientSize(int32_t* width, int32_t* height) const
+I32Extent2D Window::GetWindowSize() const
+{
+    RECT rt;
+    GetWindowRect(m_wndHandle, &rt);
+
+    return {rt.right, rt.bottom};
+}
+
+I32Extent2D Window::GetClientSize() const
 {
     RECT rt;
     GetClientRect(m_wndHandle, &rt);
 
-    *width = rt.right;
-    *height = rt.bottom;
+    return {rt.right, rt.bottom};
 }
 
-void Window::GetWindowSize(int32_t* width, int32_t* height) const
+int32_t Window::GetTitle(char8_t* destStr, int32_t destStrBufferLen) const
 {
-    RECT rt;
-    GetWindowRect(m_wndHandle, &rt);
-
-    *width = rt.right;
-    *height = rt.bottom;
-}
-
-int32_t Window::GetTitle(char* destStr, int32_t destStrBufferLen) const
-{
-    wchar_t utf16Title[4096];
-    auto utf16TitleLen = GetWindowTextW(m_wndHandle, utf16Title, 256);
+    std::array<wchar_t, 4096> utf16Title{};
+    const auto utf16TitleLen = GetWindowTextW(m_wndHandle, &utf16Title[0], 256);
     if (utf16TitleLen == 0)
     {
         return {};
     }
 
-    auto utf8TitleLen = WideCharToMultiByte(CP_UTF8, 0, utf16Title, -1, destStr, destStrBufferLen, nullptr, nullptr) - 1;
+    const auto utf8TitleLen = WideCharToMultiByte(CP_UTF8, 0, &utf16Title[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
     if (utf8TitleLen == -1)
     {
         return {};
@@ -323,12 +226,12 @@ int32_t Window::GetTitle(char* destStr, int32_t destStrBufferLen) const
 
 bool Window::IsResizable() const
 {
-    if ((this->GetRawWindowStyle() & WS_THICKFRAME) != 0)
+    if ((this->GetNativeWindowStyle() & WS_THICKFRAME) != 0)
     {
         return true;
     }
 
-    if ((this->GetRawWindowStyleEx() & WS_EX_DLGMODALFRAME) != 0)
+    if ((this->GetNativeExtendedWindowStyle() & WS_EX_DLGMODALFRAME) != 0)
     {
         return true;
     }
@@ -338,7 +241,7 @@ bool Window::IsResizable() const
 
 bool Window::HasCaption() const
 {
-    return (this->GetRawWindowStyle() & WS_CAPTION) != 0;
+    return (this->GetNativeWindowStyle() & WS_CAPTION) != 0;
 }
 
 bool Window::IsMaximized() const
@@ -355,7 +258,7 @@ bool Window::IsMinimized() const
 
 bool Window::IsTopMost() const
 {
-    return (this->GetRawWindowStyleEx() & WS_EX_TOPMOST) != 0;
+    return (this->GetNativeExtendedWindowStyle() & WS_EX_TOPMOST) != 0;
 }
 
 void* Window::GetNativeWindow() const
@@ -399,19 +302,18 @@ void Window::SetPosition(int32_t x, int32_t y)
 
 void Window::SetContentSize(int32_t width, int32_t height)
 {
+    const auto nativeWindowStyle = this->GetNativeWindowStyle();
+    const auto nativeExtendedWindowStyle = this->GetNativeExtendedWindowStyle();
+
     RECT rt{0, 0, width, height};
+    AdjustWindowRectEx(&rt, nativeWindowStyle, GetMenu(m_wndHandle) != nullptr, nativeExtendedWindowStyle);
 
-    DWORD rawWindowStyle = static_cast<DWORD>(this->GetRawWindowStyle());
-    DWORD rawExtendedWindowStyle = static_cast<DWORD>(this->GetRawWindowStyleEx());
-
-    AdjustWindowRectEx(&rt, rawWindowStyle, GetMenu(m_wndHandle) != nullptr, rawExtendedWindowStyle);
-
-    if (rawWindowStyle & WS_VSCROLL)
+    if (nativeWindowStyle & WS_VSCROLL)
     {
         rt.right += GetSystemMetrics(SM_CXVSCROLL);
     }
 
-    if (rawWindowStyle & WS_HSCROLL)
+    if (nativeWindowStyle & WS_HSCROLL)
     {
         rt.bottom += GetSystemMetrics(SM_CYVSCROLL);
     }
@@ -419,15 +321,15 @@ void Window::SetContentSize(int32_t width, int32_t height)
     SetWindowPos(m_wndHandle, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_NOMOVE | SWP_NOZORDER);
 }
 
-void Window::SetTitle(const char* title)
+void Window::SetTitle(const char8_t* title)
 {
-    wchar_t utf16Title[4096];
-    if (MultiByteToWideChar(CP_UTF8, 0, title, -1, utf16Title, std::extent_v<decltype(utf16Title)>) == 0)
+    std::array<wchar_t, 4096> utf16Title{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(title), -1, &utf16Title[0], static_cast<int>(utf16Title.size())) == 0)
     {
         return;
     }
 
-    SetWindowTextW(m_wndHandle, utf16Title);
+    SetWindowTextW(m_wndHandle, &utf16Title[0]);
 }
 
 void Window::SetTopMost(bool setTopMost)
@@ -437,10 +339,10 @@ void Window::SetTopMost(bool setTopMost)
 
 void Window::SetTransparency(float transparency)
 {
-    DWORD rawExtendedWindowStyle = static_cast<DWORD>(this->GetRawWindowStyleEx());
-    if ((rawExtendedWindowStyle & WS_EX_LAYERED) == false)
+    const auto nativeExtendedWindowStyle = this->GetNativeExtendedWindowStyle();
+    if ((nativeExtendedWindowStyle & WS_EX_LAYERED) == false)
     {
-        this->SetRawWindowStyleEx(rawExtendedWindowStyle | WS_EX_LAYERED);
+        this->SetNativeExtendedWindowStyle(nativeExtendedWindowStyle | WS_EX_LAYERED);
     }
 
     SetLayeredWindowAttributes(m_wndHandle, 0, static_cast<BYTE>(transparency * 255.0f), LWA_ALPHA);

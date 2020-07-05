@@ -11,7 +11,7 @@ class TaskModule :
 	public Module
 {
 public:
-    TGON_DECLARE_RTTI(TaskModule)
+    TGON_RTTI(TaskModule)
 
 /**@section Constructor */
 public:

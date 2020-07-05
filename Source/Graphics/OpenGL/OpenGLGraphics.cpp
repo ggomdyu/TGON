@@ -1,9 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #if TGON_GRAPHICS_OPENGL
-#include <stb_image.h>
-#include <stb_image_write.h>
-
 #include "Platform/Window.h"
 
 #include "OpenGLDebug.h"
@@ -46,18 +43,18 @@ constexpr GLenum ConvertFillModeToNative(FillMode fillMode) noexcept
     
 constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
 {
-    constexpr GLenum nativecullModes[] = {
+    constexpr GLenum nativeCullModes[] = {
         GL_CW,
         GL_CCW,
     };
     
-    return nativecullModes[static_cast<int>(cullMode)];
+    return nativeCullModes[static_cast<int>(cullMode)];
 }
     
 }
 
-OpenGLGraphics::OpenGLGraphics(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode) :
-    m_context(displayWindow, videoMode)
+OpenGLGraphics::OpenGLGraphics(void* nativeWindow, const VideoMode& videoMode) :
+    m_context(nativeWindow, videoMode)
 {
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
@@ -80,19 +77,12 @@ OpenGLGraphics::~OpenGLGraphics()
     }
 }
 
-OpenGLContext& OpenGLGraphics::GetContext() noexcept
+OpenGLGraphics& OpenGLGraphics::operator=(OpenGLGraphics&& rhs) noexcept
 {
-    return m_context;
-}
+    std::swap(m_context, rhs.m_context);
+    std::swap(m_vertexArrayHandle, rhs.m_vertexArrayHandle);
 
-const OpenGLContext& OpenGLGraphics::GetContext() const noexcept
-{
-    return m_context;
-}
-
-GLuint OpenGLGraphics::GetVertexArrayHandle() const noexcept
-{
-    return m_vertexArrayHandle;
+    return *this;
 }
 
 void Graphics::SetScissorRect(const FRect& scissorRect)

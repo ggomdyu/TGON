@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.h"
 
 #if TGON_PLATFORM_MACOS
-#   include <OpenAL/al.h>
+#include <OpenAL/al.h>
 #else
-#   include <AL/al.h>
+#include <AL/al.h>
 #endif
 
 #include "Importer/WavAudioDecoder.h"
@@ -11,10 +11,21 @@
 #include "IO/File.h"
 
 #include "AudioClip.h"
-#include "OpenALDebug.h"
 
 namespace tg
 {
+namespace
+{
+
+ALuint CreateALBuffer()
+{
+    ALuint alBufferId = 0;
+    alGenBuffers(1, &alBufferId);
+
+    return alBufferId;
+}
+
+}
 
 inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
 {
@@ -52,15 +63,15 @@ inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
     return 0;
 }
 
-AudioClip::AudioClip(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept :
+AudioClip::AudioClip(std::shared_ptr<std::byte> audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept :
     m_alBufferId(CreateALBuffer()),
-    m_audioData(audioData),
+    m_audioData(std::move(audioData)),
     m_audioDataBytes(audioDataBytes),
     m_bitsPerSample(bitsPerSample),
     m_channels(channels),
     m_samplingRate(samplingRate)
 {
-    TGON_AL_ERROR_CHECK(alBufferData(m_alBufferId, ConvertToALFormat(m_channels, m_bitsPerSample), m_audioData.get(), static_cast<ALsizei>(m_audioDataBytes), m_samplingRate));
+    alBufferData(m_alBufferId, ConvertToALFormat(m_channels, m_bitsPerSample), m_audioData.get(), static_cast<ALsizei>(m_audioDataBytes), m_samplingRate);
 }
 
 AudioClip::AudioClip(AudioClip&& rhs) noexcept :
@@ -78,7 +89,7 @@ AudioClip::~AudioClip()
 {
     if (m_alBufferId != 0)
     {
-        TGON_AL_ERROR_CHECK(alDeleteBuffers(1, &m_alBufferId));
+        alDeleteBuffers(1, &m_alBufferId);
         m_alBufferId = 0;
     }
 }
@@ -98,7 +109,7 @@ AudioClip& AudioClip::operator=(AudioClip&& rhs) noexcept
     return *this;
 }
 
-std::shared_ptr<AudioClip> AudioClip::Create(const char* filePath)
+std::shared_ptr<AudioClip> AudioClip::Create(const char8_t* filePath)
 {
     auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
     if (fileData.has_value() == false)
@@ -109,7 +120,7 @@ std::shared_ptr<AudioClip> AudioClip::Create(const char* filePath)
     return Create(*fileData);
 }
 
-std::shared_ptr<AudioClip> AudioClip::Create(const gsl::span<const std::byte>& fileData)
+std::shared_ptr<AudioClip> AudioClip::Create(const std::span<const std::byte>& fileData)
 {
     AudioFormat audioFormat = AudioFormat::Unknown;
     if (WavAudioDecoder::IsWav(fileData))
@@ -128,7 +139,7 @@ std::shared_ptr<AudioClip> AudioClip::Create(const gsl::span<const std::byte>& f
     return Create(fileData, audioFormat);
 }
 
-std::shared_ptr<AudioClip> AudioClip::Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
+std::shared_ptr<AudioClip> AudioClip::Create(const std::span<const std::byte>& fileData, AudioFormat audioFormat)
 {
     std::shared_ptr<std::byte> audioData;
     int32_t audioDataBytes = 0;
@@ -172,16 +183,6 @@ std::shared_ptr<AudioClip> AudioClip::Create(const gsl::span<const std::byte>& f
     return std::make_shared<AudioClip>(std::move(audioData), audioDataBytes, bitsPerSample, channels, samplingRate);
 }
 
-gsl::span<std::byte> AudioClip::GetData() noexcept
-{
-    return {m_audioData.get(), m_audioDataBytes};
-}
-
-gsl::span<const std::byte> AudioClip::GetData() const noexcept
-{
-    return const_cast<AudioClip*>(this)->GetData();
-}
-
 int32_t AudioClip::GetBitsPerSample() const noexcept
 {
     return m_bitsPerSample;
@@ -200,14 +201,6 @@ int32_t AudioClip::GetSamplingRate() const noexcept
 ALuint AudioClip::GetNativeBuffer() const noexcept
 {
     return m_alBufferId;
-}
-
-ALuint AudioClip::CreateALBuffer()
-{
-    ALuint alBufferId = 0;
-    TGON_AL_ERROR_CHECK(alGenBuffers(1, &alBufferId));
-
-    return alBufferId;
 }
 
 }

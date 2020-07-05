@@ -19,11 +19,11 @@ class AssetModule :
 	public Module
 {
 public:
-    TGON_DECLARE_RTTI(AssetModule)
+    TGON_RTTI(AssetModule)
 
 /* @section Type */
 private:
-    using ResourceCache = std::unordered_map<StringHash, std::any>;
+    using ResourceCache = std::unordered_map<U8StringHash, std::any>;
     using ResourceUnitTable = std::vector<ResourceCache>;
     using ResourceUnit = size_t;
 
@@ -33,20 +33,20 @@ public:
 
 /* @section Method */
 public:
-    template <typename _ResourceType>
-    std::shared_ptr<_ResourceType> GetResource(const StringViewHash& path);
-    template <typename _ResourceType>
-    std::shared_ptr<const _ResourceType> GetResource(const StringViewHash& path) const;
-    template <typename _ResourceType>
-    void PurgeResource(const StringViewHash& path);
-    template <typename _ResourceType>
+    template <typename _Resource>
+    std::shared_ptr<_Resource> GetResource(const U8StringViewHash& path);
+    template <typename _Resource>
+    std::shared_ptr<const _Resource> GetResource(const U8StringViewHash& path) const;
+    template <typename _Resource>
+    void PurgeResource(const U8StringViewHash& path);
+    template <typename _Resource>
     void PurgeResource();
     void PurgeAllResource();
 
 private:
-    template <typename _ResourceType>
-    std::shared_ptr<_ResourceType> CreateResource(const StringViewHash& path) const;
-    template <typename _ResourceType>
+    template <typename _Resource>
+    std::shared_ptr<_Resource> CreateResource(const U8StringViewHash& path) const;
+    template <typename _Resource>
     ResourceUnit GetResourceUnit() const;
 
 /* @section Variable */
@@ -57,42 +57,42 @@ private:
     inline static ResourceUnit m_maxResourceUnit;
 };
 
-template<typename _ResourceType>
-inline std::shared_ptr<_ResourceType> AssetModule::GetResource(const StringViewHash& path)
+template<typename _Resource>
+std::shared_ptr<_Resource> AssetModule::GetResource(const U8StringViewHash& path)
 {
     std::lock_guard lock(m_mutex);
 
-    ResourceCache* resourceCache = &m_resourceUnitTable[GetResourceUnit<_ResourceType>()];
+    ResourceCache* resourceCache = &m_resourceUnitTable[GetResourceUnit<_Resource>()];
     auto iter = resourceCache->find(path);
     if (iter == resourceCache->end())
     {
-        auto resource = this->CreateResource<_ResourceType>(path);
+        auto resource = this->CreateResource<_Resource>(path);
 
         // resourceCache can be a dangling pointer because of reallocation of m_resourceUnitTable.
-        resourceCache = &m_resourceUnitTable[GetResourceUnit<_ResourceType>()];
+        resourceCache = &m_resourceUnitTable[GetResourceUnit<_Resource>()];
 
         iter = resourceCache->emplace(path, std::move(resource)).first;
     }
 
-    return std::any_cast<std::shared_ptr<_ResourceType>>(iter->second);
+    return std::any_cast<std::shared_ptr<_Resource>>(iter->second);
 }
 
-template<typename _ResourceType>
-inline std::shared_ptr<const _ResourceType> AssetModule::GetResource(const StringViewHash& path) const
+template<typename _Resource>
+std::shared_ptr<const _Resource> AssetModule::GetResource(const U8StringViewHash& path) const
 {
-    return const_cast<AssetModule*>(this)->GetResource<_ResourceType>(path);
+    return const_cast<AssetModule*>(this)->GetResource<_Resource>(path);
 }
 
-template <typename _ResourceType>
-inline std::shared_ptr<_ResourceType> AssetModule::CreateResource(const StringViewHash& path) const
+template <typename _Resource>
+std::shared_ptr<_Resource> AssetModule::CreateResource(const U8StringViewHash& path) const
 {
-    return _ResourceType::Create(path.Data());
+    return _Resource::Create(path.Data());
 }
 
 template <>
-inline std::shared_ptr<Texture> AssetModule::CreateResource(const StringViewHash& path) const
+inline std::shared_ptr<Texture> AssetModule::CreateResource(const U8StringViewHash& path) const
 {
-    auto image = Image::Create(path.Data());
+    auto image = Image::FromFile(path.Data());
     if (image.has_value() == false)
     {
         return nullptr;
@@ -102,13 +102,13 @@ inline std::shared_ptr<Texture> AssetModule::CreateResource(const StringViewHash
 }
 
 template <>
-inline std::shared_ptr<Font> AssetModule::CreateResource(const StringViewHash& path) const
+inline std::shared_ptr<Font> AssetModule::CreateResource(const U8StringViewHash& path) const
 {
     return m_fontFactory.CreateFont(path.Data());
 }
 
 template <>
-inline std::shared_ptr<FontAtlas> AssetModule::CreateResource(const StringViewHash& path) const
+inline std::shared_ptr<FontAtlas> AssetModule::CreateResource(const U8StringViewHash& path) const
 {
     ResourceCache& resourceCache = m_resourceUnitTable[GetResourceUnit<Font>()];
     auto iter = resourceCache.find(path);
@@ -120,8 +120,8 @@ inline std::shared_ptr<FontAtlas> AssetModule::CreateResource(const StringViewHa
     return std::make_shared<FontAtlas>(std::any_cast<std::shared_ptr<Font>>(iter->second));
 }
 
-template<typename _ResourceType>
-inline AssetModule::ResourceUnit AssetModule::GetResourceUnit() const
+template<typename _Resource>
+AssetModule::ResourceUnit AssetModule::GetResourceUnit() const
 {
     static ResourceUnit resourceUnit = [&]()
     {
@@ -133,14 +133,14 @@ inline AssetModule::ResourceUnit AssetModule::GetResourceUnit() const
     return resourceUnit;
 }
 
-template<typename _ResourceType>
-inline void AssetModule::PurgeResource(const StringViewHash& path)
+template<typename _Resource>
+void AssetModule::PurgeResource(const U8StringViewHash& path)
 {
     m_resourceUnitTable[GetResourceUnit<Font>()].erase(path);
 }
 
-template <typename _ResourceType>
-inline void AssetModule::PurgeResource()
+template <typename _Resource>
+void AssetModule::PurgeResource()
 {
     m_resourceUnitTable[GetResourceUnit<Font>()].clear();
 }

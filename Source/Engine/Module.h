@@ -9,16 +9,11 @@ class Module :
     public RuntimeObject
 {
 public:
-    TGON_DECLARE_RTTI(Module)
-
-/* @section Destructor */
-public:
-    virtual ~Module() = default;
+    TGON_RTTI(Module)
 
 /**@section Method */
 public:
     virtual void Initialize() {}
-    virtual void Destroy() {}
     virtual void Update() {}
 };
 

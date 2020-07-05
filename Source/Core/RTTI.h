@@ -7,101 +7,101 @@
 namespace tg
 {
 
-class RTTI final
+class Rtti final
 {
 /* @section Constructor */
 public:
-    RTTI(const std::type_info& typeInfo, const RTTI* superRTTI) noexcept;
+    Rtti(const std::type_info& typeInfo, const Rtti* superRtti) noexcept;
 
 /* @section Method */
 public:
-    size_t GetHashCode() const noexcept;
-    const char* GetName() const noexcept;
-    const RTTI* GetSuperRTTI() const noexcept;
+    [[nodiscard]] size_t GetHashCode() const noexcept;
+    [[nodiscard]] const char* GetName() const noexcept;
+    [[nodiscard]] const Rtti* GetSuperRtti() const noexcept;
 
 /* @section Operator */
 public:
-    bool operator==(const RTTI& rhs) const noexcept;
-    bool operator!=(const RTTI& rhs) const noexcept;
-    bool operator<(const RTTI& rhs) const noexcept;
-    bool operator>=(const RTTI& rhs) const noexcept;
-    bool operator>(const RTTI& rhs) const noexcept;
-    bool operator<=(const RTTI& rhs) const noexcept;
+    bool operator==(const Rtti& rhs) const noexcept;
+    bool operator!=(const Rtti& rhs) const noexcept;
+    bool operator<(const Rtti& rhs) const noexcept;
+    bool operator>=(const Rtti& rhs) const noexcept;
+    bool operator>(const Rtti& rhs) const noexcept;
+    bool operator<=(const Rtti& rhs) const noexcept;
 
 /* @section Variable */
 private:
     const std::type_info* m_typeInfo;
-    const RTTI* m_superRTTI;
+    const Rtti* m_superRtti;
 };
 
 template <typename _Type>
-inline typename std::enable_if_t<IsPure<_Type>, const RTTI*> GetRTTI()
+std::enable_if_t<IsPure<_Type>, const Rtti*> GetRtti()
 {
     using PureType = Pure<_Type>;
 
-    static const RTTI rtti(typeid(PureType), GetRTTI<typename PureType::Super>());
+    static const Rtti rtti(typeid(PureType), GetRtti<typename PureType::Super>());
     return &rtti;
 }
 
 template <typename _Type>
-inline typename std::enable_if_t<!IsPure<_Type>, const RTTI*> GetRTTI()
+std::enable_if_t<!IsPure<_Type>, const Rtti*> GetRtti()
 {
-    return GetRTTI<Pure<_Type>>();
+    return GetRtti<Pure<_Type>>();
 }
 
 template <>
-inline const RTTI* GetRTTI<void>()
+inline const Rtti* GetRtti<void>()
 {
     return nullptr;
 }
 
-inline RTTI::RTTI(const std::type_info& typeInfo, const RTTI* superRTTI) noexcept :
+inline Rtti::Rtti(const std::type_info& typeInfo, const Rtti* superRtti) noexcept :
     m_typeInfo(&typeInfo),
-    m_superRTTI(superRTTI)
+    m_superRtti(superRtti)
 {
 }
 
-inline size_t RTTI::GetHashCode() const noexcept
+inline size_t Rtti::GetHashCode() const noexcept
 {
     return m_typeInfo->hash_code();
 }
 
-inline const char* RTTI::GetName() const noexcept
+inline const char* Rtti::GetName() const noexcept
 {
     return m_typeInfo->name();
 }
 
-inline const RTTI* RTTI::GetSuperRTTI() const noexcept
+inline const Rtti* Rtti::GetSuperRtti() const noexcept
 {
-    return m_superRTTI;
+    return m_superRtti;
 }
 
-inline bool RTTI::operator==(const RTTI& rhs) const noexcept
+inline bool Rtti::operator==(const Rtti& rhs) const noexcept
 {
     return m_typeInfo == rhs.m_typeInfo;
 }
 
-inline bool RTTI::operator!=(const RTTI& rhs) const noexcept
+inline bool Rtti::operator!=(const Rtti& rhs) const noexcept
 {
     return !(*this == rhs);
 }
 
-inline bool RTTI::operator<(const RTTI& rhs) const noexcept
+inline bool Rtti::operator<(const Rtti& rhs) const noexcept
 {
     return m_typeInfo->before(*rhs.m_typeInfo);
 }
 
-inline bool RTTI::operator>=(const RTTI& rhs) const noexcept
+inline bool Rtti::operator>=(const Rtti& rhs) const noexcept
 {
     return !(*this < rhs);
 }
 
-inline bool RTTI::operator>(const RTTI& rhs) const noexcept
+inline bool Rtti::operator>(const Rtti& rhs) const noexcept
 {
     return (rhs < *this);
 }
 
-inline bool RTTI::operator<=(const RTTI& rhs) const noexcept
+inline bool Rtti::operator<=(const Rtti& rhs) const noexcept
 {
     return !(*this > rhs);
 }
@@ -112,14 +112,14 @@ namespace std
 {
 
 template <>
-struct hash<tg::RTTI>
+struct hash<tg::Rtti>
 {
 /* @section Method */
 public:
-    size_t operator()(const tg::RTTI& rhs) const noexcept;
+    size_t operator()(const tg::Rtti& rhs) const noexcept;
 };
 
-inline size_t hash<tg::RTTI>::operator()(const tg::RTTI& rhs) const noexcept
+inline size_t hash<tg::Rtti>::operator()(const tg::Rtti& rhs) const noexcept
 {
     return rhs.GetHashCode();
 }

@@ -4,7 +4,7 @@
 #include "Drawing/Image.h"
 
 #if TGON_GRAPHICS_OPENGL
-#   include "OpenGL/OpenGLTexture.h"
+#include "OpenGL/OpenGLTexture.h"
 #endif
 
 namespace tg
@@ -47,12 +47,12 @@ public:
     void SetData(const std::byte* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat);
     void SetFilterMode(FilterMode filterMode);
     void SetWrapMode(WrapMode wrapMode);
-    const I32Extent2D& GetSize() const noexcept;
-    PixelFormat GetPixelFormat() const noexcept;
-    FilterMode GetFilterMode() const noexcept;
-    WrapMode GetWrapMode() const noexcept;
-    bool IsValid() const;
-    bool IsUseMipmap() const noexcept;
+    [[nodiscard]] const I32Extent2D& GetSize() const noexcept;
+    [[nodiscard]] PixelFormat GetPixelFormat() const noexcept;
+    [[nodiscard]] FilterMode GetFilterMode() const noexcept;
+    [[nodiscard]] WrapMode GetWrapMode() const noexcept;
+    [[nodiscard]] bool IsValid() const;
+    [[nodiscard]] bool IsUseMipmap() const noexcept;
     
 /**@section Variable */
 protected:

@@ -26,38 +26,38 @@ namespace tg
 
 thread_local std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
-bool Environment::SetEnvironmentVariable(const char* name, const char* value)
+bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* value)
 {
-    wchar_t utf16Name[2048];
-    if (MultiByteToWideChar(CP_UTF8, 0, name, -1, utf16Name, std::extent_v<decltype(utf16Name)>) == 0)
+    std::array<wchar_t, 2048> utf16Name{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(name), -1, &utf16Name[0], static_cast<int>(utf16Name.size()) == 0))
     {
         return false;
     }
 
-    wchar_t utf16Value[4096];
-    if (MultiByteToWideChar(CP_UTF8, 0, value, -1, utf16Value, std::extent_v<decltype(utf16Value)>) == 0)
+    std::array<wchar_t, 4096> utf16Value{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(value), -1, &utf16Value[0], static_cast<int>(utf16Value.size())) == 0)
     {
         return false;
     }
 
-    return SetEnvironmentVariableW(utf16Name, utf16Value) == TRUE;
+    return SetEnvironmentVariableW(&utf16Name[0], &utf16Value[0]) == TRUE;
 }
 
-std::optional<int32_t> Environment::GetEnvironmentVariable(const char* name, char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen)
 {
-    wchar_t utf16Name[2048];
-    if (MultiByteToWideChar(CP_UTF8, 0, name, -1, utf16Name, std::extent_v<decltype(utf16Name)>) == 0)
+    std::array<wchar_t, 2048> utf16Name{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(name), -1, &utf16Name[0], static_cast<DWORD>(utf16Name.size())) == 0)
     {
         return {};
     }
 
-    wchar_t utf16Value[4096];
-    if (GetEnvironmentVariableW(&utf16Name[0], utf16Value, std::extent_v<decltype(utf16Value)>) == 0)
+    std::array<wchar_t, 4096> utf16Value{};
+    if (GetEnvironmentVariableW(&utf16Name[0], &utf16Value[0], static_cast<DWORD>(utf16Value.size())) == 0)
     {
         return {};
     }
 
-    auto utf8ValueLen = WideCharToMultiByte(CP_UTF8, 0, utf16Value, -1, destStr, destStrBufferLen, nullptr, nullptr) - 1;
+    const auto utf8ValueLen = WideCharToMultiByte(CP_UTF8, 0, &utf16Value[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
     if (utf8ValueLen == -1)
     {
         return {};
@@ -66,17 +66,17 @@ std::optional<int32_t> Environment::GetEnvironmentVariable(const char* name, cha
     return utf8ValueLen;
 }
 
-std::optional<int32_t> Environment::GetEnvironmentVariable(const char* name, const gsl::span<char>& destStr)
+std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, const std::span<char8_t>& destStr)
 {
-    return Environment::GetEnvironmentVariable(name, &destStr[0], static_cast<int32_t>(destStr.size()));
+    return GetEnvironmentVariable(name, &destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
-std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, char8_t* destStr, int32_t destStrBufferLen)
 {
     wchar_t utf16FolderPath[2048];
     if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, utf16FolderPath) == S_OK)
     {
-        auto utf16FolderPathLen = WideCharToMultiByte(CP_UTF8, 0, utf16FolderPath, -1, destStr, destStrBufferLen, nullptr, nullptr) - 1;
+        auto utf16FolderPathLen = WideCharToMultiByte(CP_UTF8, 0, utf16FolderPath, -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
         if (utf16FolderPathLen >= 0)
         {
             return utf16FolderPathLen;
@@ -86,12 +86,12 @@ std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, char* de
     return {};
 }
 
-std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, const gsl::span<char>& destStr)
+std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, const std::span<char8_t>& destStr)
 {
     return Environment::GetFolderPath(folder, &destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
-const std::string& Environment::GetCommandLine()
+const std::u8string& Environment::GetCommandLine()
 {
     static auto commandLine = []()
     {
@@ -100,14 +100,14 @@ const std::string& Environment::GetCommandLine()
         auto utf16CommandLineBytes = WideCharToMultiByte(CP_UTF8, 0, utf16CommandLine, -1, nullptr, 0, nullptr, nullptr);
         if (utf16CommandLineBytes == 0)
         {
-            return std::string();
+            return std::u8string();
         }
 
-        std::string utf8CommandLine;
+        std::u8string utf8CommandLine;
         utf8CommandLine.resize(utf16CommandLineBytes - 1);
-        if (WideCharToMultiByte(CP_UTF8, 0, utf16CommandLine, -1, &utf8CommandLine[0], utf8CommandLine.length() + 1, nullptr, nullptr) == 0)
+        if (WideCharToMultiByte(CP_UTF8, 0, utf16CommandLine, -1, reinterpret_cast<char*>(&utf8CommandLine[0]), utf8CommandLine.length() + 1, nullptr, nullptr) == 0)
         {
-            return std::string();
+            return std::u8string();
         }
 
         return utf8CommandLine;
@@ -115,15 +115,15 @@ const std::string& Environment::GetCommandLine()
     return commandLine;
 }
 
-const std::vector<std::string>& Environment::GetCommandLineArgs()
+const std::vector<std::u8string>& Environment::GetCommandLineArgs()
 {
     static auto commandLineArgs = []()
     {
-        std::vector<std::string> ret;
+        std::vector<std::u8string> ret;
         
-        std::stringstream ss(GetCommandLine());
-        std::string commandLineArg;
-        while (std::getline(ss, commandLineArg, ' '))
+        std::basic_stringstream<char8_t, std::char_traits<char8_t>, std::allocator<char8_t>> ss(GetCommandLine());
+        std::u8string commandLineArg;
+        while (std::getline(ss, commandLineArg, u8' '))
         {
             ret.push_back(std::move(commandLineArg));
         }
@@ -159,10 +159,10 @@ bool Environment::Is64BitOperatingSystem()
 #endif
 }
 
-void Environment::FailFast(const char* message, const std::exception& exception)
+void Environment::FailFast(const char8_t* message, const std::exception& exception)
 {
     wchar_t utf16Message[4096] {};
-    auto utf16MessageLen = MultiByteToWideChar(CP_UTF8, 0, message, -1, utf16Message, std::extent_v<decltype(utf16Message)>) - 1;
+    auto utf16MessageLen = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(message), -1, utf16Message, std::extent_v<decltype(utf16Message)>) - 1;
     utf16Message[utf16MessageLen] = '\n';
 
     OutputDebugStringW(L"FailFast:\n");
@@ -171,9 +171,9 @@ void Environment::FailFast(const char* message, const std::exception& exception)
     throw exception;
 }
 
-std::string_view Environment::GetNewLine()
+std::u8string_view Environment::GetNewLine()
 {
-    char newLine[] = "\r\n";
+    char8_t newLine[] = u8"\r\n";
     return {newLine, std::extent_v<decltype(newLine)> - 1};
 }
 
@@ -190,7 +190,7 @@ int32_t Environment::GetCurrentManagedThreadId()
     return GetCurrentThreadId();
 }
 
-std::optional<int32_t> Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetUserName(char8_t* destStr, int32_t destStrBufferLen)
 {
     wchar_t utf16UserName[2048];
     auto utf16UserNameBufferLen = static_cast<DWORD>(std::extent_v<decltype(utf16UserName)>);
@@ -199,7 +199,7 @@ std::optional<int32_t> Environment::GetUserName(char* destStr, int32_t destStrBu
         return {};
     }
 
-    auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16UserName[0], -1, destStr, destStrBufferLen, nullptr, nullptr) - 1;
+    auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16UserName[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
     if (utf8UserNameLen == -1)
     {
         return {};
@@ -208,21 +208,21 @@ std::optional<int32_t> Environment::GetUserName(char* destStr, int32_t destStrBu
     return utf8UserNameLen;
 }
 
-std::optional<int32_t> Environment::GetUserName(const gsl::span<char>& destStr)
+std::optional<int32_t> Environment::GetUserName(const std::span<char8_t>& destStr)
 {
     return Environment::GetUserName(&destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
-std::optional<int32_t> Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetMachineName(char8_t* destStr, int32_t destStrBufferLen)
 {
-    wchar_t utf16ComputerName[2048];
-    auto utf16ComputerNameBufferLen = static_cast<DWORD>(std::extent_v<decltype(utf16ComputerName)>);
+    std::array<wchar_t, 2048> utf16ComputerName;
+    auto utf16ComputerNameBufferLen = static_cast<DWORD>(utf16ComputerName.size());
     if (GetComputerNameW(&utf16ComputerName[0], &utf16ComputerNameBufferLen) == FALSE)
     {
         return {};
     }
 
-    auto utf8ComputerNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16ComputerName[0], -1, destStr, destStrBufferLen, nullptr, nullptr) - 1;
+    const auto utf8ComputerNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16ComputerName[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
     if (utf8ComputerNameLen == -1)
     {
         return {};
@@ -231,20 +231,20 @@ std::optional<int32_t> Environment::GetMachineName(char* destStr, int32_t destSt
     return utf8ComputerNameLen;
 }
 
-std::optional<int32_t> Environment::GetMachineName(const gsl::span<char>& destStr)
+std::optional<int32_t> Environment::GetMachineName(const std::span<char8_t>& destStr)
 {
     return Environment::GetMachineName(&destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
-std::optional<int32_t> Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetUserDomainName(char8_t* destStr, int32_t destStrBufferLen)
 {
-    wchar_t utf16UserName[2048];
-    auto utf16UserNameBufferLen = static_cast<DWORD>(std::extent_v<decltype(utf16UserName)>);
+    std::array<wchar_t, 2048> utf16UserName{};
+    auto utf16UserNameBufferLen = static_cast<DWORD>(utf16UserName.size());
     if (GetUserNameExW(NameSamCompatible, &utf16UserName[0], &utf16UserNameBufferLen) == TRUE)
     {
         if (const wchar_t* str = wcschr(&utf16UserName[0], '\\'); str != nullptr)
         {
-            auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16UserName[0], str - utf16UserName, destStr, destStrBufferLen, nullptr, nullptr);
+            const auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16UserName[0], str - &utf16UserName[0], reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr);
             if (utf8UserNameLen == 0)
             {
                 return {};
@@ -255,18 +255,18 @@ std::optional<int32_t> Environment::GetUserDomainName(char* destStr, int32_t des
         }
     }
 
-    utf16UserNameBufferLen = static_cast<DWORD>(std::extent_v<decltype(utf16UserName)>);
+    utf16UserNameBufferLen = static_cast<DWORD>(utf16UserName.size());
 
     if (GetUserNameW(&utf16UserName[0], &utf16UserNameBufferLen) == TRUE)
     {
         SID_NAME_USE peUse;
-        wchar_t sid[1024];
-        DWORD sidLen = std::extent_v<decltype(sid)>;
-        wchar_t utf16AccountName[2048];
-        auto utf16AccountNameBufferLen = static_cast<DWORD>(std::extent_v<decltype(utf16UserName)>);
-        if (LookupAccountNameW(nullptr, utf16UserName, sid, &sidLen, &utf16AccountName[0], &utf16AccountNameBufferLen, &peUse) == TRUE)
+        std::array<wchar_t, 1024> sid{};
+        DWORD sidLen = static_cast<DWORD>(sid.size());
+        std::array<wchar_t, 2048> utf16AccountName{};
+        auto utf16AccountNameBufferLen = static_cast<DWORD>(utf16UserName.size());
+        if (LookupAccountNameW(nullptr, &utf16UserName[0], &sid[0], &sidLen, &utf16AccountName[0], &utf16AccountNameBufferLen, &peUse) == TRUE)
         {
-            auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16AccountName[0], -1, destStr, destStrBufferLen, nullptr, nullptr) - 1;
+            const auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16AccountName[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
             if (utf8UserNameLen == -1)
             {
                 return {};
@@ -280,12 +280,12 @@ std::optional<int32_t> Environment::GetUserDomainName(char* destStr, int32_t des
     return {};
 }
 
-std::optional<int32_t> Environment::GetUserDomainName(const gsl::span<char>& destStr)
+std::optional<int32_t> Environment::GetUserDomainName(const std::span<char8_t>& destStr)
 {
     return Environment::GetUserDomainName(&destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
-DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destStrBufferLen, int32_t* destStrLen)
+DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char8_t* destStr, int32_t destStrBufferLen, int32_t* destStrLen)
 {
     HANDLE threadHandle = GetCurrentThread();
     HANDLE processHandle = GetCurrentProcess();
@@ -325,29 +325,29 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destS
     void* baseModuleAddress = nullptr;
     for (auto iter = moduleHandles.rbegin(); iter != moduleHandles.rend(); ++iter)
     {
-        HMODULE moduleHandle = *iter;
+        const HMODULE moduleHandle = *iter;
         MODULEINFO moduleInfo;
         GetModuleInformation(processHandle, moduleHandle, &moduleInfo, sizeof(moduleInfo));
 
-        std::array<char, 4096> imageName;
-        GetModuleFileNameExA(processHandle, moduleHandle, &imageName[0], sizeof(imageName));
-        std::array<char, 4096> moduleName;
-        GetModuleBaseNameA(processHandle, moduleHandle, &moduleName[0], sizeof(moduleName));
+        std::array<char8_t, 4096> imageName{};
+        GetModuleFileNameExA(processHandle, moduleHandle, reinterpret_cast<char*>(&imageName[0]), sizeof(imageName));
+        std::array<char8_t, 4096> moduleName{};
+        GetModuleBaseNameA(processHandle, moduleHandle, reinterpret_cast<char*>(&moduleName[0]), sizeof(moduleName));
 
-        SymLoadModule64(processHandle, 0, &imageName[0], &moduleName[0], reinterpret_cast<DWORD64>(moduleInfo.lpBaseOfDll), moduleInfo.SizeOfImage);
+        SymLoadModule64(processHandle, 0, reinterpret_cast<char*>(&imageName[0]), reinterpret_cast<char*>(&moduleName[0]), reinterpret_cast<DWORD64>(moduleInfo.lpBaseOfDll), moduleInfo.SizeOfImage);
 
         baseModuleAddress = moduleInfo.lpBaseOfDll;
     }
 
-    PIMAGE_NT_HEADERS image = ImageNtHeader(baseModuleAddress);
-    DWORD imageType = image->FileHeader.Machine;
+    const PIMAGE_NT_HEADERS image = ImageNtHeader(baseModuleAddress);
+    const DWORD imageType = image->FileHeader.Machine;
 
     IMAGEHLP_LINE64 line {};
     line.SizeOfStruct = sizeof(line);
     
     DWORD64 displacement = 0;
     DWORD offsetFromSymbol = 0;
-    std::array<char, 1024> undecoratedName;
+    std::array<char8_t, 1024> undecoratedName{};
 
     *destStrLen = 0;
 
@@ -356,13 +356,13 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destS
         if (frame.AddrPC.Offset != 0)
         {
             std::array<std::byte, sizeof(IMAGEHLP_SYMBOL64) + 1024> symBytes {};
-            IMAGEHLP_SYMBOL64* sym = reinterpret_cast<IMAGEHLP_SYMBOL64*>(&symBytes[0]);
+            auto* sym = reinterpret_cast<IMAGEHLP_SYMBOL64*>(&symBytes[0]);
             sym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
             sym->MaxNameLength = static_cast<DWORD>(undecoratedName.size());
             SymGetSymFromAddr64(processHandle, frame.AddrPC.Offset, &displacement, sym);
 
             // Get the undecorated name of function
-            if (UnDecorateSymbolName(sym->Name, &undecoratedName[0], sym->MaxNameLength, UNDNAME_COMPLETE) == FALSE)
+            if (UnDecorateSymbolName(sym->Name, reinterpret_cast<char*>(&undecoratedName[0]), sym->MaxNameLength, UNDNAME_COMPLETE) == FALSE)
             {
                 continue;
             }
@@ -370,7 +370,7 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destS
             // Get the file name and line
             SymGetLineFromAddr64(processHandle, frame.AddrPC.Offset, &offsetFromSymbol, &line);
 
-            *destStrLen += sprintf_s(destStr + *destStrLen, static_cast<size_t>(destStrBufferLen) - *destStrLen, "   at %s in %s:line %d\n", &undecoratedName[0], line.FileName, line.LineNumber);
+            *destStrLen += sprintf_s(reinterpret_cast<char*>(destStr) + *destStrLen, static_cast<size_t>(destStrBufferLen) - *destStrLen, "   at %s in %s:line %d\n", reinterpret_cast<const char*>(&undecoratedName[0]), line.FileName, line.LineNumber);
         }
 
         if (StackWalk64(imageType, processHandle, threadHandle, &frame, context, nullptr, SymFunctionTableAccess64, SymGetModuleBase64, nullptr) == FALSE)
@@ -384,7 +384,7 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destS
     return EXCEPTION_EXECUTE_HANDLER;
 }
 
-int32_t Environment::GetStackTrace(char* destStr, int32_t destStrBufferLen)
+int32_t Environment::GetStackTrace(char8_t* destStr, int32_t destStrBufferLen)
 {
     int32_t destStrLen = 0;
     __try { TGON_THROW_SEH_EXCEPTION(); }
@@ -398,8 +398,8 @@ bool Environment::GetUserInteractive()
     static HWINSTA cachedWindowStationHandle = 0;
     static bool isUserNonInteractive = false;
 
-    auto windowStationHandle = GetProcessWindowStation();
-    if (windowStationHandle != 0 && windowStationHandle != cachedWindowStationHandle)
+    const auto windowStationHandle = GetProcessWindowStation();
+    if (windowStationHandle != nullptr && windowStationHandle != cachedWindowStationHandle)
     {
         USEROBJECTFLAGS flags;
         DWORD needLength;

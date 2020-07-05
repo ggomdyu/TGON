@@ -2,8 +2,6 @@
 
 #include <string>
 
-#include "Core/TypeTraits.h"
-
 #include "Hash.h"
 #include "FixedString.h"
 
@@ -19,83 +17,80 @@ namespace detail
 template <typename>
 struct IsBasicStringHash : std::false_type {};
 
-template <typename _StringType>
-struct IsBasicStringHash<BasicStringHash<_StringType>> : std::true_type {};
+template <typename _String>
+struct IsBasicStringHash<BasicStringHash<_String>> : std::true_type {};
 
 }
 
 template <typename _Type>
-constexpr bool IsBasicStringHash = detail::IsBasicStringHash<_Type>::value;
+concept IsBasicStringHash = detail::IsBasicStringHash<_Type>::value;
 
-template <typename _StringType>
+template <typename _String>
 class BasicStringHash
 {
 /**@section Type */
 public:
-    using StringType = std::conditional_t<IsCharPointer<_StringType>, std::string_view, _StringType>;
-    using ValueType = RemoveCvref<decltype(_StringType()[0])>;
-    using Iterator = ValueType*;
-    using ConstIterator = const ValueType*;
-    using ReverseIterator = std::reverse_iterator<Iterator>;
-    using ConstReverseIterator = std::reverse_iterator<ConstIterator>;
+    using ValueType = std::remove_cvref_t<decltype(_String()[0])>;
+    using StringType = std::conditional_t<IsCharPointer<_String>, std::basic_string_view<ValueType>, _String>;
 
 /**@section Constructor */
 public:
     constexpr BasicStringHash() noexcept = default;
-    constexpr BasicStringHash(const BasicStringHash& str) noexcept;
-    constexpr BasicStringHash(BasicStringHash&& str) noexcept;
-    template <typename _StringType2, typename std::enable_if_t<IsBasicStringHash<std::remove_reference_t<_StringType2>>>* = nullptr>
-    constexpr BasicStringHash(const _StringType2& str) noexcept;
-    template <typename _StringType2, typename std::enable_if_t<!IsBasicStringHash<std::remove_reference_t<_StringType2>>>* = nullptr>
-    constexpr BasicStringHash(const _StringType2& str) noexcept;
+    constexpr BasicStringHash(const BasicStringHash& str) = default;
+    constexpr BasicStringHash(BasicStringHash&& str) noexcept = default;
+    template <typename _String2> requires IsBasicStringHash<std::remove_reference_t<_String2>>
+    constexpr BasicStringHash(const _String2& str) noexcept;
+    template <typename _String2> requires (IsBasicStringHash<std::remove_reference_t<_String2>> == false)
+    constexpr BasicStringHash(const _String2& str) noexcept;
+
+/**@section Constructor */
+public:
+    ~BasicStringHash() = default;
 
 /**@section Operator */
 public:
-    BasicStringHash& operator=(const BasicStringHash& rhs) noexcept;
-    BasicStringHash& operator=(BasicStringHash&& rhs) noexcept;
-    template <typename _StringType2>
-    BasicStringHash& operator=(const _StringType2& rhs) noexcept;
+    BasicStringHash& operator=(const BasicStringHash& rhs) = delete;
+    BasicStringHash& operator=(BasicStringHash&& rhs) noexcept = default;
+    template <typename _String2>
+    BasicStringHash& operator=(const _String2& rhs) noexcept;
     constexpr ValueType& operator[](int32_t index) noexcept;
     constexpr ValueType operator[](int32_t index) const noexcept;
-    template <typename _StringType2>
-    constexpr bool operator==(const BasicStringHash<_StringType2>& rhs) const noexcept;
+    template <typename _String2>
+    constexpr bool operator==(const BasicStringHash<_String2>& rhs) const noexcept;
     constexpr bool operator==(const ValueType* rhs) const noexcept;
-    template <typename _StringType2>
-    constexpr bool operator!=(const BasicStringHash<_StringType2>& rhs) const noexcept;
+    template <typename _String2>
+    constexpr bool operator!=(const BasicStringHash<_String2>& rhs) const noexcept;
     constexpr bool operator!=(const ValueType* rhs) const noexcept;
-    template <typename _StringType2>
-    constexpr bool operator<(const BasicStringHash<_StringType2>& rhs) const noexcept;
-    template <typename _StringType2>
-    constexpr bool operator<=(const BasicStringHash<_StringType2>& rhs) const noexcept;
-    template <typename _StringType2>
-    constexpr bool operator>(const BasicStringHash<_StringType2>& rhs) const noexcept;
-    template <typename _StringType2>
-    constexpr bool operator>=(const BasicStringHash<_StringType2>& rhs) const noexcept;
+    template <typename _String2>
+    constexpr bool operator<(const BasicStringHash<_String2>& rhs) const noexcept;
+    template <typename _String2>
+    constexpr bool operator<=(const BasicStringHash<_String2>& rhs) const noexcept;
+    template <typename _String2>
+    constexpr bool operator>(const BasicStringHash<_String2>& rhs) const noexcept;
+    template <typename _String2>
+    constexpr bool operator>=(const BasicStringHash<_String2>& rhs) const noexcept;
     operator std::basic_string<ValueType>() const noexcept;
+    constexpr operator const ValueType* () const noexcept;
     constexpr operator std::basic_string_view<ValueType>() const noexcept;
 
 /**@section Method */
 public:
-    int32_t CompareTo(const std::basic_string_view<ValueType>& str) noexcept;
-    int32_t IndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex = 0) const;
-    int32_t IndexOf(ValueType ch, int32_t startIndex = 0) const;
-    template <typename _PredicateType>
-    int32_t IndexOfAny(const _PredicateType& predicate, int32_t startIndex = 0) const;
-    int32_t LastIndexOf(const std::basic_string_view<ValueType>& str) const;
-    int32_t LastIndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex) const;
-    int32_t LastIndexOf(ValueType ch) const;
-    int32_t LastIndexOf(ValueType ch, int32_t startIndex) const;
-    template <typename _PredicateType>
-    int32_t LastIndexOfAny(const _PredicateType& predicate) const;
-    template <typename _PredicateType>
-    int32_t LastIndexOfAny(const _PredicateType& predicate, int32_t startIndex) const;
-    constexpr const ValueType* Data() const noexcept;
-    constexpr const int32_t Length() const noexcept;
-    constexpr Iterator Begin() noexcept;
-    constexpr Iterator End() noexcept;
-    constexpr ConstIterator CBegin() const noexcept;
-    constexpr ConstIterator CEnd() const noexcept;
-    constexpr size_t GetHashCode() const noexcept;
+    [[nodiscard]] int32_t CompareTo(const std::basic_string_view<ValueType>& str) noexcept;
+    [[nodiscard]] int32_t IndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex = 0) const;
+    [[nodiscard]] int32_t IndexOf(ValueType ch, int32_t startIndex = 0) const;
+    template <typename _Predicate>
+    [[nodiscard]] int32_t IndexOfAny(const _Predicate& predicate, int32_t startIndex = 0) const;
+    [[nodiscard]] int32_t LastIndexOf(const std::basic_string_view<ValueType>& str) const;
+    [[nodiscard]] int32_t LastIndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex) const;
+    [[nodiscard]] int32_t LastIndexOf(ValueType ch) const;
+    [[nodiscard]] int32_t LastIndexOf(ValueType ch, int32_t startIndex) const;
+    template <typename _Predicate>
+    [[nodiscard]] int32_t LastIndexOfAny(const _Predicate& predicate) const;
+    template <typename _Predicate>
+    [[nodiscard]] int32_t LastIndexOfAny(const _Predicate& predicate, int32_t startIndex) const;
+    [[nodiscard]] constexpr const ValueType* Data() const noexcept;
+    [[nodiscard]] constexpr int32_t Length() const noexcept;
+    [[nodiscard]] constexpr size_t GetHashCode() const noexcept;
 
 /**@section Variable */
 public:
@@ -103,62 +98,27 @@ public:
     size_t m_hashCode = 0;
 };
 
-template <typename _StringType>
-constexpr BasicStringHash<_StringType>::BasicStringHash(const BasicStringHash& str) noexcept :
-    m_str(str.m_str),
-    m_hashCode(str.m_hashCode)
-{
-}
-
-template <typename _StringType>
-constexpr BasicStringHash<_StringType>::BasicStringHash(BasicStringHash&& str) noexcept :
-    m_str(std::move(str.m_str)),
-    m_hashCode(str.m_hashCode)
-{
-    str.m_hashCode = 0;
-}
-
-template <typename _StringType>
-template <typename _StringType2, typename std::enable_if_t<IsBasicStringHash<std::remove_reference_t<_StringType2>>>*>
-constexpr BasicStringHash<_StringType>::BasicStringHash(const _StringType2& str) noexcept :
+template <typename _String>
+template <typename _String2> requires IsBasicStringHash<std::remove_reference_t<_String2>>
+constexpr BasicStringHash<_String>::BasicStringHash(const _String2& str) noexcept :
     m_str(str.Data(), str.Length()),
     m_hashCode(str.GetHashCode())
 {
 }
 
-template <typename _StringType>
-template <typename _StringType2, typename std::enable_if_t<!IsBasicStringHash<std::remove_reference_t<_StringType2>>>*>
-constexpr BasicStringHash<_StringType>::BasicStringHash(const _StringType2& str) noexcept :
+template <typename _String>
+template <typename _String2> requires (IsBasicStringHash<std::remove_reference_t<_String2>> == false)
+constexpr BasicStringHash<_String>::BasicStringHash(const _String2& str) noexcept :
     m_str(str),
     m_hashCode(std::hash<BasicStringHash>{}(this->Data()))
 {
 }
 
-template <typename _StringType>
-inline BasicStringHash<_StringType>& BasicStringHash<_StringType>::operator=(const BasicStringHash& rhs) noexcept
+template <typename _String>
+template <typename _String2>
+BasicStringHash<_String>& BasicStringHash<_String>::operator=(const _String2& rhs) noexcept
 {
-    m_str = rhs.m_str;
-    m_hashCode = rhs.m_hashCode;
-    
-    return *this;
-}
-
-template <typename _StringType>
-inline BasicStringHash<_StringType>& BasicStringHash<_StringType>::operator=(BasicStringHash&& rhs) noexcept
-{
-    m_str = std::move(rhs.m_str);
-    m_hashCode = rhs.m_hashCode;
-    
-    rhs.m_hashCode = 0;
-    
-    return *this;
-}
-
-template <typename _StringType>
-template <typename _StringType2>
-inline BasicStringHash<_StringType>& BasicStringHash<_StringType>::operator=(const _StringType2& rhs) noexcept
-{
-    if constexpr (IsBasicStringHash<std::remove_reference_t<_StringType2>>)
+    if constexpr (IsBasicStringHash<std::remove_reference_t<_String2>>)
     {
         m_str = rhs.m_str;
         m_hashCode = rhs.m_hashCode;
@@ -172,158 +132,164 @@ inline BasicStringHash<_StringType>& BasicStringHash<_StringType>::operator=(con
     return *this;
 }
 
-template <typename _StringType>
-constexpr typename BasicStringHash<_StringType>::ValueType& BasicStringHash<_StringType>::operator[](int32_t index) noexcept
+template <typename _String>
+constexpr typename BasicStringHash<_String>::ValueType& BasicStringHash<_String>::operator[](int32_t index) noexcept
 {
     return m_str[index];
 }
 
-template <typename _StringType>
-constexpr typename BasicStringHash<_StringType>::ValueType BasicStringHash<_StringType>::operator[](int32_t index) const noexcept
+template <typename _String>
+constexpr typename BasicStringHash<_String>::ValueType BasicStringHash<_String>::operator[](int32_t index) const noexcept
 {
     return m_str[index];
 }
 
-template <typename _StringType>
-template <typename _StringType2>
-constexpr bool BasicStringHash<_StringType>::operator==(const BasicStringHash<_StringType2>& rhs) const noexcept
+template <typename _String>
+template <typename _String2>
+constexpr bool BasicStringHash<_String>::operator==(const BasicStringHash<_String2>& rhs) const noexcept
 {
     return m_hashCode == rhs.GetHashCode() && m_str == rhs.m_str;
 }
 
-template <typename _StringType>
-constexpr bool BasicStringHash<_StringType>::operator==(const ValueType* rhs) const noexcept
+template <typename _String>
+constexpr bool BasicStringHash<_String>::operator==(const ValueType* rhs) const noexcept
 {
     return m_hashCode == std::hash<BasicStringHash>{}(rhs) && BasicStringTraits<ValueType>::Compare(this->Data(), this->Length(), rhs, BasicStringTraits<ValueType>::Length(rhs)) == 0;
 }
 
-template <typename _StringType>
-template <typename _StringType2>
-constexpr bool BasicStringHash<_StringType>::operator!=(const BasicStringHash<_StringType2>& rhs) const noexcept
+template <typename _String>
+template <typename _String2>
+constexpr bool BasicStringHash<_String>::operator!=(const BasicStringHash<_String2>& rhs) const noexcept
 {
     return !this->operator==(rhs);
 }
 
-template <typename _StringType>
-constexpr bool BasicStringHash<_StringType>::operator!=(const ValueType* rhs) const noexcept
+template <typename _String>
+constexpr bool BasicStringHash<_String>::operator!=(const ValueType* rhs) const noexcept
 {
     return !this->operator!=(rhs);
 }
 
-template <typename _StringType>
-template <typename _StringType2>
-constexpr bool BasicStringHash<_StringType>::operator<(const BasicStringHash<_StringType2>& rhs) const noexcept
+template <typename _String>
+template <typename _String2>
+constexpr bool BasicStringHash<_String>::operator<(const BasicStringHash<_String2>& rhs) const noexcept
 {
     return m_hashCode < rhs.GetHashCode();
 }
 
-template <typename _StringType>
-template <typename _StringType2>
-constexpr bool BasicStringHash<_StringType>::operator<=(const BasicStringHash<_StringType2>& rhs) const noexcept
+template <typename _String>
+template <typename _String2>
+constexpr bool BasicStringHash<_String>::operator<=(const BasicStringHash<_String2>& rhs) const noexcept
 {
     return m_hashCode <= rhs.GetHashCode();
 }
 
-template <typename _StringType>
-template <typename _StringType2>
-constexpr bool BasicStringHash<_StringType>::operator>(const BasicStringHash<_StringType2>& rhs) const noexcept
+template <typename _String>
+template <typename _String2>
+constexpr bool BasicStringHash<_String>::operator>(const BasicStringHash<_String2>& rhs) const noexcept
 {
     return m_hashCode > rhs.GetHashCode();
 }
 
-template <typename _StringType>
-template <typename _StringType2>
-constexpr bool BasicStringHash<_StringType>::operator>=(const BasicStringHash<_StringType2>& rhs) const noexcept
+template <typename _String>
+template <typename _String2>
+constexpr bool BasicStringHash<_String>::operator>=(const BasicStringHash<_String2>& rhs) const noexcept
 {
     return m_hashCode >= rhs.GetHashCode();
 }
 
-template<typename _StringType>
-inline BasicStringHash<_StringType>::operator std::basic_string<RemoveCvref<decltype(_StringType()[0])>>() const noexcept
+template<typename _String>
+BasicStringHash<_String>::operator std::basic_string<typename BasicStringHash<_String>::ValueType>() const noexcept
 {
     return {this->Data(), static_cast<size_t>(this->Length())};
 }
 
-template<typename _StringType>
-constexpr BasicStringHash<_StringType>::operator std::basic_string_view<RemoveCvref<decltype(_StringType()[0])>>() const noexcept
+template <typename _String>
+constexpr BasicStringHash<_String>::operator const typename BasicStringHash<_String>::ValueType*() const noexcept
+{
+    return this->Data();
+}
+
+template<typename _String>
+constexpr BasicStringHash<_String>::operator std::basic_string_view<typename BasicStringHash<_String>::ValueType>() const noexcept
 {
     return {this->Data(), static_cast<size_t>(this->Length())};
 }
 
-template <typename _StringType>
-constexpr size_t BasicStringHash<_StringType>::GetHashCode() const noexcept
+template <typename _String>
+constexpr size_t BasicStringHash<_String>::GetHashCode() const noexcept
 {
     return m_hashCode;
 }
 
-template <typename _StringType>
-inline int32_t BasicStringHash<_StringType>::IndexOf(ValueType ch, int32_t startIndex) const
+template <typename _String>
+int32_t BasicStringHash<_String>::IndexOf(ValueType ch, int32_t startIndex) const
 {
     ValueType str[] = {ch, 0};
     return BasicStringTraits<ValueType>::IndexOf(this->Data() + startIndex, this->Length() - startIndex, str, 1) + startIndex;
 
 }
 
-template <typename _StringType>
-inline int32_t BasicStringHash<_StringType>::CompareTo(const std::basic_string_view<ValueType>& str) noexcept
+template <typename _String>
+int32_t BasicStringHash<_String>::CompareTo(const std::basic_string_view<ValueType>& str) noexcept
 {
     return BasicStringTraits<ValueType>::Compare(this->Data(), this->Length(), str.data(), str.length());
 }
 
-template <typename _StringType>
-inline int32_t BasicStringHash<_StringType>::IndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex) const
+template <typename _String>
+int32_t BasicStringHash<_String>::IndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex) const
 {
     return BasicStringTraits<ValueType>::IndexOf(this->Data() + startIndex, this->Length() - startIndex, str.data(), str.length()) + startIndex;
 }
 
-template <typename _StringType>
-template <typename _PredicateType>
-inline int32_t BasicStringHash<_StringType>::IndexOfAny(const _PredicateType& predicate, int32_t startIndex) const
+template <typename _String>
+template <typename _Predicate>
+int32_t BasicStringHash<_String>::IndexOfAny(const _Predicate& predicate, int32_t startIndex) const
 {
     return BasicStringTraits<ValueType>::IndexOfAny(this->Data() + startIndex, this->Length() - startIndex, predicate) + startIndex;
 }
 
-template <typename _StringType>
-inline int32_t BasicStringHash<_StringType>::LastIndexOf(ValueType ch, int32_t startIndex) const
+template <typename _String>
+int32_t BasicStringHash<_String>::LastIndexOf(ValueType ch, int32_t startIndex) const
 {
-    ValueType str[] = {ch, '\0'};
+    ValueType str[] = {ch, ValueType(0)};
     return BasicStringTraits<ValueType>::LastIndexOf(this->Data(), startIndex + 1, str, 1);
 }
 
-template <typename _StringType>
-inline int32_t BasicStringHash<_StringType>::LastIndexOf(const std::basic_string_view<ValueType>& str) const
+template <typename _String>
+int32_t BasicStringHash<_String>::LastIndexOf(const std::basic_string_view<ValueType>& str) const
 {
     return BasicStringTraits<ValueType>::LastIndexOf(this->Data(), this->Length(), str, str.length());
 }
 
-template <typename _StringType>
-inline int32_t BasicStringHash<_StringType>::LastIndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex) const
+template <typename _String>
+int32_t BasicStringHash<_String>::LastIndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex) const
 {
     return BasicStringTraits<ValueType>::LastIndexOf(this->Data(), startIndex, str, str.length());
 }
 
-template <typename _StringType>
-inline int32_t BasicStringHash<_StringType>::LastIndexOf(ValueType ch) const
+template <typename _String>
+int32_t BasicStringHash<_String>::LastIndexOf(ValueType ch) const
 {
     return BasicStringTraits<ValueType>::LastIndexOf(this->Data(), this->Length(), &ch, 1);
 }
 
-template <typename _StringType>
-template <typename _PredicateType>
-inline int32_t BasicStringHash<_StringType>::LastIndexOfAny(const _PredicateType& predicate) const
+template <typename _String>
+template <typename _Predicate>
+int32_t BasicStringHash<_String>::LastIndexOfAny(const _Predicate& predicate) const
 {
     return BasicStringTraits<ValueType>::LastIndexOfAny(this->Data(), this->Length(), predicate);
 }
 
-template <typename _StringType>
-template <typename _PredicateType>
-inline int32_t BasicStringHash<_StringType>::LastIndexOfAny(const _PredicateType& predicate, int32_t startIndex) const
+template <typename _String>
+template <typename _Predicate>
+int32_t BasicStringHash<_String>::LastIndexOfAny(const _Predicate& predicate, int32_t startIndex) const
 {
     return BasicStringTraits<ValueType>::LastIndexOfAny(this->Data(), startIndex, predicate);
 }
 
-template <typename _StringType>
-constexpr const typename BasicStringHash<_StringType>::ValueType* BasicStringHash<_StringType>::Data() const noexcept
+template <typename _String>
+constexpr const typename BasicStringHash<_String>::ValueType* BasicStringHash<_String>::Data() const noexcept
 {
     if constexpr (IsBasicString<StringType> || IsBasicStringView<StringType>)
     {
@@ -335,8 +301,8 @@ constexpr const typename BasicStringHash<_StringType>::ValueType* BasicStringHas
     }
 }
 
-template <typename _StringType>
-constexpr const int32_t BasicStringHash<_StringType>::Length() const noexcept
+template <typename _String>
+constexpr int32_t BasicStringHash<_String>::Length() const noexcept
 {
     if constexpr (IsBasicString<StringType> || IsBasicStringView<StringType>)
     {
@@ -346,30 +312,6 @@ constexpr const int32_t BasicStringHash<_StringType>::Length() const noexcept
     {
         return static_cast<int32_t>(m_str.Length());
     }
-}
-
-template <typename _StringType>
-constexpr typename BasicStringHash<_StringType>::Iterator BasicStringHash<_StringType>::Begin() noexcept
-{
-    return &this->Data()[0];
-}
-
-template <typename _StringType>
-constexpr typename BasicStringHash<_StringType>::Iterator BasicStringHash<_StringType>::End() noexcept
-{
-    return &this->Data()[0] + this->Length();
-}
-
-template <typename _StringType>
-constexpr typename BasicStringHash<_StringType>::ConstIterator BasicStringHash<_StringType>::CBegin() const noexcept
-{
-    return this->Begin();
-}
-
-template <typename _StringType>
-constexpr typename BasicStringHash<_StringType>::ConstIterator BasicStringHash<_StringType>::CEnd() const noexcept
-{
-    return this->End();
 }
 
 using StringHash = BasicStringHash<std::string>;
@@ -386,19 +328,19 @@ using FixedString2048Hash = BasicStringHash<FixedString2048>;
 using FixedString4096Hash = BasicStringHash<FixedString4096>;
 using FixedString8192Hash = BasicStringHash<FixedString8192>;
     
-using WStringHash = BasicStringHash<std::wstring>;
-using WStringViewHash = BasicStringHash<std::wstring_view>;
-using WFixedString8Hash = BasicStringHash<WFixedString8>;
-using WFixedString16Hash = BasicStringHash<WFixedString16>;
-using WFixedString32Hash = BasicStringHash<WFixedString32>;
-using WFixedString64Hash = BasicStringHash<WFixedString64>;
-using WFixedString128Hash = BasicStringHash<WFixedString128>;
-using WFixedString256Hash = BasicStringHash<WFixedString256>;
-using WFixedString512Hash = BasicStringHash<WFixedString512>;
-using WFixedString1024Hash = BasicStringHash<WFixedString1024>;
-using WFixedString2048Hash = BasicStringHash<WFixedString2048>;
-using WFixedString4096Hash = BasicStringHash<WFixedString4096>;
-using WFixedString8192Hash = BasicStringHash<WFixedString8192>;
+using U8StringHash = BasicStringHash<std::u8string>;
+using U8StringViewHash = BasicStringHash<std::u8string_view>;
+using U8FixedString8Hash = BasicStringHash<U8FixedString8>;
+using U8FixedString16Hash = BasicStringHash<U8FixedString16>;
+using U8FixedString32Hash = BasicStringHash<U8FixedString32>;
+using U8FixedString64Hash = BasicStringHash<U8FixedString64>;
+using U8FixedString128Hash = BasicStringHash<U8FixedString128>;
+using U8FixedString256Hash = BasicStringHash<U8FixedString256>;
+using U8FixedString512Hash = BasicStringHash<U8FixedString512>;
+using U8FixedString1024Hash = BasicStringHash<U8FixedString1024>;
+using U8FixedString2048Hash = BasicStringHash<U8FixedString2048>;
+using U8FixedString4096Hash = BasicStringHash<U8FixedString4096>;
+using U8FixedString8192Hash = BasicStringHash<U8FixedString8192>;
 
 using U16StringHash = BasicStringHash<std::u16string>;
 using U16StringViewHash = BasicStringHash<std::u16string_view>;
@@ -433,12 +375,12 @@ using U32FixedString8192Hash = BasicStringHash<U32FixedString8192>;
 namespace std
 {
 
-template <typename _StringType>
-struct hash<tg::BasicStringHash<_StringType>>
+template <typename _String>
+struct hash<tg::BasicStringHash<_String>>
 {
 /* @section Method */
 public:
-    auto operator()(const tg::BasicStringHash<_StringType>& rhs) const noexcept
+    auto operator()(const tg::BasicStringHash<_String>& rhs) const noexcept
     {
         return rhs.GetHashCode();
     }

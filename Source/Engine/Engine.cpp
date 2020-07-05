@@ -5,50 +5,41 @@
 
 #include "Engine.h"
 #include "AssetModule.h"
-#include "AudioModule.h"
-#include "TimeModule.h"
+#include "Input.h"
+#include "Time.h"
 #include "TimerModule.h"
 #include "TaskModule.h"
-#include "InputModule.h"
-#include "UIRendererModule.h"
+#include "Input.h"
+#include "Audio.h"
 #include "SceneModule.h"
 
 namespace tg
 {
 
-Engine::Engine(const EngineConfig& engineConfig) noexcept :
+Engine::Engine(const EngineConfiguration& engineConfig) noexcept :
     m_engineConfig(engineConfig)
 {
 }
 
 Engine::~Engine()
 {
-    this->Destroy();
+    this->RemoveAllModule();
 }
 
 void Engine::Initialize()
 {
     this->AddModule<TaskModule>();
     this->AddModule<AssetModule>();
-    this->AddModule<AudioModule>();
-    this->AddModule<TimeModule>();
+    this->AddModule<Audio>();
+    this->AddModule<Time>();
     this->AddModule<TimerModule>();
-    this->AddModule<InputModule>(m_engineConfig.inputMode);
-
-    auto graphics = std::make_shared<Graphics>(Application::GetInstance().GetRootWindow(), m_engineConfig.videoMode);
-    this->AddModule<UIRendererModule>(graphics);
-
-    this->AddModule<SceneModule>();
-}
-
-void Engine::Destroy()
-{
-    this->RemoveAllModule();
+    //this->AddModule<Input>s(m_engineConfig.inputMode);
+    this->AddModule<SceneManager>();
 }
 
 void Engine::Update()
 {
-    for (auto& module : m_moduleCache)
+    for (auto& module : m_modules)
     {
         if (module != nullptr)
         {
@@ -61,23 +52,13 @@ void Engine::Update()
 
 void Engine::RemoveAllModule()
 {
-    for (auto iter = m_moduleCache.rbegin(); iter != m_moduleCache.rend(); ++iter)
+    while (m_modules.empty() == false)
     {
-        if (*iter == nullptr)
-        {
-            continue;
-        }
-
-        (*iter)->Destroy();
-    }
-
-    while (m_moduleCache.empty() == false)
-    {
-        m_moduleCache.pop_back();
+        m_modules.pop_back();
     }
 }
 
-const EngineConfig& Engine::GetEngineConfig() const noexcept
+const EngineConfiguration& Engine::GetEngineConfiguration() const noexcept
 {
     return m_engineConfig;
 }

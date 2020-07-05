@@ -16,7 +16,7 @@ namespace tg
 
 std::unordered_map<int32_t, Encoding> Encoding::m_encodingTable;
 
-Encoding::Encoding(const char* codePageName) :
+Encoding::Encoding(const char8_t* codePageName) :
     Encoding(CreateUConverter(codePageName))
 {
 }
@@ -28,7 +28,7 @@ Encoding::Encoding(int32_t codePage) :
 
 Encoding::Encoding(UConverter* converter) noexcept :
     m_converter(converter),
-    m_encodingName(m_converter->sharedData->staticData->name)
+    m_encodingName(reinterpret_cast<const char8_t*>(m_converter->sharedData->staticData->name))
 {
 }
 
@@ -51,25 +51,25 @@ bool Encoding::operator!=(const Encoding& rhs) const noexcept
     return !operator==(rhs);
 }
 
-const Encoding& Encoding::GetEncoding(int32_t codePage)
+const Encoding* Encoding::GetEncoding(int32_t codePage)
 {
-    constexpr int32_t IBM_UTF8_CCSID = 1208;
-    constexpr int32_t IBM_UTF16LE_CCSID = 1202;
-    constexpr int32_t IBM_UTF16BE_CCSID = 1200;
-    constexpr int32_t IBM_UTF32LE_CCSID = 1236;
+    constexpr auto IBM_UTF8_CCSID = 1208;
+    constexpr auto IBM_UTF16LE_CCSID = 1202;
+    constexpr auto IBM_UTF16BE_CCSID = 1200;
+    constexpr auto IBM_UTF32LE_CCSID = 1236;
     switch (codePage)
     {
     case IBM_UTF8_CCSID:
-        return UTF8();
+        return &UTF8();
 
     case IBM_UTF16LE_CCSID:
-        return Unicode();
+        return &Unicode();
 
     case IBM_UTF16BE_CCSID:
-        return BigEndianUnicode();
+        return &BigEndianUnicode();
 
     case IBM_UTF32LE_CCSID:
-        return UTF32();
+        return &UTF32();
     }
 
     auto iter = m_encodingTable.find(codePage);
@@ -78,18 +78,15 @@ const Encoding& Encoding::GetEncoding(int32_t codePage)
         iter = m_encodingTable.try_emplace(iter, codePage, codePage);
     }
 
-    return iter->second;
+    return &iter->second;
 }
 
-const Encoding& Encoding::GetEncoding(const char* codePageName) noexcept(false)
+const Encoding* Encoding::GetEncoding(const char8_t* codePageName)
 {
-    UConverterLoadArgs converterLoadArgs {};
-    converterLoadArgs.name = codePageName;
-
-    auto converterSharedData = getAlgorithmicTypeFromName(codePageName);
+    const auto converterSharedData = getAlgorithmicTypeFromName(reinterpret_cast<const char*>(codePageName));
     if (converterSharedData == nullptr)
     {
-        throw std::runtime_error("Can't found the code page name.");
+        return nullptr;
     }
 
     return GetEncoding(converterSharedData->staticData->codepage);
@@ -142,7 +139,7 @@ int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncod
     return encodedStrBytes;
 }
 
-int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const gsl::span<std::byte>& srcBytes, const gsl::span<std::byte>& destBytes)
+int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::span<std::byte>& srcBytes, const std::span<std::byte>& destBytes)
 {
     return Convert(srcEncoding, destEncoding, &srcBytes[0], static_cast<int32_t>(srcBytes.size()), &destBytes[0], static_cast<int32_t>(destBytes.size()));
 }
@@ -173,7 +170,7 @@ std::vector<char32_t> Encoding::GetChars(const std::byte* bytes, int32_t count) 
     return ret;
 }
 
-std::vector<char32_t> Encoding::GetChars(const gsl::span<std::byte>& bytes) const
+std::vector<char32_t> Encoding::GetChars(const std::span<std::byte>& bytes) const
 {
     return GetChars(&bytes[0], static_cast<int32_t>(bytes.size()));
 }
@@ -204,12 +201,12 @@ int32_t Encoding::GetCharCount(const std::byte* bytes, int32_t count) const
     return ret;
 }
 
-int32_t Encoding::GetCharCount(const gsl::span<std::byte>& bytes) const
+int32_t Encoding::GetCharCount(const std::span<std::byte>& bytes) const
 {
     return GetCharCount(&bytes[0], static_cast<int32_t>(bytes.size()));
 }
 
-const std::string_view& Encoding::GetEncodingName() const noexcept
+const std::u8string_view& Encoding::GetEncodingName() const noexcept
 {
     return m_encodingName;
 }
@@ -226,25 +223,25 @@ size_t Encoding::GetHashCode() const noexcept
 
 const Encoding& Encoding::UTF8()
 {
-    static Encoding encoding("UTF8");
+    static Encoding encoding(u8"UTF8");
     return encoding;
 }
 
 const Encoding& Encoding::Unicode()
 {
-    static Encoding encoding("UTF16LE");
+    static Encoding encoding(u8"UTF16LE");
     return encoding;
 }
 
 const Encoding& Encoding::BigEndianUnicode()
 {
-    static Encoding encoding("UTF16BE");
+    static Encoding encoding(u8"UTF16BE");
     return encoding;
 }
 
 const Encoding& Encoding::UTF32()
 {
-    static Encoding encoding("UTF32");
+    static Encoding encoding(u8"UTF32");
     return encoding;
 }
 
@@ -253,10 +250,10 @@ bool Encoding::IsSingleByte() const noexcept
     return this->GetMinCharByte() == 1 && this->GetMaxCharByte() == 1;
 }
 
-UConverter* Encoding::CreateUConverter(const char* codePageName)
+UConverter* Encoding::CreateUConverter(const char8_t* codePageName)
 {
     UErrorCode status = U_ZERO_ERROR;
-    UConverter* converter = ucnv_open(codePageName, &status);
+    UConverter* converter = ucnv_open(reinterpret_cast<const char*>(codePageName), &status);
     if (U_FAILURE(status))
     {
         return nullptr;

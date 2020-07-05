@@ -1,14 +1,10 @@
 #pragma once
 
 #include <cstdint>
-#include <cstdio>
-#include <gsl/span>
-
-#if _MSC_VER
-#   define TGON_SPRINTF sprintf_s
-#else
-#   define TGON_SPRINTF snprintf
-#endif
+#include <span>
+#include <array>
+#include <string>
+#include <fmt/format.h>
 
 namespace tg
 {
@@ -23,15 +19,15 @@ public:
 
 /**@section Operator */
 public:
-    constexpr const Color4b operator+(const Color4b& rhs) const noexcept;
-    constexpr const Color4b operator-(const Color4b& rhs) const noexcept;
-    constexpr const Color4b operator*(const Color4b& rhs) const noexcept;
+    constexpr Color4b operator+(const Color4b& rhs) const noexcept;
+    constexpr Color4b operator-(const Color4b& rhs) const noexcept;
+    constexpr Color4b operator*(const Color4b& rhs) const noexcept;
     template <typename _ValueType>
-    constexpr const Color4b operator*(const _ValueType& rhs) const noexcept;
+    constexpr Color4b operator*(const _ValueType& rhs) const noexcept;
     template <typename _ValueType>
-    friend constexpr const Color4b operator*(const _ValueType& lhs, const Color4b& rhs) noexcept;
+    friend constexpr Color4b operator*(const _ValueType& lhs, const Color4b& rhs) noexcept;
     template <typename _ValueType>
-    constexpr const Color4b operator/(const _ValueType& rhs) const noexcept;
+    constexpr Color4b operator/(const _ValueType& rhs) const noexcept;
     Color4b& operator+=(const Color4b& rhs) noexcept;
     Color4b& operator-=(const Color4b& rhs) noexcept;
     Color4b& operator*=(const Color4b& rhs) noexcept;
@@ -46,10 +42,10 @@ public:
     
 /**@section Method */
 public:
-    int32_t ToString(const gsl::span<char>& destStr) const;
-    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
-    std::string ToString() const;
-    
+    int32_t ToString(const std::span<char8_t>& destStr) const;
+    int32_t ToString(char8_t* destStr, size_t destStrBufferLen) const;
+    [[nodiscard]] std::u8string ToString() const;
+
 /**@section Variable */
 public:
     union
@@ -72,35 +68,35 @@ constexpr Color4b::Color4b(uint32_t color) noexcept :
 {
 }
 
-constexpr const Color4b Color4b::operator+(const Color4b& rhs) const noexcept
+constexpr Color4b Color4b::operator+(const Color4b& rhs) const noexcept
 {
     return Color4b(r + rhs.r, g + rhs.g, b + rhs.b, a + rhs.a);
 }
 
-constexpr const Color4b Color4b::operator-(const Color4b& rhs) const noexcept
+constexpr Color4b Color4b::operator-(const Color4b& rhs) const noexcept
 {
     return Color4b(r - rhs.r, g - rhs.g, b - rhs.b, a - rhs.a);
 }
 
-constexpr const Color4b Color4b::operator*(const Color4b& rhs) const noexcept
+constexpr Color4b Color4b::operator*(const Color4b& rhs) const noexcept
 {
     return Color4b(r * rhs.r, g * rhs.g, b * rhs.b, a * rhs.a);
 }
     
 template <typename _ValueType>
-constexpr const Color4b Color4b::operator*(const _ValueType& rhs) const noexcept
+constexpr Color4b Color4b::operator*(const _ValueType& rhs) const noexcept
 {
     return Color4b(r * rhs, g * rhs, b * rhs, a * rhs);
 }
 
 template <typename _ValueType>
-constexpr const Color4b operator*(const _ValueType& lhs, const Color4b& rhs) noexcept
+constexpr Color4b operator*(const _ValueType& lhs, const Color4b& rhs) noexcept
 {
     return Color4b(lhs * rhs.r, lhs * rhs.g, lhs * rhs.b, lhs * rhs.a);
 }
 
 template <typename _ValueType>
-constexpr const Color4b Color4b::operator/(const _ValueType& rhs) const noexcept
+constexpr Color4b Color4b::operator/(const _ValueType& rhs) const noexcept
 {
     return Color4b(r / rhs, g / rhs, b / rhs, a / rhs);
 }
@@ -136,7 +132,7 @@ inline Color4b& Color4b::operator*=(const Color4b& rhs) noexcept
 }
 
 template <typename _ValueType>
-inline Color4b& Color4b::operator*=(const _ValueType& rhs) noexcept
+Color4b& Color4b::operator*=(const _ValueType& rhs) noexcept
 {
     r *= rhs;
     g *= rhs;
@@ -157,7 +153,7 @@ inline Color4b& Color4b::operator/=(const Color4b& rhs) noexcept
 }
 
 template <typename _ValueType>
-inline Color4b& Color4b::operator/=(const _ValueType& rhs) noexcept
+Color4b& Color4b::operator/=(const _ValueType& rhs) noexcept
 {
     r /= rhs;
     g /= rhs;
@@ -182,21 +178,24 @@ constexpr Color4b::operator uint32_t() const noexcept
     return color;
 }
 
-inline int32_t Color4b::ToString(const gsl::span<char>& destStr) const
+inline int32_t Color4b::ToString(const std::span<char8_t>& destStr) const
 {
     return this->ToString(&destStr[0], destStr.size());
 }
 
-inline int32_t Color4b::ToString(char* destStr, std::size_t destStrBufferLen) const
+inline std::u8string Color4b::ToString() const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%d %d %d %d", r, g, b, a);
+    std::array<char8_t, 1024> str{};
+    const int32_t strLen = this->ToString(str);
+
+    return {&str[0], static_cast<size_t>(strLen)};
 }
 
-inline std::string Color4b::ToString() const
+inline int32_t Color4b::ToString(char8_t* destStr, size_t destStrBufferLen) const
 {
-    std::array<char, 1024> str;
-    int32_t strLen = this->ToString(str);
-    return {&str[0], static_cast<size_t>(strLen)};
+    const auto destStrLen = fmt::format_to_n(destStr, sizeof(destStr[0]) * (destStrBufferLen - 1), "{} {} {} {}", r, g, b, a).size;
+    destStr[destStrLen] = u8'\0';
+    return static_cast<int32_t>(destStrLen);
 }
 
 struct Color3f
@@ -213,9 +212,9 @@ public:
 
 /**@section Method */
 public:
-    int32_t ToString(const gsl::span<char>& destStr) const;
-    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
-    std::string ToString() const;
+    int32_t ToString(const std::span<char8_t>& destStr) const;
+    int32_t ToString(char8_t* destStr, size_t destStrBufferLen) const;
+    [[nodiscard]] std::u8string ToString() const;
 
 /**@section Variable */
 public:
@@ -239,21 +238,24 @@ constexpr bool Color3f::operator!=(const Color3f& rhs) const noexcept
     return !this->operator==(rhs);
 }
 
-inline int32_t Color3f::ToString(const gsl::span<char>& destStr) const
+inline int32_t Color3f::ToString(const std::span<char8_t>& destStr) const
 {
     return this->ToString(&destStr[0], destStr.size());
 }
 
-inline int32_t Color3f::ToString(char* destStr, std::size_t destStrBufferLen) const
+inline std::u8string Color3f::ToString() const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f %f", r, g, b);
+    std::array<char8_t, 1024> str{};
+    const int32_t strLen = this->ToString(str);
+
+    return {&str[0], static_cast<size_t>(strLen)};
 }
 
-inline std::string Color3f::ToString() const
+inline int32_t Color3f::ToString(char8_t* destStr, size_t destStrBufferLen) const
 {
-    std::array<char, 1024> str;
-    int32_t strLen = this->ToString(str);
-    return {&str[0], static_cast<size_t>(strLen)};
+    const auto destStrLen = fmt::format_to_n(destStr, sizeof(destStr[0]) * (destStrBufferLen - 1), "{} {} {}", r, g, b).size;
+    destStr[destStrLen] = u8'\0';
+    return static_cast<int32_t>(destStrLen);
 }
 
 struct Color4f
@@ -270,9 +272,9 @@ public:
 
 /**@section Method */
 public:
-    int32_t ToString(const gsl::span<char>& destStr) const;
-    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
-    std::string ToString() const;
+    int32_t ToString(const std::span<char8_t>& destStr) const;
+    int32_t ToString(char8_t* destStr, size_t destStrBufferLen) const;
+    [[nodiscard]] std::u8string ToString() const;
 
 /**@section Variable */
 public:
@@ -297,23 +299,24 @@ constexpr bool Color4f::operator!=(const Color4f& rhs) const noexcept
     return !this->operator==(rhs);
 }
 
-inline int32_t Color4f::ToString(const gsl::span<char>& destStr) const
+inline int32_t Color4f::ToString(const std::span<char8_t>& destStr) const
 {
     return this->ToString(&destStr[0], destStr.size());
 }
 
-inline int32_t Color4f::ToString(char* destStr, std::size_t destStrBufferLen) const
+inline std::u8string Color4f::ToString() const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f %f %f", r, g, b, a);
-}
+    std::array<char8_t, 1024> str{};
+    const int32_t strLen = this->ToString(str);
 
-inline std::string Color4f::ToString() const
-{
-    std::array<char, 1024> str;
-    int32_t strLen = this->ToString(str);
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
+inline int32_t Color4f::ToString(char8_t* destStr, size_t destStrBufferLen) const
+{
+    const auto destStrLen = fmt::format_to_n(destStr, sizeof(destStr[0]) * (destStrBufferLen - 1), "{} {} {} {}", r, g, b, a).size;
+    destStr[destStrLen] = u8'\0';
+    return static_cast<int32_t>(destStrLen);
 }
 
-#undef TGON_SPRINTF
+}

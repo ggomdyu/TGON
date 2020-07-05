@@ -28,14 +28,6 @@ constexpr GLenum ConvertVertexFormatTypeToNative(VertexFormatType vertexFormatTy
     return nativeVertexFormatTypes[static_cast<int>(vertexFormatType)];
 }
 
-GLuint CreateVertexBufferHandle()
-{
-    GLuint vertexBufferHandle;
-    TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));
-
-    return vertexBufferHandle;
-}
-
 }
 
 OpenGLVertexBuffer::OpenGLVertexBuffer(GLuint vertexBufferHandle) noexcept :
@@ -56,6 +48,14 @@ OpenGLVertexBuffer& OpenGLVertexBuffer::operator=(OpenGLVertexBuffer&& rhs) noex
     return *this;
 }
 
+GLuint OpenGLVertexBuffer::CreateVertexBufferHandle()
+{
+    GLuint vertexBufferHandle;
+    TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));
+
+    return vertexBufferHandle;
+}
+
 GLuint OpenGLVertexBuffer::GetVertexBufferHandle() const noexcept
 {
     return m_vertexBufferHandle;
@@ -66,10 +66,16 @@ VertexBuffer::VertexBuffer() :
 {
 }
 
-VertexBuffer::VertexBuffer(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs) :
+VertexBuffer::VertexBuffer(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayouts) :
     OpenGLVertexBuffer(CreateVertexBufferHandle()),
-    m_vertexBufferLayoutDescs(vertexBufferLayoutDescs)
+    m_vertexBufferLayouts(vertexBufferLayouts)
 {
+}
+
+VertexBuffer::~VertexBuffer()
+{
+    TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_vertexBufferHandle));
+    m_vertexBufferHandle = 0;
 }
 
 void VertexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage)
@@ -80,16 +86,16 @@ void VertexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynam
 
 void VertexBuffer::SetLayoutDescriptor(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs)
 {
-    m_vertexBufferLayoutDescs = vertexBufferLayoutDescs;
+    m_vertexBufferLayouts = vertexBufferLayoutDescs;
 }
 
 void VertexBuffer::Use()
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle));
 
-    for (size_t i = 0; i < m_vertexBufferLayoutDescs.size(); ++i)
+    for (size_t i = 0; i < m_vertexBufferLayouts.size(); ++i)
     {
-        const auto& vertexBufferDesc = m_vertexBufferLayoutDescs[i];
+        const auto& vertexBufferDesc = m_vertexBufferLayouts[i];
 
         TGON_GL_ERROR_CHECK(glEnableVertexAttribArray(GLuint(i)));
         TGON_GL_ERROR_CHECK(glVertexAttribPointer(
@@ -105,18 +111,9 @@ void VertexBuffer::Use()
 
 void VertexBuffer::Unuse()
 {
-    for (size_t i = 0; i < m_vertexBufferLayoutDescs.size(); ++i)
+    for (size_t i = 0; i < m_vertexBufferLayouts.size(); ++i)
     {
         TGON_GL_ERROR_CHECK(glDisableVertexAttribArray(GLuint(i)));
-    }
-}
-
-void VertexBuffer::Destroy()
-{
-    if (m_vertexBufferHandle != 0)
-    {
-        TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_vertexBufferHandle));
-        m_vertexBufferHandle = 0;
     }
 }
 

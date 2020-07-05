@@ -5,13 +5,13 @@
 #include "Math/Vector2.h"
 
 #if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsWindow.h"
+#include "Windows/WindowsWindow.h"
 #elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSWindow.h"
+#include "MacOS/MacOSWindow.h"
 #elif TGON_PLATFORM_ANDROID
-#   include "Android/AndroidWindow.h"
+#include "Android/AndroidWindow.h"
 #elif TGON_PLATFORM_IOS
-#   include "IOS/IOSWindow.h"
+#include "IOS/IOSWindow.h"
 #endif
 
 #include "WindowStyle.h"
@@ -25,6 +25,7 @@ class Window final :
 /**@section Constructor */
 public:
     explicit Window(const WindowStyle& windowStyle);
+    Window(const Window&) = delete;
     Window(Window&&) noexcept = default;
 
 /**@section Destructor */
@@ -33,9 +34,10 @@ public:
 
 /**@section Operator */
 public:
+    Window& operator=(const Window& rhs) = delete;
+    Window& operator=(Window&& rhs) noexcept = default;
     bool operator==(const Window& rhs) const noexcept;
     bool operator!=(const Window& rhs) const noexcept;
-    Window& operator=(Window&& rhs) noexcept = default;
 
 /**@section Method */
 public:
@@ -50,24 +52,21 @@ public:
     void Flash();
     void SetPosition(int32_t x, int32_t y);
     void SetContentSize(int32_t width, int32_t height);
-    void SetTitle(const char* title);
+    void SetTitle(const char8_t* title);
     void SetTopMost(bool setTopMost);
     void SetTransparency(float transparency);
-    void GetPosition(int32_t* x, int32_t* y) const;
-    I32Vector2 GetPosition() const;
-    void GetWindowSize(int32_t* destWidth, int32_t* destHeight) const;
-    I32Extent2D GetWindowSize() const;
-    void GetClientSize(int32_t* width, int32_t* height) const;
-    I32Extent2D GetClientSize() const;
-    int32_t GetTitle(char* destStr, int32_t destStrBufferLen) const;
-    std::string GetTitle() const;
-    float GetTransparency() const;
-    void* GetNativeWindow() const;
-    bool HasCaption() const;
-    bool IsResizable() const;
-    bool IsMaximized() const;
-    bool IsMinimized() const;
-    bool IsTopMost() const;
+    [[nodiscard]] I32Vector2 GetPosition() const;
+    [[nodiscard]] I32Extent2D GetWindowSize() const;
+    [[nodiscard]] I32Extent2D GetClientSize() const;
+    int32_t GetTitle(char8_t* destStr, int32_t destStrBufferLen) const;
+    [[nodiscard]] std::u8string GetTitle() const;
+    [[nodiscard]] float GetTransparency() const;
+    [[nodiscard]] void* GetNativeWindow() const;
+    [[nodiscard]] bool HasCaption() const;
+    [[nodiscard]] bool IsResizable() const;
+    [[nodiscard]] bool IsMaximized() const;
+    [[nodiscard]] bool IsMinimized() const;
+    [[nodiscard]] bool IsTopMost() const;
 
 /**@section Event handler */
 public:

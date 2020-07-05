@@ -10,6 +10,9 @@
 
 #include "IO/File.h"
 #include "Core/Algorithm.h"
+#if TGON_USING_SIMD
+#include "Core/Simd.h"
+#endif
 
 #include "Image.h"
 
@@ -31,53 +34,138 @@ constexpr int32_t ConvertPixelFormatToChannelCount(PixelFormat pixelFormat)
     return channelCountTable[UnderlyingCast(pixelFormat)];
 }
 
+template <int32_t _BytesPerPixel>
+void FlipImageX(std::byte* imageData, int32_t width, int32_t height)
+{
+#if TGON_USING_SIMD
+#else
+    using ColorRef = struct { std::byte _[4]; }*;
+
+    auto frontRow = reinterpret_cast<ColorRef>(imageData);
+    auto backRow = &(reinterpret_cast<ColorRef>(imageData))[width - 1];
+
+    for (; frontRow < backRow; ++frontRow, --backRow)
+    {
+        for (int32_t col = 0; col < width * height; col += width)
+        {
+            std::swap(*(frontRow + col), *(backRow + col));
+        }
+    }
+#endif
 }
 
-Image::Image(std::unique_ptr<std::byte[]>&& imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
+template <int32_t _BytesPerPixel>
+void FlipImageXY(std::byte* imageData, int32_t width, int32_t height)
+{
+#if TGON_USING_SIMD
+#else
+    using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
+
+    auto* frontRow = reinterpret_cast<ColorRef>(imageData);
+    auto* backRow = &(reinterpret_cast<ColorRef>(imageData))[width * height - 1];
+
+    for (; frontRow < backRow; ++frontRow, --backRow)
+    {
+        std::swap(*frontRow, *backRow);
+    }
+#endif
+}
+
+void FlipImageY(std::byte* imageData, int32_t width, int32_t height, int32_t bytesPerPixel)
+{
+#if TGON_USING_SIMD
+#else
+    const size_t stride = width * bytesPerPixel;
+    const auto tempRowBuffer = std::make_unique<std::byte[]>(stride);
+
+    auto* frontRow = imageData;
+    auto* backRow = &imageData[(height - 1) * stride];
+
+    for (; frontRow < backRow; frontRow += stride, backRow -= stride)
+    {
+        std::copy_n(frontRow, stride, tempRowBuffer.get());
+        std::copy_n(backRow, stride, frontRow);
+        std::copy_n(tempRowBuffer.get(), stride, backRow);
+    }
+#endif
+}
+template <int32_t _BytesPerPixel>
+void RotateImageRight90Degrees(std::byte* imageData, int32_t width, int32_t height)
+{
+#if TGON_USING_SIMD
+#else
+    using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
+    const auto imageDataSize = static_cast<int64_t>(width) * height * _BytesPerPixel;
+    const auto tempBuffer = std::make_unique<std::byte[]>(imageDataSize);
+
+    auto* srcRow = reinterpret_cast<ColorRef>(imageData);
+    auto* destCol = &(reinterpret_cast<ColorRef>(tempBuffer.get()))[height - 1];
+
+    for (; srcRow < reinterpret_cast<ColorRef>(imageData) + width * height; srcRow += width, --destCol)
+    {
+        for (int32_t x = 0; x < width; ++x)
+        {
+            destCol[x * height] = srcRow[x];
+        }
+    }
+
+    std::copy_n(tempBuffer.get(), imageDataSize, imageData);
+#endif
+}
+
+template <int32_t _BytesPerPixel>
+void RotateImageLeft90Degrees(std::byte* imageData, int32_t width, int32_t height)
+{
+#if TGON_USING_SIMD
+#else
+    using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
+    const auto imageDataSize = static_cast<int64_t>(width) * height * _BytesPerPixel;
+    const auto tempBuffer = std::make_unique<std::byte[]>(imageDataSize);
+
+    auto* srcRow = reinterpret_cast<ColorRef>(imageData);
+    auto* destCol = &reinterpret_cast<ColorRef>(tempBuffer.get())[(width - 1) * height];
+
+    for (; srcRow < reinterpret_cast<ColorRef>(imageData) + width * height; srcRow += width, ++destCol)
+    {
+        for (int32_t x = 0; x < width; ++x)
+        {
+            destCol[-x * height] = srcRow[x];
+        }
+    }
+
+    std::copy_n(tempBuffer.get(), imageDataSize, imageData);
+#endif
+}
+
+}
+
+Image::Image(std::unique_ptr<std::byte[]> imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
     m_imageData(std::move(imageData)),
-    m_size(size),
-    m_pixelFormat(pixelFormat)
+    m_size(size)
 {
 }
 
-Image::Image(Image&& rhs) noexcept :
-    m_imageData(std::move(rhs.m_imageData)),
-    m_size(rhs.m_size),
-    m_pixelFormat(rhs.m_pixelFormat)
+bool Image::operator==(std::nullptr_t rhs) const noexcept
 {
+    return m_imageData == nullptr;
 }
 
-bool Image::operator==(const Image& rhs) const noexcept
+bool Image::operator!=(std::nullptr_t rhs) const noexcept
 {
-    return m_size == rhs.m_size && m_pixelFormat == rhs.m_pixelFormat && memcmp(&m_imageData[0], &rhs.m_imageData[0], m_size.width * m_size.height * ConvertPixelFormatToChannelCount(m_pixelFormat)) == 0;
+    return m_imageData != nullptr;
 }
 
-bool Image::operator!=(const Image& rhs) const noexcept
-{
-    return !this->operator==(rhs);
-}
-
-Image& Image::operator=(Image&& rhs) noexcept
-{
-    std::swap(m_imageData, rhs.m_imageData);
-
-    m_size = rhs.m_size;
-    m_pixelFormat = rhs.m_pixelFormat;
-
-    return *this;
-}
-
-std::byte& Image::operator[](size_t index) noexcept
+std::byte& Image::operator[](int32_t index) noexcept
 {
     return m_imageData[index];
 }
 
-std::byte Image::operator[](size_t index) const noexcept
+std::byte Image::operator[](int32_t index) const noexcept
 {
     return m_imageData[index];
 }
 
-std::optional<Image> Image::Create(const char* filePath)
+std::optional<Image> Image::FromFile(const char8_t* filePath)
 {
     auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
     if (fileData.has_value() == false)
@@ -85,13 +173,13 @@ std::optional<Image> Image::Create(const char* filePath)
         return {};
     }
 
-    return Create(*fileData);
+    return FromBytes(*fileData);
 }
 
-std::optional<Image> Image::Create(const gsl::span<const std::byte>& fileData)
+std::optional<Image> Image::FromBytes(const std::span<const std::byte>& bytes)
 {
     int width = 0, height = 0;
-    auto imageData = std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(&fileData[0]), static_cast<int>(fileData.size()), &width, &height, nullptr, STBI_rgb_alpha)));
+    auto imageData = std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(&bytes[0]), static_cast<int>(bytes.size()), &width, &height, nullptr, STBI_rgb_alpha)));
     if (imageData == nullptr)
     {
         return {};
@@ -110,39 +198,89 @@ const std::byte* Image::GetImageData() const noexcept
     return &m_imageData[0];
 }
 
+int32_t Image::GetWidth() const noexcept
+{
+    return m_size.width;
+}
+
+int32_t Image::GetHeight() const noexcept
+{
+    return m_size.height;
+}
+
 const I32Extent2D& Image::GetSize() const noexcept
 {
     return m_size;
 }
 
-int32_t Image::GetChannels() const noexcept
-{
-    return ConvertPixelFormatToChannelCount(m_pixelFormat);
-}
-
 PixelFormat Image::GetPixelFormat() const noexcept
 {
-    return m_pixelFormat;
+    return InternalPixelFormat;
 }
 
-bool Image::SaveAsPng(const char* saveFilePath) const
+bool Image::Save(const char8_t* filePath, ImageFormat format) const
 {
-    return stbi_write_png(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get(), m_size.width * 4) != 0;
+    switch (format)
+    {
+    case ImageFormat::Png:
+        return stbi_write_png(reinterpret_cast<const char*>(filePath), m_size.width, m_size.height, 4, m_imageData.get(), m_size.width * 4) != 0;
+
+    case ImageFormat::Jpeg:
+        return stbi_write_jpg(reinterpret_cast<const char*>(filePath), m_size.width, m_size.height, 4, m_imageData.get(), 100) != 0;
+
+    case ImageFormat::Bmp:
+        return stbi_write_bmp(reinterpret_cast<const char*>(filePath), m_size.width, m_size.height, 4, m_imageData.get()) != 0;
+
+    default:
+        return false;
+    }
 }
 
-bool Image::SaveAsJpeg(const char* saveFilePath, int32_t quality) const
+void Image::RotateFlip(RotateFlipType rotateFlipType)
 {
-    return stbi_write_jpg(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get(), quality) != 0;
-}
+    static_assert(InternalPixelFormat == PixelFormat::RGBA8888, "Image::RotateFlip only supports RGBA8888 format.");
 
-bool Image::SaveAsBmp(const char* saveFilePath) const
-{
-    return stbi_write_bmp(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get()) != 0;
-}
+    constexpr auto BytesPerPixel = ConvertPixelFormatToChannelCount(InternalPixelFormat);
 
-bool Image::SaveAsTga(const char* saveFilePath) const
-{
-    return stbi_write_tga(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get()) != 0;
+    switch (rotateFlipType)
+    {
+    case RotateFlipType::RotateNoneFlipNone:
+        break;
+
+    case RotateFlipType::Rotate90FlipNone:
+        RotateImageRight90Degrees<BytesPerPixel>(m_imageData.get(), m_size.width, m_size.height);
+        std::swap(m_size.width, m_size.height);
+        break;
+
+    case RotateFlipType::Rotate180FlipNone:
+        FlipImageXY<BytesPerPixel>(m_imageData.get(), m_size.width, m_size.height);
+        break;
+
+    case RotateFlipType::Rotate270FlipNone:
+        RotateImageLeft90Degrees<BytesPerPixel>(m_imageData.get(), m_size.width, m_size.height);
+        std::swap(m_size.width, m_size.height);
+        break;
+
+    case RotateFlipType::RotateNoneFlipX:
+        FlipImageX<BytesPerPixel>(m_imageData.get(), m_size.width, m_size.height);
+        break;
+
+    case RotateFlipType::Rotate90FlipX:
+        RotateImageRight90Degrees<BytesPerPixel>(m_imageData.get(), m_size.width, m_size.height);
+        FlipImageX<BytesPerPixel>(m_imageData.get(), m_size.width, m_size.height);
+        std::swap(m_size.width, m_size.height);
+        break;
+
+    case RotateFlipType::RotateNoneFlipY:
+        FlipImageY(m_imageData.get(), m_size.width, m_size.height, BytesPerPixel);
+        break;
+
+    case RotateFlipType::Rotate90FlipY:
+        RotateImageRight90Degrees<BytesPerPixel>(m_imageData.get(), m_size.width, m_size.height);
+        FlipImageY(m_imageData.get(), m_size.width, m_size.height, BytesPerPixel);
+        std::swap(m_size.width, m_size.height);
+        break;
+    }
 }
 
 }

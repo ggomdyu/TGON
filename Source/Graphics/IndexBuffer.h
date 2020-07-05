@@ -1,10 +1,9 @@
 #pragma once
 
-#include <initializer_list>
-#include <gsl/span>
+#include <span>
 
 #if TGON_GRAPHICS_OPENGL
-#   include "OpenGL/OpenGLIndexBuffer.h"
+#include "OpenGL/OpenGLIndexBuffer.h"
 #endif
 
 namespace tg
@@ -16,7 +15,8 @@ class IndexBuffer :
 /**@section Constructor */
 public:
     IndexBuffer();
-    IndexBuffer(IndexBuffer&& rhs) noexcept;
+    IndexBuffer(const IndexBuffer& rhs) = delete;
+    IndexBuffer(IndexBuffer&& rhs) noexcept = default;
 
 /**@section Destructor */
 public:
@@ -24,24 +24,22 @@ public:
     
 /**@section Operator */
 public:
-    IndexBuffer& operator=(IndexBuffer&& rhs);
+    IndexBuffer& operator=(const IndexBuffer& rhs) = delete;
+    IndexBuffer& operator=(IndexBuffer&& rhs) noexcept = default;
 
 /**@section Method */
 public:
     [[nodiscard]] PlatformIndexBuffer& GetPlatformDependency() noexcept;
     [[nodiscard]] const PlatformIndexBuffer& GetPlatformDependency() const noexcept;
     template <typename _Type>
-    void SetData(const gsl::span<_Type>& data, bool isDynamicUsage);
+    void SetData(const std::span<_Type>& data, bool isDynamicUsage);
     void SetData(const void* data, int32_t dataBytes, bool isDynamicUsage);
     void Use();
     void Unuse();
-
-private:
-    void Destroy();
 };
 
 template <typename _Type>
-inline void IndexBuffer::SetData(const gsl::span<_Type>& data, bool isDynamicUsage)
+inline void IndexBuffer::SetData(const std::span<_Type>& data, bool isDynamicUsage)
 {
     this->SetData(data.data(), data.size() * sizeof(_Type), isDynamicUsage);
 }

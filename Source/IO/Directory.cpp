@@ -10,9 +10,9 @@
 namespace tg
 {
 
-DirectoryInfo Directory::CreateDirectory(const std::string_view& path)
+DirectoryInfo Directory::CreateDirectory(const std::u8string_view& path)
 {
-    std::string fullPath = Path::GetFullPath(path);
+    std::u8string fullPath = Path::GetFullPath(path);
     if (fullPath.length() > 0 && Path::IsDirectorySeparator(fullPath.back()) == false)
     {
         fullPath += Path::DirectorySeparatorChar;
@@ -33,9 +33,9 @@ DirectoryInfo Directory::CreateDirectory(const std::string_view& path)
     return DirectoryInfo(fullPath, FullPathTag{});
 }
 
-DirectoryInfo Directory::GetParent(const std::string_view& path)
+DirectoryInfo Directory::GetParent(const std::u8string_view& path)
 {
-    FixedString8192 str(path);
+    U8FixedString8192 str(path);
     if (path.length() > 0)
     {
         if (Path::IsDirectorySeparator(str[str.Length() - 1]) == false)
@@ -45,17 +45,17 @@ DirectoryInfo Directory::GetParent(const std::string_view& path)
     }
     else
     {
-        return DirectoryInfo("", FullPathTag{});
+        return DirectoryInfo(u8"", FullPathTag{});
     }
     
-    str += "../";
+    str += u8"../";
     
     return DirectoryInfo(str);
 }
 
-std::string Directory::GetCurrentDirectory()
+std::u8string Directory::GetCurrentDirectory()
 {
-    std::array<char, 8192> str;
+    std::array<char8_t, 8192> str;
     auto strLen = GetCurrentDirectory(str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {
@@ -65,104 +65,104 @@ std::string Directory::GetCurrentDirectory()
     return {str.data(), static_cast<size_t>(*strLen)};
 }
 
-bool Directory::SetCreationTime(const char* path, const DateTime& creationTime)
+bool Directory::SetCreationTime(const char8_t* path, const DateTime& creationTime)
 {
     return File::SetCreationTime(path, creationTime);
 }
 
-bool Directory::SetCreationTimeUtc(const char* path, const DateTime& creationTimeUtc)
+bool Directory::SetCreationTimeUtc(const char8_t* path, const DateTime& creationTimeUtc)
 {
     return File::SetCreationTimeUtc(path, creationTimeUtc);
 }
 
-bool Directory::SetLastAccessTime(const char* path, const DateTime& lastAccessTime)
+bool Directory::SetLastAccessTime(const char8_t* path, const DateTime& lastAccessTime)
 {
     return File::SetLastAccessTime(path, lastAccessTime);
 }
 
-bool Directory::SetLastAccessTimeUtc(const char* path, const DateTime& lastAccessTimeUtc)
+bool Directory::SetLastAccessTimeUtc(const char8_t* path, const DateTime& lastAccessTimeUtc)
 {
     return File::SetLastAccessTimeUtc(path, lastAccessTimeUtc);
 }
 
-bool Directory::SetLastWriteTime(const char* path, const DateTime& lastWriteTime)
+bool Directory::SetLastWriteTime(const char8_t* path, const DateTime& lastWriteTime)
 {
     return File::SetLastWriteTime(path, lastWriteTime);
 }
 
-bool Directory::SetLastWriteTimeUtc(const char* path, const DateTime& lastWriteTimeUtc)
+bool Directory::SetLastWriteTimeUtc(const char8_t* path, const DateTime& lastWriteTimeUtc)
 {
     return File::SetLastWriteTimeUtc(path, lastWriteTimeUtc);
 }
 
-std::optional<DateTime> Directory::GetCreationTime(const char* path)
+std::optional<DateTime> Directory::GetCreationTime(const char8_t* path)
 {
     return File::GetCreationTime(path);
 }
 
-std::optional<DateTime> Directory::GetCreationTimeUtc(const char* path)
+std::optional<DateTime> Directory::GetCreationTimeUtc(const char8_t* path)
 {
     return File::GetCreationTimeUtc(path);
 }
 
-std::optional<DateTime> Directory::GetLastAccessTime(const char* path)
+std::optional<DateTime> Directory::GetLastAccessTime(const char8_t* path)
 {
     return File::GetLastAccessTime(path);
 }
 
-std::optional<DateTime> Directory::GetLastAccessTimeUtc(const char* path)
+std::optional<DateTime> Directory::GetLastAccessTimeUtc(const char8_t* path)
 {
     return File::GetLastAccessTimeUtc(path);
 }
 
-std::optional<DateTime> Directory::GetLastWriteTime(const char* path)
+std::optional<DateTime> Directory::GetLastWriteTime(const char8_t* path)
 {
     return File::GetLastWriteTime(path);
 }
 
-std::optional<DateTime> Directory::GetLastWriteTimeUtc(const char* path)
+std::optional<DateTime> Directory::GetLastWriteTimeUtc(const char8_t* path)
 {
     return File::GetLastWriteTimeUtc(path);
 }
 
-std::string Directory::GetDirectoryRoot(const std::string_view& path)
+std::u8string Directory::GetDirectoryRoot(const std::u8string_view& path)
 {
     if (path.length() <= 0)
     {
         return {};
     }
     
-    auto fullPath = Path::GetFullPath(path);
+    const auto fullPath = Path::GetFullPath(path);
     return fullPath.substr(0, Path::GetRootLength(fullPath));
 }
 
-std::vector<std::string> Directory::GetDirectories(const char* path, const char* searchPattern, SearchOption searchOption)
+std::vector<std::u8string> Directory::GetDirectories(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption)
 {
-    std::vector<std::string> ret;
+    std::vector<std::u8string> ret;
     
-    EnumerateDirectories(path, searchPattern, searchOption, [&](const std::string_view& str)
+    EnumerateDirectories(path, searchPattern, searchOption, [&](const std::u8string_view& str)
     {
         ret.emplace_back(str);
     });
     return ret;
 }
 
-std::vector<std::string> Directory::GetFiles(const char* path, const char* searchPattern, SearchOption searchOption)
+std::vector<std::u8string> Directory::GetFiles(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption)
 {
-    std::vector<std::string> ret;
+    std::vector<std::u8string> ret;
     
-    EnumerateFiles(path, searchPattern, searchOption, [&](const std::string_view& str)
+    EnumerateFiles(path, searchPattern, searchOption, [&](const std::u8string_view& str)
     {
         ret.emplace_back(str);
     });
     return ret;
 }
 
-std::vector<std::string> Directory::GetFileSystemEntries(const char* path, const char* searchPattern, SearchOption searchOption)
+std::vector<std::u8string> Directory::GetFileSystemEntries(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption)
 {
-    std::vector<std::string> ret;
+    std::vector<std::u8string> ret;
     
-    EnumerateFileSystemEntries(path, searchPattern, searchOption, [&](const std::string_view& str)
+    EnumerateFileSystemEntries(path, searchPattern, searchOption, [&](const std::u8string_view& str)
     {
         ret.emplace_back(str);
     });

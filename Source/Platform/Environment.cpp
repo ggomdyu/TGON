@@ -10,36 +10,36 @@
 namespace tg
 {
 
-std::optional<std::string> Environment::GetEnvironmentVariable(const char* name)
+std::optional<std::u8string> Environment::GetEnvironmentVariable(const char8_t* name)
 {
-    std::array<char, 8192> str;
+    std::array<char8_t, 8192> str{};
     auto strLen = GetEnvironmentVariable(name, str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {
         return {};
     }
 
-    return std::string(str.data(), static_cast<size_t>(*strLen));
+    return std::u8string(str.data(), static_cast<size_t>(*strLen));
 }
 
-std::string Environment::GetCurrentDirectory()
+std::u8string Environment::GetCurrentDirectory()
 {
     return Directory::GetCurrentDirectory();
 }
 
-std::optional<int32_t> Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetCurrentDirectory(char8_t* destStr, int32_t destStrBufferLen)
 {
     return Directory::GetCurrentDirectory(destStr, destStrBufferLen);
 }
 
-std::optional<int32_t> Environment::GetCurrentDirectory(const gsl::span<char>& destStr)
+std::optional<int32_t> Environment::GetCurrentDirectory(const std::span<char8_t>& destStr)
 {
     return GetCurrentDirectory(destStr.data(), static_cast<int32_t>(destStr.size()));
 }
 
-std::string Environment::GetFolderPath(SpecialFolder folder)
+std::u8string Environment::GetFolderPath(SpecialFolder folder)
 {
-    std::array<char, 8192> str;
+    std::array<char8_t, 8192> str{};
     auto strLen = GetFolderPath(folder, str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {
@@ -59,9 +59,9 @@ int32_t Environment::GetProcessorCount()
     return static_cast<int32_t>(std::thread::hardware_concurrency());
 }
 
-std::string Environment::GetUserName()
+std::u8string Environment::GetUserName()
 {
-    std::array<char, 4096> str;
+    std::array<char8_t, 4096> str{};
     auto strLen = GetUserName(str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {
@@ -71,9 +71,9 @@ std::string Environment::GetUserName()
     return {str.data(), static_cast<size_t>(*strLen)};
 }
 
-std::string Environment::GetMachineName()
+std::u8string Environment::GetMachineName()
 {
-    std::array<char, 4096> str;
+    std::array<char8_t, 4096> str{};
     auto strLen = GetMachineName(str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {
@@ -83,9 +83,9 @@ std::string Environment::GetMachineName()
     return {str.data(), static_cast<size_t>(*strLen)};
 }
 
-std::string Environment::GetUserDomainName()
+std::u8string Environment::GetUserDomainName()
 {
-    std::array<char, 4096> str;
+    std::array<char8_t, 4096> str{};
     auto strLen = GetUserDomainName(str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {
@@ -95,24 +95,24 @@ std::string Environment::GetUserDomainName()
     return {str.data(), static_cast<size_t>(*strLen)};
 }
 
-void Environment::FailFast(const char* message)
+void Environment::FailFast(const char8_t* message)
 {
     FailFast(message, {});
 }
 
-std::string Environment::GetStackTrace()
+std::u8string Environment::GetStackTrace()
 {
-    std::array<char, 8192> str;
-    auto strLen = GetStackTrace(str.data(), static_cast<int32_t>(str.size()));
+    std::array<char8_t, 8192> str{};
+    const auto strLen = GetStackTrace(str.data(), static_cast<int32_t>(str.size()));
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
-std::string Environment::GetSystemDirectory()
+std::u8string Environment::GetSystemDirectory()
 {
     return GetFolderPath(SpecialFolder::System);
 }
 
-std::vector<std::string> Environment::GetLogicalDrives()
+std::vector<std::u8string> Environment::GetLogicalDrives()
 {
     return Directory::GetLogicalDrives();
 }

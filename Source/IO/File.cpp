@@ -1,8 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include <cstdio>
-#include <array>
-#include <sys/stat.h>
 #include <fstream>
 
 #include "Time/TimeZoneInfo.h"
@@ -12,7 +10,7 @@
 namespace tg
 {
 
-std::optional<DateTime> File::GetCreationTime(const char* path)
+std::optional<DateTime> File::GetCreationTime(const char8_t* path)
 {
     auto ret = GetCreationTimeUtc(path);
     if (ret)
@@ -23,7 +21,7 @@ std::optional<DateTime> File::GetCreationTime(const char* path)
     return ret;
 }
 
-std::optional<DateTime> File::GetLastAccessTime(const char* path)
+std::optional<DateTime> File::GetLastAccessTime(const char8_t* path)
 {
     auto ret = GetLastAccessTimeUtc(path);
     if (ret)
@@ -34,7 +32,7 @@ std::optional<DateTime> File::GetLastAccessTime(const char* path)
     return ret;
 }
 
-std::optional<DateTime> File::GetLastWriteTime(const char* path)
+std::optional<DateTime> File::GetLastWriteTime(const char8_t* path)
 {
     auto ret = GetLastWriteTimeUtc(path);
     if (ret)
@@ -45,26 +43,26 @@ std::optional<DateTime> File::GetLastWriteTime(const char* path)
     return ret;
 }
 
-bool File::SetCreationTime(const char* path, const DateTime& creationTime)
+bool File::SetCreationTime(const char8_t* path, const DateTime& creationTime)
 {
     return SetCreationTimeUtc(path, creationTime);
 }
 
-bool File::SetLastAccessTime(const char* path, const DateTime& lastAccessTime)
+bool File::SetLastAccessTime(const char8_t* path, const DateTime& lastAccessTime)
 {
     return SetLastAccessTimeUtc(path, lastAccessTime);
 }
 
-bool File::SetLastWriteTime(const char* path, const DateTime& lastWriteTime)
+bool File::SetLastWriteTime(const char8_t* path, const DateTime& lastWriteTime)
 {
     return SetLastWriteTimeUtc(path, lastWriteTime);
 }
 
-std::unique_ptr<std::byte[]> File::ReadAllBytes(const char* path, ReturnSmartPointerTag)
+std::unique_ptr<std::byte[]> File::ReadAllBytes(const char8_t* path, ReturnSmartPointerTag)
 {
 #ifdef _MSC_VER
     FILE* fp = nullptr;
-    fopen_s(&fp, path, "rb");
+    fopen_s(&fp, reinterpret_cast<const char*>(path), "rb");
 #else
     FILE* fp = fopen(path, "rb");
 #endif
@@ -74,7 +72,7 @@ std::unique_ptr<std::byte[]> File::ReadAllBytes(const char* path, ReturnSmartPoi
     }
 
     fseek(fp, 0, SEEK_END);
-    auto fileSize = static_cast<size_t>(ftell(fp));
+    const auto fileSize = static_cast<size_t>(ftell(fp));
     fseek(fp, 0, SEEK_SET);
 
     auto fileData = std::make_unique<std::byte[]>(static_cast<size_t>(fileSize));
@@ -88,11 +86,11 @@ std::unique_ptr<std::byte[]> File::ReadAllBytes(const char* path, ReturnSmartPoi
     return fileData;
 }
 
-std::optional<std::vector<std::byte>> File::ReadAllBytes(const char* path, ReturnVectorTag)
+std::optional<std::vector<std::byte>> File::ReadAllBytes(const char8_t* path, ReturnVectorTag)
 {
 #ifdef _MSC_VER
     FILE* fp = nullptr;
-    fopen_s(&fp, path, "rb");
+    fopen_s(&fp, reinterpret_cast<const char*>(path), "rb");
 #else
     FILE* fp = fopen(path, "rb");
 #endif
@@ -102,7 +100,7 @@ std::optional<std::vector<std::byte>> File::ReadAllBytes(const char* path, Retur
     }
 
     fseek(fp, 0, SEEK_END);
-    auto fileSize = static_cast<size_t>(ftell(fp));
+    const auto fileSize = static_cast<size_t>(ftell(fp));
     fseek(fp, 0, SEEK_SET);
 
     std::vector<std::byte> fileData(fileSize);
@@ -116,11 +114,11 @@ std::optional<std::vector<std::byte>> File::ReadAllBytes(const char* path, Retur
     return fileData;
 }
 
-std::optional<std::string> File::ReadAllText(const char* path)
+std::optional<std::u8string> File::ReadAllText(const char8_t* path)
 {
 #ifdef _MSC_VER
     FILE* fp = nullptr;
-    fopen_s(&fp, path, "r");
+    fopen_s(&fp, reinterpret_cast<const char*>(path), "r");
 #else
     FILE* fp = fopen(path, "r");
 #endif
@@ -130,10 +128,10 @@ std::optional<std::string> File::ReadAllText(const char* path)
     }
 
     fseek(fp, 0, SEEK_END);
-    auto fileSize = static_cast<size_t>(ftell(fp));
+    const auto fileSize = static_cast<size_t>(ftell(fp));
     fseek(fp, 0, SEEK_SET);
 
-    std::string fileData(fileSize, '\0');
+    std::u8string fileData(fileSize, '\0');
 #ifdef _MSC_VER
     fread_s(&fileData[0], fileSize, 1, fileSize, fp);
 #else
@@ -144,18 +142,18 @@ std::optional<std::string> File::ReadAllText(const char* path)
     return fileData;
 }
 
-std::optional<std::vector<std::string>> File::ReadAllLines(const char* path)
+std::optional<std::vector<std::u8string>> File::ReadAllLines(const char8_t* path)
 {
-    std::ifstream fs;
-    fs.open(path);
+    std::basic_ifstream<char8_t, std::char_traits<char8_t>> fs;
+    fs.open(reinterpret_cast<const char*>(path));
     
     if (!fs)
     {
         return {};
     }
     
-    std::vector<std::string> ret;
-    std::string line;
+    std::vector<std::u8string> ret;
+    std::u8string line;
     while (std::getline(fs, line))
     {
         if (line.empty())
@@ -169,32 +167,32 @@ std::optional<std::vector<std::string>> File::ReadAllLines(const char* path)
     return ret;
 }
 
-FileStream File::Create(const char* path)
+FileStream File::Create(const char8_t* path)
 {
     return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None);
 }
 
-FileStream File::Create(const char* path, int32_t bufferSize)
+FileStream File::Create(const char8_t* path, int32_t bufferSize)
 {
     return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize);
 }
 
-FileStream File::Create(const char* path, int32_t bufferSize, FileOptions options)
+FileStream File::Create(const char8_t* path, int32_t bufferSize, FileOptions options)
 {
     return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize, options);
 }
 
-FileStream File::Open(const char* path, FileMode mode)
+FileStream File::Open(const char8_t* path, FileMode mode)
 {
     return Open(path, mode, mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite, FileShare::None);
 }
 
-FileStream File::Open(const char* path, FileMode mode, FileAccess access)
+FileStream File::Open(const char8_t* path, FileMode mode, FileAccess access)
 {
     return Open(path, mode, access, FileShare::None);
 }
 
-FileStream File::Open(const char* path, FileMode mode, FileAccess access, FileShare share)
+FileStream File::Open(const char8_t* path, FileMode mode, FileAccess access, FileShare share)
 {
     return FileStream(path, mode, access, share);
 }

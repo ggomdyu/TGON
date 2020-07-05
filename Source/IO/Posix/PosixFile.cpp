@@ -7,21 +7,21 @@
 namespace tg
 {
 
-bool File::Delete(const char* path)
+bool File::Delete(const char8_t* path)
 {
     struct stat s;
-    if (stat(path, &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(reinterpret_cast<const char*>(path), &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return false;
     }
     
-    return remove(path) == 0;
+    return remove(reinterpret_cast<const char*>(path)) == 0;
 }
 
-bool File::Exists(const char* path)
+bool File::Exists(const char8_t* path)
 {
     struct stat s;
-    if (stat(path, &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(reinterpret_cast<const char*>(path), &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return false;
     }
@@ -29,21 +29,21 @@ bool File::Exists(const char* path)
     return true;
 }
 
-bool File::Move(const char* srcPath, const char* destPath)
+bool File::Move(const char8_t* srcPath, const char8_t* destPath)
 {
     struct stat s;
-    if (stat(srcPath, &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(reinterpret_cast<const char*>(srcPath), &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return false;
     }
     
-    return rename(srcPath, destPath) == 0;
+    return rename(reinterpret_cast<const char*>(srcPath), reinterpret_cast<const char*>(destPath)) == 0;
 }
 
-std::optional<DateTime> File::GetCreationTimeUtc(const char* path)
+std::optional<DateTime> File::GetCreationTimeUtc(const char8_t* path)
 {
     struct stat s;
-    if (stat(path, &s) != 0)
+    if (stat(reinterpret_cast<const char*>(path), &s) != 0)
     {
         return {};
     }
@@ -55,10 +55,10 @@ std::optional<DateTime> File::GetCreationTimeUtc(const char* path)
 #endif
 }
 
-std::optional<DateTime> File::GetLastAccessTimeUtc(const char* path)
+std::optional<DateTime> File::GetLastAccessTimeUtc(const char8_t* path)
 {
     struct stat s;
-    if (stat(path, &s) != 0)
+    if (stat(reinterpret_cast<const char*>(path), &s) != 0)
     {
         return {};
     }
@@ -70,10 +70,10 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const char* path)
 #endif
 }
 
-std::optional<DateTime> File::GetLastWriteTimeUtc(const char* path)
+std::optional<DateTime> File::GetLastWriteTimeUtc(const char8_t* path)
 {
     struct stat s;
-    if (stat(path, &s) != 0)
+    if (stat(reinterpret_cast<const char*>(path), &s) != 0)
     {
         return {};
     }

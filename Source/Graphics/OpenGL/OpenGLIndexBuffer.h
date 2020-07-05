@@ -3,26 +3,30 @@
 #if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
-#include "Core/NonCopyable.h"
-
 namespace tg
 {
 
-class OpenGLIndexBuffer :
-    private NonCopyable
+class OpenGLIndexBuffer
 {
 /**@section Constructor */
-protected:
+public:
     explicit OpenGLIndexBuffer(GLuint indexBufferHandle) noexcept;
+    OpenGLIndexBuffer(const OpenGLIndexBuffer& rhs) = delete;
     OpenGLIndexBuffer(OpenGLIndexBuffer&& rhs) noexcept;
-
+    
+/**@section Destructor */
+public:
+    ~OpenGLIndexBuffer() = default;
+    
 /**@section Operator */
-protected:
+public:
+    OpenGLIndexBuffer& operator=(const OpenGLIndexBuffer& rhs) = delete;
     OpenGLIndexBuffer& operator=(OpenGLIndexBuffer&& rhs) noexcept;
     
 /**@section Method */
 public:
-    GLuint GetIndexBufferHandle() const noexcept;
+    [[nodiscard]] static GLuint CreateIndexBufferHandle();
+    [[nodiscard]] GLuint GetIndexBufferHandle() const noexcept;
 
 /**@section Variable */
 protected:

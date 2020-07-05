@@ -68,7 +68,7 @@ void Transform::UpdateWorldMatrix() const
     m_matWorld *= Matrix4x4::Rotate(m_localRotation.x * Deg2Rad, m_localRotation.y * Deg2Rad, m_localRotation.z * Deg2Rad);
     m_matWorld *= Matrix4x4::Translate(m_localPosition.x, m_localPosition.y, m_localPosition.z);
 
-    if (auto owner = this->GetGameObject().lock(); owner != nullptr)
+   /* if (auto owner = this->GetGameObject().lock(); owner != nullptr)
     {
         if (auto parent = owner->GetParent().lock(); parent != nullptr)
         {
@@ -79,7 +79,7 @@ void Transform::UpdateWorldMatrix() const
         {
             child->GetTransform()->m_isDirty = true;
         }
-    }
+    }*/
 }
 
 bool Transform::IsDirty() const noexcept

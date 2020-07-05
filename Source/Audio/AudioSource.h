@@ -1,31 +1,30 @@
 #pragma once
 
 #include <optional>
+#include <memory>
 
-#include "Core/RuntimeObject.h"
+typedef unsigned int ALuint;
 
 namespace tg
 {
 
 class AudioClip;
 
-class AudioSource final :
-    public RuntimeObject
+class AudioSource final
 {
-public:
-    TGON_DECLARE_RTTI(AudioSource)
-
 /**@section Constructor */
 public:
     AudioSource(ALuint alSource) noexcept;
+    AudioSource(const AudioSource& rhs) = delete;
     AudioSource(AudioSource&& rhs) noexcept;
 
 /**@section Destructor */
 public:
-    ~AudioSource() override;
+    ~AudioSource();
 
 /**@section Operator */
 public:
+    AudioSource& operator=(const AudioSource& rhs) = delete;
     AudioSource& operator=(AudioSource&& rhs) noexcept;
 
 /**@section Method */
@@ -45,18 +44,15 @@ public:
     void SetProgressInSeconds(float seconds);
     void SetPitch(float pitch);
     void SetLoop(bool isLoop);
-    float GetVolume() const;
-    float GetProgressInSeconds() const;
-    float GetTotalProgressInSeconds() const;
-    float GetPitch() const;
-    std::shared_ptr<AudioClip> GetClip() noexcept;
-    std::shared_ptr<const AudioClip> GetClip() const noexcept;
-    bool IsLoop() const;
-    bool IsPlaying() const;
+    [[nodiscard]] float GetVolume() const;
+    [[nodiscard]] float GetProgressInSeconds() const;
+    [[nodiscard]] float GetTotalProgressInSeconds() const;
+    [[nodiscard]] float GetPitch() const;
+    [[nodiscard]] std::shared_ptr<AudioClip> GetClip() noexcept;
+    [[nodiscard]] std::shared_ptr<const AudioClip> GetClip() const noexcept;
+    [[nodiscard]] bool IsLoop() const;
+    [[nodiscard]] bool IsPlaying() const;
 
-private:
-    static std::optional<ALuint> CreateALSource();
-   
 /**@section Variable */
 private:
     ALuint m_alSource;

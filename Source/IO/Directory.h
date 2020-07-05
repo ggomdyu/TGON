@@ -3,7 +3,7 @@
 #include <string>
 #include <optional>
 #include <vector>
-#include <gsl/span>
+#include <span>
 
 #include "DirectoryInfo.h"
 #include "File.h"
@@ -20,114 +20,114 @@ public:
     
 /**@section Method */
 public:
-    static DirectoryInfo CreateDirectory(const std::string_view& path);
-    static bool Delete(const char* path, bool recursive = false);
-    static bool Exists(const char* path);
-    static bool Move(const char* srcPath, const char* destPath);
-    static bool SetCurrentDirectory(const char* path);
-    static bool SetCreationTime(const char* path, const DateTime& creationTime);
-    static bool SetCreationTimeUtc(const char* path, const DateTime& creationTimeUtc);
-    static bool SetLastAccessTime(const char* path, const DateTime& lastAccessTime);
-    static bool SetLastAccessTimeUtc(const char* path, const DateTime& lastAccessTimeUtc);
-    static bool SetLastWriteTime(const char* path, const DateTime& lastWriteTime);
-    static bool SetLastWriteTimeUtc(const char* path, const DateTime& lastWriteTimeUtc);
-    static std::optional<DateTime> GetCreationTime(const char* path);
-    static std::optional<DateTime> GetCreationTimeUtc(const char* path);
-    static std::optional<DateTime> GetLastAccessTime(const char* path);
-    static std::optional<DateTime> GetLastAccessTimeUtc(const char* path);
-    static std::optional<DateTime> GetLastWriteTime(const char* path);
-    static std::optional<DateTime> GetLastWriteTimeUtc(const char* path);
-    static std::string GetCurrentDirectory();
-    static std::optional<int32_t> GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
+    static DirectoryInfo CreateDirectory(const std::u8string_view& path);
+    static bool Delete(const char8_t* path, bool recursive = false);
+    static bool Exists(const char8_t* path);
+    static bool Move(const char8_t* srcPath, const char8_t* destPath);
+    static bool SetCurrentDirectory(const char8_t* path);
+    static bool SetCreationTime(const char8_t* path, const DateTime& creationTime);
+    static bool SetCreationTimeUtc(const char8_t* path, const DateTime& creationTimeUtc);
+    static bool SetLastAccessTime(const char8_t* path, const DateTime& lastAccessTime);
+    static bool SetLastAccessTimeUtc(const char8_t* path, const DateTime& lastAccessTimeUtc);
+    static bool SetLastWriteTime(const char8_t* path, const DateTime& lastWriteTime);
+    static bool SetLastWriteTimeUtc(const char8_t* path, const DateTime& lastWriteTimeUtc);
+    static std::optional<DateTime> GetCreationTime(const char8_t* path);
+    static std::optional<DateTime> GetCreationTimeUtc(const char8_t* path);
+    static std::optional<DateTime> GetLastAccessTime(const char8_t* path);
+    static std::optional<DateTime> GetLastAccessTimeUtc(const char8_t* path);
+    static std::optional<DateTime> GetLastWriteTime(const char8_t* path);
+    static std::optional<DateTime> GetLastWriteTimeUtc(const char8_t* path);
+    static std::u8string GetCurrentDirectory();
+    static std::optional<int32_t> GetCurrentDirectory(char8_t* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static std::optional<int32_t> GetCurrentDirectory(const gsl::span<char, Length>& destStr);
-    static std::string GetDirectoryRoot(const std::string_view& path);
-    static std::vector<std::string> GetLogicalDrives();
-    static DirectoryInfo GetParent(const std::string_view& path);
-    static std::vector<std::string> GetDirectories(const char* path, const char* searchPattern = "*", SearchOption searchOption = SearchOption::TopDirectoryOnly);
-    static std::vector<std::string> GetFiles(const char* path, const char* searchPattern = "*", SearchOption searchOption = SearchOption::TopDirectoryOnly);
-    static std::vector<std::string> GetFileSystemEntries(const char* path, const char* searchPattern = "*", SearchOption searchOption = SearchOption::TopDirectoryOnly);
-    template <typename _HandlerType>
-    static void EnumerateDirectories(const char* path, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateDirectories(const char* path, const char* searchPattern, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateDirectories(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFiles(const char* path, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFiles(const char* path, const char* searchPattern, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFiles(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFileSystemEntries(const char* path, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFileSystemEntries(const char* path, const char* searchPattern, const _HandlerType& handler);
-    template <typename _HandlerType>
-    static void EnumerateFileSystemEntries(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler);
+    static std::optional<int32_t> GetCurrentDirectory(const std::span<char8_t, Length>& destStr);
+    static std::u8string GetDirectoryRoot(const std::u8string_view& path);
+    static std::vector<std::u8string> GetLogicalDrives();
+    static DirectoryInfo GetParent(const std::u8string_view& path);
+    static std::vector<std::u8string> GetDirectories(const char8_t* path, const char8_t* searchPattern = u8"*", SearchOption searchOption = SearchOption::TopDirectoryOnly);
+    static std::vector<std::u8string> GetFiles(const char8_t* path, const char8_t* searchPattern = u8"*", SearchOption searchOption = SearchOption::TopDirectoryOnly);
+    static std::vector<std::u8string> GetFileSystemEntries(const char8_t* path, const char8_t* searchPattern = u8"*", SearchOption searchOption = SearchOption::TopDirectoryOnly);
+    template <typename _Callback>
+    static void EnumerateDirectories(const char8_t* path, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFiles(const char8_t* path, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFiles(const char8_t* path, const char8_t* searchPattern, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFiles(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFileSystemEntries(const char8_t* path, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, const _Callback& callback);
+    template <typename _Callback>
+    static void EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& callback);
     
 private:
-    static bool InternalCreateDirectory(const char* path);
+    static bool InternalCreateDirectory(const char8_t* path);
 };
 
 template <int32_t Length>
-inline std::optional<int32_t> Directory::GetCurrentDirectory(const gsl::span<char, Length>& destStr)
+std::optional<int32_t> Directory::GetCurrentDirectory(const std::span<char8_t, Length>& destStr)
 {
     return GetCurrentDirectory(destStr.data(), Length);
 }
 
-template <typename _HandlerType>
-inline void Directory::EnumerateDirectories(const char* path, const _HandlerType& handler)
+template <typename _Callback>
+void Directory::EnumerateDirectories(const char8_t* path, const _Callback& callback)
 {
-    return FileSystemEnumerable::EnumerateDirectories(path, handler);
+    return FileSystemEnumerable::EnumerateDirectories(path, callback);
 }
 
-template <typename _HandlerType>
-inline void Directory::EnumerateDirectories(const char* path, const char* searchPattern, const _HandlerType& handler)
+template <typename _Callback>
+void Directory::EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, const _Callback& callback)
 {
-    return FileSystemEnumerable::EnumerateDirectories(path, searchPattern, handler);
+    return FileSystemEnumerable::EnumerateDirectories(path, searchPattern, callback);
 }
 
-template <typename _HandlerType>
-inline void Directory::EnumerateDirectories(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler)
+template <typename _Callback>
+void Directory::EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& callback)
 {
-    return FileSystemEnumerable::EnumerateDirectories(path, searchPattern, searchOption, handler);
+    return FileSystemEnumerable::EnumerateDirectories(path, searchPattern, searchOption, callback);
 }
 
-template <typename _HandlerType>
-inline void Directory::EnumerateFiles(const char* path, const _HandlerType& handler)
+template <typename _Callback>
+void Directory::EnumerateFiles(const char8_t* path, const _Callback& callback)
 {
-    return FileSystemEnumerable::EnumerateFiles(path, handler);
+    return FileSystemEnumerable::EnumerateFiles(path, callback);
 }
 
-template <typename _HandlerType>
-inline void Directory::EnumerateFiles(const char* path, const char* searchPattern, const _HandlerType& handler)
+template <typename _Callback>
+void Directory::EnumerateFiles(const char8_t* path, const char8_t* searchPattern, const _Callback& callback)
 {
-    return FileSystemEnumerable::EnumerateFiles(path, searchPattern, handler);
+    return FileSystemEnumerable::EnumerateFiles(path, searchPattern, callback);
 }
 
-template <typename _HandlerType>
-inline void Directory::EnumerateFiles(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler)
+template <typename _Callback>
+void Directory::EnumerateFiles(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& callback)
 {
-    return FileSystemEnumerable::EnumerateFiles(path, searchPattern, searchOption, handler);
+    return FileSystemEnumerable::EnumerateFiles(path, searchPattern, searchOption, callback);
 }
 
-template <typename _HandlerType>
-inline void Directory::EnumerateFileSystemEntries(const char* path, const _HandlerType& handler)
+template <typename _Callback>
+void Directory::EnumerateFileSystemEntries(const char8_t* path, const _Callback& callback)
 {
-    return FileSystemEnumerable::EnumerateFileSystemEntries(path, handler);
+    return FileSystemEnumerable::EnumerateFileSystemEntries(path, callback);
 }
 
-template <typename _HandlerType>
-inline void Directory::EnumerateFileSystemEntries(const char* path, const char* searchPattern, const _HandlerType& handler)
+template <typename _Callback>
+void Directory::EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, const _Callback& callback)
 {
-    return FileSystemEnumerable::EnumerateFileSystemEntries(path, searchPattern, handler);
+    return FileSystemEnumerable::EnumerateFileSystemEntries(path, searchPattern, callback);
 }
 
-template <typename _HandlerType>
-inline void Directory::EnumerateFileSystemEntries(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler)
+template <typename _Callback>
+void Directory::EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& callback)
 {
-    return FileSystemEnumerable::EnumerateFileSystemEntries(path, searchPattern, searchOption, handler);
+    return FileSystemEnumerable::EnumerateFileSystemEntries(path, searchPattern, searchOption, callback);
 }
 
 }

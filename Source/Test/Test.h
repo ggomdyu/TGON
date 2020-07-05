@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace tgon
+namespace tg
 {
 
 class Test

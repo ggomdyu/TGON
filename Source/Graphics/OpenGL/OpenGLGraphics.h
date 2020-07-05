@@ -10,24 +10,22 @@
 namespace tg
 {
     
-class OpenGLGraphics :
-    private NonCopyable
+class OpenGLGraphics
 {
 /**@section Constructor */
-protected:
-    OpenGLGraphics(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode);
+public:
+    OpenGLGraphics(void* nativeWindow, const VideoMode& videoMode);
+    OpenGLGraphics(const OpenGLGraphics& rhs) = delete;
     OpenGLGraphics(OpenGLGraphics&& rhs) noexcept;
 
-protected:
+/**@section Destructor */
+public:
     ~OpenGLGraphics();
 
-/**@section Method */
+/**@section Operator */
 public:
-    OpenGLContext& GetContext() noexcept;
-    const OpenGLContext& GetContext() const noexcept;
-
-protected:
-    GLuint GetVertexArrayHandle() const noexcept;
+    OpenGLGraphics& operator=(const OpenGLGraphics& rhs) = delete;
+    OpenGLGraphics& operator=(OpenGLGraphics&& rhs) noexcept;
 
 /**@section Variable */
 protected:
