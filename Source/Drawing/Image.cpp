@@ -10,9 +10,7 @@
 
 #include "IO/File.h"
 #include "Core/Algorithm.h"
-#if TGON_USING_SIMD
 #include "Core/Simd.h"
-#endif
 
 #include "Image.h"
 
@@ -37,18 +35,49 @@ constexpr int32_t ConvertPixelFormatToChannelCount(PixelFormat pixelFormat)
 template <int32_t _BytesPerPixel>
 void FlipImageX(std::byte* imageData, int32_t width, int32_t height)
 {
-#if TGON_USING_SIMD
+    using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
+
+    if (imageData == nullptr)
+    {
+        return;
+    }
+
+#if TGON_SIMD_SSE2
+    const int32_t simdUnavailableSize = (width * height) % 8;
+
+    for (int32_t y = 0; y < height; ++y)
+    {
+        if (simdUnavailableSize > 0)
+        {
+            auto* frontIter = reinterpret_cast<ColorRef>(&imageData[y * width + width / 2 - simdUnavailableSize / 2]);
+            auto* backIter = frontIter + simdUnavailableSize - 1;
+
+            for (; frontIter < backIter; ++frontIter, --backIter)
+            {
+                std::swap(*frontIter, *backIter);
+            }
+        }
+
+        auto* frontIter = reinterpret_cast<__m128i*>(&imageData[y * width * 4]);
+        auto* backIter = (reinterpret_cast<__m128i*>(&imageData[(y + 1) * width * 4 - static_cast<int32_t>(sizeof(__m128i))]));
+
+        for (; frontIter < backIter; ++frontIter, --backIter)
+        {
+            const auto r1 = _mm_shuffle_epi32(_mm_loadu_si128(frontIter), _MM_SHUFFLE(0, 1, 2, 3));
+            const auto r2 = _mm_shuffle_epi32(_mm_loadu_si128(backIter), _MM_SHUFFLE(0, 1, 2, 3));
+            _mm_storeu_si128(frontIter, r2);
+            _mm_storeu_si128(backIter, r1);
+        }
+    }
 #else
-    using ColorRef = struct { std::byte _[4]; }*;
+    auto frontIter = reinterpret_cast<ColorRef>(imageData);
+    auto backIter = &(reinterpret_cast<ColorRef>(imageData))[width - 1];
 
-    auto frontRow = reinterpret_cast<ColorRef>(imageData);
-    auto backRow = &(reinterpret_cast<ColorRef>(imageData))[width - 1];
-
-    for (; frontRow < backRow; ++frontRow, --backRow)
+    for (; frontIter < backIter; ++frontIter, --backIter)
     {
         for (int32_t col = 0; col < width * height; col += width)
         {
-            std::swap(*(frontRow + col), *(backRow + col));
+            std::swap(*(frontIter + col), *(backIter + col));
         }
     }
 #endif
@@ -57,43 +86,76 @@ void FlipImageX(std::byte* imageData, int32_t width, int32_t height)
 template <int32_t _BytesPerPixel>
 void FlipImageXY(std::byte* imageData, int32_t width, int32_t height)
 {
-#if TGON_USING_SIMD
-#else
     using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
 
-    auto* frontRow = reinterpret_cast<ColorRef>(imageData);
-    auto* backRow = &(reinterpret_cast<ColorRef>(imageData))[width * height - 1];
-
-    for (; frontRow < backRow; ++frontRow, --backRow)
+    if (imageData == nullptr)
     {
-        std::swap(*frontRow, *backRow);
+        return;
+    }
+
+#if TGON_SIMD_SSE2
+    const int32_t simdUnavailableSize = (width * height) % 8;
+    if (simdUnavailableSize > 0)
+    {
+        auto* frontIter = reinterpret_cast<ColorRef>(&imageData[width * height / 2 - simdUnavailableSize / 2]);
+        auto* backIter = frontIter + simdUnavailableSize - 1;
+
+        for (; frontIter < backIter; ++frontIter, --backIter)
+        {
+            std::swap(*frontIter, *backIter);
+        }
+    }
+
+    auto* frontIter = reinterpret_cast<__m128i*>(imageData);
+    auto* backIter = (reinterpret_cast<__m128i*>(&imageData[width * height * 4 - static_cast<int32_t>(sizeof(__m128i))]));
+    
+    for (; frontIter < backIter; ++frontIter, --backIter)
+    {
+        const auto r1 = _mm_shuffle_epi32(_mm_loadu_si128(frontIter), _MM_SHUFFLE(0, 1, 2, 3));
+        const auto r2 = _mm_shuffle_epi32(_mm_loadu_si128(backIter), _MM_SHUFFLE(0, 1, 2, 3));
+        _mm_storeu_si128(frontIter, r2);
+        _mm_storeu_si128(backIter, r1);
+    }
+#else
+    auto* frontIter = reinterpret_cast<ColorRef>(imageData);
+    auto* backIter = &(reinterpret_cast<ColorRef>(imageData))[width * height - 1];
+
+    for (; frontIter < backIter; ++frontIter, --backIter)
+    {
+        std::swap(*frontIter, *backIter);
     }
 #endif
 }
 
 void FlipImageY(std::byte* imageData, int32_t width, int32_t height, int32_t bytesPerPixel)
 {
-#if TGON_USING_SIMD
-#else
-    const size_t stride = width * bytesPerPixel;
-    const auto tempRowBuffer = std::make_unique<std::byte[]>(stride);
-
-    auto* frontRow = imageData;
-    auto* backRow = &imageData[(height - 1) * stride];
-
-    for (; frontRow < backRow; frontRow += stride, backRow -= stride)
+    if (imageData == nullptr)
     {
-        std::copy_n(frontRow, stride, tempRowBuffer.get());
-        std::copy_n(backRow, stride, frontRow);
-        std::copy_n(tempRowBuffer.get(), stride, backRow);
+        return;
     }
-#endif
+
+    const int32_t stride = width * bytesPerPixel;
+    const auto tempRowBuffer = std::make_unique<std::byte[]>(static_cast<size_t>(stride));
+
+    auto* frontIter = imageData;
+    auto* backIter = &imageData[(height - 1) * stride];
+
+    for (; frontIter < backIter; frontIter += stride, backIter -= stride)
+    {
+        std::copy_n(frontIter, stride, tempRowBuffer.get());
+        std::copy_n(backIter, stride, frontIter);
+        std::copy_n(tempRowBuffer.get(), stride, backIter);
+    }
 }
+
 template <int32_t _BytesPerPixel>
 void RotateImageRight90Degrees(std::byte* imageData, int32_t width, int32_t height)
 {
-#if TGON_USING_SIMD
-#else
+    if (imageData == nullptr)
+    {
+        return;
+    }
+
     using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
     const auto imageDataSize = static_cast<int64_t>(width) * height * _BytesPerPixel;
     const auto tempBuffer = std::make_unique<std::byte[]>(imageDataSize);
@@ -101,7 +163,7 @@ void RotateImageRight90Degrees(std::byte* imageData, int32_t width, int32_t heig
     auto* srcRow = reinterpret_cast<ColorRef>(imageData);
     auto* destCol = &(reinterpret_cast<ColorRef>(tempBuffer.get()))[height - 1];
 
-    for (; srcRow < reinterpret_cast<ColorRef>(imageData) + width * height; srcRow += width, --destCol)
+    for (; srcRow < &(reinterpret_cast<ColorRef>(imageData)[width * height]); srcRow += width, --destCol)
     {
         for (int32_t x = 0; x < width; ++x)
         {
@@ -110,22 +172,24 @@ void RotateImageRight90Degrees(std::byte* imageData, int32_t width, int32_t heig
     }
 
     std::copy_n(tempBuffer.get(), imageDataSize, imageData);
-#endif
 }
 
 template <int32_t _BytesPerPixel>
 void RotateImageLeft90Degrees(std::byte* imageData, int32_t width, int32_t height)
 {
-#if TGON_USING_SIMD
-#else
+    if (imageData == nullptr)
+    {
+        return;
+    }
+
     using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
-    const auto imageDataSize = static_cast<int64_t>(width) * height * _BytesPerPixel;
+    const auto imageDataSize = width * height * _BytesPerPixel;
     const auto tempBuffer = std::make_unique<std::byte[]>(imageDataSize);
 
     auto* srcRow = reinterpret_cast<ColorRef>(imageData);
     auto* destCol = &reinterpret_cast<ColorRef>(tempBuffer.get())[(width - 1) * height];
 
-    for (; srcRow < reinterpret_cast<ColorRef>(imageData) + width * height; srcRow += width, ++destCol)
+    for (; srcRow < &(reinterpret_cast<ColorRef>(imageData)[width * height]); srcRow += width, ++destCol)
     {
         for (int32_t x = 0; x < width; ++x)
         {
@@ -134,7 +198,6 @@ void RotateImageLeft90Degrees(std::byte* imageData, int32_t width, int32_t heigh
     }
 
     std::copy_n(tempBuffer.get(), imageDataSize, imageData);
-#endif
 }
 
 }
