@@ -5,9 +5,7 @@
 #include <span>
 #include <array>
 
-#if TGON_USING_SIMD
 #include "Core/Simd.h"
-#endif
 
 #include "Vector3.h"
 
@@ -91,13 +89,12 @@ constexpr Matrix4x4::Matrix4x4() noexcept :
 }
 
 inline Matrix4x4::Matrix4x4(const std::span<const float>& m) noexcept
-#if TGON_USING_SIMD
+#if TGON_SIMD_SSE2
 {
-    // Faster 2.0x
-    StoreSimdRegister(&m00, LoadSimdRegister(&m[0]));
-    StoreSimdRegister(&m10, LoadSimdRegister(&m[4]));
-    StoreSimdRegister(&m20, LoadSimdRegister(&m[8]));
-    StoreSimdRegister(&m30, LoadSimdRegister(&m[12]));
+    _mm_storeu_ps(&m00, _mm_loadu_ps(&m[0]));
+    _mm_storeu_ps(&m10, _mm_loadu_ps(&m[4]));
+    _mm_storeu_ps(&m20, _mm_loadu_ps(&m[8]));
+    _mm_storeu_ps(&m30, _mm_loadu_ps(&m[12]));
 }
 #else
     :
@@ -132,42 +129,44 @@ constexpr ExpressionTemplate<Minus, Matrix4x4, Matrix4x4> Matrix4x4::operator-(c
 
 inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const noexcept
 {
-#if TGON_USING_SIMD
+#if TGON_SIMD_SSE2
     Matrix4x4 ret;
-    auto r0 = LoadSimdRegister(&rhs.m00);
-    auto r1 = LoadSimdRegister(&rhs.m10);
-    auto r2 = LoadSimdRegister(&rhs.m20);
-    auto r3 = LoadSimdRegister(&rhs.m30);
+    auto r0 = _mm_loadu_ps(&rhs.m00);
+    auto r1 = _mm_loadu_ps(&rhs.m10);
+    auto r2 = _mm_loadu_ps(&rhs.m20);
+    auto r3 = _mm_loadu_ps(&rhs.m30);
 
-    auto l = LoadSimdRegister(&m00);
-    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
-    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
-    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
-    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
-    StoreSimdRegister(&ret.m00, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+    auto l = _mm_loadu_ps(&m00);
+    r0 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(0, 0, 0, 0)), r0);
+    r1 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(1, 1, 1, 1)), r1);
+    r2 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(2, 2, 2, 2)), r2);
+    r3 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(3, 3, 3, 3)), r3);
+    _mm_storeu_ps(&ret.m00, _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, r3)));
 
-    l = LoadSimdRegister(&m10);
-    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
-    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
-    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
-    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
-    StoreSimdRegister(&ret.m10, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+    l = _mm_loadu_ps(&m10);
+    r0 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(0, 0, 0, 0)), r0);
+    r1 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(1, 1, 1, 1)), r1);
+    r2 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(2, 2, 2, 2)), r2);
+    r3 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(3, 3, 3, 3)), r3);
+    _mm_storeu_ps(&ret.m10, _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, r3)));
 
-    l = LoadSimdRegister(&m20);
-    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
-    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
-    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
-    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
-    StoreSimdRegister(&ret.m20, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+    l = _mm_loadu_ps(&m20);
+    r0 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(0, 0, 0, 0)), r0);
+    r1 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(1, 1, 1, 1)), r1);
+    r2 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(2, 2, 2, 2)), r2);
+    r3 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(3, 3, 3, 3)), r3);
+    _mm_storeu_ps(&ret.m20, _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, r3)));
 
-    l = LoadSimdRegister(&m30);
-    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
-    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
-    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
-    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
-    StoreSimdRegister(&ret.m30, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+    l = _mm_loadu_ps(&m30);
+    r0 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(0, 0, 0, 0)), r0);
+    r1 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(1, 1, 1, 1)), r1);
+    r2 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(2, 2, 2, 2)), r2);
+    r3 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(3, 3, 3, 3)), r3);
+    _mm_storeu_ps(&ret.m30, _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, r3)));
+
+    return *this;
 #else
-   return Matrix4x4(
+    return Matrix4x4(
         (m00 * rhs.m00) + (m01 * rhs.m10) + (m02 * rhs.m20) + (m03 * rhs.m30),
         (m00 * rhs.m01) + (m01 * rhs.m11) + (m02 * rhs.m21) + (m03 * rhs.m31),
         (m00 * rhs.m02) + (m01 * rhs.m12) + (m02 * rhs.m22) + (m03 * rhs.m32),
@@ -193,12 +192,11 @@ inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const noexcept
 
 inline Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& rhs) noexcept
 {
-#if TGON_USING_SIMD
-    // 속도향상 없음
-    StoreSimdRegister(&m00, AddSimdRegister(LoadSimdRegister(&m00), LoadSimdRegister(&rhs.m00)));
-    StoreSimdRegister(&m10, AddSimdRegister(LoadSimdRegister(&m10), LoadSimdRegister(&rhs.m10)));
-    StoreSimdRegister(&m20, AddSimdRegister(LoadSimdRegister(&m20), LoadSimdRegister(&rhs.m20)));
-    StoreSimdRegister(&m30, AddSimdRegister(LoadSimdRegister(&m30), LoadSimdRegister(&rhs.m30)));
+#if TGON_SIMD_SSE2
+    _mm_storeu_ps(&m00, _mm_add_ps(_mm_loadu_ps(&m00), _mm_loadu_ps(&rhs.m00)));
+    _mm_storeu_ps(&m10, _mm_add_ps(_mm_loadu_ps(&m10), _mm_loadu_ps(&rhs.m10)));
+    _mm_storeu_ps(&m20, _mm_add_ps(_mm_loadu_ps(&m20), _mm_loadu_ps(&rhs.m20)));
+    _mm_storeu_ps(&m30, _mm_add_ps(_mm_loadu_ps(&m30), _mm_loadu_ps(&rhs.m30)));
 #else
     m00 += rhs.m00; m01 += rhs.m01; m02 += rhs.m02; m03 += rhs.m03;
     m10 += rhs.m10; m11 += rhs.m11; m12 += rhs.m12; m13 += rhs.m13;
@@ -211,12 +209,11 @@ inline Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& rhs) noexcept
 
 inline Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& rhs) noexcept
 {
-#if TGON_USING_SIMD
-    // 속도향상 없음
-    StoreSimdRegister(&m00, SubtractSimdRegister(LoadSimdRegister(&m00), LoadSimdRegister(&rhs.m00)));
-    StoreSimdRegister(&m10, SubtractSimdRegister(LoadSimdRegister(&m10), LoadSimdRegister(&rhs.m10)));
-    StoreSimdRegister(&m20, SubtractSimdRegister(LoadSimdRegister(&m20), LoadSimdRegister(&rhs.m20)));
-    StoreSimdRegister(&m30, SubtractSimdRegister(LoadSimdRegister(&m30), LoadSimdRegister(&rhs.m30)));
+#if TGON_SIMD_SSE2
+    _mm_storeu_ps(&m00, _mm_sub_ps(_mm_loadu_ps(&m00), _mm_loadu_ps(&rhs.m00)));
+    _mm_storeu_ps(&m10, _mm_sub_ps(_mm_loadu_ps(&m10), _mm_loadu_ps(&rhs.m10)));
+    _mm_storeu_ps(&m20, _mm_sub_ps(_mm_loadu_ps(&m20), _mm_loadu_ps(&rhs.m20)));
+    _mm_storeu_ps(&m30, _mm_sub_ps(_mm_loadu_ps(&m30), _mm_loadu_ps(&rhs.m30)));
 #else
     m00 -= rhs.m00; m01 -= rhs.m01; m02 -= rhs.m02; m03 -= rhs.m03;
     m10 -= rhs.m10; m11 -= rhs.m11; m12 -= rhs.m12; m13 -= rhs.m13;
@@ -320,23 +317,22 @@ inline Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height
 
 inline Matrix4x4 Matrix4x4::Transposed(const Matrix4x4& matrix) noexcept
 {
-#if TGON_USING_SIMD
-    // Faster 1.5x
+#if TGON_SIMD_SSE2
     Matrix4x4 ret;
-    auto r1 = LoadSimdRegister(&matrix.m00);
-    auto r2 = LoadSimdRegister(&matrix.m10);
-    auto r3 = LoadSimdRegister(&matrix.m20);
-    auto r4 = LoadSimdRegister(&matrix.m30);
+    const auto r1 = _mm_loadu_ps(&matrix.m00);
+    const auto r2 = _mm_loadu_ps(&matrix.m10);
+    const auto r3 = _mm_loadu_ps(&matrix.m20);
+    const auto r4 = _mm_loadu_ps(&matrix.m30);
+    
+    const auto r5 = _mm_shuffle_ps(r1, r2, _MM_SHUFFLE(1, 0, 1, 0));
+    const auto r6 = _mm_shuffle_ps(r1, r2, _MM_SHUFFLE(3, 2, 3, 2));
+    const auto r7 = _mm_shuffle_ps(r3, r4, _MM_SHUFFLE(1, 0, 1, 0));
+    const auto r8 = _mm_shuffle_ps(r3, r4, _MM_SHUFFLE(3, 2, 3, 2));
 
-    auto r5 = ShuffleSimdRegister(r1, r2, ShuffleMask(0, 1, 0, 1));
-    auto r6 = ShuffleSimdRegister(r1, r2, ShuffleMask(2, 3, 2, 3));
-    auto r7 = ShuffleSimdRegister(r3, r4, ShuffleMask(0, 1, 0, 1));
-    auto r8 = ShuffleSimdRegister(r3, r4, ShuffleMask(2, 3, 2, 3));
-
-    StoreSimdRegister(&ret.m00, ShuffleSimdRegister(r5, r7, ShuffleMask(0, 2, 0, 2)));
-    StoreSimdRegister(&ret.m10, ShuffleSimdRegister(r5, r7, ShuffleMask(1, 3, 1, 3)));
-    StoreSimdRegister(&ret.m20, ShuffleSimdRegister(r6, r8, ShuffleMask(0, 2, 0, 2)));
-    StoreSimdRegister(&ret.m30, ShuffleSimdRegister(r6, r8, ShuffleMask(1, 3, 1, 3)));
+    _mm_storeu_ps(&ret.m00, _mm_shuffle_ps(r5, r7, _MM_SHUFFLE(2, 0, 2, 0)));
+    _mm_storeu_ps(&ret.m10, _mm_shuffle_ps(r5, r7, _MM_SHUFFLE(3, 1, 3, 1)));
+    _mm_storeu_ps(&ret.m20, _mm_shuffle_ps(r6, r8, _MM_SHUFFLE(2, 0, 2, 0)));
+    _mm_storeu_ps(&ret.m30, _mm_shuffle_ps(r6, r8, _MM_SHUFFLE(3, 1, 3, 1)));
 
     return ret;
 #else
@@ -351,22 +347,21 @@ inline Matrix4x4 Matrix4x4::Transposed(const Matrix4x4& matrix) noexcept
 
 inline void Matrix4x4::Transpose() noexcept
 {
-#if TGON_USING_SIMD
-    // Faster 2.2x
-    auto r1 = LoadSimdRegister(&m00);
-    auto r2 = LoadSimdRegister(&m10);
-    auto r3 = LoadSimdRegister(&m20);
-    auto r4 = LoadSimdRegister(&m30);
+#if TGON_SIMD_SSE2
+    const auto r1 = _mm_loadu_ps(&m00);
+    const auto r2 = _mm_loadu_ps(&m10);
+    const auto r3 = _mm_loadu_ps(&m20);
+    const auto r4 = _mm_loadu_ps(&m30);
+    
+    const auto r5 = _mm_shuffle_ps(r1, r2, _MM_SHUFFLE(1, 0, 1, 0));
+    const auto r6 = _mm_shuffle_ps(r1, r2, _MM_SHUFFLE(3, 2, 3, 2));
+    const auto r7 = _mm_shuffle_ps(r3, r4, _MM_SHUFFLE(1, 0, 1, 0));
+    const auto r8 = _mm_shuffle_ps(r3, r4, _MM_SHUFFLE(3, 2, 3, 2));
 
-    auto r5 = ShuffleSimdRegister(r1, r2, ShuffleMask(0, 1, 0, 1));
-    auto r6 = ShuffleSimdRegister(r1, r2, ShuffleMask(2, 3, 2, 3));
-    auto r7 = ShuffleSimdRegister(r3, r4, ShuffleMask(0, 1, 0, 1));
-    auto r8 = ShuffleSimdRegister(r3, r4, ShuffleMask(2, 3, 2, 3));
-
-    StoreSimdRegister(&m00, ShuffleSimdRegister(r5, r7, ShuffleMask(0, 2, 0, 2)));
-    StoreSimdRegister(&m10, ShuffleSimdRegister(r5, r7, ShuffleMask(1, 3, 1, 3)));
-    StoreSimdRegister(&m20, ShuffleSimdRegister(r6, r8, ShuffleMask(0, 2, 0, 2)));
-    StoreSimdRegister(&m30, ShuffleSimdRegister(r6, r8, ShuffleMask(1, 3, 1, 3)));
+    _mm_storeu_ps(&m00, _mm_shuffle_ps(r5, r7, _MM_SHUFFLE(2, 0, 2, 0)));
+    _mm_storeu_ps(&m10, _mm_shuffle_ps(r5, r7, _MM_SHUFFLE(3, 1, 3, 1)));
+    _mm_storeu_ps(&m20, _mm_shuffle_ps(r6, r8, _MM_SHUFFLE(2, 0, 2, 0)));
+    _mm_storeu_ps(&m30, _mm_shuffle_ps(r6, r8, _MM_SHUFFLE(3, 1, 3, 1)));
 #else
     *this = Transposed(*this);
 #endif
@@ -375,39 +370,39 @@ inline void Matrix4x4::Transpose() noexcept
 
 inline Matrix4x4& Matrix4x4::operator*=(const Matrix4x4& rhs) noexcept
 {
-#if TGON_USING_SIMD
-    auto r0 = LoadSimdRegister(&rhs.m00);
-    auto r1 = LoadSimdRegister(&rhs.m10);
-    auto r2 = LoadSimdRegister(&rhs.m20);
-    auto r3 = LoadSimdRegister(&rhs.m30);
+#if TGON_SIMD_SSE2
+    auto r0 = _mm_loadu_ps(&rhs.m00);
+    auto r1 = _mm_loadu_ps(&rhs.m10);
+    auto r2 = _mm_loadu_ps(&rhs.m20);
+    auto r3 = _mm_loadu_ps(&rhs.m30);
 
-    auto l = LoadSimdRegister(&m00);
-    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
-    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
-    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
-    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
-    StoreSimdRegister(&m00, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+    auto l = _mm_loadu_ps(&m00);
+    r0 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(0, 0, 0, 0)), r0);
+    r1 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(1, 1, 1, 1)), r1);
+    r2 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(2, 2, 2, 2)), r2);
+    r3 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(3, 3, 3, 3)), r3);
+    _mm_storeu_ps(&m00, _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, r3)));
 
-    l = LoadSimdRegister(&m10);
-    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
-    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
-    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
-    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
-    StoreSimdRegister(&m10, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+    l = _mm_loadu_ps(&m10);
+    r0 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(0, 0, 0, 0)), r0);
+    r1 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(1, 1, 1, 1)), r1);
+    r2 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(2, 2, 2, 2)), r2);
+    r3 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(3, 3, 3, 3)), r3);
+    _mm_storeu_ps(&m10, _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, r3)));
 
-    l = LoadSimdRegister(&m20);
-    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
-    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
-    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
-    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
-    StoreSimdRegister(&m20, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+    l = _mm_loadu_ps(&m20);
+    r0 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(0, 0, 0, 0)), r0);
+    r1 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(1, 1, 1, 1)), r1);
+    r2 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(2, 2, 2, 2)), r2);
+    r3 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(3, 3, 3, 3)), r3);
+    _mm_storeu_ps(&m20, _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, r3)));
 
-    l = LoadSimdRegister(&m30);
-    r0 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(0, 0, 0, 0)), r0);
-    r1 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(1, 1, 1, 1)), r1);
-    r2 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(2, 2, 2, 2)), r2);
-    r3 = MultiplySimdRegister(ShuffleSimdRegister(l, l, ShuffleMask(3, 3, 3, 3)), r3);
-    StoreSimdRegister(&m30, AddSimdRegister(AddSimdRegister(r0, r1), AddSimdRegister(r2, r3)));
+    l = _mm_loadu_ps(&m30);
+    r0 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(0, 0, 0, 0)), r0);
+    r1 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(1, 1, 1, 1)), r1);
+    r2 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(2, 2, 2, 2)), r2);
+    r3 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(3, 3, 3, 3)), r3);
+    _mm_storeu_ps(&m30, _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, r3)));
 #else
     *this = Matrix4x4(
         (m00 * rhs.m00) + (m01 * rhs.m10) + (m02 * rhs.m20) + (m03 * rhs.m30),
