@@ -63,8 +63,8 @@ void Timer::Update()
         return;
     }
     
-    auto currTime = Environment::GetTickCount();
-    if ((currTime - m_prevTime) > m_interval)
+    const auto currentTime = Environment::GetTickCount();
+    if ((currentTime - m_prevTime) > m_interval)
     {
         if (OnTimeElapsed != nullptr)
         {
@@ -73,7 +73,7 @@ void Timer::Update()
         
         if (m_isAutoReset)
         {
-            m_prevTime = currTime;
+            m_prevTime = currentTime;
         }
         else
         {

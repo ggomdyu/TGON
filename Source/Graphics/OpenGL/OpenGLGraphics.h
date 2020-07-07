@@ -3,8 +3,6 @@
 #if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
-#include "Core/NonCopyable.h"
-
 #include "OpenGLContext.h"
 
 namespace tg

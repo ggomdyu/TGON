@@ -11,9 +11,9 @@ class Timer final
 {
 /**@section Constructor */
 public:
+    explicit Timer(bool isAutoReset) noexcept;
     Timer() noexcept;
     Timer(int64_t interval, bool isAutoReset) noexcept;
-    explicit Timer(bool isAutoReset) noexcept;
 
 /**@section Method */
 public:
@@ -28,24 +28,36 @@ public:
      */
     void Start();
     
-    /**@brief   Stops raising the OnTimeElapsed event by setting m_isEnabled to false. */
+    /**
+     * @brief   Stops raising the OnTimeElapsed event by setting m_isEnabled to false.
+     */
     void Stop();
     
-    /**@brief   Sets a bool indicating whether the Timer should raise the event only once or repeatedly. */
+    /**
+     * @brief   Sets a bool indicating whether the Timer should raise the event only once or repeatedly.
+     */
     void SetAutoReset(bool isAutoReset);
     
-    /**@brief   Gets a bool indicating whether the Timer should raise the event only once or repeatedly. */
-    bool IsAutoReset() const noexcept;
+    /**
+     * @brief   Gets a bool indicating whether the Timer should raise the event only once or repeatedly.
+     */
+    [[nodiscard]] bool IsAutoReset() const noexcept;
     
-    /**@brief   Sets the interval, expressed in milliseconds, at which to raise the OnTimeElapsed event. */
+    /**
+     * @brief   Sets the interval, expressed in milliseconds, at which to raise the OnTimeElapsed event.
+     */
     void SetInterval(int64_t interval);
     
-    /**@brief   Gets the interval, expressed in milliseconds, at which to raise the OnTimeElapsed event. */
-    int64_t GetInterval() const noexcept;
+    /**
+     * @brief   Gets the interval, expressed in milliseconds, at which to raise the OnTimeElapsed event.
+     */
+    [[nodiscard]] int64_t GetInterval() const noexcept;
     
 /**@section Variable */
 public:
-    /**@brief   Occurs when the interval elapses. */
+    /**
+     * @brief   Occurs when the interval elapses.
+     */
     DelegateChain<void()> OnTimeElapsed;
     
 /**@section Variable */

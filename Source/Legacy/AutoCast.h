@@ -1,10 +1,5 @@
-/**
- * @file    AutoCast.h
- * @author  ggomdyu
- * @since   05/24/2016
- */
-
 #pragma once
+
 #include <utility>
 
 namespace tgon
