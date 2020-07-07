@@ -137,6 +137,6 @@ struct IsExpressionTemplate<ExpressionTemplate<_Operator, _FirstOperand, _Second
 }
 
 template <typename _Type>
-concept IsExpressionTemplate = detail::IsExpressionTemplate<_Type>::value;
+concept Expression = detail::IsExpressionTemplate<_Type>::value;
 
 }

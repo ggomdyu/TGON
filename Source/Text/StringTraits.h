@@ -91,7 +91,7 @@ int32_t BasicStringTraits<_Char>::IndexOf(const _Char* str, int32_t strLen, cons
     const _Char* foundStr = std::search(str, str + strLen, subStr, subStr + subStrLen);
     if (foundStr != str + strLen)
     {
-        return foundStr - str;
+        return static_cast<int32_t>(foundStr - str);
     }
 
     return -1;
@@ -104,7 +104,7 @@ int32_t BasicStringTraits<_Char>::IndexOfAny(const _Char* str, int32_t strLen, c
     const _Char* foundStr = std::find_if(str, str + strLen, predicate);
     if (foundStr != str + strLen)
     {
-        return foundStr - str;
+        return static_cast<int32_t>(foundStr - str);
     }
 
     return -1;
@@ -116,7 +116,7 @@ int32_t BasicStringTraits<_Char>::LastIndexOf(const _Char* str, int32_t strLen, 
     const _Char* foundStr = std::find_end(str, str + strLen, subStr, subStr + subStrLen);
     if (foundStr != str + strLen)
     {
-        return foundStr - str;
+        return static_cast<int32_t>(foundStr - str);
     }
 
     return -1;

@@ -22,8 +22,8 @@ public:
                         float m20, float m21, float m22, float m23,
                         float m30, float m31, float m32, float m33) noexcept;
     explicit Matrix4x4(const std::span<const float>& m) noexcept;
-    template <typename _Expression> requires IsExpressionTemplate<_Expression>
-    constexpr Matrix4x4(const _Expression& expression);
+    template <Expression _ExpressionTemplate>
+    constexpr Matrix4x4(const _ExpressionTemplate& expression);
 
 /**@section Operator */
 public:
@@ -69,8 +69,8 @@ public:
           m30, m31, m32, m33;
 };
 
-template <typename _Expression> requires IsExpressionTemplate<_Expression>
-constexpr Matrix4x4::Matrix4x4(const _Expression& expression) :
+template <Expression _ExpressionTemplate>
+constexpr Matrix4x4::Matrix4x4(const _ExpressionTemplate& expression) :
     Matrix4x4(
         expression[0], expression[1], expression[2], expression[3],
         expression[4], expression[5], expression[6], expression[7],

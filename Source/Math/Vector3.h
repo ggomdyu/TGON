@@ -5,7 +5,7 @@
 namespace tg
 {
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 struct BasicVector3
 {
 /**@section Type */
@@ -18,7 +18,7 @@ public:
     constexpr BasicVector3(const _Value& scalar) noexcept;
     constexpr BasicVector3(const _Value& x, const _Value& y) noexcept;
     constexpr BasicVector3(const _Value& x, const _Value& y, const _Value& z) noexcept;
-    template <typename _ExpressionTemplate> requires IsExpressionTemplate<_ExpressionTemplate>
+    template <Expression _ExpressionTemplate>
     constexpr BasicVector3(const _ExpressionTemplate& expression);
     
 /**@section Operator */
@@ -68,16 +68,16 @@ public:
 using Vector3 = BasicVector3<float>;
 using DVector3 = BasicVector3<double>;
 
-template <typename... _Args>
+template <Arithmetic... _Args>
 BasicVector3(_Args...) -> BasicVector3<std::common_type_t<_Args...>>;
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value>::BasicVector3(const _Value& scalar) noexcept :
     BasicVector3(scalar, scalar, scalar)
 {
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value>::BasicVector3(const _Value& x, const _Value& y) noexcept :
     BasicVector3(x, y, 0.0f)
 {
@@ -85,7 +85,7 @@ constexpr BasicVector3<_Value>::BasicVector3(const _Value& x, const _Value& y) n
 
 #if TGON_USING_SIMD
 #else
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value>::BasicVector3(const _Value& x, const _Value& y, const _Value& z) noexcept :
     x(x),
     y(y),
@@ -94,56 +94,56 @@ constexpr BasicVector3<_Value>::BasicVector3(const _Value& x, const _Value& y, c
 }
 #endif
 
-template <typename _Value> requires IsArithmetic<_Value>
-template <typename _ExpressionTemplate> requires IsExpressionTemplate<_ExpressionTemplate>
+template <Arithmetic _Value>
+template <Expression _ExpressionTemplate>
 constexpr BasicVector3<_Value>::BasicVector3(const _ExpressionTemplate& expression) :
     BasicVector3(expression[0], expression[1], expression[2])
 {
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr ExpressionTemplate<Plus, BasicVector3<_Value>, BasicVector3<_Value>> BasicVector3<_Value>::operator+(const BasicVector3& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr ExpressionTemplate<Minus, BasicVector3<_Value>, BasicVector3<_Value>> BasicVector3<_Value>::operator-(const BasicVector3& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value> BasicVector3<_Value>::operator*(const _Value& rhs) const noexcept
 {
     return BasicVector3(x * rhs, y * rhs, z * rhs);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value> BasicVector3<_Value>::operator/(const _Value& rhs) const
 {
     return BasicVector3(x / rhs, y / rhs, z / rhs);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value> operator*(const _Value& lhs, const BasicVector3<_Value>& rhs) noexcept
 {
     return rhs * lhs;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value> operator/(const _Value& lhs, const BasicVector3<_Value>& rhs)
 {
     return rhs / lhs;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value> BasicVector3<_Value>::operator-() const noexcept
 {
     return BasicVector3(-x, -y, -z);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 BasicVector3<_Value>& BasicVector3<_Value>::operator+=(const BasicVector3& rhs) noexcept
 {
     x += rhs.x;
@@ -153,7 +153,7 @@ BasicVector3<_Value>& BasicVector3<_Value>::operator+=(const BasicVector3& rhs) 
     return *this;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 BasicVector3<_Value>& BasicVector3<_Value>::operator-=(const BasicVector3& rhs) noexcept
 {
     x -= rhs.x;
@@ -163,7 +163,7 @@ BasicVector3<_Value>& BasicVector3<_Value>::operator-=(const BasicVector3& rhs) 
     return *this;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 BasicVector3<_Value>& BasicVector3<_Value>::operator*=(const BasicVector3& rhs) noexcept
 {
     x *= rhs.x;
@@ -173,7 +173,7 @@ BasicVector3<_Value>& BasicVector3<_Value>::operator*=(const BasicVector3& rhs) 
     return *this;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 BasicVector3<_Value>& BasicVector3<_Value>::operator*=(const _Value& rhs) noexcept
 {
     x *= rhs;
@@ -183,7 +183,7 @@ BasicVector3<_Value>& BasicVector3<_Value>::operator*=(const _Value& rhs) noexce
     return *this;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 BasicVector3<_Value>& BasicVector3<_Value>::operator/=(const _Value& rhs)
 {
     x /= rhs;
@@ -193,55 +193,55 @@ BasicVector3<_Value>& BasicVector3<_Value>::operator/=(const _Value& rhs)
     return *this;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 _Value& BasicVector3<_Value>::operator[](int32_t index) noexcept
 {
     return *(&x + index);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 _Value BasicVector3<_Value>::operator[](int32_t index) const noexcept
 {
     return *(&x + index);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr bool BasicVector3<_Value>::operator==(const BasicVector3& rhs) const noexcept
 {
     return (x == rhs.x && y == rhs.y && z == rhs.z);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr bool BasicVector3<_Value>::operator!=(const BasicVector3& rhs) const noexcept
 {
     return !(*this == rhs);
 }
     
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value>::operator Vector2() const noexcept
 {
     return Vector2(x, y);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value> BasicVector3<_Value>::Reflect(const BasicVector3& inDirection, const BasicVector3& inPlaneNormal) noexcept
 {
     return inDirection + Dot(-inDirection, inPlaneNormal) * 2 * inPlaneNormal;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr _Value BasicVector3<_Value>::Dot(const BasicVector3& v1, const BasicVector3& v2) noexcept
 {
     return v1.Dot(v2);
 }
     
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr _Value BasicVector3<_Value>::Dot(const BasicVector3& v) const noexcept
 {
     return (x * v.x) + (y * v.y) + (z * v.z);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicVector3<_Value> BasicVector3<_Value>::Cross(const BasicVector3& v1, const BasicVector3& v2) noexcept
 {
     return {
@@ -251,45 +251,45 @@ constexpr BasicVector3<_Value> BasicVector3<_Value>::Cross(const BasicVector3& v
     };
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 _Value& BasicVector3<_Value>::At(int32_t index)
 {
     assert(index < 3 && index > -1);
     return *(&x + index);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 _Value BasicVector3<_Value>::At(int32_t index) const
 {
     assert(index < 3 && index > -1);
     return *(&x + index);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 _Value BasicVector3<_Value>::Distance(const BasicVector3& v1, const BasicVector3& v2)
 {
     return BasicVector3(v1 - v2).Length();
 }
     
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 _Value BasicVector3<_Value>::Distance(const BasicVector3& v) const noexcept
 {
     return BasicVector3(*this - v).Length();
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 _Value BasicVector3<_Value>::Length() const
 {
     return std::sqrtf(this->LengthSq());
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 _Value BasicVector3<_Value>::LengthSq() const noexcept
 {
     return (x * x) + (y * y) + (z * z);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 void BasicVector3<_Value>::Normalize()
 {
     _Value length = this->Length();
@@ -299,7 +299,7 @@ void BasicVector3<_Value>::Normalize()
     z = z / length;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 BasicVector3<_Value> BasicVector3<_Value>::Normalized() const
 {
     _Value length = this->Length();
@@ -307,13 +307,13 @@ BasicVector3<_Value> BasicVector3<_Value>::Normalized() const
     return BasicVector3(x / length, y / length, z / length);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 int32_t BasicVector3<_Value>::ToString(const std::span<char8_t>& destStr) const
 {
     return this->ToString(&destStr[0], destStr.size());
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 std::u8string BasicVector3<_Value>::ToString() const
 {
     std::array<char8_t, 1024> str{};
@@ -322,7 +322,7 @@ std::u8string BasicVector3<_Value>::ToString() const
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 int32_t BasicVector3<_Value>::ToString(char8_t* destStr, size_t destStrBufferLen) const
 {
     const auto destStrLen = fmt::format_to_n(destStr, sizeof(destStr[0]) * (destStrBufferLen - 1), u8"{} {} {}", x, y, z).size;

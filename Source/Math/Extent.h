@@ -6,12 +6,13 @@
 #include <span>
 #include <fmt/format.h>
 
+#include "Core/Concepts.h"
 #include "Core/ExpressionTemplate.h"
 
 namespace tg
 {
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 struct BasicExtent2D
 {
 /**@section Type */
@@ -22,9 +23,9 @@ public:
 public:
     constexpr BasicExtent2D() noexcept = default;
     constexpr BasicExtent2D(const _Value& width, const _Value& height) noexcept;
-    template <typename _Value2>
+    template <Arithmetic _Value2>
     constexpr BasicExtent2D(const BasicExtent2D<_Value2>& extent) noexcept;
-    template <typename _ExpressionTemplate> requires IsExpressionTemplate<_ExpressionTemplate>
+    template <Expression _ExpressionTemplate>
     constexpr BasicExtent2D(const _ExpressionTemplate& expression);
 
 /**@section Operator */
@@ -38,7 +39,7 @@ public:
     BasicExtent2D& operator-=(const BasicExtent2D& rhs) noexcept;
     BasicExtent2D& operator*=(const _Value& rhs) noexcept;
     BasicExtent2D& operator/=(const _Value& rhs);
-    template <typename _Value2>
+    template <Arithmetic _Value2>
     BasicExtent2D& operator=(const BasicExtent2D<_Value2>& rhs) noexcept;
     constexpr bool operator==(const BasicExtent2D& rhs) const noexcept;
     constexpr bool operator!=(const BasicExtent2D& rhs) const noexcept;
@@ -61,62 +62,62 @@ using I64Extent2D = BasicExtent2D<int64_t>;
 using IExtent2D = BasicExtent2D<int>;
 using LLExtent2D = BasicExtent2D<long long>;
 
-template <typename... _Args>
+template <Arithmetic... _Args>
 BasicExtent2D(_Args...) -> BasicExtent2D<std::common_type_t<_Args...>>;
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicExtent2D<_Value>::BasicExtent2D(const _Value& width, const _Value& height) noexcept :
     width(width),
     height(height)
 {
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
-template <typename _Value2>
+template <Arithmetic _Value>
+template <Arithmetic _Value2>
 constexpr BasicExtent2D<_Value>::BasicExtent2D(const BasicExtent2D<_Value2>& extent) noexcept :
     width(static_cast<_Value>(extent.width)),
     height(static_cast<_Value>(extent.height))
 {
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
-template <typename _ExpressionTemplate> requires IsExpressionTemplate<_ExpressionTemplate>
+template <Arithmetic _Value>
+template <Expression _ExpressionTemplate>
 constexpr BasicExtent2D<_Value>::BasicExtent2D(const _ExpressionTemplate& expression) :
     BasicExtent2D(expression[0], expression[1])
 {
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr ExpressionTemplate<Plus, BasicExtent2D<_Value>, BasicExtent2D<_Value>> BasicExtent2D<_Value>::operator+(const BasicExtent2D& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr ExpressionTemplate<Minus, BasicExtent2D<_Value>, BasicExtent2D<_Value>> BasicExtent2D<_Value>::operator-(const BasicExtent2D& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicExtent2D<_Value> BasicExtent2D<_Value>::operator*(const _Value& rhs) const noexcept
 {
     return BasicExtent2D(*this) *= rhs;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicExtent2D<_Value> BasicExtent2D<_Value>::operator/(const _Value& rhs) const
 {
     return BasicExtent2D(*this) /= rhs;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr BasicExtent2D<_Value> BasicExtent2D<_Value>::operator-() const noexcept
 {
 	return BasicExtent2D(-width, -height);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator+=(const BasicExtent2D& rhs) noexcept
 {
     width += rhs.width;
@@ -125,7 +126,7 @@ BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator+=(const BasicExtent2D& rh
 	return *this;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator-=(const BasicExtent2D& rhs) noexcept
 {
     width -= rhs.width;
@@ -134,7 +135,7 @@ BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator-=(const BasicExtent2D& rh
 	return *this;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator*=(const _Value& rhs) noexcept
 {
     width *= rhs;
@@ -143,7 +144,7 @@ BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator*=(const _Value& rhs) noex
 	return *this;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator/=(const _Value& rhs)
 {
     width /= rhs;
@@ -152,8 +153,8 @@ BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator/=(const _Value& rhs)
 	return *this;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
-template <typename _Value2>
+template <Arithmetic _Value>
+template <Arithmetic _Value2>
 BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator=(const BasicExtent2D<_Value2>& rhs) noexcept
 {
     width = rhs.width;
@@ -162,25 +163,25 @@ BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator=(const BasicExtent2D<_Val
     return *this;
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr bool BasicExtent2D<_Value>::operator==(const BasicExtent2D& rhs) const noexcept
 {
 	return (width == rhs.width && height == rhs.height);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 constexpr bool BasicExtent2D<_Value>::operator!=(const BasicExtent2D& rhs) const noexcept
 {
     return !(*this == rhs);
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 int32_t BasicExtent2D<_Value>::ToString(const std::span<char8_t>& destStr) const
 {
     return this->ToString(&destStr[0], destStr.size());
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 std::u8string BasicExtent2D<_Value>::ToString() const
 {
     std::array<char8_t, 1024> str;
@@ -189,7 +190,7 @@ std::u8string BasicExtent2D<_Value>::ToString() const
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
-template <typename _Value> requires IsArithmetic<_Value>
+template <Arithmetic _Value>
 int32_t BasicExtent2D<_Value>::ToString(char8_t* destStr, size_t destStrBufferLen) const
 {
     auto destStrLen = fmt::format_to_n(destStr, sizeof(destStr[0]) * (destStrBufferLen - 1), u8"{} {}", width, height).size;

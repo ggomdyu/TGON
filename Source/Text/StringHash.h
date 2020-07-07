@@ -23,7 +23,7 @@ struct IsBasicStringHash<BasicStringHash<_String>> : std::true_type {};
 }
 
 template <typename _Type>
-concept IsBasicStringHash = detail::IsBasicStringHash<_Type>::value;
+concept HashableString = detail::IsBasicStringHash<_Type>::value;
 
 template <typename _String>
 class BasicStringHash
@@ -38,9 +38,9 @@ public:
     constexpr BasicStringHash() noexcept = default;
     constexpr BasicStringHash(const BasicStringHash& str) = default;
     constexpr BasicStringHash(BasicStringHash&& str) noexcept = default;
-    template <typename _String2> requires IsBasicStringHash<std::remove_reference_t<_String2>>
+    template <HashableString _String2>
     constexpr BasicStringHash(const _String2& str) noexcept;
-    template <typename _String2> requires (IsBasicStringHash<std::remove_reference_t<_String2>> == false)
+    template <typename _String2>
     constexpr BasicStringHash(const _String2& str) noexcept;
 
 /**@section Constructor */
@@ -99,7 +99,7 @@ public:
 };
 
 template <typename _String>
-template <typename _String2> requires IsBasicStringHash<std::remove_reference_t<_String2>>
+template <HashableString _String2>
 constexpr BasicStringHash<_String>::BasicStringHash(const _String2& str) noexcept :
     m_str(str.Data(), str.Length()),
     m_hashCode(str.GetHashCode())
@@ -107,7 +107,7 @@ constexpr BasicStringHash<_String>::BasicStringHash(const _String2& str) noexcep
 }
 
 template <typename _String>
-template <typename _String2> requires (IsBasicStringHash<std::remove_reference_t<_String2>> == false)
+template <typename _String2>
 constexpr BasicStringHash<_String>::BasicStringHash(const _String2& str) noexcept :
     m_str(str),
     m_hashCode(std::hash<BasicStringHash>{}(this->Data()))
@@ -118,7 +118,7 @@ template <typename _String>
 template <typename _String2>
 BasicStringHash<_String>& BasicStringHash<_String>::operator=(const _String2& rhs) noexcept
 {
-    if constexpr (IsBasicStringHash<std::remove_reference_t<_String2>>)
+    if constexpr (HashableString<_String2>)
     {
         m_str = rhs.m_str;
         m_hashCode = rhs.m_hashCode;
@@ -126,7 +126,7 @@ BasicStringHash<_String>& BasicStringHash<_String>::operator=(const _String2& rh
     else
     {
         m_str = rhs;
-        m_hashCode = X65599Hash(this->Data());
+        m_hashCode = X65599Hash(&rhs[0]);
     }
 
     return *this;
