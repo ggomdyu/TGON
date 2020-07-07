@@ -50,6 +50,9 @@ private:
     ResourceUnit GetResourceUnit() const;
 
 /* @section Variable */
+public:
+    static constexpr auto ModuleStage = ModuleStage::Idle;
+
 private:
     std::mutex m_mutex;
     FontFactory m_fontFactory;

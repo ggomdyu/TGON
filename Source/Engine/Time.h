@@ -26,6 +26,9 @@ public:
     [[nodiscard]] int32_t GetFrameCount() const noexcept;
 
 /**@section Variable */
+public:
+    static constexpr auto ModuleStage = ModuleStage::Update;
+
 private:
     int64_t m_lastRecordedTickTime;
     float m_timeScale;

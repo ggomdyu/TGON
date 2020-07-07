@@ -7,17 +7,18 @@
 #include "AssetModule.h"
 #include "Input.h"
 #include "Time.h"
-#include "TimerModule.h"
+#include "Timer.h"
 #include "TaskModule.h"
 #include "Input.h"
 #include "Audio.h"
 #include "SceneModule.h"
+#include "Renderer.h"
 
 namespace tg
 {
 
-Engine::Engine(const EngineConfiguration& engineConfig) noexcept :
-    m_engineConfig(engineConfig)
+Engine::Engine(EngineConfiguration engineConfig) noexcept :
+    m_engineConfig(std::move(engineConfig))
 {
 }
 
@@ -32,18 +33,21 @@ void Engine::Initialize()
     this->AddModule<AssetModule>();
     this->AddModule<Audio>();
     this->AddModule<Time>();
-    this->AddModule<TimerModule>();
+    this->AddModule<WorldTimer>();
     //this->AddModule<Input>s(m_engineConfig.inputMode);
     this->AddModule<SceneManager>();
 }
 
 void Engine::Update()
 {
-    for (auto& module : m_modules)
+    for (auto& modules : m_moduleStage)
     {
-        if (module != nullptr)
+        for (auto& module : modules)
         {
-            module->Update();
+            if (module != nullptr)
+            {
+                module->Update();
+            }
         }
     }
     
@@ -52,9 +56,12 @@ void Engine::Update()
 
 void Engine::RemoveAllModule()
 {
-    while (m_modules.empty() == false)
+    for (auto& modules : m_moduleStage)
     {
-        m_modules.pop_back();
+        while (modules.empty() == false)
+        {
+            modules.pop_back();
+        }
     }
 }
 

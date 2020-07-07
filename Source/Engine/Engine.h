@@ -1,7 +1,9 @@
 #pragma once
 
 #include <vector>
+#include <array>
 
+#include "Core/Algorithm.h"
 #include "Platform/WindowStyle.h"
 #include "Graphics/VideoMode.h"
 
@@ -38,7 +40,7 @@ public:
 
 /**@section Constructor */
 public:
-    explicit Engine(const EngineConfiguration& engineConfig) noexcept;
+    explicit Engine(EngineConfiguration engineConfig) noexcept;
     Engine(const Engine& rhs) = delete;
     Engine(Engine&& rhs) = delete;
 
@@ -54,12 +56,12 @@ public:
 /**@section Method */
 public:
     /**
-     * @brief   Initialize the object.
+     * @brief   Initializes the object.
      */
     virtual void Initialize();
 
     /**
-     * @brief   Update the frame of the object.
+     * @brief   Updates the frame of the object.
      */
     virtual void Update();
 
@@ -68,7 +70,7 @@ public:
      * @param args  Arguments for construct the specified type of module.
      * @return  The added module.
      */
-    template <typename _ModuleType, typename... _ArgTypes>
+    template <Moduleable _ModuleType, typename... _ArgTypes>
     _ModuleType* AddModule(_ArgTypes&&... args);
 
     /**
@@ -96,15 +98,15 @@ private:
 /**@section Variable */
 private:
     EngineConfiguration m_engineConfig;
-    std::vector<std::unique_ptr<Module>> m_modules;
+    std::array<std::vector<std::unique_ptr<Module>>, 2> m_moduleStage;
 };
     
-template <typename _ModuleType, typename... _ArgTypes>
+template <Moduleable _ModuleType, typename... _ArgTypes>
 _ModuleType* Engine::AddModule(_ArgTypes&&... args)
 {
     auto module = std::make_unique<_ModuleType>(std::forward<_ArgTypes>(args)...);
     auto* rawModule = module.get();
-    m_modules.push_back(std::move(module));
+    m_moduleStage[UnderlyingCast(_ModuleType::ModuleStage)].push_back(std::move(module));
 
     rawModule->Initialize();
 
@@ -114,11 +116,14 @@ _ModuleType* Engine::AddModule(_ArgTypes&&... args)
 template <typename _ModuleType>
 _ModuleType* Engine::FindModule() noexcept
 {
-    for (auto& module : m_modules)
+    for (auto& modules : m_moduleStage)
     {
-        if (module->GetRtti() == GetRtti<_ModuleType>())
+        for (auto& module : modules)
         {
-            return reinterpret_cast<_ModuleType*>(module.get());
+            if (module->GetRtti() == GetRtti<_ModuleType>())
+            {
+                return reinterpret_cast<_ModuleType*>(module.get());
+            }
         }
     }
 

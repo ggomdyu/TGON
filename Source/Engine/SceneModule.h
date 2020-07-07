@@ -62,6 +62,9 @@ public:
     SceneOpenCallback OnOpenScene;
 
 /**@section Variable */
+public:
+    static constexpr auto ModuleStage = ModuleStage::Update;
+
 protected:
     std::shared_ptr<Scene> m_activeScene;
     std::vector<std::shared_ptr<Scene>> m_sceneList;

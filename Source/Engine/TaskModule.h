@@ -26,6 +26,9 @@ public:
     void Update() override;
     
 /**@section Variable */
+public:
+    static constexpr auto ModuleStage = ModuleStage::Update;
+
 private:
     SerialDispatchQueue m_mainDispatchQueue;
     ConcurrentDispatchQueue m_globalDispatchQueue;
