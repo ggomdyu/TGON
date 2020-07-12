@@ -2,12 +2,12 @@
 
 #include "Platform/Environment.h"
 
-#include "Time.h"
+#include "TimeModule.h"
 
 namespace tg
 {
 
-Time::Time() :
+TimeModule::TimeModule() :
     m_lastRecordedTickTime(Environment::GetTickCount()),
     m_timeScale(1.0f),
     m_deltaTime(0.0f),
@@ -15,37 +15,37 @@ Time::Time() :
 {
 }
 
-void Time::SetTimeScale(float timeScale) noexcept
+void TimeModule::SetTimeScale(float timeScale) noexcept
 {
     m_timeScale = timeScale;
 }
 
-float Time::GetTimeScale() const noexcept
+float TimeModule::GetTimeScale() const noexcept
 {
     return m_timeScale;
 }
 
-float Time::GetDeltaTime() const noexcept
+float TimeModule::GetDeltaTime() const noexcept
 {
     return m_deltaTime * m_timeScale;
 }
 
-float Time::GetUnscaledDeltaTime() const noexcept
+float TimeModule::GetUnscaledDeltaTime() const noexcept
 {
     return m_deltaTime;
 }
 
-float Time::GetSmoothDeltaTime() const noexcept
+float TimeModule::GetSmoothDeltaTime() const noexcept
 {
     return m_smoothDeltaTime * m_timeScale;
 }
 
-int32_t Time::GetFrameCount() const noexcept
+int32_t TimeModule::GetFrameCount() const noexcept
 {
     return m_frameCount;
 }
 
-void Time::Update()
+void TimeModule::Update()
 {
     const auto currTime = Environment::GetTickCount();
 

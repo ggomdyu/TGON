@@ -7,19 +7,21 @@
 namespace tg
 {
 
-class Renderer final :
+class RendererModule final :
 	public Module
 {
 public:
-    TGON_RTTI(Renderer)
+    TGON_RTTI(RendererModule)
 
 /**@section Constructor */
 public:
-    Renderer(void* nativeWindow, const VideoMode& videoMode);
+    RendererModule(void* nativeWindow, const VideoMode& videoMode);
 
 /**@section Method */
 public:
     void Update() override;
+    [[nodiscard]] Graphics& GetGraphics() noexcept;
+    [[nodiscard]] const Graphics& GetGraphics() const noexcept;
 
 /**@section Variable */
 private:

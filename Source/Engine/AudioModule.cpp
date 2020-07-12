@@ -1,11 +1,11 @@
 #include "PrecompiledHeader.h"
 
-#include "Audio.h"
+#include "AudioModule.h"
 
 namespace tg
 {
 
-Audio::Audio() :
+AudioModule::AudioModule() :
     m_device({nullptr, [](ALCdevice* device)
     {
         alcCloseDevice(device);
@@ -18,7 +18,7 @@ Audio::Audio() :
 {
 }
 
-void Audio::Update()
+void AudioModule::Update()
 {
 }
 

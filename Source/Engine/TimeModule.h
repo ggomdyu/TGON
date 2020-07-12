@@ -5,15 +5,15 @@
 namespace tg
 {
 
-class Time final :
+class TimeModule final :
 	public Module
 {
 public:
-    TGON_RTTI(Time)
+    TGON_RTTI(TimeModule)
 
 /**@section Constructor */
 public:
-    Time();
+    TimeModule();
 
 /**@section Method */
 public:

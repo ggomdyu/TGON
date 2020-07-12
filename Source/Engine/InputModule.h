@@ -16,15 +16,15 @@ struct InputMode final
     bool isUseGamepad = false;
 };
 
-class Input final :
+class InputModule final :
     public Module
 {
 public:
-    TGON_RTTI(Input)
+    TGON_RTTI(InputModule)
     
 /**@section Constructor */
 public:
-    explicit Input(const InputMode& inputMode = {});
+    explicit InputModule(const InputMode& inputMode = {});
 
 /**@section Method */
 public:

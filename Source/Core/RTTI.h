@@ -35,18 +35,18 @@ private:
 };
 
 template <typename _Type>
-std::enable_if_t<IsPure<_Type>, const Rtti*> GetRtti()
+std::enable_if_t<IsRawType<_Type>, const Rtti*> GetRtti()
 {
-    using PureType = Pure<_Type>;
+    using PureType = RawType<_Type>;
 
     static const Rtti rtti(typeid(PureType), GetRtti<typename PureType::Super>());
     return &rtti;
 }
 
 template <typename _Type>
-std::enable_if_t<!IsPure<_Type>, const Rtti*> GetRtti()
+std::enable_if_t<!IsRawType<_Type>, const Rtti*> GetRtti()
 {
-    return GetRtti<Pure<_Type>>();
+    return GetRtti<RawType<_Type>>();
 }
 
 template <>

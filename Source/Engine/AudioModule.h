@@ -5,15 +5,15 @@
 namespace tg
 {
 
-class Audio :
+class AudioModule :
 	public Module
 {
 public:
-    TGON_RTTI(Audio)
+    TGON_RTTI(AudioModule)
 
 /* @section Constructor */
 public:
-    Audio();
+    AudioModule();
 
 /* @section Method */
 public:

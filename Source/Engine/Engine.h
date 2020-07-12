@@ -7,8 +7,7 @@
 #include "Platform/WindowStyle.h"
 #include "Graphics/VideoMode.h"
 
-#include "Input.h"
-#include "Module.h"
+#include "InputModule.h"
 
 #define TGON_ENGINE(className)\
     namespace tg\

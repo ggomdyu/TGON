@@ -11,18 +11,18 @@ namespace tg
 
 using TimerHandle = int64_t;
 
-class WorldTimer :
+class TimerModule :
 	public Module
 {
 public:
-    TGON_RTTI(WorldTimer)
+    TGON_RTTI(TimerModule)
 
 /**@section Struct */
 private:
     struct TimerInfo
     {
         TimerHandle timerHandle;
-        Delegate<void(TimerHandle)> callback;
+        Delegate<void()> callback;
         float elapsedTime = 0.0f;
         float interval = 0.0f;
         bool isLoop = false;
@@ -31,14 +31,14 @@ private:
 
 /**@section Constructor */
 public:
-    WorldTimer() noexcept;
+    TimerModule() noexcept;
 
 /**@section Method */
 public:
-    TimerHandle SetTimer(Delegate<void(TimerHandle)> callback, float interval, bool isLoop);
+    void Update() override;
+    TimerHandle SetTimer(Delegate<void()> callback, float interval, bool isLoop);
     bool ClearTimer(TimerHandle timerHandle);
     [[nodiscard]] float GetTimerElapsed(TimerHandle timerHandle) const noexcept;
-    void Update() override;
 
 private:
     static TimerHandle CreateTimerHandle() noexcept;

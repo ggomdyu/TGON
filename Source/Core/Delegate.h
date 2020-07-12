@@ -117,7 +117,7 @@ size_t FunctorImpl<_Function, _Return, _Args...>::GetSize() const noexcept
 }
 
 template <typename _Type>
-concept IsDelegate = detail::IsDelegate<_Type>::value;
+constexpr bool IsDelegate = detail::IsDelegate<_Type>::value;
 
 template <typename _Return, typename... _Args>
 class Delegate<_Return(_Args...)> final

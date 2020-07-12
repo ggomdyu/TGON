@@ -68,7 +68,7 @@ public:
     [[nodiscard]] bool IsMinimized() const;
     [[nodiscard]] bool IsTopMost() const;
 
-/**@section Event handler */
+/**@section Variable */
 public:
     DelegateChain<void(int32_t, int32_t)> OnMove;
     DelegateChain<void(int32_t, int32_t)> OnResize;

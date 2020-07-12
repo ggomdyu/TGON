@@ -189,7 +189,7 @@ void Application::ShowMessageBox(const char8_t* title, const char8_t* message, M
     }
 
     std::array<wchar_t, 2048> utf16Message{};
-    const auto utf16MessageLen = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(message), -1, &utf16Message[0], utf16Message.size());
+    const auto utf16MessageLen = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(message), -1, &utf16Message[0], static_cast<int>(utf16Message.size()));
     if (utf16MessageLen == 0)
     {
         return;

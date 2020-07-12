@@ -16,7 +16,7 @@ enum class NewSceneSetup
     DefaultGameObjects,
 };
 
-enum class OpenSceneMode
+enum class LoadSceneMode
 {
     Single,
     Additive,
@@ -37,33 +37,49 @@ private:
     std::vector<std::shared_ptr<GameObject>> m_gameObjects;
 };
 
-class SceneManager :
+class SceneModule :
     public Module
 {
 public:
-    TGON_RTTI(SceneManager)
+    TGON_RTTI(SceneModule)
 
 /**@section Type */
 public:
     using NewSceneCreatedCallback = Delegate<void(const std::shared_ptr<Scene>&, NewSceneSetup)>;
-    using SceneOpeningCallback = Delegate<void(const std::shared_ptr<Scene>&, OpenSceneMode)>;
-    using SceneOpenCallback = Delegate<void(const std::shared_ptr<Scene>&, OpenSceneMode)>;
+    using SceneOpeningCallback = Delegate<void(const std::shared_ptr<Scene>&, LoadSceneMode)>;
+    using SceneOpenCallback = Delegate<void(const std::shared_ptr<Scene>&, LoadSceneMode)>;
 
 /**@section Method */
 public:
+    /**
+     * @brief   Updates the frame of the object.
+     */
     void Update() override;
-    void NewScene(NewSceneSetup newSceneSetup);
-    void OpenScene(const std::string& path, OpenSceneMode openSceneMode);
-    std::shared_ptr<GameObject> Instantiate();
 
-/**@section Event handler */
-public:
-    SceneOpeningCallback OnOpeningScene;
-    SceneOpenCallback OnOpenScene;
+    /**
+     * @brief   Creates a new scene.
+     * @param newSceneSetup     The setup parameter allows you to select whether or not the default set of object should be added to the new scene.
+     */
+    void NewScene(NewSceneSetup newSceneSetup);
+
+    /**
+     * @brief   Loads the specified name of scene.
+     * @param name              The name of scene.
+     * @param loadSceneMode     It allows you to select whether or not merge objects to active scene.
+     */
+    void LoadScene(const std::string& name, LoadSceneMode loadSceneMode);
+
+    /**
+     * @brief   Instantiate a new GameObject to the active scene.
+     * @return  A new instantiated object.
+     */
+    std::shared_ptr<GameObject> Instantiate();
 
 /**@section Variable */
 public:
     static constexpr auto ModuleStage = ModuleStage::Update;
+    SceneOpeningCallback OnOpeningScene;
+    SceneOpenCallback OnOpenScene;
 
 protected:
     std::shared_ptr<Scene> m_activeScene;

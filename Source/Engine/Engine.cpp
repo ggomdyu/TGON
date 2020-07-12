@@ -5,14 +5,14 @@
 
 #include "Engine.h"
 #include "AssetModule.h"
-#include "Input.h"
-#include "Time.h"
-#include "Timer.h"
+#include "InputModule.h"
+#include "TimeModule.h"
+#include "TimerModule.h"
 #include "TaskModule.h"
-#include "Input.h"
-#include "Audio.h"
+#include "InputModule.h"
+#include "AudioModule.h"
 #include "SceneModule.h"
-#include "Renderer.h"
+#include "RendererModule.h"
 
 namespace tg
 {
@@ -31,11 +31,11 @@ void Engine::Initialize()
 {
     this->AddModule<TaskModule>();
     this->AddModule<AssetModule>();
-    this->AddModule<Audio>();
-    this->AddModule<Time>();
-    this->AddModule<WorldTimer>();
+    this->AddModule<AudioModule>();
+    this->AddModule<TimeModule>();
+    this->AddModule<TimerModule>();
     //this->AddModule<Input>s(m_engineConfig.inputMode);
-    this->AddModule<SceneManager>();
+    this->AddModule<SceneModule>();
 }
 
 void Engine::Update()

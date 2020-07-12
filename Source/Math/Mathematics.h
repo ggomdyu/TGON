@@ -133,13 +133,13 @@ constexpr _Value Lerp(const _Value& from, const _Value& to, float time) noexcept
 
 constexpr float Smoothstep(float from, float to, float time) noexcept
 {
-    float t = Clamp((time - from) / (to - from), 0.0f, 1.0f);
+    const float t = Clamp((time - from) / (to - from), 0.0f, 1.0f);
     return t * t * (3.0f - (2.0f * t));
 }
 
 constexpr Vector3 QuadraticBezier(const Vector3& v1, const Vector3& v2, const Vector3& v3, float time) noexcept
 {
-    float invTime = 1.0f - time;
+    const float invTime = 1.0f - time;
     return {(invTime * invTime * v1) + (2.0f * time * invTime * v2) + (time * invTime * v3)};
 }
 

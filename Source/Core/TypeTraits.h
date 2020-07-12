@@ -97,10 +97,10 @@ template <typename _Type>
 using RemoveAllPointers = typename detail::RemoveAllPointers<_Type>::Type;
 
 template <typename _Type>
-using Pure = std::remove_cv_t<RemoveAllPointers<std::decay_t<_Type>>>;
+using RawType = std::remove_cv_t<RemoveAllPointers<std::decay_t<_Type>>>;
 
 template <typename _Type>
-constexpr bool IsPure = std::is_same_v<Pure<_Type>, _Type>;
+constexpr bool IsRawType = std::is_same_v<RawType<_Type>, _Type>;
 
 template <typename _Type, typename... _Types>
 constexpr bool IsAllSame = std::bool_constant<(std::is_same_v<_Type, _Types> && ...)>::value;
@@ -112,9 +112,9 @@ template <typename _Type>
 constexpr bool IsChar = IsAny<_Type, char, char16_t, char32_t, wchar_t>;
     
 template <typename _Type>
-constexpr bool IsCharPointer = IsChar<Pure<_Type>> && std::is_pointer_v<_Type>;
+constexpr bool IsCharPointer = IsChar<RawType<_Type>> && std::is_pointer_v<_Type>;
 
 template <typename _Type>
-constexpr bool IsCharReference = IsChar<Pure<_Type>> && std::is_reference_v<_Type>;
+constexpr bool IsCharReference = IsChar<RawType<_Type>> && std::is_reference_v<_Type>;
 
 }
