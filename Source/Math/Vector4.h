@@ -16,27 +16,25 @@ public:
 /**@section Constructor */
 public:
     constexpr BasicVector4() noexcept = default;
-    constexpr BasicVector4(const _Value& scalar) noexcept;
-    constexpr BasicVector4(const _Value& x, const _Value& y, const _Value& z, const _Value& w) noexcept;
-    template <Expression _ExpressionTemplate>
+    constexpr BasicVector4(_Value scalar) noexcept;
+    constexpr BasicVector4(_Value x, _Value y, _Value z, _Value w) noexcept;
+    template <typename _ExpressionTemplate>
     constexpr BasicVector4(const _ExpressionTemplate& expression);
 
 /**@section Operator */
 public:
-    constexpr ExpressionTemplate<Plus, BasicVector4, BasicVector4> operator+(const BasicVector4& rhs) const noexcept;
-    constexpr ExpressionTemplate<Minus, BasicVector4, BasicVector4> operator-(const BasicVector4& rhs) const noexcept;
-    constexpr BasicVector4 operator*(const _Value& rhs) const noexcept;
-    constexpr BasicVector4 operator/(const _Value& rhs) const;
-    friend constexpr BasicVector4 operator*(const _Value& lhs, const BasicVector4& rhs) noexcept;
-    friend constexpr BasicVector4 operator/(const _Value& lhs, const BasicVector4& rhs);
+    constexpr AddExpression<BasicVector4, BasicVector4> operator+(const BasicVector4& rhs) const noexcept;
+    constexpr SubtractExpression<BasicVector4, BasicVector4> operator-(const BasicVector4& rhs) const noexcept;
+    constexpr MultiplyExpression<BasicVector4, _Value> operator*(const _Value& rhs) const noexcept;
+    constexpr DivideExpression<BasicVector4, _Value> operator/(const _Value& rhs) const;
     constexpr BasicVector4 operator*(const Matrix4x4& rhs) const noexcept;
     constexpr BasicVector4 operator-() const noexcept;
     BasicVector4& operator+=(const BasicVector4& rhs) noexcept;
     BasicVector4& operator-=(const BasicVector4& rhs) noexcept;
     BasicVector4& operator*=(const BasicVector4& rhs) noexcept;
-    BasicVector4& operator*=(const _Value& rhs) noexcept;
+    BasicVector4& operator*=(_Value rhs) noexcept;
     BasicVector4& operator*=(const Matrix4x4& rhs) noexcept;
-    BasicVector4& operator/=(const _Value& rhs);
+    BasicVector4& operator/=(_Value rhs);
     _Value& operator[](int32_t index) noexcept;
     _Value operator[](int32_t index) const noexcept;
     constexpr bool operator==(const BasicVector4& rhs) const noexcept;
@@ -71,13 +69,13 @@ template <Arithmetic... _Args>
 BasicVector4(_Args...) -> BasicVector4<std::common_type_t<_Args...>>;
 
 template <Arithmetic _Value>
-    constexpr BasicVector4<_Value>::BasicVector4(const _Value& scalar) noexcept :
+    constexpr BasicVector4<_Value>::BasicVector4(_Value scalar) noexcept :
     BasicVector4(scalar, scalar, scalar, scalar)
 {
 }
 
 template <Arithmetic _Value>
-constexpr BasicVector4<_Value>::BasicVector4(const _Value& x, const _Value& y, const _Value& z, const _Value& w) noexcept :
+constexpr BasicVector4<_Value>::BasicVector4(_Value x, _Value y, _Value z, _Value w) noexcept :
     x(x),
     y(y),
     z(z),
@@ -86,46 +84,40 @@ constexpr BasicVector4<_Value>::BasicVector4(const _Value& x, const _Value& y, c
 }
 
 template <Arithmetic _Value>
-template <Expression _ExpressionTemplate>
+template <typename _ExpressionTemplate>
 constexpr BasicVector4<_Value>::BasicVector4(const _ExpressionTemplate& expression) :
     BasicVector4(expression[0], expression[1], expression[2], expression[3])
 {
 }
 
 template <Arithmetic _Value>
-constexpr ExpressionTemplate<Plus, BasicVector4<_Value>, BasicVector4<_Value>> BasicVector4<_Value>::operator+(const BasicVector4& rhs) const noexcept
+constexpr AddExpression<BasicVector4<_Value>, BasicVector4<_Value>> BasicVector4<_Value>::operator+(const BasicVector4& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr ExpressionTemplate<Minus, BasicVector4<_Value>, BasicVector4<_Value>> BasicVector4<_Value>::operator-(const BasicVector4& rhs) const noexcept
+constexpr SubtractExpression<BasicVector4<_Value>, BasicVector4<_Value>> BasicVector4<_Value>::operator-(const BasicVector4& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr BasicVector4<_Value> BasicVector4<_Value>::operator*(const _Value& rhs) const noexcept
+constexpr MultiplyExpression<BasicVector4<_Value>, _Value> BasicVector4<_Value>::operator*(const _Value& rhs) const noexcept
 {
-    return BasicVector4(x * rhs, y * rhs, z * rhs, w * rhs);
+    return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr BasicVector4<_Value> BasicVector4<_Value>::operator/(const _Value& rhs) const
+constexpr DivideExpression<BasicVector4<_Value>, _Value> BasicVector4<_Value>::operator/(const _Value& rhs) const
 {
-    return BasicVector4(x / rhs, y / rhs, z / rhs, w / rhs);
+    return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr BasicVector4<_Value> operator*(const _Value& lhs, const BasicVector4<_Value>& rhs) noexcept
+constexpr MultiplyExpression<BasicVector4<_Value>, _Value> operator*(const _Value& lhs, const BasicVector4<_Value>& rhs) noexcept
 {
-    return rhs * lhs;
-}
-
-template <Arithmetic _Value>
-constexpr BasicVector4<_Value> operator/(const _Value& lhs, const BasicVector4<_Value>& rhs)
-{
-    return rhs / lhs;
+    return {lhs, rhs};
 }
 
 template <Arithmetic _Value>
@@ -179,7 +171,7 @@ BasicVector4<_Value>& BasicVector4<_Value>::operator*=(const BasicVector4& rhs) 
 }
 
 template <Arithmetic _Value>
-BasicVector4<_Value>& BasicVector4<_Value>::operator*=(const _Value& rhs) noexcept
+BasicVector4<_Value>& BasicVector4<_Value>::operator*=(_Value rhs) noexcept
 {
     x *= rhs;
     y *= rhs;
@@ -203,7 +195,7 @@ BasicVector4<_Value>& BasicVector4<_Value>::operator*=(const Matrix4x4& rhs) noe
 }
     
 template <Arithmetic _Value>
-BasicVector4<_Value>& BasicVector4<_Value>::operator/=(const _Value& rhs)
+BasicVector4<_Value>& BasicVector4<_Value>::operator/=(_Value rhs)
 {
     x /= rhs;
     y /= rhs;

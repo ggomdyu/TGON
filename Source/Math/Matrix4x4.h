@@ -22,13 +22,13 @@ public:
                         float m20, float m21, float m22, float m23,
                         float m30, float m31, float m32, float m33) noexcept;
     explicit Matrix4x4(const std::span<const float>& m) noexcept;
-    template <Expression _ExpressionTemplate>
+    template <typename _ExpressionTemplate>
     constexpr Matrix4x4(const _ExpressionTemplate& expression);
 
 /**@section Operator */
 public:
-    constexpr ExpressionTemplate<Plus, Matrix4x4, Matrix4x4> operator+(const Matrix4x4& rhs) const noexcept;
-    constexpr ExpressionTemplate<Minus, Matrix4x4, Matrix4x4> operator-(const Matrix4x4& rhs) const noexcept;
+    constexpr AddExpression<Matrix4x4, Matrix4x4> operator+(const Matrix4x4& rhs) const noexcept;
+    constexpr SubtractExpression<Matrix4x4, Matrix4x4> operator-(const Matrix4x4& rhs) const noexcept;
     Matrix4x4 operator*(const Matrix4x4& rhs) const noexcept;
     Matrix4x4& operator+=(const Matrix4x4& rhs) noexcept;
     Matrix4x4& operator-=(const Matrix4x4& rhs) noexcept;
@@ -69,7 +69,7 @@ public:
           m30, m31, m32, m33;
 };
 
-template <Expression _ExpressionTemplate>
+template <typename _ExpressionTemplate>
 constexpr Matrix4x4::Matrix4x4(const _ExpressionTemplate& expression) :
     Matrix4x4(
         expression[0], expression[1], expression[2], expression[3],
@@ -117,12 +117,12 @@ constexpr Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
 {
 }
 
-constexpr ExpressionTemplate<Plus, Matrix4x4, Matrix4x4> Matrix4x4::operator+(const Matrix4x4& rhs) const noexcept
+constexpr AddExpression<Matrix4x4, Matrix4x4> Matrix4x4::operator+(const Matrix4x4& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-constexpr ExpressionTemplate<Minus, Matrix4x4, Matrix4x4> Matrix4x4::operator-(const Matrix4x4& rhs) const noexcept
+constexpr SubtractExpression<Matrix4x4, Matrix4x4> Matrix4x4::operator-(const Matrix4x4& rhs) const noexcept
 {
     return {*this, rhs};
 }
@@ -431,7 +431,7 @@ inline Matrix4x4& Matrix4x4::operator*=(const Matrix4x4& rhs) noexcept
 
 inline bool Matrix4x4::operator==(const Matrix4x4& rhs) const noexcept
 {
-    for (int32_t i = 0; i < 16; ++i)
+    for (auto i = 0; i < 16; ++i)
     {
         if ((&(m00))[i] != (&(rhs.m00))[i])
         {
