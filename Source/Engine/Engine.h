@@ -8,6 +8,7 @@
 #include "Graphics/VideoMode.h"
 
 #include "InputModule.h"
+#include "TimeModule.h"
 
 #define TGON_ENGINE(className)\
     namespace tg\
@@ -69,7 +70,7 @@ public:
      * @param args  Arguments for construct the specified type of module.
      * @return  The added module.
      */
-    template <Moduleable _ModuleType, typename... _ArgTypes>
+    template <Modularizable _ModuleType, typename... _ArgTypes>
     _ModuleType* AddModule(_ArgTypes&&... args);
 
     /**
@@ -88,19 +89,37 @@ public:
 
     /**
      * @brief   Gets the configuration of the engine.
+     * @return  The engine configuration.
      */
     [[nodiscard]] const EngineConfiguration& GetEngineConfiguration() const noexcept;
 
+    /**
+     * @brief   Forces the engine to render at a specified frame rate.
+     * @param targetFrameRate   The frame rate.
+     */
+    void SetTargetFrameRate(float targetFrameRate);
+
+    /**
+     * @brief   Gets the frame rate of the engine.
+     * @return  The frame rate.
+     */
+    [[nodiscard]] float GetTargetFrameRate() const noexcept;
+
 private:
+    void UpdateModule();
+    void UpdateModuleStage(ModuleStage moduleStage);
     void RemoveAllModule();
 
 /**@section Variable */
 private:
     EngineConfiguration m_engineConfig;
-    std::array<std::vector<std::unique_ptr<Module>>, 2> m_moduleStage;
+    std::array<std::vector<std::unique_ptr<Module>>, 3> m_moduleStage;
+    int64_t m_prevFrameTime = 0;
+    float m_frameTime = 0.0f;
+    float m_targetSecondPerFrame = -1.0f;
 };
     
-template <Moduleable _ModuleType, typename... _ArgTypes>
+template <Modularizable _ModuleType, typename... _ArgTypes>
 _ModuleType* Engine::AddModule(_ArgTypes&&... args)
 {
     auto module = std::make_unique<_ModuleType>(std::forward<_ArgTypes>(args)...);

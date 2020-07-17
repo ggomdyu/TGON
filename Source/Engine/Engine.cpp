@@ -1,15 +1,13 @@
 #include "PrecompiledHeader.h"
 
 #include "Platform/Application.h"
-#include "Graphics/Graphics.h"
+#include "Platform/Environment.h"
 
 #include "Engine.h"
 #include "AssetModule.h"
 #include "InputModule.h"
-#include "TimeModule.h"
 #include "TimerModule.h"
 #include "TaskModule.h"
-#include "InputModule.h"
 #include "AudioModule.h"
 #include "SceneModule.h"
 #include "RendererModule.h"
@@ -18,7 +16,8 @@ namespace tg
 {
 
 Engine::Engine(EngineConfiguration engineConfig) noexcept :
-    m_engineConfig(std::move(engineConfig))
+    m_engineConfig(std::move(engineConfig)),
+    m_prevFrameTime(Environment::GetTickCount())
 {
 }
 
@@ -30,28 +29,66 @@ Engine::~Engine()
 void Engine::Initialize()
 {
     this->AddModule<TaskModule>();
-    this->AddModule<AssetModule>();
     this->AddModule<AudioModule>();
     this->AddModule<TimeModule>();
     this->AddModule<TimerModule>();
-    //this->AddModule<Input>s(m_engineConfig.inputMode);
+    this->AddModule<RendererModule>(Application::GetRootWindow()->GetNativeWindow(), m_engineConfig.videoMode);
+    this->AddModule<InputModule>(m_engineConfig.inputMode);
     this->AddModule<SceneModule>();
 }
 
 void Engine::Update()
 {
-    for (auto& modules : m_moduleStage)
+    this->UpdateModule();
+}
+
+void Engine::UpdateModule()
+{
+    this->UpdateModuleStage(ModuleStage::Update);
+
+    // Ignore FPS limitation if V-Sync enabled.
+    if (m_engineConfig.videoMode.enableVerticalSync == false)
     {
-        for (auto& module : modules)
+        const auto currentFrameTime = Environment::GetTickCount();
+        m_frameTime += static_cast<float>(currentFrameTime - m_prevFrameTime) * 0.001f;
+        m_prevFrameTime = currentFrameTime;
+
+        if (m_frameTime > m_targetSecondPerFrame)
         {
-            if (module != nullptr)
-            {
-                module->Update();
-            }
+            m_frameTime -= m_targetSecondPerFrame;
+            this->UpdateModuleStage(ModuleStage::Render);
         }
     }
-    
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    else
+    {
+        this->UpdateModuleStage(ModuleStage::Render);
+    }
+}
+
+const EngineConfiguration& Engine::GetEngineConfiguration() const noexcept
+{
+    return m_engineConfig;
+}
+
+void Engine::SetTargetFrameRate(float targetFrameRate)
+{
+    m_targetSecondPerFrame = 1.0f / targetFrameRate;
+}
+
+float Engine::GetTargetFrameRate() const noexcept
+{
+    return 1.0f / m_targetSecondPerFrame;
+}
+
+void Engine::UpdateModuleStage(ModuleStage moduleStage)
+{
+    for (auto& module : m_moduleStage[UnderlyingCast(moduleStage)])
+    {
+        if (module != nullptr)
+        {
+            module->Update();
+        }
+    }
 }
 
 void Engine::RemoveAllModule()
@@ -63,11 +100,6 @@ void Engine::RemoveAllModule()
             modules.pop_back();
         }
     }
-}
-
-const EngineConfiguration& Engine::GetEngineConfiguration() const noexcept
-{
-    return m_engineConfig;
 }
 
 }
