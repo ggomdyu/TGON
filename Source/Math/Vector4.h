@@ -18,15 +18,15 @@ public:
     constexpr BasicVector4() noexcept = default;
     constexpr BasicVector4(_Value scalar) noexcept;
     constexpr BasicVector4(_Value x, _Value y, _Value z, _Value w) noexcept;
-    template <typename _ExpressionTemplate>
-    constexpr BasicVector4(const _ExpressionTemplate& expression);
+    template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
+    constexpr BasicVector4(const ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>& expression);
 
 /**@section Operator */
 public:
-    constexpr AddExpression<BasicVector4, BasicVector4> operator+(const BasicVector4& rhs) const noexcept;
-    constexpr SubtractExpression<BasicVector4, BasicVector4> operator-(const BasicVector4& rhs) const noexcept;
-    constexpr MultiplyExpression<BasicVector4, _Value> operator*(const _Value& rhs) const noexcept;
-    constexpr DivideExpression<BasicVector4, _Value> operator/(const _Value& rhs) const;
+    constexpr ExpressionTemplate<Add, BasicVector4, BasicVector4> operator+(const BasicVector4& rhs) const noexcept;
+    constexpr ExpressionTemplate<Subtract, BasicVector4, BasicVector4> operator-(const BasicVector4& rhs) const noexcept;
+    constexpr ExpressionTemplate<Multiply, BasicVector4, _Value> operator*(const _Value& rhs) const noexcept;
+    constexpr ExpressionTemplate<Divide, BasicVector4, _Value> operator/(const _Value& rhs) const;
     constexpr BasicVector4 operator*(const Matrix4x4& rhs) const noexcept;
     constexpr BasicVector4 operator-() const noexcept;
     BasicVector4& operator+=(const BasicVector4& rhs) noexcept;
@@ -64,6 +64,8 @@ public:
     
 using Vector4 = BasicVector4<float>;
 using DVector4 = BasicVector4<double>;
+using I32Vector4 = BasicVector4<int32_t>;
+using I64Vector4 = BasicVector4<int64_t>;
 
 template <Arithmetic... _Args>
 BasicVector4(_Args...) -> BasicVector4<std::common_type_t<_Args...>>;
@@ -84,40 +86,40 @@ constexpr BasicVector4<_Value>::BasicVector4(_Value x, _Value y, _Value z, _Valu
 }
 
 template <Arithmetic _Value>
-template <typename _ExpressionTemplate>
-constexpr BasicVector4<_Value>::BasicVector4(const _ExpressionTemplate& expression) :
+template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
+constexpr BasicVector4<_Value>::BasicVector4(const ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>& expression) :
     BasicVector4(expression[0], expression[1], expression[2], expression[3])
 {
 }
 
 template <Arithmetic _Value>
-constexpr AddExpression<BasicVector4<_Value>, BasicVector4<_Value>> BasicVector4<_Value>::operator+(const BasicVector4& rhs) const noexcept
+constexpr ExpressionTemplate<Add, BasicVector4<_Value>, BasicVector4<_Value>> BasicVector4<_Value>::operator+(const BasicVector4& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr SubtractExpression<BasicVector4<_Value>, BasicVector4<_Value>> BasicVector4<_Value>::operator-(const BasicVector4& rhs) const noexcept
+constexpr ExpressionTemplate<Subtract, BasicVector4<_Value>, BasicVector4<_Value>> BasicVector4<_Value>::operator-(const BasicVector4& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr MultiplyExpression<BasicVector4<_Value>, _Value> BasicVector4<_Value>::operator*(const _Value& rhs) const noexcept
+constexpr ExpressionTemplate<Multiply, BasicVector4<_Value>, _Value> BasicVector4<_Value>::operator*(const _Value& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr DivideExpression<BasicVector4<_Value>, _Value> BasicVector4<_Value>::operator/(const _Value& rhs) const
+constexpr ExpressionTemplate<Divide, BasicVector4<_Value>, _Value> BasicVector4<_Value>::operator/(const _Value& rhs) const
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr MultiplyExpression<BasicVector4<_Value>, _Value> operator*(const _Value& lhs, const BasicVector4<_Value>& rhs) noexcept
+constexpr ExpressionTemplate<Multiply, BasicVector4<_Value>, _Value> operator*(const _Value& lhs, const BasicVector4<_Value>& rhs) noexcept
 {
-    return {lhs, rhs};
+    return {rhs, lhs};
 }
 
 template <Arithmetic _Value>

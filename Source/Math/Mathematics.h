@@ -128,7 +128,13 @@ constexpr bool IsPrimeNumber(const _Value& value) noexcept
 template <typename _Value>
 constexpr _Value Lerp(const _Value& from, const _Value& to, float time) noexcept
 {
-    return from + (_Value(to - from) * time);
+    return from + ((to - from) * std::clamp(time, 0.0f, 1.0f));
+}
+
+template <typename _Value>
+constexpr _Value LerpUnclamped(const _Value& from, const _Value& to, float time) noexcept
+{
+    return from + ((to - from) * time);
 }
 
 constexpr float Smoothstep(float from, float to, float time) noexcept

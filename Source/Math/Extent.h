@@ -30,10 +30,10 @@ public:
 
 /**@section Operator */
 public:
-    constexpr AddExpression<BasicExtent2D, BasicExtent2D> operator+(const BasicExtent2D& rhs) const noexcept;
-    constexpr SubtractExpression<BasicExtent2D, BasicExtent2D> operator-(const BasicExtent2D& rhs) const noexcept;
-    constexpr MultiplyExpression<BasicExtent2D, _Value> operator*(const _Value& rhs) const noexcept;
-    constexpr DivideExpression<BasicExtent2D, _Value> operator/(const _Value& rhs) const;
+    constexpr ExpressionTemplate<Add, BasicExtent2D, BasicExtent2D> operator+(const BasicExtent2D& rhs) const noexcept;
+    constexpr ExpressionTemplate<Subtract, BasicExtent2D, BasicExtent2D> operator-(const BasicExtent2D& rhs) const noexcept;
+    constexpr ExpressionTemplate<Multiply, BasicExtent2D, _Value> operator*(const _Value& rhs) const noexcept;
+    constexpr ExpressionTemplate<Divide, BasicExtent2D, _Value> operator/(const _Value& rhs) const;
     constexpr BasicExtent2D operator-() const noexcept;
     BasicExtent2D& operator+=(const BasicExtent2D& rhs) noexcept;
     BasicExtent2D& operator-=(const BasicExtent2D& rhs) noexcept;
@@ -59,8 +59,6 @@ using FExtent2D = BasicExtent2D<float>;
 using DExtent2D = BasicExtent2D<double>;
 using I32Extent2D = BasicExtent2D<int32_t>;
 using I64Extent2D = BasicExtent2D<int64_t>;
-using IExtent2D = BasicExtent2D<int>;
-using LLExtent2D = BasicExtent2D<long long>;
 
 template <Arithmetic... _Args>
 BasicExtent2D(_Args...) -> BasicExtent2D<std::common_type_t<_Args...>>;
@@ -88,31 +86,31 @@ constexpr BasicExtent2D<_Value>::BasicExtent2D(const _ExpressionTemplate& expres
 }
 
 template <Arithmetic _Value>
-constexpr AddExpression<BasicExtent2D<_Value>, BasicExtent2D<_Value>> BasicExtent2D<_Value>::operator+(const BasicExtent2D& rhs) const noexcept
+constexpr ExpressionTemplate<Add, BasicExtent2D<_Value>, BasicExtent2D<_Value>> BasicExtent2D<_Value>::operator+(const BasicExtent2D& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr SubtractExpression<BasicExtent2D<_Value>, BasicExtent2D<_Value>> BasicExtent2D<_Value>::operator-(const BasicExtent2D& rhs) const noexcept
+constexpr ExpressionTemplate<Subtract, BasicExtent2D<_Value>, BasicExtent2D<_Value>> BasicExtent2D<_Value>::operator-(const BasicExtent2D& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr MultiplyExpression<BasicExtent2D<_Value>, _Value> BasicExtent2D<_Value>::operator*(const _Value& rhs) const noexcept
+constexpr ExpressionTemplate<Multiply, BasicExtent2D<_Value>, _Value> BasicExtent2D<_Value>::operator*(const _Value& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr DivideExpression<BasicExtent2D<_Value>, _Value> BasicExtent2D<_Value>::operator/(const _Value& rhs) const
+constexpr ExpressionTemplate<Divide, BasicExtent2D<_Value>, _Value> BasicExtent2D<_Value>::operator/(const _Value& rhs) const
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr DivideExpression<_Value, BasicExtent2D<_Value>> operator*(const _Value& lhs, const BasicExtent2D<_Value>& rhs)
+constexpr ExpressionTemplate<Divide, _Value, BasicExtent2D<_Value>> operator*(const _Value& lhs, const BasicExtent2D<_Value>& rhs)
 {
     return {lhs, rhs};
 }

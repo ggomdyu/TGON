@@ -49,8 +49,6 @@ using FRect = BasicRect<float>;
 using DRect = BasicRect<double>;
 using I32Rect = BasicRect<int32_t>;
 using I64Rect = BasicRect<int64_t>;
-using IRect = BasicRect<int>;
-using LLRect = BasicRect<long long>;
 
 template <Arithmetic... _Args>
 BasicRect(_Args...) -> BasicRect<std::common_type_t<_Args...>>;

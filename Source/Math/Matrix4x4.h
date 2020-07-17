@@ -22,13 +22,13 @@ public:
                         float m20, float m21, float m22, float m23,
                         float m30, float m31, float m32, float m33) noexcept;
     explicit Matrix4x4(const std::span<const float>& m) noexcept;
-    template <typename _ExpressionTemplate>
-    constexpr Matrix4x4(const _ExpressionTemplate& expression);
+    template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
+    constexpr Matrix4x4(const ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>& expression);
 
 /**@section Operator */
 public:
-    constexpr AddExpression<Matrix4x4, Matrix4x4> operator+(const Matrix4x4& rhs) const noexcept;
-    constexpr SubtractExpression<Matrix4x4, Matrix4x4> operator-(const Matrix4x4& rhs) const noexcept;
+    constexpr ExpressionTemplate<Add, Matrix4x4, Matrix4x4> operator+(const Matrix4x4& rhs) const noexcept;
+    constexpr ExpressionTemplate<Subtract, Matrix4x4, Matrix4x4> operator-(const Matrix4x4& rhs) const noexcept;
     Matrix4x4 operator*(const Matrix4x4& rhs) const noexcept;
     Matrix4x4& operator+=(const Matrix4x4& rhs) noexcept;
     Matrix4x4& operator-=(const Matrix4x4& rhs) noexcept;
@@ -69,8 +69,8 @@ public:
           m30, m31, m32, m33;
 };
 
-template <typename _ExpressionTemplate>
-constexpr Matrix4x4::Matrix4x4(const _ExpressionTemplate& expression) :
+template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
+constexpr Matrix4x4::Matrix4x4(const ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>& expression) :
     Matrix4x4(
         expression[0], expression[1], expression[2], expression[3],
         expression[4], expression[5], expression[6], expression[7],
@@ -117,12 +117,12 @@ constexpr Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
 {
 }
 
-constexpr AddExpression<Matrix4x4, Matrix4x4> Matrix4x4::operator+(const Matrix4x4& rhs) const noexcept
+constexpr ExpressionTemplate<Add, Matrix4x4, Matrix4x4> Matrix4x4::operator+(const Matrix4x4& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-constexpr SubtractExpression<Matrix4x4, Matrix4x4> Matrix4x4::operator-(const Matrix4x4& rhs) const noexcept
+constexpr ExpressionTemplate<Subtract, Matrix4x4, Matrix4x4> Matrix4x4::operator-(const Matrix4x4& rhs) const noexcept
 {
     return {*this, rhs};
 }
