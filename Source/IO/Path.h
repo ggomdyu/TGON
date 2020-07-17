@@ -79,12 +79,12 @@ constexpr bool Path::IsPathRooted(const std::u8string_view& path) noexcept
 
 constexpr std::u8string_view Path::GetExtension(const std::u8string_view& path) noexcept
 {
-    auto iterIndex = path.length();
-    while (iterIndex-- > 0)
+    auto index = path.length();
+    while (index-- > 0)
     {
-        if (path[iterIndex] == '.')
+        if (path[index] == '.')
         {
-            return path.substr(iterIndex);
+            return path.substr(index);
         }
     }
     
@@ -93,12 +93,12 @@ constexpr std::u8string_view Path::GetExtension(const std::u8string_view& path) 
 
 constexpr std::u8string_view Path::GetFileName(const std::u8string_view& path) noexcept
 {
-    auto iterIndex = path.length();
-    while (iterIndex-- > 0)
+    auto index = path.length();
+    while (index-- > 0)
     {
-        if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
+        if (path[index] == AltDirectorySeparatorChar || path[index] == DirectorySeparatorChar)
         {
-            return path.substr(iterIndex + 1, path.length() - iterIndex);
+            return path.substr(index + 1, path.length() - index);
         }
     }
 
@@ -109,21 +109,21 @@ constexpr std::u8string_view Path::GetFileNameWithoutExtension(const std::u8stri
 {
     auto extensionStartIndex = path.length();
     
-    auto iterIndex = extensionStartIndex;
-    while (iterIndex-- > 0)
+    auto index = extensionStartIndex;
+    while (index-- > 0)
     {
-        if (IsDirectorySeparator(path[iterIndex]))
+        if (IsDirectorySeparator(path[index]))
         {
-            return path.substr(iterIndex + 1, extensionStartIndex - (iterIndex + 1));
+            return path.substr(index + 1, extensionStartIndex - (index + 1));
         }
-        else if (iterIndex == 0)
+        else if (index == 0)
         {
             return path.substr(0, extensionStartIndex);
         }
 
-        if (path[iterIndex] == '.' && (extensionStartIndex == path.length()))
+        if (path[index] == '.' && (extensionStartIndex == path.length()))
         {
-            extensionStartIndex = iterIndex;
+            extensionStartIndex = index;
         }
     }
 
@@ -132,12 +132,12 @@ constexpr std::u8string_view Path::GetFileNameWithoutExtension(const std::u8stri
 
 constexpr std::u8string_view Path::GetDirectoryName(const std::u8string_view& path) noexcept
 {
-    auto iterIndex = path.length();
-    while (iterIndex-- > 0)
+    auto index = path.length();
+    while (index-- > 0)
     {
-        if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
+        if (path[index] == AltDirectorySeparatorChar || path[index] == DirectorySeparatorChar)
         {
-            return path.substr(0, iterIndex);
+            return path.substr(0, index);
         }
     }
 
@@ -146,12 +146,12 @@ constexpr std::u8string_view Path::GetDirectoryName(const std::u8string_view& pa
 
 constexpr bool Path::HasExtension(const std::u8string_view& path) noexcept
 {
-    auto iterIndex = path.length();
-    while (iterIndex-- > 0)
+    auto index = path.length();
+    while (index-- > 0)
     {
-        if (path[iterIndex] == '.')
+        if (path[index] == '.')
         {
-            return path.length() > (iterIndex + 1);
+            return path.length() > (index + 1);
         }
     }
     

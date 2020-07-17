@@ -96,7 +96,7 @@ public:
 /**@section Variable */
 private:
     const std::byte* m_fileData;
-    const std::byte* m_fileDataIter;
+    const std::byte* m_fileDataIt;
     std::size_t m_fileDataBytes;
 };
 
@@ -120,7 +120,7 @@ inline std::size_t RiffReader::ChunkHeader::GetSize() const noexcept
 
 inline RiffReader::RiffReader(const std::byte* fileData, std::size_t fileDataBytes) noexcept :
     m_fileData(fileData),
-    m_fileDataIter(fileData),
+    m_fileDataIt(fileData),
     m_fileDataBytes(fileDataBytes)
 {
 }
@@ -129,8 +129,8 @@ inline bool RiffReader::ReadNext()
 {
     ChunkHeader currChunk = GetChunkHeader();
 
-    m_fileDataIter += currChunk.GetSize();
-    if (m_fileDataIter >= m_fileData + m_fileDataBytes) // This not works fine. Should be fixed!
+    m_fileDataIt += currChunk.GetSize();
+    if (m_fileDataIt >= m_fileData + m_fileDataBytes) // This not works fine. Should be fixed!
     {
         return false;
     }
@@ -140,7 +140,7 @@ inline bool RiffReader::ReadNext()
 
 inline RiffReader::ChunkHeader RiffReader::GetChunkHeader() const
 {
-    return ChunkHeader(static_cast<ChunkId>(*reinterpret_cast<const uint32_t*>(&m_fileDataIter[0])), *reinterpret_cast<const uint32_t*>(&m_fileDataIter[4]), &m_fileDataIter[8]);
+    return ChunkHeader(static_cast<ChunkId>(*reinterpret_cast<const uint32_t*>(&m_fileDataIt[0])), *reinterpret_cast<const uint32_t*>(&m_fileDataIt[4]), &m_fileDataIt[8]);
 }
 
 }

@@ -73,15 +73,15 @@ inline void WeightSelector<_WeightType>::Add(WeightType weight, WeightHandlerTyp
 template <typename _WeightType>
 inline void WeightSelector<_WeightType>::Erase(const WeightHandlerType& handler)
 {
-    auto iter = std::find_if(m_weightDescList.begin(), m_weightDescList.end(), [&](const WeightDesc& comp)
+    auto it = std::find_if(m_weightDescList.begin(), m_weightDescList.end(), [&](const WeightDesc& comp)
     {
         return handler == comp.weightHandler;
     });
 
-    if (iter != m_weightDescList.end())
+    if (it != m_weightDescList.end())
     {
-        m_totalWeight -= iter->weight;
-        m_weightDescList.erase(iter);
+        m_totalWeight -= it->weight;
+        m_weightDescList.erase(it);
     }
 }
 

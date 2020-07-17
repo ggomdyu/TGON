@@ -34,7 +34,7 @@ private:
     I32Rect m_contentRect;
     std::vector<CharacterInfo> m_characterInfos;
     std::vector<LineInfo> m_lineInfos;
-    int32_t m_iterIndex = 0;
+    int32_t m_characterStartIndex = 0;
 };
 
 TextBlock::TextBlock(const std::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment)
@@ -89,7 +89,7 @@ void TextBlock::Clear()
     m_contentRect = {};
     m_characterInfos.clear();
     m_lineInfos.clear();
-    m_iterIndex = 0;
+    m_characterStartIndex = 0;
 }
 
 const I32Rect& TextBlock::GetRect() const noexcept
@@ -131,14 +131,14 @@ int32_t TextBlock::TryAddTextLine(const std::span<const char32_t>& characters, c
     int32_t yMax = -INT32_MAX;
     int32_t yMaxBearing = -INT32_MAX;
     int32_t insertedTextLen = static_cast<int32_t>(characters.size());
-    int32_t characterStartIndex = m_iterIndex;
     int32_t xAdvance = 0;
+    const int32_t characterStartIndex = m_characterStartIndex;
     
     auto& lineInfo = m_lineInfos.back();
     
     for (decltype(characters.size()) i = 0; i < characters.size(); ++i)
     {
-        auto ch = characters[i];
+        const auto ch = characters[i];
         
         const auto& glyphData = fontAtlas->GetGlyphData(ch, fontSize);
         if (glyphData == nullptr)
@@ -160,16 +160,16 @@ int32_t TextBlock::TryAddTextLine(const std::span<const char32_t>& characters, c
         yMaxBearing = std::max(yMaxBearing, glyphData->metrics.bearing.y);
         
         xAdvance += glyphData->metrics.advance.x;
-        m_iterIndex += 1;
+        m_characterStartIndex += 1;
     }
 
     if (insertedTextLen > 0)
     {
         lineInfo.characterStartIndex = characterStartIndex;
-        lineInfo.characterEndIndex = m_iterIndex;
+        lineInfo.characterEndIndex = m_characterStartIndex;
         
         // Refresh the content rect of line.
-        int32_t lineHeight = yMax - yMin;
+        const int32_t lineHeight = yMax - yMin;
         const auto& frontCharacterInfo = m_characterInfos[lineInfo.characterStartIndex];
         const auto& backCharacterInfo = m_characterInfos[std::max(lineInfo.characterStartIndex, lineInfo.characterEndIndex - 1)];
         lineInfo.contentRect.height = lineHeight;
@@ -197,7 +197,7 @@ void TextBlock::ProcessTextAlignment(TextAlignment textAlignment)
             int32_t yOffset = m_rect.y - m_rect.height + m_contentRect.height;
             for (auto& lineInfo : m_lineInfos)
             {
-                int32_t xOffset = m_rect.x;
+                const int32_t xOffset = m_rect.x;
                 for (size_t i = lineInfo.characterStartIndex; i != lineInfo.characterEndIndex; ++i)
                 {
                     m_characterInfos[i].rect.x = xOffset + (m_characterInfos[i].rect.x - lineInfo.contentRect.x);
@@ -215,7 +215,7 @@ void TextBlock::ProcessTextAlignment(TextAlignment textAlignment)
             int32_t yOffset = m_rect.y - m_rect.height + m_contentRect.height;
             for (auto& lineInfo : m_lineInfos)
             {
-                int32_t xOffset = m_rect.x + (m_rect.width - lineInfo.contentRect.width) / 2;
+                const int32_t xOffset = m_rect.x + (m_rect.width - lineInfo.contentRect.width) / 2;
                 for (size_t i = lineInfo.characterStartIndex; i != lineInfo.characterEndIndex; ++i)
                 {
                     m_characterInfos[i].rect.x = xOffset + (m_characterInfos[i].rect.x - lineInfo.contentRect.x);
@@ -233,7 +233,7 @@ void TextBlock::ProcessTextAlignment(TextAlignment textAlignment)
             int32_t yOffset = m_rect.y - m_rect.height + m_contentRect.height;
             for (auto& lineInfo : m_lineInfos)
             {
-                int32_t xOffset = m_rect.x + m_rect.width - lineInfo.contentRect.width;
+                const int32_t xOffset = m_rect.x + m_rect.width - lineInfo.contentRect.width;
                 for (size_t i = lineInfo.characterStartIndex; i != lineInfo.characterEndIndex; ++i)
                 {
                     m_characterInfos[i].rect.x = xOffset + (m_characterInfos[i].rect.x - lineInfo.contentRect.x);
@@ -251,7 +251,7 @@ void TextBlock::ProcessTextAlignment(TextAlignment textAlignment)
             int32_t yOffset = m_rect.y - ((m_rect.height - m_contentRect.height) / 2);
             for (auto& lineInfo : m_lineInfos)
             {
-                int32_t xOffset = m_rect.x;
+                const int32_t xOffset = m_rect.x;
                 for (size_t i = lineInfo.characterStartIndex; i != lineInfo.characterEndIndex; ++i)
                 {
                     m_characterInfos[i].rect.x = xOffset + (m_characterInfos[i].rect.x - lineInfo.contentRect.x);
@@ -269,7 +269,7 @@ void TextBlock::ProcessTextAlignment(TextAlignment textAlignment)
             int32_t yOffset = m_rect.y - (m_rect.height - m_contentRect.height) / 2;
             for (auto& lineInfo : m_lineInfos)
             {
-                int32_t xOffset = m_rect.x + (m_rect.width - lineInfo.contentRect.width) / 2;
+                const int32_t xOffset = m_rect.x + (m_rect.width - lineInfo.contentRect.width) / 2;
                 for (size_t i = lineInfo.characterStartIndex; i != lineInfo.characterEndIndex; ++i)
                 {
                     m_characterInfos[i].rect.x = xOffset + (m_characterInfos[i].rect.x - lineInfo.contentRect.x);
@@ -287,7 +287,7 @@ void TextBlock::ProcessTextAlignment(TextAlignment textAlignment)
             int32_t yOffset = m_rect.y - ((m_rect.height - m_contentRect.height) / 2);
             for (auto& lineInfo : m_lineInfos)
             {
-                int32_t xOffset = m_rect.x + m_rect.width - lineInfo.contentRect.width;
+                const int32_t xOffset = m_rect.x + m_rect.width - lineInfo.contentRect.width;
                 for (size_t i = lineInfo.characterStartIndex; i != lineInfo.characterEndIndex; ++i)
                 {
                     m_characterInfos[i].rect.x = xOffset + (m_characterInfos[i].rect.x - lineInfo.contentRect.x);
@@ -305,7 +305,7 @@ void TextBlock::ProcessTextAlignment(TextAlignment textAlignment)
             int32_t yOffset = m_rect.y;
             for (auto& lineInfo : m_lineInfos)
             {
-                int32_t xOffset = m_rect.x;
+                const int32_t xOffset = m_rect.x;
                 for (size_t i = lineInfo.characterStartIndex; i != lineInfo.characterEndIndex; ++i)
                 {
                     m_characterInfos[i].rect.x = xOffset + (m_characterInfos[i].rect.x - lineInfo.contentRect.x);
@@ -323,7 +323,7 @@ void TextBlock::ProcessTextAlignment(TextAlignment textAlignment)
             int32_t yOffset = m_rect.y;
             for (auto& lineInfo : m_lineInfos)
             {
-                int32_t xOffset = m_rect.x + (m_rect.width - lineInfo.contentRect.width) / 2;
+                const int32_t xOffset = m_rect.x + (m_rect.width - lineInfo.contentRect.width) / 2;
                 for (size_t i = lineInfo.characterStartIndex; i != lineInfo.characterEndIndex; ++i)
                 {
                     m_characterInfos[i].rect.x = xOffset + (m_characterInfos[i].rect.x - lineInfo.contentRect.x);
@@ -341,7 +341,7 @@ void TextBlock::ProcessTextAlignment(TextAlignment textAlignment)
             int32_t yOffset = m_rect.y;
             for (auto& lineInfo : m_lineInfos)
             {
-                int32_t xOffset = m_rect.x + m_rect.width - lineInfo.contentRect.width;
+                const int32_t xOffset = m_rect.x + m_rect.width - lineInfo.contentRect.width;
                 for (size_t i = lineInfo.characterStartIndex; i != lineInfo.characterEndIndex; ++i)
                 {
                     m_characterInfos[i].rect.x = xOffset + (m_characterInfos[i].rect.x - lineInfo.contentRect.x);
@@ -408,7 +408,7 @@ void UIText::SetLineBreakMode(LineBreakMode lineBreakMode)
     m_isDirty = true;
 }
 
-void UIText::SetBlendColor(const Color4f& color)
+void UIText::SetBlendColor(const Color& color)
 {
     m_blendColor = color;
     m_isDirty = true;
@@ -455,7 +455,7 @@ LineBreakMode UIText::GetLineBreakMode() const noexcept
     return m_lineBreakMode;
 }
 
-const Color4f& UIText::GetBlendColor() const noexcept
+const Color& UIText::GetBlendColor() const noexcept
 {
     return m_blendColor;
 }
@@ -470,7 +470,7 @@ const I32Rect& UIText::GetContentRect() const noexcept
     return m_textBlock->GetContentRect();
 }
 
-const std::vector<CharacterInfo>& UIText::GetCharacterInfos() const noexcept
+const std::vector<CharacterInfo>& UIText::GetCharacterInfos() const
 {
     if (m_isDirty)
     {

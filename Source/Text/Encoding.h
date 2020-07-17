@@ -39,7 +39,7 @@ public:
     [[nodiscard]] static const Encoding* GetEncoding(int32_t codePage);
     [[nodiscard]] static const Encoding* GetEncoding(const char8_t* codePageName);
     [[nodiscard]] static std::vector<std::byte> Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* bytes, int32_t count);
-    static int32_t Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* srcBytes, int32_t srcBytesCount, std::byte* destBytes, int32_t destBytesCount);
+    static int32_t Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* srcBytes, int32_t srcByteCount, std::byte* destBytes, int32_t destByteCount);
     static int32_t Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::span<std::byte>& srcBytes, const std::span<std::byte>& destBytes);
     [[nodiscard]] std::vector<char32_t> GetChars(const std::byte* bytes, int32_t count) const;
     [[nodiscard]] std::vector<char32_t> GetChars(const std::span<std::byte>& bytes) const;

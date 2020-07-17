@@ -47,14 +47,14 @@ void ForEach(std::pair<_Args...>& pair, const _Callback& callback)
     callback(pair.second);
 }
 
-template <typename _Iter, typename _Callback>
-void ForEach(_Iter beginIter, _Iter endIter, const _Callback& callback)
+template <typename _It, typename _Callback>
+void ForEach(_It beginIt, _It endIt, const _Callback& callback)
 {
-    while (beginIter != endIter)
+    while (beginIt != endIt)
     {
-        callback(*beginIter);
+        callback(*beginIt);
 
-        ++beginIter;
+        ++beginIt;
     }
 }
 
@@ -73,15 +73,15 @@ void ForEach(const _Container& container, const _Callback& callback)
 template <typename _Container, typename _Predicate>
 void EraseAll(_Container& container, const _Predicate& predicate)
 {
-    for (auto iter = container.begin(); iter != container.end();)
+    for (auto it = container.begin(); it != container.end();)
     {
-        if (predicate(*iter) == true)
+        if (predicate(*it) == true)
         {
-            iter = container.erase(iter);
+            it = container.erase(it);
         }
         else
         {
-            ++iter;
+            ++it;
         }
     }
 }
@@ -89,11 +89,11 @@ void EraseAll(_Container& container, const _Predicate& predicate)
 template <typename _Container, typename _Predicate, typename _Callback>
 void FindAll(_Container& container, const _Predicate& predicate, const _Callback& callback)
 {
-    for (auto iter = container.begin(); iter != container.end(); ++iter)
+    for (auto it = container.begin(); it != container.end(); ++it)
     {
-        if (predicate(*iter) == true)
+        if (predicate(*it) == true)
         {
-            callback(*iter);
+            callback(*it);
         }
     }
 }
@@ -104,10 +104,16 @@ constexpr size_t GetArraySize(const _ArrayElem(&)[_ArraySize]) noexcept
     return _ArraySize;
 }
 
-template <typename... _Args>
-constexpr std::array<std::decay_t<std::common_type_t<_Args...>>, sizeof...(_Args)> MakeArray(_Args&&... rhs) noexcept
+template <typename _ArrayElem, size_t _ArraySize>
+constexpr size_t GetArraySize(const std::array<_ArrayElem, _ArraySize>&) noexcept
 {
-    return {std::forward<_Args>(rhs)...};
+    return _ArraySize;
+}
+
+template <typename... _Args>
+constexpr std::array<std::decay_t<std::common_type_t<_Args...>>, sizeof...(_Args)> MakeArray(_Args&&... args) noexcept
+{
+    return {std::forward<_Args>(args)...};
 }
 
 template <typename _Enum> requires std::is_enum_v<_Enum>
@@ -122,20 +128,6 @@ void Swap(_Type& lhs, _Type& rhs) noexcept(std::is_nothrow_move_constructible<_T
     _Type temp = std::move(lhs);
     lhs = std::move(rhs);
     rhs = std::move(temp);
-}
-
-template <typename _Iter, typename _Value>
-bool BinarySearch(_Iter begin, _Iter end, const _Value& value)
-{
-    begin = std::lower_bound(begin, end, value);
-    return !(begin == end) && !(value < *begin);
-}
-
-template <typename _Iter, typename _Value, typename _Predicate>
-bool BinarySearch(_Iter begin, _Iter end, const _Value& value, _Predicate predicate)
-{
-    begin = std::lower_bound(begin, end, value, predicate);
-    return !(begin == end) && !predicate(*begin, value);
 }
 
 }

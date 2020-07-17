@@ -3,9 +3,7 @@
 #include <type_traits>
 #include <string>
 
-namespace tg
-{
-namespace detail
+namespace tg::detail
 {
 
 template <typename>
@@ -33,6 +31,9 @@ struct RemoveAllPointers<_Type*>
 };
 
 }
+
+namespace tg
+{
 
 template <typename>
 struct FunctionTraits;

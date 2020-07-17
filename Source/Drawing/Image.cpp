@@ -43,41 +43,43 @@ void FlipImageX(std::byte* imageData, int32_t width, int32_t height)
     }
 
 #if TGON_SIMD_SSE2
+    static_assert(_BytesPerPixel == 4, "The SIMD version of FlipImageX only supports 32-bit pixel format.");
+
     const int32_t simdUnavailableSize = (width * height) % 8;
 
     for (int32_t y = 0; y < height; ++y)
     {
         if (simdUnavailableSize > 0)
         {
-            auto* frontIter = reinterpret_cast<ColorRef>(&imageData[y * width + width / 2 - simdUnavailableSize / 2]);
-            auto* backIter = frontIter + simdUnavailableSize - 1;
+            auto* frontIt = reinterpret_cast<ColorRef>(&imageData[y * width + width / 2 - simdUnavailableSize / 2]);
+            auto* backIt = frontIt + simdUnavailableSize - 1;
 
-            for (; frontIter < backIter; ++frontIter, --backIter)
+            for (; frontIt < backIt; ++frontIt, --backIt)
             {
-                std::swap(*frontIter, *backIter);
+                std::swap(*frontIt, *backIt);
             }
         }
 
-        auto* frontIter = reinterpret_cast<__m128i*>(&imageData[y * width * 4]);
-        auto* backIter = (reinterpret_cast<__m128i*>(&imageData[(y + 1) * width * 4 - static_cast<int32_t>(sizeof(__m128i))]));
+        auto* frontIt = reinterpret_cast<__m128i*>(&imageData[y * width * 4]);
+        auto* backIt = (reinterpret_cast<__m128i*>(&imageData[(y + 1) * width * 4 - static_cast<int32_t>(sizeof(__m128i))]));
 
-        for (; frontIter < backIter; ++frontIter, --backIter)
+        for (; frontIt < backIt; ++frontIt, --backIt)
         {
-            const auto r1 = _mm_shuffle_epi32(_mm_loadu_si128(frontIter), _MM_SHUFFLE(0, 1, 2, 3));
-            const auto r2 = _mm_shuffle_epi32(_mm_loadu_si128(backIter), _MM_SHUFFLE(0, 1, 2, 3));
-            _mm_storeu_si128(frontIter, r2);
-            _mm_storeu_si128(backIter, r1);
+            const auto r1 = _mm_shuffle_epi32(_mm_loadu_si128(frontIt), _MM_SHUFFLE(0, 1, 2, 3));
+            const auto r2 = _mm_shuffle_epi32(_mm_loadu_si128(backIt), _MM_SHUFFLE(0, 1, 2, 3));
+            _mm_storeu_si128(frontIt, r2);
+            _mm_storeu_si128(backIt, r1);
         }
     }
 #else
-    auto frontIter = reinterpret_cast<ColorRef>(imageData);
-    auto backIter = &(reinterpret_cast<ColorRef>(imageData))[width - 1];
+    auto frontIt = reinterpret_cast<ColorRef>(imageData);
+    auto backIt = &(reinterpret_cast<ColorRef>(imageData))[width - 1];
 
-    for (; frontIter < backIter; ++frontIter, --backIter)
+    for (; frontIt < backIt; ++frontIt, --backIt)
     {
         for (int32_t col = 0; col < width * height; col += width)
         {
-            std::swap(*(frontIter + col), *(backIter + col));
+            std::swap(*(frontIt + col), *(backIt + col));
         }
     }
 #endif
@@ -94,35 +96,37 @@ void FlipImageXY(std::byte* imageData, int32_t width, int32_t height)
     }
 
 #if TGON_SIMD_SSE2
+    static_assert(_BytesPerPixel == 4, "The SIMD version of FlipImageXY only supports 32-bit pixel format.");
+
     const int32_t simdUnavailableSize = (width * height) % 8;
     if (simdUnavailableSize > 0)
     {
-        auto* frontIter = reinterpret_cast<ColorRef>(&imageData[width * height / 2 - simdUnavailableSize / 2]);
-        auto* backIter = frontIter + simdUnavailableSize - 1;
+        auto* frontIt = reinterpret_cast<ColorRef>(&imageData[width * height / 2 - simdUnavailableSize / 2]);
+        auto* backIt = frontIt + simdUnavailableSize - 1;
 
-        for (; frontIter < backIter; ++frontIter, --backIter)
+        for (; frontIt < backIt; ++frontIt, --backIt)
         {
-            std::swap(*frontIter, *backIter);
+            std::swap(*frontIt, *backIt);
         }
     }
 
-    auto* frontIter = reinterpret_cast<__m128i*>(imageData);
-    auto* backIter = (reinterpret_cast<__m128i*>(&imageData[width * height * 4 - static_cast<int32_t>(sizeof(__m128i))]));
+    auto* frontIt = reinterpret_cast<__m128i*>(imageData);
+    auto* backIt = (reinterpret_cast<__m128i*>(&imageData[width * height * 4 - static_cast<int32_t>(sizeof(__m128i))]));
     
-    for (; frontIter < backIter; ++frontIter, --backIter)
+    for (; frontIt < backIt; ++frontIt, --backIt)
     {
-        const auto r1 = _mm_shuffle_epi32(_mm_loadu_si128(frontIter), _MM_SHUFFLE(0, 1, 2, 3));
-        const auto r2 = _mm_shuffle_epi32(_mm_loadu_si128(backIter), _MM_SHUFFLE(0, 1, 2, 3));
-        _mm_storeu_si128(frontIter, r2);
-        _mm_storeu_si128(backIter, r1);
+        const auto r1 = _mm_shuffle_epi32(_mm_loadu_si128(frontIt), _MM_SHUFFLE(0, 1, 2, 3));
+        const auto r2 = _mm_shuffle_epi32(_mm_loadu_si128(backIt), _MM_SHUFFLE(0, 1, 2, 3));
+        _mm_storeu_si128(frontIt, r2);
+        _mm_storeu_si128(backIt, r1);
     }
 #else
-    auto* frontIter = reinterpret_cast<ColorRef>(imageData);
-    auto* backIter = &(reinterpret_cast<ColorRef>(imageData))[width * height - 1];
+    auto* frontIt = reinterpret_cast<ColorRef>(imageData);
+    auto* backIt = &(reinterpret_cast<ColorRef>(imageData))[width * height - 1];
 
-    for (; frontIter < backIter; ++frontIter, --backIter)
+    for (; frontIt < backIt; ++frontIt, --backIt)
     {
-        std::swap(*frontIter, *backIter);
+        std::swap(*frontIt, *backIt);
     }
 #endif
 }
@@ -137,14 +141,14 @@ void FlipImageY(std::byte* imageData, int32_t width, int32_t height, int32_t byt
     const int32_t stride = width * bytesPerPixel;
     const auto tempRowBuffer = std::make_unique<std::byte[]>(static_cast<size_t>(stride));
 
-    auto* frontIter = imageData;
-    auto* backIter = &imageData[(height - 1) * stride];
+    auto* frontIt = imageData;
+    auto* backIt = &imageData[(height - 1) * stride];
 
-    for (; frontIter < backIter; frontIter += stride, backIter -= stride)
+    for (; frontIt < backIt; frontIt += stride, backIt -= stride)
     {
-        std::copy_n(frontIter, stride, tempRowBuffer.get());
-        std::copy_n(backIter, stride, frontIter);
-        std::copy_n(tempRowBuffer.get(), stride, backIter);
+        std::copy_n(frontIt, stride, tempRowBuffer.get());
+        std::copy_n(backIt, stride, frontIt);
+        std::copy_n(tempRowBuffer.get(), stride, backIt);
     }
 }
 
@@ -218,17 +222,17 @@ bool Image::operator!=(std::nullptr_t rhs) const noexcept
     return m_imageData != nullptr;
 }
 
-std::byte& Image::operator[](int32_t index) noexcept
+std::byte& Image::operator[](int32_t index)
 {
     return m_imageData[index];
 }
 
-std::byte Image::operator[](int32_t index) const noexcept
+std::byte Image::operator[](int32_t index) const
 {
     return m_imageData[index];
 }
 
-std::optional<Image> Image::FromFile(const char8_t* filePath)
+std::optional<Image> Image::Create(const char8_t* filePath)
 {
     auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
     if (fileData.has_value() == false)
@@ -236,10 +240,10 @@ std::optional<Image> Image::FromFile(const char8_t* filePath)
         return {};
     }
 
-    return FromBytes(*fileData);
+    return Create(*fileData);
 }
 
-std::optional<Image> Image::FromBytes(const std::span<const std::byte>& bytes)
+std::optional<Image> Image::Create(const std::span<const std::byte>& bytes)
 {
     int width = 0, height = 0;
     auto imageData = std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(&bytes[0]), static_cast<int>(bytes.size()), &width, &height, nullptr, STBI_rgb_alpha)));
@@ -301,8 +305,6 @@ bool Image::Save(const char8_t* filePath, ImageFormat format) const
 
 void Image::RotateFlip(RotateFlipType rotateFlipType)
 {
-    static_assert(InternalPixelFormat == PixelFormat::RGBA8888, "Image::RotateFlip only supports RGBA8888 format.");
-
     constexpr auto BytesPerPixel = ConvertPixelFormatToChannelCount(InternalPixelFormat);
 
     switch (rotateFlipType)

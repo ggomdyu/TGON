@@ -64,14 +64,14 @@ DelegateChain<_Return(_Args...)>& DelegateChain<_Return(_Args...)>::operator+=(_
 template <typename _Return, typename... _Args>
 DelegateChain<_Return(_Args...)>& DelegateChain<_Return(_Args...)>::operator-=(const DelegateType& rhs)
 {
-    auto iter = std::find_if(m_invocationList.begin(), m_invocationList.end(), [&](const DelegateType& item)
+    auto it = std::find_if(m_invocationList.begin(), m_invocationList.end(), [&](const DelegateType& item)
     {
         return item == rhs;
     });
 
-    if (iter != m_invocationList.end())
+    if (it != m_invocationList.end())
     {
-        m_invocationList.erase(iter);
+        m_invocationList.erase(it);
         return true;
     }
 
@@ -118,8 +118,8 @@ _Return DelegateChain<_Return(_Args...)>::Invoke(_Args2&&... args)
         m_invocationList[i](std::forward<_Args2>(args)...);
     }
 
-    auto iter = m_invocationList.end() - 1;
-    return (*iter)(std::forward<_Args2>(args)...);
+    auto it = m_invocationList.end() - 1;
+    return (*it)(std::forward<_Args2>(args)...);
 }
 
 template <typename _Return, typename... _Args>

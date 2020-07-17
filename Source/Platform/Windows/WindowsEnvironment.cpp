@@ -73,10 +73,10 @@ std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, 
 
 std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, char8_t* destStr, int32_t destStrBufferLen)
 {
-    wchar_t utf16FolderPath[2048];
-    if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, utf16FolderPath) == S_OK)
+    std::array<wchar_t, 2048> utf16FolderPath{};
+    if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, &utf16FolderPath[0]) == S_OK)
     {
-        const auto utf16FolderPathLen = WideCharToMultiByte(CP_UTF8, 0, utf16FolderPath, -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
+        const auto utf16FolderPathLen = WideCharToMultiByte(CP_UTF8, 0, &utf16FolderPath[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
         if (utf16FolderPathLen >= 0)
         {
             return utf16FolderPathLen;
@@ -88,7 +88,7 @@ std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, char8_t*
 
 std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, const std::span<char8_t>& destStr)
 {
-    return Environment::GetFolderPath(folder, &destStr[0], static_cast<int32_t>(destStr.size()));
+    return GetFolderPath(folder, &destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 const std::u8string& Environment::GetCommandLine()
@@ -242,7 +242,7 @@ std::optional<int32_t> Environment::GetUserDomainName(char8_t* destStr, int32_t 
     auto utf16UserNameBufferLen = static_cast<DWORD>(utf16UserName.size());
     if (GetUserNameExW(NameSamCompatible, &utf16UserName[0], &utf16UserNameBufferLen) == TRUE)
     {
-        if (const wchar_t* str = wcschr(&utf16UserName[0], '\\'); str != nullptr)
+        if (const wchar_t* str = wcschr(&utf16UserName[0], L'\\'); str != nullptr)
         {
             const auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16UserName[0], str - &utf16UserName[0], reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr);
             if (utf8UserNameLen == 0)
@@ -250,7 +250,7 @@ std::optional<int32_t> Environment::GetUserDomainName(char8_t* destStr, int32_t 
                 return {};
             }
 
-            destStr[utf8UserNameLen] = '\0';
+            destStr[utf8UserNameLen] = u8'\0';
             return utf8UserNameLen;
         }
     }
@@ -272,7 +272,7 @@ std::optional<int32_t> Environment::GetUserDomainName(char8_t* destStr, int32_t 
                 return {};
             }
 
-            destStr[utf8UserNameLen] = '\0';
+            destStr[utf8UserNameLen] = u8'\0';
             return utf8UserNameLen;
         }
     }
@@ -282,7 +282,7 @@ std::optional<int32_t> Environment::GetUserDomainName(char8_t* destStr, int32_t 
 
 std::optional<int32_t> Environment::GetUserDomainName(const std::span<char8_t>& destStr)
 {
-    return Environment::GetUserDomainName(&destStr[0], static_cast<int32_t>(destStr.size()));
+    return GetUserDomainName(&destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char8_t* destStr, int32_t destStrBufferLen, int32_t* destStrLen)
@@ -299,33 +299,49 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char8_t* destStr, int32_t de
     
     CONTEXT* context = ep->ContextRecord;
 #ifdef _M_X64
-    STACKFRAME64 frame;
-    frame.AddrPC.Offset = context->Rip;
-    frame.AddrPC.Mode = AddrModeFlat;
-    frame.AddrStack.Offset = context->Rsp;
-    frame.AddrStack.Mode = AddrModeFlat;
-    frame.AddrFrame.Offset = context->Rbp;
-    frame.AddrFrame.Mode = AddrModeFlat;
+    STACKFRAME64 frame
+    {
+        .AddrPC = ADDRESS64{
+            .Offset = context->Rip,
+            .Mode = AddrModeFlat
+        },
+        .AddrFrame = ADDRESS64{
+            .Offset = context->Rbp,
+            .Mode = AddrModeFlat
+        },
+        .AddrStack = ADDRESS64{
+            .Offset = context->Rsp,
+            .Mode = AddrModeFlat
+        },
+    };
 #else
-    STACKFRAME64 frame;
-    frame.AddrPC.Offset = context->Eip;
-    frame.AddrPC.Mode = AddrModeFlat;
-    frame.AddrStack.Offset = context->Esp;
-    frame.AddrStack.Mode = AddrModeFlat;
-    frame.AddrFrame.Offset = context->Ebp;
-    frame.AddrFrame.Mode = AddrModeFlat;
+    STACKFRAME64 frame
+    {
+        .AddrPC = ADDRESS64{
+            .Offset = context->Eip,
+            .Mode = AddrModeFlat
+        },
+        .AddrFrame = ADDRESS64{
+            .Offset = context->Ebp,
+            .Mode = AddrModeFlat
+        },
+        .AddrStack = ADDRESS64{
+            .Offset = context->Esp,
+            .Mode = AddrModeFlat
+        },
+    };
 #endif
     
     std::vector<HMODULE> moduleHandles;
-    DWORD moduleHandlesSize = 0;
-    EnumProcessModules(processHandle, nullptr, 0, &moduleHandlesSize);
-    moduleHandles.resize(moduleHandlesSize / sizeof(HMODULE));
-    EnumProcessModules(processHandle, &moduleHandles[0], static_cast<DWORD>(moduleHandles.size() * sizeof(HMODULE)), &moduleHandlesSize);
+    DWORD moduleHandlesByteCount = 0;
+    EnumProcessModules(processHandle, nullptr, 0, &moduleHandlesByteCount);
+    moduleHandles.resize(moduleHandlesByteCount / sizeof(HMODULE));
+    EnumProcessModules(processHandle, &moduleHandles[0], static_cast<DWORD>(moduleHandles.size() * sizeof(HMODULE)), &moduleHandlesByteCount);
 
     void* baseModuleAddress = nullptr;
-    for (auto iter = moduleHandles.rbegin(); iter != moduleHandles.rend(); ++iter)
+    for (auto it = moduleHandles.rbegin(); it != moduleHandles.rend(); ++it)
     {
-        const HMODULE moduleHandle = *iter;
+        const HMODULE moduleHandle = *it;
         MODULEINFO moduleInfo;
         GetModuleInformation(processHandle, moduleHandle, &moduleInfo, sizeof(moduleInfo));
 
@@ -355,7 +371,7 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char8_t* destStr, int32_t de
     {
         if (frame.AddrPC.Offset != 0)
         {
-            std::array<std::byte, sizeof(IMAGEHLP_SYMBOL64) + 1024> symBytes {};
+            std::array<std::byte, sizeof(IMAGEHLP_SYMBOL64) + 1024> symBytes{};
             auto* sym = reinterpret_cast<IMAGEHLP_SYMBOL64*>(&symBytes[0]);
             sym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
             sym->MaxNameLength = static_cast<DWORD>(undecoratedName.size());

@@ -72,7 +72,7 @@ public:
     void SetTextAlignment(TextAlignment textAlignment);
     void SetLineSpacing(float lineSpacing);
     void SetLineBreakMode(LineBreakMode lineBreakMode);
-    void SetBlendColor(const Color4f& blendColor);
+    void SetBlendColor(const Color& blendColor);
     void SetRect(const I32Rect& rect);
     std::shared_ptr<FontAtlas> GetFontAtlas() noexcept;
     std::shared_ptr<const FontAtlas> GetFontAtlas() const noexcept;
@@ -81,10 +81,10 @@ public:
     TextAlignment GetTextAlignment() const noexcept;
     float GetLineSpacing() const noexcept;
     LineBreakMode GetLineBreakMode() const noexcept;
-    const Color4f& GetBlendColor() const noexcept;
+    const Color& GetBlendColor() const noexcept;
     const I32Rect& GetRect() const noexcept;
     const I32Rect& GetContentRect() const noexcept;
-    const std::vector<CharacterInfo>& GetCharacterInfos() const noexcept;
+    const std::vector<CharacterInfo>& GetCharacterInfos() const;
     void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const override;
     
 /**@section Variable */
@@ -96,7 +96,7 @@ public:
     TextAlignment m_textAlignment = TextAlignment::UpperLeft;
     float m_lineSpacing = 0.0f;
     LineBreakMode m_lineBreakMode = LineBreakMode::CharacterWrap;
-    Color4f m_blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f);
+    Color m_blendColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
     I32Rect m_rect;
     mutable bool m_isDirty = true;
     std::unique_ptr<class TextBlock> m_textBlock;

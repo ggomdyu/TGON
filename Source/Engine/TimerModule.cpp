@@ -8,7 +8,7 @@ namespace tg
 {
 
 TimerModule::TimerModule() noexcept :
-    m_prevTickTime(Environment::GetTickCount())
+    m_prevFrameTime(Environment::GetTickCount())
 {
 }
 
@@ -35,13 +35,13 @@ float TimerModule::GetTimerElapsed(TimerHandle timerHandle) const noexcept
         return timerInfo.timerHandle == timerHandle;
     };
 
-    const auto iterator = std::find_if(m_timerInfos.cbegin(), m_timerInfos.cend(), predicate);
-    if (iterator == m_timerInfos.cend())
+    const auto it = std::find_if(m_timerInfos.cbegin(), m_timerInfos.cend(), predicate);
+    if (it == m_timerInfos.cend())
     {
         return 0.0f;
     }
     
-    return iterator->interval - iterator->elapsedTime;
+    return it->interval - it->elapsedTime;
 }
 
 bool TimerModule::ClearTimer(TimerHandle timerHandle)
@@ -51,10 +51,10 @@ bool TimerModule::ClearTimer(TimerHandle timerHandle)
         return timerInfo.timerHandle == timerHandle;
     };
 
-    const auto iterator = std::find_if(m_timerInfos.begin(), m_timerInfos.end(), predicate);
-    if (iterator != m_timerInfos.end())
+    const auto it = std::find_if(m_timerInfos.begin(), m_timerInfos.end(), predicate);
+    if (it != m_timerInfos.end())
     {
-        iterator->isDeleteReserved = true;
+        it->isDeleteReserved = true;
         return true;
     }
 
@@ -69,14 +69,14 @@ TimerHandle TimerModule::CreateTimerHandle() noexcept
 
 void TimerModule::Update()
 {
-    const auto tempTickTime = Environment::GetTickCount();
+    const auto currentFrameTime = Environment::GetTickCount();
 
-    const auto tickTime = static_cast<float>(tempTickTime - m_prevTickTime) * 0.001f;
-    m_prevTickTime = tempTickTime;
+    const auto tickTime = static_cast<float>(currentFrameTime - m_prevFrameTime) * 0.001f;
+    m_prevFrameTime = currentFrameTime;
     
-    for (auto iterator = m_timerInfos.begin(); iterator != m_timerInfos.end();)
+    for (auto it = m_timerInfos.begin(); it != m_timerInfos.end();)
     {
-        auto& timerInfo = *iterator;
+        auto& timerInfo = *it;
         if (timerInfo.elapsedTime >= timerInfo.interval)
         {
             if (timerInfo.isDeleteReserved == false)
@@ -89,13 +89,13 @@ void TimerModule::Update()
                 }
                 else
                 {
-                    iterator = m_timerInfos.erase(iterator);
+                    it = m_timerInfos.erase(it);
                     continue;
                 }
             }
             else
             {
-                iterator = m_timerInfos.erase(iterator);
+                it = m_timerInfos.erase(it);
                 continue;
             }
         }
@@ -104,7 +104,7 @@ void TimerModule::Update()
             timerInfo.elapsedTime += tickTime;
         }
         
-        ++iterator;
+        ++it;
     }
 }
 

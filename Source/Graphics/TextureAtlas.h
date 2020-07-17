@@ -131,13 +131,13 @@ inline bool BasicTextureAtlas<_KeyType>::Contains(const _KeyType& key)
 template <typename _KeyType>
 inline std::optional<FRect> BasicTextureAtlas<_KeyType>::GetTextureRect(const _KeyType& key) const
 {
-    auto iter = m_packedTextureInfos.find(key);
-    if (iter == m_packedTextureInfos.end())
+    auto it = m_packedTextureInfos.find(key);
+    if (it == m_packedTextureInfos.end())
     {
         return {};
     }
     
-    return iter->second;
+    return it->second;
 }
 
 template <typename _KeyType>

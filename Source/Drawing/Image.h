@@ -62,13 +62,13 @@ private:
 public:
     bool operator==(std::nullptr_t rhs) const noexcept;
     bool operator!=(std::nullptr_t rhs) const noexcept;
-    std::byte& operator[](int32_t index) noexcept;
-    std::byte operator[](int32_t index) const noexcept;
+    std::byte& operator[](int32_t index);
+    std::byte operator[](int32_t index) const;
 
 /**@section Method */
 public:
-    static std::optional<Image> FromFile(const char8_t* filePath);
-    static std::optional<Image> FromBytes(const std::span<const std::byte>& bytes);
+    static std::optional<Image> Create(const char8_t* filePath);
+    static std::optional<Image> Create(const std::span<const std::byte>& bytes);
     [[nodiscard]] std::byte* GetImageData() noexcept;
     [[nodiscard]] const std::byte* GetImageData() const noexcept;
     [[nodiscard]] int32_t GetWidth() const noexcept;
