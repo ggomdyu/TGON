@@ -44,23 +44,23 @@ struct Divide
 };
 
 template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
-struct ExpressionTemplate final
+struct ExpressionTemplates final
 {
 /**@section Constructor */
 public:
-    constexpr ExpressionTemplate(const _FirstOperand& firstOperand, const _SecondOperand& secondOperand) noexcept;
+    constexpr ExpressionTemplates(const _FirstOperand& firstOperand, const _SecondOperand& secondOperand) noexcept;
 
 /**@section Operator */
 public:
     constexpr auto operator[](int32_t index) const;
     template <typename _SecondOperand2>
-    constexpr ExpressionTemplate<Add, ExpressionTemplate, _SecondOperand2> operator+(const _SecondOperand2& rhs) const noexcept;
+    constexpr ExpressionTemplates<Add, ExpressionTemplates, _SecondOperand2> operator+(const _SecondOperand2& rhs) const noexcept;
     template <typename _SecondOperand2>
-    constexpr ExpressionTemplate<Subtract, ExpressionTemplate, _SecondOperand2> operator-(const _SecondOperand2& rhs) const noexcept;
+    constexpr ExpressionTemplates<Subtract, ExpressionTemplates, _SecondOperand2> operator-(const _SecondOperand2& rhs) const noexcept;
     template <typename _SecondOperand2>
-    constexpr ExpressionTemplate<Multiply, ExpressionTemplate, _SecondOperand2> operator*(const _SecondOperand2& rhs) const noexcept;
+    constexpr ExpressionTemplates<Multiply, ExpressionTemplates, _SecondOperand2> operator*(const _SecondOperand2& rhs) const noexcept;
     template <typename _SecondOperand2>
-    constexpr ExpressionTemplate<Divide, ExpressionTemplate, _SecondOperand2> operator/(const _SecondOperand2& rhs) const noexcept;
+    constexpr ExpressionTemplates<Divide, ExpressionTemplates, _SecondOperand2> operator/(const _SecondOperand2& rhs) const noexcept;
 
 /**@section Method */
 public:
@@ -74,14 +74,14 @@ private:
 };
 
 template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
-constexpr ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>::ExpressionTemplate(const _FirstOperand& firstOperand, const _SecondOperand& secondOperand) noexcept :
+constexpr ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>::ExpressionTemplates(const _FirstOperand& firstOperand, const _SecondOperand& secondOperand) noexcept :
     m_firstOperand(firstOperand),
     m_secondOperand(secondOperand)
 {
 }
 
 template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
-constexpr auto ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>::operator[](int32_t index) const
+constexpr auto ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>::operator[](int32_t index) const
 {
     if constexpr (Indexable<decltype(m_firstOperand)> && Indexable<decltype(m_secondOperand)>)
     {
@@ -103,40 +103,40 @@ constexpr auto ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>::ope
 
 template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
 template <typename _SecondOperand2>
-constexpr ExpressionTemplate<Add, ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>, _SecondOperand2> ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>::operator+(const _SecondOperand2& rhs) const noexcept
+constexpr ExpressionTemplates<Add, ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>, _SecondOperand2> ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>::operator+(const _SecondOperand2& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
 template <typename _SecondOperand2>
-constexpr ExpressionTemplate<Subtract, ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>, _SecondOperand2> ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>::operator-(const _SecondOperand2& rhs) const noexcept
+constexpr ExpressionTemplates<Subtract, ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>, _SecondOperand2> ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>::operator-(const _SecondOperand2& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
 template <typename _SecondOperand2>
-constexpr ExpressionTemplate<Multiply, ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>, _SecondOperand2> ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>::operator*(const _SecondOperand2& rhs) const noexcept
+constexpr ExpressionTemplates<Multiply, ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>, _SecondOperand2> ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>::operator*(const _SecondOperand2& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
 template <typename _SecondOperand2>
-constexpr ExpressionTemplate<Divide, ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>, _SecondOperand2> ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>::operator/(const _SecondOperand2& rhs) const noexcept
+constexpr ExpressionTemplates<Divide, ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>, _SecondOperand2> ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>::operator/(const _SecondOperand2& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
-constexpr const _FirstOperand& ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>::GetFirstOperand() const noexcept
+constexpr const _FirstOperand& ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>::GetFirstOperand() const noexcept
 {
     return m_firstOperand;
 }
 
 template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
-constexpr const _SecondOperand& ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>::GetSecondOperand() const noexcept
+constexpr const _SecondOperand& ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>::GetSecondOperand() const noexcept
 {
     return m_secondOperand;
 }

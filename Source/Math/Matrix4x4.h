@@ -23,12 +23,12 @@ public:
                         float m30, float m31, float m32, float m33) noexcept;
     explicit Matrix4x4(const std::span<const float>& m) noexcept;
     template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
-    constexpr Matrix4x4(const ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>& expression);
+    constexpr Matrix4x4(const ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>& expression);
 
 /**@section Operator */
 public:
-    constexpr ExpressionTemplate<Add, Matrix4x4, Matrix4x4> operator+(const Matrix4x4& rhs) const noexcept;
-    constexpr ExpressionTemplate<Subtract, Matrix4x4, Matrix4x4> operator-(const Matrix4x4& rhs) const noexcept;
+    constexpr ExpressionTemplates<Add, Matrix4x4, Matrix4x4> operator+(const Matrix4x4& rhs) const noexcept;
+    constexpr ExpressionTemplates<Subtract, Matrix4x4, Matrix4x4> operator-(const Matrix4x4& rhs) const noexcept;
     Matrix4x4 operator*(const Matrix4x4& rhs) const noexcept;
     Matrix4x4& operator+=(const Matrix4x4& rhs) noexcept;
     Matrix4x4& operator-=(const Matrix4x4& rhs) noexcept;
@@ -70,7 +70,7 @@ public:
 };
 
 template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
-constexpr Matrix4x4::Matrix4x4(const ExpressionTemplate<_Operator, _FirstOperand, _SecondOperand>& expression) :
+constexpr Matrix4x4::Matrix4x4(const ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>& expression) :
     Matrix4x4(
         expression[0], expression[1], expression[2], expression[3],
         expression[4], expression[5], expression[6], expression[7],
@@ -117,12 +117,12 @@ constexpr Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
 {
 }
 
-constexpr ExpressionTemplate<Add, Matrix4x4, Matrix4x4> Matrix4x4::operator+(const Matrix4x4& rhs) const noexcept
+constexpr ExpressionTemplates<Add, Matrix4x4, Matrix4x4> Matrix4x4::operator+(const Matrix4x4& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-constexpr ExpressionTemplate<Subtract, Matrix4x4, Matrix4x4> Matrix4x4::operator-(const Matrix4x4& rhs) const noexcept
+constexpr ExpressionTemplates<Subtract, Matrix4x4, Matrix4x4> Matrix4x4::operator-(const Matrix4x4& rhs) const noexcept
 {
     return {*this, rhs};
 }
@@ -130,7 +130,26 @@ constexpr ExpressionTemplate<Subtract, Matrix4x4, Matrix4x4> Matrix4x4::operator
 inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const noexcept
 {
 #if TGON_SIMD_SSE2
-    Matrix4x4 ret;
+    float r[16];
+    __m128 a_line, b_line, r_line;
+    for (int i = 0; i < 16; i += 4) {
+        // unroll the first step of the loop to avoid having to initialize r_line to zero
+        a_line = _mm_load_ps(&m00);         // a_line = vec4(column(a, 0))
+        b_line = _mm_set1_ps(rhs[i]);      // b_line = vec4(b[i][0])
+        r_line = _mm_mul_ps(a_line, b_line); // r_line = a_line * b_line
+        for (int j = 1; j < 4; j++) {
+            a_line = _mm_load_ps(&(&m00)[j * 4]); // a_line = vec4(column(a, j))
+            b_line = _mm_set1_ps(rhs[i + j]);  // b_line = vec4(b[i][j])
+                                           // r_line += a_line * b_line
+            r_line = _mm_add_ps(_mm_mul_ps(a_line, b_line), r_line);
+        }
+        _mm_store_ps(&r[i], r_line);     // r[i] = r_line
+    }
+    int n = 3;
+
+
+
+   /* Matrix4x4 ret;
     auto r0 = _mm_loadu_ps(&rhs.m00);
     auto r1 = _mm_loadu_ps(&rhs.m10);
     auto r2 = _mm_loadu_ps(&rhs.m20);
@@ -162,7 +181,7 @@ inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const noexcept
     r1 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(1, 1, 1, 1)), r1);
     r2 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(2, 2, 2, 2)), r2);
     r3 = _mm_mul_ps(_mm_shuffle_ps(l, l, _MM_SHUFFLE(3, 3, 3, 3)), r3);
-    _mm_storeu_ps(&ret.m30, _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, r3)));
+    _mm_storeu_ps(&ret.m30, _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, r3)));*/
 
     return *this;
 #else

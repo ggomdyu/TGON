@@ -4,7 +4,7 @@
 #include <array>
 #include <fmt/format.h>
 
-#include "Core/ExpressionTemplate.h"
+#include "Core/ExpressionTemplates.h"
 
 namespace tg
 {
@@ -19,11 +19,11 @@ public:
 
 /**@section Operator */
 public:
-    constexpr ExpressionTemplate<Add, Color, Color> operator+(const Color& rhs) const noexcept;
-    constexpr ExpressionTemplate<Subtract, Color, Color> operator-(const Color& rhs) const noexcept;
-    constexpr ExpressionTemplate<Subtract, Color, Color> operator*(const Color& rhs) const noexcept;
-    constexpr ExpressionTemplate<Multiply, Color, float> operator*(const float& rhs) const noexcept;
-    constexpr ExpressionTemplate<Divide, Color, float> operator/(const float& rhs) const;
+    constexpr ExpressionTemplates<Add, Color, Color> operator+(const Color& rhs) const noexcept;
+    constexpr ExpressionTemplates<Subtract, Color, Color> operator-(const Color& rhs) const noexcept;
+    constexpr ExpressionTemplates<Subtract, Color, Color> operator*(const Color& rhs) const noexcept;
+    constexpr ExpressionTemplates<Multiply, Color, float> operator*(const float& rhs) const noexcept;
+    constexpr ExpressionTemplates<Divide, Color, float> operator/(const float& rhs) const;
     Color& operator+=(const Color& rhs) noexcept;
     Color& operator-=(const Color& rhs) noexcept;
     Color& operator*=(const Color& rhs) noexcept;
@@ -73,32 +73,32 @@ constexpr Color::Color(float r, float g, float b) noexcept :
 {
 }
 
-constexpr ExpressionTemplate<Add, Color, Color> Color::operator+(const Color& rhs) const noexcept
+constexpr ExpressionTemplates<Add, Color, Color> Color::operator+(const Color& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-constexpr ExpressionTemplate<Subtract, Color, Color> Color::operator-(const Color& rhs) const noexcept
+constexpr ExpressionTemplates<Subtract, Color, Color> Color::operator-(const Color& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-constexpr ExpressionTemplate<Subtract, Color, Color> Color::operator*(const Color& rhs) const noexcept
+constexpr ExpressionTemplates<Subtract, Color, Color> Color::operator*(const Color& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-constexpr ExpressionTemplate<Multiply, Color, float> Color::operator*(const float& rhs) const noexcept
+constexpr ExpressionTemplates<Multiply, Color, float> Color::operator*(const float& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-constexpr ExpressionTemplate<Multiply, Color, float> operator*(const float& lhs, const Color& rhs) noexcept
+constexpr ExpressionTemplates<Multiply, Color, float> operator*(const float& lhs, const Color& rhs) noexcept
 {
     return {rhs, lhs};
 }
 
-constexpr ExpressionTemplate<Divide, Color, float> Color::operator/(const float& rhs) const
+constexpr ExpressionTemplates<Divide, Color, float> Color::operator/(const float& rhs) const
 {
     return {*this, rhs};
 }
