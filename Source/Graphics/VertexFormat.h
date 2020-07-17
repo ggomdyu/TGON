@@ -22,7 +22,7 @@ struct V3F_T2F
 struct V3F_C4F_T2F
 {
     Vector3 position;
-    Color4f color;
+    Color color;
     Vector2 uv;
 };
 

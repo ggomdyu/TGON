@@ -8,10 +8,7 @@ namespace tg
 {
 
 TimeModule::TimeModule() :
-    m_lastRecordedTickTime(Environment::GetTickCount()),
-    m_timeScale(1.0f),
-    m_deltaTime(0.0f),
-    m_smoothDeltaTime(0.0f)
+    m_prevFrameTime(Environment::GetTickCount())
 {
 }
 
@@ -47,14 +44,14 @@ int32_t TimeModule::GetFrameCount() const noexcept
 
 void TimeModule::Update()
 {
-    const auto currTime = Environment::GetTickCount();
+    const auto currentFrameTime = Environment::GetTickCount();
 
-    m_deltaTime = static_cast<float>(currTime - m_lastRecordedTickTime) * 0.001f;
+    m_deltaTime = static_cast<float>(currentFrameTime - m_prevFrameTime) * 0.001f;
     m_smoothDeltaTime = SmoothDeltaTimeFactor * m_deltaTime + (1.0f - SmoothDeltaTimeFactor) * m_smoothDeltaTime;
 
     ++m_frameCount;
 
-    m_lastRecordedTickTime = currTime;
+    m_prevFrameTime = currentFrameTime;
 }
 
 }

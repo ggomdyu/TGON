@@ -59,7 +59,7 @@ public:
     [[nodiscard]] PlatformGraphics& GetPlatformDependency() noexcept;
     [[nodiscard]] const PlatformGraphics& GetPlatformDependency() const noexcept;
     void SetScissorRect(const FRect& scissorRect);
-    void SetClearColor(const Color4f& color);
+    void SetClearColor(const Color& color);
     void SetFillMode(FillMode fillMode);
     void SetCullMode(CullMode cullMode);
     void SetViewport(int32_t x, int32_t y, int32_t width, int32_t height);

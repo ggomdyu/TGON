@@ -65,7 +65,7 @@ BlendMode UIBatch::GetBlendMode() const noexcept
     return m_blendMode;
 }
 
-void UIBatch::Merge(float x, float y, const FRect& textureRect, const Vector2& pivot, const Color4f& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices)
+void UIBatch::Merge(float x, float y, const FRect& textureRect, const Vector2& pivot, const Color& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices)
 {
     decltype(auto) textureSize = m_texture->GetSize();
         
@@ -116,7 +116,7 @@ void UIBatch::Merge(float x, float y, const FRect& textureRect, const Vector2& p
     newVertices[5] = newVertices[0];
 }
     
-void UIBatch::Merge(const FRect& textureRect, const FExtent2D& textureSize, const Vector2& pivot, const Color4f& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices)
+void UIBatch::Merge(const FRect& textureRect, const FExtent2D& textureSize, const Vector2& pivot, const Color& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices)
 {
     float leftUV = textureRect.x / textureSize.width;
     float rightUV = (textureRect.x + textureRect.width) / textureSize.width;

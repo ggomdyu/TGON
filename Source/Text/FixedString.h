@@ -47,10 +47,6 @@ public:
     bool operator==(const BasicFixedString<_Char, _CharBufferSize2, _StringTraits>& str) const;
     _Char operator[](int32_t index) const;
     _Char& operator[](int32_t index);
-    operator std::basic_string<_Char>() const noexcept;
-    operator std::basic_string_view<_Char>() const noexcept;
-    operator std::span<_Char>() const noexcept;
-    operator std::span<_Char, _CharBufferSize>() const noexcept;
 
 /**@section Method */
 public:
@@ -81,6 +77,9 @@ protected:
     int32_t m_strLen = 0;
 };
 
+template <typename _Char, int32_t _CharBufferSize, typename _StringTraits = BasicStringTraits<_Char>>
+BasicFixedString(const _Char(&)[_CharBufferSize]) -> BasicFixedString<_Char, _CharBufferSize, _StringTraits>;
+
 namespace detail
 {
 
@@ -92,11 +91,8 @@ struct IsBasicFixedString<BasicFixedString<_Char, _CharBufferSize, _StringTraits
 
 }
 
-template <typename _Char, int32_t _CharBufferSize, typename _StringTraits = BasicStringTraits<_Char>>
-BasicFixedString(const _Char(&)[_CharBufferSize]) -> BasicFixedString<_Char, _CharBufferSize, _StringTraits>;
-
 template <typename _Type>
-concept IsBasicFixedString = detail::IsBasicFixedString<_Type>::value;
+constexpr bool IsBasicFixedString = detail::IsBasicFixedString<_Type>::value;
 
 using FixedString8 = BasicFixedString<char, 8>;
 using FixedString16 = BasicFixedString<char, 16>;
@@ -259,30 +255,6 @@ template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
 _Char& BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator[](int32_t index)
 {
     return m_str[index];
-}
-
-template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
-BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator std::basic_string<_Char>() const noexcept
-{
-    return {m_str.data(), static_cast<size_t>(m_strLen)};
-}
-
-template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
-BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator std::basic_string_view<_Char>() const noexcept
-{
-    return {m_str.data(), static_cast<size_t>(m_strLen)};
-}
-
-template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
-BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator std::span<_Char>() const noexcept
-{
-    return m_str;
-}
-
-template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
-BasicFixedString<_Char, _CharBufferSize, _StringTraits>::operator std::span<_Char, _CharBufferSize>() const noexcept
-{
-    return m_str;
 }
 
 template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>

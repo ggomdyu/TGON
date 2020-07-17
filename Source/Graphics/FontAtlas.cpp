@@ -59,7 +59,7 @@ std::shared_ptr<Texture> FontAtlas::GetAtlasTexture() noexcept
 
 const GlyphData* FontAtlas::GetGlyphData(char32_t ch, int32_t fontSize) const
 {
-    auto glyphData = m_font->GetGlyphData(ch, fontSize);
+    auto glyphData = m_font->GetFontFace(fontSize)->GetGlyphData(ch);
     if (glyphData != nullptr)
     {
         auto textureAtlasKey = FontAtlas::CreateTextureAtlasKey(ch, fontSize);
@@ -74,7 +74,7 @@ const GlyphData* FontAtlas::GetGlyphData(char32_t ch, int32_t fontSize) const
 
 I32Vector2 FontAtlas::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const
 {
-    return m_font->GetKerning(lhs, rhs, fontSize);
+    return m_font->GetFontFace(fontSize)->GetKerning(lhs, rhs);
 }
 
 FontAtlas::TextureAtlasKey FontAtlas::CreateTextureAtlasKey(char32_t ch, int32_t fontSize) noexcept

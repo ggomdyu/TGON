@@ -10,7 +10,7 @@ namespace tg
 
 class Component;
 
-class GameObject :
+class GameObject final :
     public RuntimeObject
 {
 public:
@@ -23,14 +23,9 @@ public:
 /**@section Method */
 public:
     /**
-     * @brief   Initializes the object.
-     */
-    virtual void Initialize() {}
-
-    /**
      * @brief   Updates the frame of the object.
      */
-    virtual void Update();
+    void Update();
 
     /**
      * @brief   Adds a component to the object.
@@ -42,36 +37,40 @@ public:
 
     /**
      * @brief   Finds the component of the specified type.
-     * @return  The type of component to retrieve or nullptr.
+     * @return  The found component or nullptr.
      */
     template <typename _Component>
     [[nodiscard]] _Component* FindComponent();
 
     /**
      * @brief   Finds the component of the specified type.
-     * @return  The type of component to retrieve or nullptr.
+     * @return  The found component or nullptr.
      */
     template <typename _Component>
     [[nodiscard]] const _Component* FindComponent() const;
 
     /**
      * @brief   Sets the name of the object.
+     * @param name  The object name.
      */
     void SetName(StringHash name);
 
     /**
-     * @brief   Sets the name of the object.
+     * @brief   Activates or deactivates the object.
+     * @param isActive  True activates the object and false deactivates the object.
      */
     void SetActive(bool isActive) noexcept;
 
     /**
      * @brief   Gets the name of the object.
+     * @return  The object name.
      */
     [[nodiscard]] const StringHash& GetName() const noexcept;
 
     /**
-    * @brief   Gets the active state of the object.
-    */
+     * @brief   Gets the active state of the object.
+     * @return  The active state of the object.
+     */
     [[nodiscard]] bool IsActive() const noexcept;
 
 /**@section Variable */

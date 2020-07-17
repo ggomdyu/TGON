@@ -58,7 +58,7 @@ bool File::SetLastWriteTime(const char8_t* path, const DateTime& lastWriteTime)
     return SetLastWriteTimeUtc(path, lastWriteTime);
 }
 
-std::unique_ptr<std::byte[]> File::ReadAllBytes(const char8_t* path, ReturnSmartPointerTag)
+std::unique_ptr<std::byte[]> File::ReadAllBytes(const char8_t* path, ReturnPointerTag)
 {
 #ifdef _MSC_VER
     FILE* fp = nullptr;

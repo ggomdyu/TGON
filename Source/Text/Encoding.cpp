@@ -70,20 +70,21 @@ const Encoding* Encoding::GetEncoding(int32_t codePage)
 
     case IBM_UTF32LE_CCSID:
         return &UTF32();
-    }
 
-    auto iter = m_encodingTable.find(codePage);
-    if (iter == m_encodingTable.end())
-    {
-        iter = m_encodingTable.try_emplace(iter, codePage, codePage);
-    }
+    default:
+        auto it = m_encodingTable.find(codePage);
+        if (it == m_encodingTable.end())
+        {
+            it = m_encodingTable.try_emplace(it, codePage, codePage);
+        }
 
-    return &iter->second;
+        return &it->second;
+    }
 }
 
 const Encoding* Encoding::GetEncoding(const char8_t* codePageName)
 {
-    const auto converterSharedData = getAlgorithmicTypeFromName(reinterpret_cast<const char*>(codePageName));
+    const auto* converterSharedData = getAlgorithmicTypeFromName(reinterpret_cast<const char*>(codePageName));
     if (converterSharedData == nullptr)
     {
         return nullptr;
@@ -94,39 +95,39 @@ const Encoding* Encoding::GetEncoding(const char8_t* codePageName)
 
 std::vector<std::byte> Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* bytes, int32_t count)
 {
-    UErrorCode status = U_ZERO_ERROR;
-    icu::UnicodeString ustr(reinterpret_cast<const char*>(bytes), count, srcEncoding.m_converter, status);
+    auto status = U_ZERO_ERROR;
+    const icu::UnicodeString str(reinterpret_cast<const char*>(bytes), count, srcEncoding.m_converter, status);
     if (U_FAILURE(status))
     {
         return {};
     }
 
-    int32_t encodedStrBytes = ustr.extract(nullptr, 0, destEncoding.m_converter, status);
+    const auto encodedStrByteCount = str.extract(nullptr, 0, destEncoding.m_converter, status);
 
-    std::vector<std::byte> ret(encodedStrBytes);
+    std::vector<std::byte> ret(encodedStrByteCount);
     status = U_ZERO_ERROR;
-    ustr.extract(reinterpret_cast<char*>(&ret[0]), static_cast<int32_t>(ret.size()), destEncoding.m_converter, status);
+    str.extract(reinterpret_cast<char*>(&ret[0]), static_cast<int32_t>(ret.size()), destEncoding.m_converter, status);
 
     return ret;
 }
 
-int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* srcBytes, int32_t srcBytesCount, std::byte* destBytes, int32_t destBytesCount)
+int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* srcBytes, int32_t srcByteCount, std::byte* destBytes, int32_t destByteCount)
 {
-    UErrorCode status = U_ZERO_ERROR;
-    icu::UnicodeString ustr(reinterpret_cast<const char*>(srcBytes), srcBytesCount, srcEncoding.m_converter, status);
+    auto status = U_ZERO_ERROR;
+    const icu::UnicodeString str(reinterpret_cast<const char*>(srcBytes), srcByteCount, srcEncoding.m_converter, status);
     if (U_FAILURE(status))
     {
-        if (destBytesCount >= destEncoding.GetMinCharByte())
+        if (destByteCount >= destEncoding.GetMinCharByte())
         {
             memset(destBytes, 0, destEncoding.GetMinCharByte());
         }
         return -1;
     }
 
-    int32_t encodedStrBytes = ustr.extract(nullptr, 0, destEncoding.m_converter, status);
-    if (encodedStrBytes > destBytesCount)
+    const auto encodedStrByteCount = str.extract(nullptr, 0, destEncoding.m_converter, status);
+    if (encodedStrByteCount > destByteCount)
     {
-        if (destBytesCount >= destEncoding.GetMinCharByte())
+        if (destByteCount >= destEncoding.GetMinCharByte())
         {
             memset(destBytes, 0, destEncoding.GetMinCharByte());
         }
@@ -134,9 +135,9 @@ int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncod
     }
 
     status = U_ZERO_ERROR;
-    ustr.extract(reinterpret_cast<char*>(&destBytes[0]), destBytesCount, destEncoding.m_converter, status);
+    str.extract(reinterpret_cast<char*>(&destBytes[0]), destByteCount, destEncoding.m_converter, status);
 
-    return encodedStrBytes;
+    return encodedStrByteCount;
 }
 
 int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::span<std::byte>& srcBytes, const std::span<std::byte>& destBytes)
@@ -148,12 +149,12 @@ std::vector<char32_t> Encoding::GetChars(const std::byte* bytes, int32_t count) 
 {
     std::vector<char32_t> ret;
 
-    UErrorCode status = U_ZERO_ERROR;
-    auto currIter = reinterpret_cast<const char*>(&bytes[0]);
-    auto endIter = reinterpret_cast<const char*>(bytes + count);
-    while (currIter < endIter)
+    auto status = U_ZERO_ERROR;
+    const auto* currentIt = reinterpret_cast<const char*>(&bytes[0]);
+    const auto* endIt = reinterpret_cast<const char*>(bytes + count);
+    while (currentIt < endIt)
     {
-        auto ch = ucnv_getNextUChar(m_converter, &currIter, currIter + count, &status);
+        const auto ch = ucnv_getNextUChar(m_converter, &currentIt, currentIt + count, &status);
         if (U_FAILURE(status))
         {
             return {};
@@ -179,12 +180,12 @@ int32_t Encoding::GetCharCount(const std::byte* bytes, int32_t count) const
 {
     int32_t ret = 0;
 
-    UErrorCode status = U_ZERO_ERROR;
-    auto currIter = reinterpret_cast<const char*>(&bytes[0]);
-    auto endIter = reinterpret_cast<const char*>(bytes + count);
-    while (currIter < endIter)
+    auto status = U_ZERO_ERROR;
+    const auto* currentIt = reinterpret_cast<const char*>(&bytes[0]);
+    const auto* endIt = reinterpret_cast<const char*>(bytes + count);
+    while (currentIt < endIt)
     {
-        auto ch = ucnv_getNextUChar(m_converter, &currIter, currIter + count, &status);
+        const auto ch = ucnv_getNextUChar(m_converter, &currentIt, currentIt + count, &status);
         if (U_FAILURE(status))
         {
             return -1;
@@ -252,8 +253,8 @@ bool Encoding::IsSingleByte() const noexcept
 
 UConverter* Encoding::CreateUConverter(const char8_t* codePageName)
 {
-    UErrorCode status = U_ZERO_ERROR;
-    UConverter* converter = ucnv_open(reinterpret_cast<const char*>(codePageName), &status);
+    auto status = U_ZERO_ERROR;
+    auto* converter = ucnv_open(reinterpret_cast<const char*>(codePageName), &status);
     if (U_FAILURE(status))
     {
         return nullptr;
@@ -264,14 +265,14 @@ UConverter* Encoding::CreateUConverter(const char8_t* codePageName)
 
 UConverter* Encoding::CreateUConverter(int32_t codePage)
 {
-    auto converterSharedData = getAlgorithmicTypeFromCodePage(codePage);
+    const auto* converterSharedData = getAlgorithmicTypeFromCodePage(codePage);
     if (converterSharedData == nullptr)
     {
         return nullptr;
     }
 
-    UErrorCode status = U_ZERO_ERROR;
-    UConverter* converter = ucnv_open(converterSharedData->staticData->name, &status);
+    auto status = U_ZERO_ERROR;
+    auto* converter = ucnv_open(converterSharedData->staticData->name, &status);
     if (U_FAILURE(status))
     {
         return nullptr;

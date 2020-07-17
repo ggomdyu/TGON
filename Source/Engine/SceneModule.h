@@ -75,6 +75,12 @@ public:
      */
     std::shared_ptr<GameObject> Instantiate();
 
+    /**
+     * @brief   Makes object don't destroy on load new scene.
+     * @param object    The target object.
+     */
+    void DontDestroyOnLoad(std::shared_ptr<GameObject> object);
+
 /**@section Variable */
 public:
     static constexpr auto ModuleStage = ModuleStage::Update;

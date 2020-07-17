@@ -24,6 +24,9 @@ public:
     [[nodiscard]] const Graphics& GetGraphics() const noexcept;
 
 /**@section Variable */
+public:
+    static constexpr auto ModuleStage = ModuleStage::Render;
+
 private:
     Graphics m_graphics;
 };

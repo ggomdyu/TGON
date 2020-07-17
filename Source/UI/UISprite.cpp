@@ -7,7 +7,7 @@
 namespace tg
 {
 
-UISprite::UISprite(const std::shared_ptr<Texture>& texture, BlendMode blendMode, Color4f blendColor) noexcept :
+UISprite::UISprite(const std::shared_ptr<Texture>& texture, BlendMode blendMode, Color blendColor) noexcept :
     m_texture(texture),
     m_textureSize(texture ? FExtent2D(texture->GetSize()) : FExtent2D(0.0f, 0.0f)),
     m_textureRect(0, 0, m_textureSize.width, m_textureSize.height),
@@ -45,7 +45,7 @@ void UISprite::SetBlendMode(BlendMode blendMode) noexcept
     m_blendMode = blendMode;
 }
 
-void UISprite::SetBlendColor(const Color4f& blendColor) noexcept
+void UISprite::SetBlendColor(const Color& blendColor) noexcept
 {
     m_blendColor = blendColor;
 }
@@ -75,7 +75,7 @@ BlendMode UISprite::GetBlendMode() const noexcept
     return m_blendMode;
 }
 
-const Color4f& UISprite::GetBlendColor() const noexcept
+const Color& UISprite::GetBlendColor() const noexcept
 {
     return m_blendColor;
 }

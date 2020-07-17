@@ -1,7 +1,9 @@
 #pragma once
 
 #include <optional>
+#include <memory>
 
+#include "Core/TagDispatch.h"
 #include "Time/DateTime.h"
 
 #include "FileStream.h"
@@ -9,9 +11,6 @@
 namespace tg
 {
 
-class ReturnVectorTag {};
-class ReturnSmartPointerTag {};
- 
 enum class FileAttributes
 {
     Archive = 0x20,
@@ -60,7 +59,7 @@ public:
     static bool Decrypt(const char8_t* path);
     static bool Encrypt(const char8_t* path);
     static std::optional<std::u8string> ReadAllText(const char8_t* path);
-    static std::unique_ptr<std::byte[]> ReadAllBytes(const char8_t* path, ReturnSmartPointerTag);
+    static std::unique_ptr<std::byte[]> ReadAllBytes(const char8_t* path, ReturnPointerTag);
     static std::optional<std::vector<std::byte>> ReadAllBytes(const char8_t* path, ReturnVectorTag);
     static std::optional<std::vector<std::u8string>> ReadAllLines(const char8_t* path);
     static FileStream Create(const char8_t* path);

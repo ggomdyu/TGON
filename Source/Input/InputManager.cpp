@@ -9,7 +9,10 @@ namespace tg
 
 InputManager::InputManager()
 {
-    auto inputManager = std::make_unique<gainput::InputManager>();
+    if (m_inputManager == nullptr)
+    {
+        m_inputManager = std::make_unique<gainput::InputManager>();
+    }
 
 #if TGON_PLATFORM_WINDOWS
     WindowsApplication::SetCustomMessageCallback([](const MSG& msg)
@@ -21,7 +24,7 @@ InputManager::InputManager()
 
 InputManager::~InputManager()
 {
-    m_inputManager.release();
+    m_inputManager.reset();
 }
 
 std::unique_ptr<Keyboard> InputManager::CreateKeyboard() const

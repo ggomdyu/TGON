@@ -90,7 +90,7 @@ void Graphics::SetScissorRect(const FRect& scissorRect)
     TGON_GL_ERROR_CHECK(glScissor(static_cast<GLint>(scissorRect.x), static_cast<GLint>(scissorRect.y), static_cast<GLint>(scissorRect.width), static_cast<GLint>(scissorRect.height)));
 }
 
-void Graphics::SetClearColor(const Color4f& color)
+void Graphics::SetClearColor(const Color& color)
 {
     TGON_GL_ERROR_CHECK(glClearColor(color.r, color.g, color.b, color.a));
 }

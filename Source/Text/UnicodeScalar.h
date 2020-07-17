@@ -28,8 +28,8 @@ public:
 
 /**@section Method */
 public:
-    constexpr char32_t GetValue() const noexcept;
-    constexpr size_t GetHashCode() const noexcept;
+    [[nodiscard]] constexpr char32_t GetValue() const noexcept;
+    [[nodiscard]] constexpr size_t GetHashCode() const noexcept;
 
 private:
     constexpr char32_t ToChar32(const char* str);

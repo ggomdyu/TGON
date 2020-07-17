@@ -7,7 +7,7 @@
 #include <fmt/format.h>
 
 #include "Core/Concepts.h"
-#include "Core/ExpressionTemplate.h"
+#include "Core/ExpressionTemplates.h"
 
 namespace tg
 {
@@ -25,15 +25,15 @@ public:
     constexpr BasicExtent2D(const _Value& width, const _Value& height) noexcept;
     template <Arithmetic _Value2>
     constexpr BasicExtent2D(const BasicExtent2D<_Value2>& extent) noexcept;
-    template <typename _ExpressionTemplate>
-    constexpr BasicExtent2D(const _ExpressionTemplate& expression);
+    template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
+    constexpr BasicExtent2D(const ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>& expression);
 
 /**@section Operator */
 public:
-    constexpr ExpressionTemplate<Add, BasicExtent2D, BasicExtent2D> operator+(const BasicExtent2D& rhs) const noexcept;
-    constexpr ExpressionTemplate<Subtract, BasicExtent2D, BasicExtent2D> operator-(const BasicExtent2D& rhs) const noexcept;
-    constexpr ExpressionTemplate<Multiply, BasicExtent2D, _Value> operator*(const _Value& rhs) const noexcept;
-    constexpr ExpressionTemplate<Divide, BasicExtent2D, _Value> operator/(const _Value& rhs) const;
+    constexpr ExpressionTemplates<Add, BasicExtent2D, BasicExtent2D> operator+(const BasicExtent2D& rhs) const noexcept;
+    constexpr ExpressionTemplates<Subtract, BasicExtent2D, BasicExtent2D> operator-(const BasicExtent2D& rhs) const noexcept;
+    constexpr ExpressionTemplates<Multiply, BasicExtent2D, _Value> operator*(const _Value& rhs) const noexcept;
+    constexpr ExpressionTemplates<Divide, BasicExtent2D, _Value> operator/(const _Value& rhs) const;
     constexpr BasicExtent2D operator-() const noexcept;
     BasicExtent2D& operator+=(const BasicExtent2D& rhs) noexcept;
     BasicExtent2D& operator-=(const BasicExtent2D& rhs) noexcept;
@@ -79,38 +79,38 @@ constexpr BasicExtent2D<_Value>::BasicExtent2D(const BasicExtent2D<_Value2>& ext
 }
 
 template <Arithmetic _Value>
-template <typename _ExpressionTemplate>
-constexpr BasicExtent2D<_Value>::BasicExtent2D(const _ExpressionTemplate& expression) :
+template <typename _Operator, typename _FirstOperand, typename _SecondOperand>
+constexpr BasicExtent2D<_Value>::BasicExtent2D(const ExpressionTemplates<_Operator, _FirstOperand, _SecondOperand>& expression) :
     BasicExtent2D(expression[0], expression[1])
 {
 }
 
 template <Arithmetic _Value>
-constexpr ExpressionTemplate<Add, BasicExtent2D<_Value>, BasicExtent2D<_Value>> BasicExtent2D<_Value>::operator+(const BasicExtent2D& rhs) const noexcept
+constexpr ExpressionTemplates<Add, BasicExtent2D<_Value>, BasicExtent2D<_Value>> BasicExtent2D<_Value>::operator+(const BasicExtent2D& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr ExpressionTemplate<Subtract, BasicExtent2D<_Value>, BasicExtent2D<_Value>> BasicExtent2D<_Value>::operator-(const BasicExtent2D& rhs) const noexcept
+constexpr ExpressionTemplates<Subtract, BasicExtent2D<_Value>, BasicExtent2D<_Value>> BasicExtent2D<_Value>::operator-(const BasicExtent2D& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr ExpressionTemplate<Multiply, BasicExtent2D<_Value>, _Value> BasicExtent2D<_Value>::operator*(const _Value& rhs) const noexcept
+constexpr ExpressionTemplates<Multiply, BasicExtent2D<_Value>, _Value> BasicExtent2D<_Value>::operator*(const _Value& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr ExpressionTemplate<Divide, BasicExtent2D<_Value>, _Value> BasicExtent2D<_Value>::operator/(const _Value& rhs) const
+constexpr ExpressionTemplates<Divide, BasicExtent2D<_Value>, _Value> BasicExtent2D<_Value>::operator/(const _Value& rhs) const
 {
     return {*this, rhs};
 }
 
 template <Arithmetic _Value>
-constexpr ExpressionTemplate<Divide, _Value, BasicExtent2D<_Value>> operator*(const _Value& lhs, const BasicExtent2D<_Value>& rhs)
+constexpr ExpressionTemplates<Divide, _Value, BasicExtent2D<_Value>> operator*(const _Value& lhs, const BasicExtent2D<_Value>& rhs)
 {
     return {lhs, rhs};
 }

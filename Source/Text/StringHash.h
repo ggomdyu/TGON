@@ -23,7 +23,7 @@ struct IsBasicStringHash<BasicStringHash<_String>> : std::true_type {};
 }
 
 template <typename _Type>
-concept HashableString = detail::IsBasicStringHash<_Type>::value;
+concept IsBasicStringHash = detail::IsBasicStringHash<_Type>::value;
 
 template <typename _String>
 class BasicStringHash
@@ -38,9 +38,9 @@ public:
     constexpr BasicStringHash() noexcept = default;
     constexpr BasicStringHash(const BasicStringHash& str) = default;
     constexpr BasicStringHash(BasicStringHash&& str) noexcept = default;
-    template <HashableString _String2>
+    template <typename _String2> requires IsBasicStringHash<_String2>
     constexpr BasicStringHash(const _String2& str) noexcept;
-    template <typename _String2>
+    template <typename _String2> requires(!IsBasicStringHash<_String2>)
     constexpr BasicStringHash(const _String2& str) noexcept;
 
 /**@section Constructor */
@@ -53,8 +53,8 @@ public:
     BasicStringHash& operator=(BasicStringHash&& rhs) noexcept = default;
     template <typename _String2>
     BasicStringHash& operator=(const _String2& rhs) noexcept;
-    constexpr ValueType& operator[](int32_t index) noexcept;
-    constexpr ValueType operator[](int32_t index) const noexcept;
+    constexpr ValueType& operator[](int32_t index);
+    constexpr ValueType operator[](int32_t index) const;
     template <typename _String2>
     constexpr bool operator==(const BasicStringHash<_String2>& rhs) const noexcept;
     constexpr bool operator==(const ValueType* rhs) const noexcept;
@@ -69,9 +69,6 @@ public:
     constexpr bool operator>(const BasicStringHash<_String2>& rhs) const noexcept;
     template <typename _String2>
     constexpr bool operator>=(const BasicStringHash<_String2>& rhs) const noexcept;
-    operator std::basic_string<ValueType>() const noexcept;
-    constexpr operator const ValueType* () const noexcept;
-    constexpr operator std::basic_string_view<ValueType>() const noexcept;
 
 /**@section Method */
 public:
@@ -99,7 +96,7 @@ public:
 };
 
 template <typename _String>
-template <HashableString _String2>
+template <typename _String2> requires IsBasicStringHash<_String2>
 constexpr BasicStringHash<_String>::BasicStringHash(const _String2& str) noexcept :
     m_str(str.Data(), str.Length()),
     m_hashCode(str.GetHashCode())
@@ -107,7 +104,7 @@ constexpr BasicStringHash<_String>::BasicStringHash(const _String2& str) noexcep
 }
 
 template <typename _String>
-template <typename _String2>
+template <typename _String2> requires(!IsBasicStringHash<_String2>)
 constexpr BasicStringHash<_String>::BasicStringHash(const _String2& str) noexcept :
     m_str(str),
     m_hashCode(std::hash<BasicStringHash>{}(this->Data()))
@@ -118,7 +115,7 @@ template <typename _String>
 template <typename _String2>
 BasicStringHash<_String>& BasicStringHash<_String>::operator=(const _String2& rhs) noexcept
 {
-    if constexpr (HashableString<_String2>)
+    if constexpr (IsBasicStringHash<_String2>)
     {
         m_str = rhs.m_str;
         m_hashCode = rhs.m_hashCode;
@@ -133,13 +130,13 @@ BasicStringHash<_String>& BasicStringHash<_String>::operator=(const _String2& rh
 }
 
 template <typename _String>
-constexpr typename BasicStringHash<_String>::ValueType& BasicStringHash<_String>::operator[](int32_t index) noexcept
+constexpr typename BasicStringHash<_String>::ValueType& BasicStringHash<_String>::operator[](int32_t index)
 {
     return m_str[index];
 }
 
 template <typename _String>
-constexpr typename BasicStringHash<_String>::ValueType BasicStringHash<_String>::operator[](int32_t index) const noexcept
+constexpr typename BasicStringHash<_String>::ValueType BasicStringHash<_String>::operator[](int32_t index) const
 {
     return m_str[index];
 }
@@ -196,24 +193,6 @@ template <typename _String2>
 constexpr bool BasicStringHash<_String>::operator>=(const BasicStringHash<_String2>& rhs) const noexcept
 {
     return m_hashCode >= rhs.GetHashCode();
-}
-
-template<typename _String>
-BasicStringHash<_String>::operator std::basic_string<typename BasicStringHash<_String>::ValueType>() const noexcept
-{
-    return {this->Data(), static_cast<size_t>(this->Length())};
-}
-
-template <typename _String>
-constexpr BasicStringHash<_String>::operator const typename BasicStringHash<_String>::ValueType*() const noexcept
-{
-    return this->Data();
-}
-
-template<typename _String>
-constexpr BasicStringHash<_String>::operator std::basic_string_view<typename BasicStringHash<_String>::ValueType>() const noexcept
-{
-    return {this->Data(), static_cast<size_t>(this->Length())};
 }
 
 template <typename _String>

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <concepts>
+
 #include "Core/RuntimeObject.h"
 
 namespace tg
@@ -32,9 +34,10 @@ public:
 };
 
 template <typename _Module>
-concept Moduleable = requires(_Module* module) {
-    static_cast<Module*>(module);
-    _Module::ModuleStage;
+concept Modularizable = requires(_Module* module)
+{
+    { module } -> std::convertible_to<Module*>;
+    { _Module::ModuleStage };
 };
 
 }

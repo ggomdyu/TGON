@@ -30,10 +30,10 @@ public:
     static constexpr auto ModuleStage = ModuleStage::Update;
 
 private:
-    int64_t m_lastRecordedTickTime;
-    float m_timeScale;
-    float m_deltaTime;
-    float m_smoothDeltaTime;
+    int64_t m_prevFrameTime = 1.0f;
+    float m_timeScale = 1.0f;
+    float m_deltaTime = 0.0f;
+    float m_smoothDeltaTime = 0.0f;
     int32_t m_frameCount = 0;
     static constexpr float SmoothDeltaTimeFactor = 0.2f;
 };

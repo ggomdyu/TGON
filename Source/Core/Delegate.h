@@ -171,10 +171,10 @@ private:
 };
 
 template <typename _Function>
-Delegate(_Function&& function) -> Delegate<typename FunctionTraits<std::remove_cvref_t<_Function>>::FunctionType>;
+Delegate(_Function function) -> Delegate<typename FunctionTraits<std::remove_cvref_t<_Function>>::FunctionType>;
 
 template <typename _Function>
-Delegate(_Function&& function, void* receiver) -> Delegate<typename FunctionTraits<std::remove_cvref_t<_Function>>::FunctionType>;
+Delegate(_Function function, void* receiver) -> Delegate<typename FunctionTraits<std::remove_cvref_t<_Function>>::FunctionType>;
 
 template <typename _Return, typename... _Args>
 constexpr Delegate<_Return(_Args...)>::Delegate(std::nullptr_t) noexcept :

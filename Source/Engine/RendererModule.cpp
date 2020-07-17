@@ -2,9 +2,12 @@
 
 #include "RendererModule.h"
 
+#include "Diagnostics/Debug.h"
+#include "Platform/Application.h"
+#include "Platform/Environment.h"
+
 namespace tg
 {
-
 RendererModule::RendererModule(void* nativeWindow, const VideoMode& videoMode) :
     m_graphics(nativeWindow, videoMode)
 {
@@ -12,6 +15,10 @@ RendererModule::RendererModule(void* nativeWindow, const VideoMode& videoMode) :
 
 void RendererModule::Update()
 {
+    m_graphics.ClearColorDepthBuffer();
+    m_graphics.SwapBuffer();
+
+
 }
 
 Graphics& RendererModule::GetGraphics() noexcept

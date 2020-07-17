@@ -48,7 +48,7 @@ public:
     static constexpr auto ModuleStage = ModuleStage::Update;
 
 private:
-    int64_t m_prevTickTime;
+    int64_t m_prevFrameTime;
     std::vector<TimerInfo> m_timerInfos;
 };
 

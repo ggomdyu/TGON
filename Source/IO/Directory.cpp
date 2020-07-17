@@ -50,7 +50,7 @@ DirectoryInfo Directory::GetParent(const std::u8string_view& path)
     
     str += u8"../";
     
-    return DirectoryInfo(str);
+    return DirectoryInfo({str.Data(), static_cast<size_t>(str.Length())});
 }
 
 std::u8string Directory::GetCurrentDirectory()

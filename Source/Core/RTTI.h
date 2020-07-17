@@ -37,9 +37,9 @@ private:
 template <typename _Type>
 std::enable_if_t<IsRawType<_Type>, const Rtti*> GetRtti()
 {
-    using PureType = RawType<_Type>;
+    using RawType = RawType<_Type>;
 
-    static const Rtti rtti(typeid(PureType), GetRtti<typename PureType::Super>());
+    static const Rtti rtti(typeid(RawType), GetRtti<typename RawType::Super>());
     return &rtti;
 }
 
