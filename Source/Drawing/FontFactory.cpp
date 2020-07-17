@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "Core/Algorithm.h"
-#include "IO/File.h"
 
 #include "FontFactory.h"
 
@@ -55,8 +54,7 @@ FontFactory::FontFactory(FT_Library library) noexcept :
 std::optional<FontFactory> FontFactory::Create()
 {
     FT_Library library = nullptr;
-    FT_Error error = FT_Init_FreeType(&library) != 0;
-    if (error)
+    if (FT_Init_FreeType(&library))
     {
         return {};
     }
@@ -64,15 +62,14 @@ std::optional<FontFactory> FontFactory::Create()
     return FontFactory(library);
 }
 
-std::shared_ptr<Font> FontFactory::CreateFont(const char8_t* filePath) const
+std::shared_ptr<std::remove_pointer_t<FT_Library>> FontFactory::GetLibrary() noexcept
 {
-    auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
-    if (fileData.has_value() == false)
-    {
-        return {};
-    }
+    return m_library;
+}
 
-    return this->CreateFont(std::move(*fileData));
+std::shared_ptr<const std::remove_pointer_t<FT_Library>> FontFactory::GetLibrary() const noexcept
+{
+    return m_library;
 }
 
 }

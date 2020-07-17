@@ -1,41 +1,56 @@
 #pragma once
 
+#include "Core/NonCopyable.h"
+
 #include "FontFace.h"
 
 namespace tg
 {
 
-class Font final
+class Font :
+    private NonCopyable
 {
 /**@section Constructor */
-public:
-    template <typename _ContainerType>
-    Font(const std::shared_ptr<FT_LibraryRec>& library, _ContainerType&& fileData);
-    Font(Font&& rhs) noexcept;
-
-/**@section Operator */
-public:
-    Font& operator=(Font&& rhs) noexcept;
+protected:
+    Font(std::shared_ptr<std::remove_pointer_t<FT_Library>>&& library, std::vector<std::byte>&& fileData);
 
 /**@section Method */
 public:
-    const GlyphData* GetGlyphData(char32_t ch, int32_t fontSize) const;
-    I32Vector2 GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const;
-    std::shared_ptr<FontFace> GetFace(int32_t fontSize);
-    std::shared_ptr<const FontFace> GetFace(int32_t fontSize) const;
+    /**
+     * @brief   Creates a instance of object.
+     * @param library   The handle to the FreeType library instance.
+     * @param filePath  The font file path.
+     * @return  The instantiated object.
+     */
+    [[nodiscard]] static std::shared_ptr<Font> Create(std::shared_ptr<std::remove_pointer_t<FT_Library>> library, const char8_t* filePath);
+
+    /**
+     * @brief   Creates a instance of object.
+     * @param library   The handle to the FreeType library instance.
+     * @param fileData  The font file data.
+     * @return  The instantiated object.
+     */
+    [[nodiscard]] static std::shared_ptr<Font> Create(std::shared_ptr<std::remove_pointer_t<FT_Library>> library, std::vector<std::byte>&& fileData);
+
+    /**
+     * @brief   Gets the font face.
+     * @param fontSize  The size of font face to get.
+     * @return  The font face or nullptr.
+     */
+    [[nodiscard]] std::shared_ptr<FontFace> GetFontFace(int32_t fontSize);
+
+    /**
+     * @brief   Gets the font face.
+     * @param fontSize  The size of font face to get.
+     * @return  The font face or nullptr.
+     */
+    [[nodiscard]] std::shared_ptr<const FontFace> GetFontFace(int32_t fontSize) const;
 
 /**@section Variable */
 private:
-    std::shared_ptr<FT_LibraryRec> m_library;
     std::vector<std::byte> m_fileData;
+    std::shared_ptr<std::remove_pointer_t<FT_Library>> m_library;
     mutable std::unordered_map<int32_t, std::shared_ptr<FontFace>> m_fontFaces;
 };
-
-template <typename _ContainerType>
-inline Font::Font(const std::shared_ptr<FT_LibraryRec>& library, _ContainerType&& fileData) :
-    m_library(library),
-    m_fileData(std::forward<_ContainerType>(fileData))
-{
-}
 
 }

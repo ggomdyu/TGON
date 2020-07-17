@@ -1,5 +1,8 @@
 #include "PrecompiledHeader.h"
 
+#include "Core/MakeSharedEnabler.h"
+#include "IO/File.h"
+
 #include "Font.h"
 
 namespace tg
@@ -7,47 +10,42 @@ namespace tg
 
 extern const char* ConvertFTErrorToString(FT_Error error);
 
-Font::Font(Font&& rhs) noexcept :
-    m_library(rhs.m_library),
-    m_fileData(std::move(rhs.m_fileData)),
-    m_fontFaces(std::move(rhs.m_fontFaces))
+Font::Font(std::shared_ptr<std::remove_pointer_t<FT_Library>>&& library, std::vector<std::byte>&& fileData) :
+    m_fileData(std::move(fileData)),
+    m_library(std::move(library))
 {
-    rhs.m_library = nullptr;
 }
 
-Font& Font::operator=(Font&& rhs) noexcept
+std::shared_ptr<Font> Font::Create(std::shared_ptr<std::remove_pointer_t<FT_Library>> library, const char8_t* filePath)
 {
-    std::swap(m_fileData, rhs.m_fileData);
-    std::swap(m_library, rhs.m_library);
-    std::swap(m_fontFaces, rhs.m_fontFaces);
-    
-    return *this;
-}
-
-std::shared_ptr<FontFace> Font::GetFace(int32_t fontSize)
-{
-    auto iter = m_fontFaces.find(fontSize);
-    if (iter != m_fontFaces.end())
+    auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
+    if (fileData.has_value() == false)
     {
-        return iter->second;
+        return {};
     }
 
-    return m_fontFaces.emplace_hint(iter, fontSize, FontFace::Create(m_library, m_fileData, fontSize))->second;
+    return Create(std::move(library), std::move(*fileData));
 }
 
-std::shared_ptr<const FontFace> Font::GetFace(int32_t fontSize) const
+std::shared_ptr<Font> Font::Create(std::shared_ptr<std::remove_pointer_t<FT_Library>> library, std::vector<std::byte>&& fileData)
 {
-    return const_cast<Font*>(this)->GetFace(fontSize);
+    return std::make_shared<MakeSharedEnabler<Font>>(std::move(library), std::move(fileData));
 }
 
-const GlyphData* Font::GetGlyphData(char32_t ch, int32_t fontSize) const
+std::shared_ptr<FontFace> Font::GetFontFace(int32_t fontSize)
 {
-    return this->GetFace(fontSize)->GetGlyphData(ch);
+    const auto it = m_fontFaces.find(fontSize);
+    if (it != m_fontFaces.end())
+    {
+        return it->second;
+    }
+
+    return m_fontFaces.emplace_hint(it, fontSize, FontFace::Create(m_library, std::span(m_fileData), fontSize))->second;
 }
 
-I32Vector2 Font::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const
+std::shared_ptr<const FontFace> Font::GetFontFace(int32_t fontSize) const
 {
-    return this->GetFace(fontSize)->GetKerning(lhs, rhs);
+    return const_cast<Font*>(this)->GetFontFace(fontSize);
 }
 
 }

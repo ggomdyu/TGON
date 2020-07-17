@@ -1,16 +1,13 @@
 #pragma once
 
-#include <vector>
-#include <cstddef>
+#include <span>
 #include <unordered_map>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+#include "Core/NonCopyable.h"
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
-
-typedef struct FT_LibraryRec_ FT_LibraryRec;
-typedef struct FT_LibraryRec_* FT_Library;
 
 namespace tg
 {
@@ -29,34 +26,40 @@ struct GlyphData final
     std::unique_ptr<std::byte[]> bitmap;
 };
 
-class FontFace final
+class FontFace :
+    private NonCopyable
 {
 /**@section Constructor */
-public:
-    FontFace(FT_Face fontFace, int32_t fontSize) noexcept;
-    FontFace(const FontFace& rhs) = delete;
-    FontFace(FontFace&& rhs) noexcept;
-
-/**@section Destructor */
-public:
-    ~FontFace();
-
-/**@section Operator */
-public:
-    FontFace& operator=(const FontFace& rhs) = delete;
-    FontFace& operator=(FontFace&& rhs) noexcept;
+protected:
+    explicit FontFace(std::unique_ptr<std::remove_pointer_t<FT_Face>, void(*)(FT_Face)> fontFace) noexcept;
 
 /**@section Method */
 public:
-    static std::shared_ptr<FontFace> Create(const std::shared_ptr<FT_LibraryRec>& library, const std::vector<std::byte>& fileData, int32_t fontSize);
+    /**
+     * @brief   Creates a instance of object.
+     * @return  The instantiated object.
+     */
+    static std::shared_ptr<FontFace> Create(const std::shared_ptr<std::remove_pointer_t<FT_Library>>& library, const std::span<const std::byte>& fileData, int32_t fontSize);
+
+    /**
+     * @brief   Gets the glyph data of the specified character.
+     * @param ch    Glyph identifier character.
+     * @return  The character glyph data or nullptr.
+     */
     const GlyphData* GetGlyphData(char32_t ch) const;
+
+    /**
+     * @brief   Gets the size of kerning between two characters.
+     * @param lhs   Left side character.
+     * @param rhs   Right side character.
+     * @return  Size of kerning.
+     */
     I32Vector2 GetKerning(char32_t lhs, char32_t rhs) const;
 
 /**@section Variable */
 private:
-    FT_Face m_fontFace;
-    int32_t m_fontSize;
-    mutable std::unordered_map<char32_t, GlyphData> m_glyphDatas;
+    std::unique_ptr<std::remove_pointer_t<FT_Face>, void(*)(FT_Face)> m_fontFace;
+    mutable std::unordered_map<char32_t, GlyphData> m_glyphData;
 };
 
 }

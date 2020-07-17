@@ -1,13 +1,17 @@
 #pragma once
 
 #include <optional>
-
-#include "Font.h"
+#include <memory>
+#include <ft2build.h>
+#include FT_FREETYPE_H
+ 
+#include "Core/NonCopyable.h"
 
 namespace tg
 {
 
-class FontFactory final
+class FontFactory final :
+    private NonCopyable
 {
 /**@section Constructor */
 private:
@@ -15,20 +19,27 @@ private:
 
 /**@section Method */
 public:
-    static std::optional<FontFactory> Create();
-    template <typename _ContainerType>
-    std::shared_ptr<Font> CreateFont(_ContainerType&& fileData) const;
-    std::shared_ptr<Font> CreateFont(const char8_t* filePath) const;
+    /**
+     * @brief   Creates a instance of object.
+     * @return  The instantiated object.
+     */
+    [[nodiscard]] static std::optional<FontFactory> Create();
+
+    /**
+     * @brief   Gets the handle to the FreeType library instance.
+     * @return  The FreeType library instance.
+     */
+    [[nodiscard]] std::shared_ptr<std::remove_pointer_t<FT_Library>> GetLibrary() noexcept;
+
+    /**
+     * @brief   Gets the handle to the FreeType library instance.
+     * @return  The FreeType library instance.
+     */
+    [[nodiscard]] std::shared_ptr<const std::remove_pointer_t<FT_Library>> GetLibrary() const noexcept;
 
 /**@section Variable */
 private:
-    std::shared_ptr<FT_LibraryRec> m_library;
+    std::shared_ptr<std::remove_pointer_t<FT_Library>> m_library;
 };
-
-template<typename _ContainerType>
-std::shared_ptr<Font> FontFactory::CreateFont(_ContainerType&& fileData) const
-{
-    return std::make_shared<Font>(m_library, std::forward<_ContainerType>(fileData));
-}
 
 }
