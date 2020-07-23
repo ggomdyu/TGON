@@ -13,11 +13,11 @@
 }
 
 @property (readonly, assign) tg::Window* window;
-- (id)initWithWindow:(tg::Window*)window;
+-(id)initWithWindow:(tg::Window*)window;
 @end
 
 @implementation WindowDelegate
-- (id)initWithWindow:(tg::Window*)window
+-(id)initWithWindow:(tg::Window*)window
 {
     self = [super init];
     if (self)
@@ -28,7 +28,7 @@
     return self;
 }
 
-- (void)windowDidResize:(NSNotification*)notification
+-(void)windowDidResize:(NSNotification*)notification
 {
     if (_window->OnResize != nullptr)
     {
@@ -37,7 +37,7 @@
     }
 }
 
-- (void)windowDidMove:(NSNotification*)notification
+-(void)windowDidMove:(NSNotification*)notification
 {
     if (_window->OnMove != nullptr)
     {
@@ -46,7 +46,7 @@
     }
 }
 
-- (void)windowWillMiniaturize:(NSNotification*)notification
+-(void)windowWillMiniaturize:(NSNotification*)notification
 {
     if (_window->OnMinimize != nullptr)
     {
@@ -54,7 +54,7 @@
     }
 }
 
-- (void)windowDidDeminiaturize:(NSNotification*)notification
+-(void)windowDidDeminiaturize:(NSNotification*)notification
 {
     if (_window->OnMaximize != nullptr)
     {
@@ -62,7 +62,7 @@
     }
 }
 
-- (void)windowDidEnterFullScreen:(NSNotification *)notification
+-(void)windowDidEnterFullScreen:(NSNotification *)notification
 {
     if (_window->OnEnterFullScreen != nullptr)
     {
@@ -70,7 +70,7 @@
     }
 }
 
-- (void)windowDidExitFullScreen:(NSNotification *)notification
+-(void)windowDidExitFullScreen:(NSNotification *)notification
 {
     if (_window->OnExitFullScreen != nullptr)
     {
@@ -127,7 +127,7 @@ NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
     [window setBackgroundColor:[NSColor whiteColor]];
     [window setReleasedWhenClosed:YES];
     [window setLevel:NSMainMenuWindowLevel];
-    [window setTitle:[NSString stringWithUTF8String:windowStyle.title.c_str()]];
+    [window setTitle:[NSString stringWithUTF8String:reinterpret_cast<const char*>(windowStyle.title.c_str())]];
     
     if (windowStyle.enableSystemButton == false)
     {
@@ -235,9 +235,9 @@ void Window::SetContentSize(int32_t width, int32_t height)
     [m_window setContentSize:NSMakeSize(clientRect.size.width, clientRect.size.height)];
 }
 
-void Window::SetTitle(const char* title)
+void Window::SetTitle(const char8_t* title)
 {
-    [m_window setTitle:[NSString stringWithUTF8String:title]];
+    [m_window setTitle:[NSString stringWithUTF8String:reinterpret_cast<const char*>(title)]];
 }
 
 void Window::SetTopMost(bool setTopMost)
@@ -256,32 +256,26 @@ void Window::SetTransparency(float transparency)
     [m_window setAlphaValue:transparency];
 }
 
-void Window::GetPosition(int32_t* destX, int32_t* destY) const
+I32Vector2 Window::GetPosition() const
 {
     NSRect mainScreenRect = [[NSScreen mainScreen] visibleFrame];
     NSRect windowRect = [m_window frame];
-
-    *destX = static_cast<int32_t>(windowRect.origin.x);
-    *destY = static_cast<int32_t>((mainScreenRect.origin.y + mainScreenRect.size.height - windowRect.size.height) - windowRect.origin.y);
+    return {static_cast<int32_t>(windowRect.origin.x), static_cast<int32_t>((mainScreenRect.origin.y + mainScreenRect.size.height - windowRect.size.height) - windowRect.origin.y)};
 }
 
-void Window::GetWindowSize(int32_t* destWidth, int32_t* destHeight) const
+I32Extent2D Window::GetWindowSize() const
 {
     auto windowRect = [m_window frame];
-    
-    *destWidth = static_cast<int32_t>(windowRect.size.width);
-    *destHeight = static_cast<int32_t>(windowRect.size.height);
+    return {static_cast<int32_t>(windowRect.size.width), static_cast<int32_t>(windowRect.size.height)};
 }
 
-void Window::GetClientSize(int32_t* destWidth, int32_t* destHeight) const
+I32Extent2D Window::GetClientSize() const
 {
     auto windowRect = [[m_window contentView] frame];
-    
-    *destWidth = static_cast<int32_t>(windowRect.size.width);
-    *destHeight = static_cast<int32_t>(windowRect.size.height);
+    return {static_cast<int32_t>(windowRect.size.width), static_cast<int32_t>(windowRect.size.height)};
 }
 
-int32_t Window::GetTitle(char* destTitle, int32_t destTitleBufferLen) const
+int32_t Window::GetTitle(char8_t* destTitle, int32_t destTitleBufferLen) const
 {
     auto title = [m_window title];
     auto titleLen = static_cast<int32_t>([title lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);

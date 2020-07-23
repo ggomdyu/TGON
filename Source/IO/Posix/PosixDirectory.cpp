@@ -13,9 +13,9 @@ namespace tg
 namespace
 {
 
-bool InternalRecursiveDelete(const std::string& path)
+bool InternalRecursiveDelete(const std::u8string& path)
 {
-    DIR* dir = opendir(path.c_str());
+    DIR* dir = opendir(reinterpret_cast<const char*>(path.c_str()));
     if (dir == nullptr)
     {
         return false;
@@ -30,27 +30,27 @@ bool InternalRecursiveDelete(const std::string& path)
             continue;
         }
         
-        auto combinedPath = Path::Combine(path, {ent->d_name, ent->d_namlen});
+        auto combinedPath = Path::Combine(path, {reinterpret_cast<const char8_t*>(ent->d_name), ent->d_namlen});
         if (ent->d_type & DT_DIR)
         {
             InternalRecursiveDelete(combinedPath);
         }
         else
         {
-            unlink(combinedPath.c_str());
+            unlink(reinterpret_cast<const char*>(combinedPath.c_str()));
         }
     }
     closedir(dir);
 
-    return rmdir(path.c_str()) == 0;
+    return rmdir(reinterpret_cast<const char*>(path.c_str())) == 0;
 }
 
 } /* namespace */
 
-bool Directory::Exists(const char* path)
+bool Directory::Exists(const char8_t* path)
 {
     struct stat s;
-    if (stat(path, &s) != 0 || S_ISDIR(s.st_mode) == false)
+    if (stat(reinterpret_cast<const char*>(path), &s) != 0 || S_ISDIR(s.st_mode) == false)
     {
         return false;
     }
@@ -58,51 +58,51 @@ bool Directory::Exists(const char* path)
     return true;
 }
 
-bool Directory::Delete(const char* path, bool recursive)
+bool Directory::Delete(const char8_t* path, bool recursive)
 {
     if (recursive)
     {
         return InternalRecursiveDelete(path);
     }
     
-    return rmdir(path) == 0;
+    return rmdir(reinterpret_cast<const char*>(path)) == 0;
 }
 
-bool Directory::Move(const char* srcPath, const char* destPath)
+bool Directory::Move(const char8_t* srcPath, const char8_t* destPath)
 {
     struct stat s;
-    if (stat(srcPath, &s) != 0 || S_ISDIR(s.st_mode) == false)
+    if (stat(reinterpret_cast<const char*>(srcPath), &s) != 0 || S_ISDIR(s.st_mode) == false)
     {
         return false;
     }
     
-    return rename(srcPath, destPath) == 0;
+    return rename(reinterpret_cast<const char*>(srcPath), reinterpret_cast<const char*>(destPath)) == 0;
 }
 
-bool Directory::SetCurrentDirectory(const char* path)
+bool Directory::SetCurrentDirectory(const char8_t* path)
 {
-    return chdir(path) == 0;
+    return chdir(reinterpret_cast<const char*>(path)) == 0;
 }
 
-std::optional<int32_t> Directory::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Directory::GetCurrentDirectory(char8_t* destStr, int32_t destStrBufferLen)
 {
-    if (getcwd(destStr, destStrBufferLen) == nullptr)
+    if (getcwd(reinterpret_cast<char*>(destStr), destStrBufferLen) == nullptr)
     {
         return {};
     }
-    
-    return static_cast<int32_t>(strlen(destStr));
+
+    return static_cast<int32_t>(std::char_traits<char8_t>::length(destStr));
 }
 
-std::vector<std::string> Directory::GetLogicalDrives()
+std::vector<std::u8string> Directory::GetLogicalDrives()
 {
     // TODO: Implement
     return {};
 }
 
-bool Directory::InternalCreateDirectory(const char* path)
+bool Directory::InternalCreateDirectory(const char8_t* path)
 {
-    return mkdir(path, 0777) == 0;
+    return mkdir(reinterpret_cast<const char*>(path), 0777) == 0;
 }
 
 }

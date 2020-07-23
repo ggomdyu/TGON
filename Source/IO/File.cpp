@@ -64,7 +64,7 @@ std::unique_ptr<std::byte[]> File::ReadAllBytes(const char8_t* path, ReturnPoint
     FILE* fp = nullptr;
     fopen_s(&fp, reinterpret_cast<const char*>(path), "rb");
 #else
-    FILE* fp = fopen(path, "rb");
+    FILE* fp = fopen(reinterpret_cast<const char*>(path), "rb");
 #endif
     if (fp == nullptr)
     {
@@ -92,7 +92,7 @@ std::optional<std::vector<std::byte>> File::ReadAllBytes(const char8_t* path, Re
     FILE* fp = nullptr;
     fopen_s(&fp, reinterpret_cast<const char*>(path), "rb");
 #else
-    FILE* fp = fopen(path, "rb");
+    FILE* fp = fopen(reinterpret_cast<const char*>(path), "rb");
 #endif
     if (fp == nullptr)
     {
@@ -120,7 +120,7 @@ std::optional<std::u8string> File::ReadAllText(const char8_t* path)
     FILE* fp = nullptr;
     fopen_s(&fp, reinterpret_cast<const char*>(path), "r");
 #else
-    FILE* fp = fopen(path, "r");
+    FILE* fp = fopen(reinterpret_cast<const char*>(path), "r");
 #endif
     if (fp == nullptr)
     {
@@ -144,27 +144,28 @@ std::optional<std::u8string> File::ReadAllText(const char8_t* path)
 
 std::optional<std::vector<std::u8string>> File::ReadAllLines(const char8_t* path)
 {
-    std::basic_ifstream<char8_t, std::char_traits<char8_t>> fs;
-    fs.open(reinterpret_cast<const char*>(path));
-    
-    if (!fs)
-    {
-        return {};
-    }
-    
-    std::vector<std::u8string> ret;
-    std::u8string line;
-    while (std::getline(fs, line))
-    {
-        if (line.empty())
-        {
-            continue;
-        }
-        
-        ret.push_back(std::move(line));
-    }
-    
-    return ret;
+    return {};
+//    std::basic_ifstream<char8_t, std::char_traits<char8_t>> fs;
+//    fs.open(reinterpret_cast<const char*>(path));
+//
+//    if (!fs)
+//    {
+//        return {};
+//    }
+//
+//    std::vector<std::u8string> ret;
+//    std::u8string line;
+//    while (std::getline(fs, line))
+//    {
+//        if (line.empty())
+//        {
+//            continue;
+//        }
+//
+//        ret.push_back(std::move(line));
+//    }
+//
+//    return ret;
 }
 
 FileStream File::Create(const char8_t* path)

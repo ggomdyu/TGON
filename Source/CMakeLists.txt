@@ -29,7 +29,7 @@ elseif(APPLE)
     set(TGON_GRAPHICS "OpenGL" CACHE STRING "")
     set_property(CACHE TGON_GRAPHICS PROPERTY STRINGS "OpenGL" "Metal")
 
-    set(CMAKE_CXX_FLAGS "-x objective-c++")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -x objective-c++")
 else()
     message(FATAL_ERROR "Your platform is not supported.")
 endif()
@@ -123,6 +123,7 @@ function(init_tgon_compile_definitions)
         $<UPPER_CASE:TGON_GRAPHICS_${TGON_GRAPHICS}>=1
         TGON_USING_SIMD=$<BOOL:${TGON_USING_SIMD}>
         TGON_SUPPORT_SIMD=$<BOOL:${TGON_SUPPORT_SIMD}>
+        TGON_SUPPORT_POSIX=$<BOOL:${TGON_SUPPORT_POSIX}>
         $<IF:$<BOOL:${TGON_SUPPORT_SSE2}>,TGON_SIMD_SSE2=1,
         $<IF:$<BOOL:${TGON_SUPPORT_NEON}>,TGON_SIMD_NEON=1,>>
     )

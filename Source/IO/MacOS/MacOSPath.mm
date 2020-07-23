@@ -7,16 +7,16 @@
 namespace tg
 {
     
-gsl::span<const char> Path::GetInvalidFileNameChars() noexcept
+std::span<const char8_t> Path::GetInvalidFileNameChars() noexcept
 {
-    constexpr char invalidFileNameChars[] = {'\0', 'a'};
-    return gsl::span(invalidFileNameChars, std::extent_v<decltype(invalidFileNameChars)> - 1);
+    constexpr char8_t invalidFileNameChars[] = {u8'\0', u8'a'};
+    return std::span(invalidFileNameChars, std::extent_v<decltype(invalidFileNameChars)> - 1);
 }
     
-gsl::span<const char> Path::GetInvalidPathChars() noexcept
+std::span<const char8_t> Path::GetInvalidPathChars() noexcept
 {
-    constexpr char invalidPathChars[] = {'\0'};
-    return gsl::span(invalidPathChars, std::extent_v<decltype(invalidPathChars)> - 1);
+    constexpr char8_t invalidPathChars[] = {u8'\0'};
+    return std::span(invalidPathChars, std::extent_v<decltype(invalidPathChars)> - 1);
 }
 
 }

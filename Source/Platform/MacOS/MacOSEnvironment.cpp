@@ -15,21 +15,21 @@ namespace tg
 namespace
 {
     
-int32_t GetSpecialDirectory(NSString* path, const std::string_view& postfixStr, char* destStr, int32_t destStrBufferLen)
+int32_t GetSpecialDirectory(NSString* path, const std::u8string_view& postfix, char8_t* destStr, int32_t destStrBufferLen)
 {
     auto pathStrLen = [path lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-    if (pathStrLen + postfixStr.length() + 1 > destStrBufferLen)
+    if (pathStrLen + postfix.length() + 1 > destStrBufferLen)
     {
         return 0;
     }
     
     memcpy(destStr, path.UTF8String, pathStrLen);
-    memcpy(&destStr[pathStrLen], postfixStr.data(), postfixStr.length() + 1);
+    memcpy(&destStr[pathStrLen], postfix.data(), postfix.length() + 1);
     
-    return static_cast<int32_t>(pathStrLen + postfixStr.length());
+    return static_cast<int32_t>(pathStrLen + postfix.length());
 }
 
-int32_t GetSpecialDirectory(NSSearchPathDirectory searchPathDirectory, NSSearchPathDomainMask pathDomainMask, const std::string_view& postfixStr, char* destStr, int32_t destStrBufferLen)
+int32_t GetSpecialDirectory(NSSearchPathDirectory searchPathDirectory, NSSearchPathDomainMask pathDomainMask, const std::u8string_view& postfix, char8_t* destStr, int32_t destStrBufferLen)
 {
     NSArray<NSString*>* paths = NSSearchPathForDirectoriesInDomains(searchPathDirectory, pathDomainMask, YES);
     if ([paths count] <= 0)
@@ -37,17 +37,17 @@ int32_t GetSpecialDirectory(NSSearchPathDirectory searchPathDirectory, NSSearchP
         return 0;
     }
     
-    return GetSpecialDirectory([paths objectAtIndex: 0], postfixStr, destStr, destStrBufferLen);
+    return GetSpecialDirectory([paths objectAtIndex: 0], postfix, destStr, destStrBufferLen);
 }
     
 } /* namespace */
 
-bool Environment::SetEnvironmentVariable(const char* name, const char* value)
+bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* value)
 {
-    return setenv(name, value, true) == 0;
+    return setenv(reinterpret_cast<const char*>(name), reinterpret_cast<const char*>(value), true) == 0;
 }
 
-bool Environment::SetEnvironmentVariable(const char* name, const char* value, EnvironmentVariableTarget target)
+bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* value, EnvironmentVariableTarget target)
 {
     if (target == EnvironmentVariableTarget::Process)
     {
@@ -57,9 +57,9 @@ bool Environment::SetEnvironmentVariable(const char* name, const char* value, En
     return false;
 }
 
-std::optional<int32_t> Environment::GetEnvironmentVariable(const char* name, char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen)
 {
-    const char* envValue = getenv(name);
+    const char* envValue = getenv(reinterpret_cast<const char*>(name));
     if (envValue == nullptr)
     {
         return {};
@@ -76,7 +76,7 @@ std::optional<int32_t> Environment::GetEnvironmentVariable(const char* name, cha
     return static_cast<int32_t>(envValueLen);
 }
 
-std::optional<std::string> Environment::GetEnvironmentVariable(const char* name, EnvironmentVariableTarget target)
+std::optional<std::u8string> Environment::GetEnvironmentVariable(const char8_t* name, EnvironmentVariableTarget target)
 {
     if (target == EnvironmentVariableTarget::Process)
     {
@@ -91,19 +91,19 @@ int32_t Environment::GetCurrentManagedThreadId()
     return static_cast<int32_t>(pthread_mach_thread_np(pthread_self()));
 }
 
-std::optional<int32_t> Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetUserName(char8_t* destStr, int32_t destStrBufferLen)
 {
-    if (getlogin_r(destStr, destStrBufferLen) != 0)
+    if (getlogin_r(reinterpret_cast<char*>(destStr), destStrBufferLen) != 0)
     {
         return {};
     }
     
-    return static_cast<int32_t>(strlen(destStr));
+    return static_cast<int32_t>(std::char_traits<char8_t>::length(destStr));
 }
 
-std::optional<int32_t> Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetMachineName(char8_t* destStr, int32_t destStrBufferLen)
 {
-    if (gethostname(destStr, destStrBufferLen) != 0)
+    if (gethostname(reinterpret_cast<char*>(destStr), destStrBufferLen) != 0)
     {
         return {};
     }
@@ -122,64 +122,64 @@ std::optional<int32_t> Environment::GetMachineName(char* destStr, int32_t destSt
     return nodeNameLen;
 }
 
-std::optional<int32_t> Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetUserDomainName(char8_t* destStr, int32_t destStrBufferLen)
 {
     return GetMachineName(destStr, destStrBufferLen);
 }
 
-std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, char8_t* destStr, int32_t destStrBufferLen)
 {
     switch (folder)
     {
     case SpecialFolder::ApplicationData:
-        return GetSpecialDirectory(NSHomeDirectory(), ".config", destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSHomeDirectory(), u8".config", destStr, destStrBufferLen);
             
     case SpecialFolder::CommonApplicationData:
-        return GetSpecialDirectory(@"/usr/share", {"", 0}, destStr, destStrBufferLen);
+        return GetSpecialDirectory(@"/usr/share", {u8"", 0}, destStr, destStrBufferLen);
        
     case SpecialFolder::Desktop:
     case SpecialFolder::DesktopDirectory:
-        return GetSpecialDirectory(NSDesktopDirectory, NSUserDomainMask, {"", 0}, destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSDesktopDirectory, NSUserDomainMask, {u8"", 0}, destStr, destStrBufferLen);
             
     case SpecialFolder::Fonts:
-        return GetSpecialDirectory(NSLibraryDirectory, NSUserDomainMask, "/Fonts", destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSLibraryDirectory, NSUserDomainMask, u8"/Fonts", destStr, destStrBufferLen);
 
     case SpecialFolder::Favorites:
-        return GetSpecialDirectory(NSLibraryDirectory, NSUserDomainMask, "/Favorites", destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSLibraryDirectory, NSUserDomainMask, u8"/Favorites", destStr, destStrBufferLen);
             
     case SpecialFolder::InternetCache:
-        return GetSpecialDirectory(NSCachesDirectory, NSUserDomainMask, {"", 0}, destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSCachesDirectory, NSUserDomainMask, {u8"", 0}, destStr, destStrBufferLen);
             
     case SpecialFolder::ProgramFiles:
-        return GetSpecialDirectory(@"/Applications", {"", 0}, destStr, destStrBufferLen);
+        return GetSpecialDirectory(@"/Applications", {u8"", 0}, destStr, destStrBufferLen);
             
     case SpecialFolder::System:
-        return GetSpecialDirectory(@"/System", {"", 0}, destStr, destStrBufferLen);
+        return GetSpecialDirectory(@"/System", {u8"", 0}, destStr, destStrBufferLen);
         
     case SpecialFolder::UserProfile:
     case SpecialFolder::MyDocuments:
-        return GetSpecialDirectory(NSHomeDirectory(), {"", 0}, destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSHomeDirectory(), {u8"", 0}, destStr, destStrBufferLen);
     
     case SpecialFolder::MyMusic:
-        return GetSpecialDirectory(NSMusicDirectory, NSUserDomainMask, {"", 0}, destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSMusicDirectory, NSUserDomainMask, {u8"", 0}, destStr, destStrBufferLen);
         
     case SpecialFolder::MyPictures:
-        return GetSpecialDirectory(NSPicturesDirectory, NSUserDomainMask, {"", 0}, destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSPicturesDirectory, NSUserDomainMask, {u8"", 0}, destStr, destStrBufferLen);
             
     default:
         return {};
     }
 }
 
-const std::string& Environment::GetCommandLine()
+const std::u8string& Environment::GetCommandLine()
 {
-    static std::string commandLine = []()
+    static std::u8string commandLine = []()
     {
-        std::string ret;
+        std::u8string ret;
         for (NSString* commandLine in [[NSProcessInfo processInfo] arguments])
         {
-            ret += [commandLine UTF8String];
-            ret += " ";
+            ret += reinterpret_cast<const char8_t*>([commandLine UTF8String]);
+            ret += u8" ";
         }
         
         ret.pop_back();
@@ -204,9 +204,9 @@ bool Environment::Is64BitOperatingSystem()
     return Is64BitProcess();
 }
 
-std::string_view Environment::GetNewLine()
+std::u8string_view Environment::GetNewLine()
 {
-    return "\n";
+    return u8"\n";
 }
 
 int32_t Environment::GetSystemPageSize()
@@ -214,14 +214,14 @@ int32_t Environment::GetSystemPageSize()
     return static_cast<int32_t>(getpagesize());
 }
 
-void Environment::FailFast(const char* message, const std::exception& exception)
+void Environment::FailFast(const char8_t* message, const std::exception& exception)
 {
-    printf("FailFast:\n%s", message);
+    printf("FailFast:\n%s", reinterpret_cast<const char*>(message));
 
     throw exception;
 }
 
-int32_t Environment::GetStackTrace(char* destStr, int32_t destStrBufferLen)
+int32_t Environment::GetStackTrace(char8_t* destStr, int32_t destStrBufferLen)
 {
     std::array<void*, 2048> addr;
     int numFrames = backtrace(addr.data(), static_cast<int>(addr.size()));
@@ -234,7 +234,7 @@ int32_t Environment::GetStackTrace(char* destStr, int32_t destStrBufferLen)
     char** symbols = backtrace_symbols(addr.data(), numFrames);
     for (int i = 0; i < numFrames; ++i)
     {
-        destStrLen += sprintf(&destStr[destStrLen], "%s\n", symbols[i]);
+        destStrLen += sprintf(reinterpret_cast<char*>(&destStr[destStrLen]), "%s\n", symbols[i]);
     }
     
     free(symbols);

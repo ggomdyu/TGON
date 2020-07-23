@@ -14,7 +14,7 @@ namespace
     
 constexpr const char* ConvertFileModeAccessToNative(FileMode mode, FileAccess access)
 {
-    constexpr const char* fopenModeTable[][3] = {
+    constexpr const char* fileModeTable[][3] = {
         {nullptr, "wb", "wb+"},
         {nullptr, "wb", "wb+"},
         {"rb", "wb", "rb+"},
@@ -23,22 +23,22 @@ constexpr const char* ConvertFileModeAccessToNative(FileMode mode, FileAccess ac
         {nullptr, "ab", "ab+"},
     };
 
-    return fopenModeTable[static_cast<int32_t>(mode) - 1][static_cast<int32_t>(access) - 1];
+    return fileModeTable[static_cast<int32_t>(mode) - 1][static_cast<int32_t>(access) - 1];
 }
 
-FILE* CreateFileOpenHandle(const char* path, FileMode mode, FileAccess access)
+FILE* CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess access)
 {
     if (mode == FileMode::OpenOrCreate && File::Exists(path) == false)
     {
         FileStream(path, FileMode::CreateNew);
     }
 
-    return fopen(path, ConvertFileModeAccessToNative(mode, access));
+    return fopen(reinterpret_cast<const char*>(path), ConvertFileModeAccessToNative(mode, access));
 }
 
 } /* namespace */
 
-FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
+FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access)),
     m_bufferSize(bufferSize),
     m_readPos(0),

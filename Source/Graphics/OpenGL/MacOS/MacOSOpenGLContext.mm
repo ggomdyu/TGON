@@ -60,55 +60,50 @@ NSOpenGLPixelFormat* FindSuitablePixelFormat(const VideoMode& videoMode)
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode) :
-    context([[NSOpenGLContext alloc] initWithFormat:FindSuitablePixelFormat(videoMode) shareContext:nil])
+OpenGLContext::OpenGLContext(void* nativeWindow, const VideoMode& videoMode) :
+    m_context([[NSOpenGLContext alloc] initWithFormat:FindSuitablePixelFormat(videoMode) shareContext:nil])
 {
-    NSWindow* nativeWindow = (__bridge NSWindow*)displayWindow->GetNativeWindow();
+    NSWindow* window = (__bridge NSWindow*)nativeWindow;
     
     // Create a NSOpenGLView and attach it to the target window.
     NSOpenGLView* openGLView = [[NSOpenGLView alloc] init];
-    [openGLView setOpenGLContext: context];
+    [openGLView setOpenGLContext: m_context];
     [[openGLView openGLContext] makeCurrentContext];
-    [nativeWindow setContentView:openGLView];
+    [window setContentView:openGLView];
     
     glewInit();
 }
 
 OpenGLContext::OpenGLContext(OpenGLContext&& rhs) noexcept :
-    pixelFormat(rhs.pixelFormat),
-    context(rhs.context)
+    m_pixelFormat(rhs.m_pixelFormat),
+    m_context(rhs.m_context)
 {
-    rhs.pixelFormat = nil;
-    rhs.context = nil;
+    rhs.m_pixelFormat = nil;
+    rhs.m_context = nil;
 }
 
 OpenGLContext::~OpenGLContext()
 {
-	this->Destroy();
+    m_pixelFormat = nil;
+    m_context = nil;
 }
 
 OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs) noexcept
 {
-    std::swap(pixelFormat, rhs.pixelFormat);
-    std::swap(context, rhs.context);
+    std::swap(m_pixelFormat, rhs.m_pixelFormat);
+    std::swap(m_context, rhs.m_context);
     
     return *this;
 }
 
 void OpenGLContext::MakeCurrent()
 {
-    [context makeCurrentContext];
+    [m_context makeCurrentContext];
 }
 
 void OpenGLContext::SwapBuffer()
 {
-    [context flushBuffer];
-}
-
-void OpenGLContext::Destroy()
-{
-	pixelFormat = nil;
-    context = nil;
+    [m_context flushBuffer];
 }
 
 }
