@@ -159,7 +159,7 @@ bool Environment::Is64BitOperatingSystem()
 #endif
 }
 
-void Environment::FailFast(const char8_t* message, const std::exception& exception)
+void Environment::FailFast(const char8_t* message)
 {
     std::array<wchar_t, 4096> utf16Message{};
     const auto utf16MessageLen = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(message), -1, &utf16Message[0], std::extent_v<decltype(utf16Message)>) - 1;
@@ -168,7 +168,7 @@ void Environment::FailFast(const char8_t* message, const std::exception& excepti
     OutputDebugStringW(L"FailFast:\n");
     OutputDebugStringW(&utf16Message[0]);
 
-    throw exception;
+    assert(false);
 }
 
 std::u8string_view Environment::GetNewLine()

@@ -31,6 +31,8 @@ public:
     void SetNativeWindowStyle(DWORD nativeWindowStyle);
     void SetNativeExtendedWindowStyle(DWORD nativeExtendedWindowStyle);
     void SetUserData(void* data);
+    [[nodiscard]] void* GetUserData();
+    [[nodiscard]] const void* GetUserData() const;
     [[nodiscard]] DWORD GetNativeWindowStyle() const;
     [[nodiscard]] DWORD GetNativeExtendedWindowStyle() const;
 

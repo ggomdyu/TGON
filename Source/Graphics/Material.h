@@ -1,27 +1,26 @@
 #pragma once
 
+#include <memory>
+
+#include "Core/TagDispatch.h"
+
 #include "ShaderProgram.h"
-#include "Pass.h"
 
 namespace tg
 {
 
-class Material :
-    private NonCopyable
+class Material
 {
 /**@section Constructor */
-public:
+protected:
     explicit Material(ShaderProgram&& shaderProgram) noexcept;
-    Material(const char* vertexShaderCode, const char* fragmentShaderCode);
-
-/**@section Destructor */
-public:
-    ~Material() = default;
 
 /**@section Method */
 public:
+    [[nodiscard]] static std::optional<Material> Create(const char* vertexShaderCode, const char* fragmentShaderCode);
+    [[nodiscard]] static std::shared_ptr<Material> Create(const char* vertexShaderCode, const char* fragmentShaderCode, ReturnPointerTag);
     void Use();
-    void Unuse();
+    void Disuse();
     void SetParameter1f(const char* name, float f);
     void SetParameter2f(const char* name, float f1, float f2);
     void SetParameter3f(const char* name, float f1, float f2, float f3);
@@ -35,7 +34,7 @@ public:
     void SetParameterWVPMatrix4fv(const float* f);
     void SetParameterSampler(int32_t location, uint32_t textureUnit, uint32_t texture);
     void BindAttributeLocation(const char* name, uint32_t location);
-    int32_t GetUniformLocation(const char* name) const;
+    [[nodiscard]] int32_t GetUniformLocation(const char* name) const;
     
 /**@section Variable */
 protected:

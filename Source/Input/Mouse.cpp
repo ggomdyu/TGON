@@ -7,7 +7,7 @@
 #endif
 
 #include "Core/Algorithm.h"
-#include "Platform/Application.h"
+#include "Engine/Application.h"
 
 #include "Mouse.h"
 
@@ -36,7 +36,7 @@ void Mouse::GetPosition(int32_t* x, int32_t* y)
 #if TGON_PLATFORM_WINDOWS
     POINT pt;
     GetCursorPos(&pt);
-    ScreenToClient(static_cast<HWND>(Application::GetRootWindow()->GetNativeWindow()), &pt);
+    ScreenToClient(static_cast<HWND>(Application::GetInstance().GetRootWindow()->GetNativeWindow()), &pt);
 
     *x = static_cast<int32_t>(pt.x);
     *y = static_cast<int32_t>(pt.y);

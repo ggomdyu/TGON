@@ -19,7 +19,7 @@ public:
 /**@section Method */
 public:
     void Use();
-    void Unuse();
+    void Disuse();
     std::shared_ptr<Texture> GetTexture() noexcept;
     std::shared_ptr<const Texture> GetTexture() const noexcept;
 

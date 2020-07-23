@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 
-#include "Platform/Application.h"
 #include "Platform/Environment.h"
+#include "Engine/Application.h"
 
 #include "Engine.h"
 #include "AssetModule.h"
@@ -26,13 +26,18 @@ Engine::~Engine()
     this->RemoveAllModule();
 }
 
+Engine& Engine::GetInstance() noexcept
+{
+    return Application::GetInstance().GetEngine();
+}
+
 void Engine::Initialize()
 {
     this->AddModule<TaskModule>();
     this->AddModule<AudioModule>();
     this->AddModule<TimeModule>();
     this->AddModule<TimerModule>();
-    this->AddModule<RendererModule>(Application::GetRootWindow()->GetNativeWindow(), m_engineConfig.videoMode);
+    this->AddModule<RendererModule>(Application::GetInstance().GetRootWindow()->GetNativeWindow(), m_engineConfig.videoMode);
     this->AddModule<InputModule>(m_engineConfig.inputMode);
     this->AddModule<SceneModule>();
 }

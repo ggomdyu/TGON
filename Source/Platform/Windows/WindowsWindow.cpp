@@ -83,7 +83,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
     RECT windowSize {0, 0, windowStyle.width, windowStyle.height};
     AdjustWindowRect(&windowSize, nativeWindowStyle, FALSE);
 
-    HWND const wndHandle = ::CreateWindowExW(
+    auto* const wndHandle = ::CreateWindowExW(
         nativeExtendedWindowStyle,
         className,
         &utf16Title[0],
@@ -161,9 +161,19 @@ void WindowsWindow::SetUserData(void* data)
     SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(data));
 }
 
+void* WindowsWindow::GetUserData()
+{
+    return reinterpret_cast<void*>(GetWindowLongPtrW(m_wndHandle, GWLP_USERDATA));
+}
+
+const void* WindowsWindow::GetUserData() const
+{
+    return const_cast<WindowsWindow*>(this)->GetUserData();
+}
+
 void Window::BringToFront()
 {
-    const bool isTopMost = this->IsTopMost();
+    const auto isTopMost = this->IsTopMost();
     this->SetTopMost(true);
     this->SetTopMost(isTopMost);
 }

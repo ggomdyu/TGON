@@ -2,9 +2,7 @@
 
 #include <memory>
 
-#include "Engine/Engine.h"
-
-#include "Window.h"
+#include "Platform/Window.h"
 
 #if TGON_PLATFORM_WINDOWS
 #include "Windows/WindowsApplication.h"
@@ -31,26 +29,28 @@ class Application final :
 {
 /**@section Constructor */
 private:
-    Application();
+    Application() = default;
 
 /**@section Method */
 public:
+    [[nodiscard]] static Application& GetInstance() noexcept;
     [[nodiscard]] PlatformApplication& GetPlatformDependency() noexcept;
     [[nodiscard]] const PlatformApplication& GetPlatformDependency() const noexcept;
-    static Application& GetInstance();
-    void Initialize();
+    void Initialize(std::unique_ptr<class Engine> engine);
     void MessageLoop();
-    static void Terminate();
+    [[noreturn]] static void Terminate();
     static void ShowMessageBox(const char8_t* message);
     static void ShowMessageBox(const char8_t* message, MessageBoxIcon messageBoxIcon);
     static void ShowMessageBox(const char8_t* title, const char8_t* message);
     static void ShowMessageBox(const char8_t* title, const char8_t* message, MessageBoxIcon messageBoxIcon);
-    static std::shared_ptr<Engine> GetEngine() noexcept;
-    static std::shared_ptr<Window> GetRootWindow() noexcept;
+    [[nodiscard]] Engine& GetEngine() noexcept;
+    [[nodiscard]] const Engine& GetEngine() const noexcept;
+    [[nodiscard]] std::shared_ptr<Window> GetRootWindow() noexcept;
+    [[nodiscard]] std::shared_ptr<const Window> GetRootWindow() const noexcept;
     
 /**@section Variable */
 protected:
-    std::shared_ptr<Engine> m_engine;
+    std::unique_ptr<Engine> m_engine;
     std::shared_ptr<Window> m_rootWindow;
 };
 

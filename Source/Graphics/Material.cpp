@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include "Core/MakeSharedEnabler.h"
+
 #include "Material.h"
 
 namespace tg
@@ -10,19 +12,36 @@ Material::Material(ShaderProgram&& shaderProgram) noexcept :
 {
 }
 
-Material::Material(const char* vertexShaderCode, const char* fragmentShaderCode) :
-    m_shaderProgram(vertexShaderCode, fragmentShaderCode)
+std::optional<Material> Material::Create(const char* vertexShaderCode, const char* fragmentShaderCode)
 {
+    auto shaderProgram = ShaderProgram::Create(vertexShaderCode, fragmentShaderCode);
+    if (!shaderProgram)
+    {
+        return {};
+    }
+
+    return Material(std::move(*shaderProgram));
 }
-    
+
+std::shared_ptr<Material> Material::Create(const char* vertexShaderCode, const char* fragmentShaderCode, ReturnPointerTag)
+{
+    auto shaderProgram = ShaderProgram::Create(vertexShaderCode, fragmentShaderCode);
+    if (!shaderProgram)
+    {
+        return {};
+    }
+
+    return std::make_shared<MakeSharedEnabler<Material>>(std::move(*shaderProgram));
+}
+
 void Material::Use()
 {
     m_shaderProgram.Use();
 }
 
-void Material::Unuse()
+void Material::Disuse()
 {
-    m_shaderProgram.Unuse();
+    m_shaderProgram.Disuse();
 }
 
 void Material::SetParameter1f(const char* name, float f)

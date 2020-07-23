@@ -126,7 +126,7 @@ void RenderTarget::Use()
     glViewport(0, 0, static_cast<GLsizei>(m_extent.width), static_cast<GLsizei>(m_extent.height));
 }
 
-void RenderTarget::Unuse()
+void RenderTarget::Disuse()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

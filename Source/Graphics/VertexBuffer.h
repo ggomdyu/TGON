@@ -10,7 +10,7 @@
 namespace tg
 {
 
-enum class VertexFormatType
+enum class VertexFormat
 {
     Float,
     Double,
@@ -30,39 +30,22 @@ enum class VertexAttributeIndex
     Normal = 3,
 };
 
-struct VertexBufferLayoutDescriptor
+struct VertexBufferLayout
 {
-/**@section Constructor */
-public:
-    constexpr VertexBufferLayoutDescriptor(VertexAttributeIndex attribute, int32_t dimension, VertexFormatType type, bool normalized, int32_t stride, std::size_t offset) noexcept;
-
-/**@section Variable */
-public:
     VertexAttributeIndex attribute;
     int32_t dimension;
-    VertexFormatType type;
+    VertexFormat type;
     bool normalized;
     int32_t stride;
     std::size_t offset;
 };
-
-constexpr VertexBufferLayoutDescriptor::VertexBufferLayoutDescriptor(VertexAttributeIndex attribute, int32_t dimension, VertexFormatType type, bool normalized, int32_t stride, std::size_t offset) noexcept :
-    attribute(attribute),
-    dimension(dimension),
-    type(type),
-    normalized(normalized),
-    stride(stride),
-    offset(offset)
-{
-}
 
 class VertexBuffer final :
     private PlatformVertexBuffer
 {
 /**@section Constructor */
 public:
-    VertexBuffer();
-    VertexBuffer(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayouts);
+    using PlatformVertexBuffer::PlatformVertexBuffer;
     VertexBuffer(const VertexBuffer& rhs) = delete;
     VertexBuffer(VertexBuffer&& rhs) noexcept = default;
     
@@ -79,20 +62,21 @@ public:
 public:
     [[nodiscard]] PlatformVertexBuffer& GetPlatformDependency() noexcept;
     [[nodiscard]] const PlatformVertexBuffer& GetPlatformDependency() const noexcept;
+    [[nodiscard]] static std::optional<VertexBuffer> Create(const std::initializer_list<VertexBufferLayout>& vertexBufferLayouts = {});
     template <typename _Type>
     void SetData(const std::span<_Type>& data, bool isDynamicUsage);
-    void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
-    void SetLayoutDescriptor(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
+    void SetData(const void* data, std::size_t dataByteCount, bool isDynamicUsage);
+    void SetLayoutDescriptor(const std::initializer_list<VertexBufferLayout>& vertexBufferLayouts);
     void Use();
-    void Unuse();
+    void Disuse();
 
 /**@section Variable */
 private:
-    std::vector<VertexBufferLayoutDescriptor> m_vertexBufferLayouts;
+    std::vector<VertexBufferLayout> m_vertexBufferLayouts;
 };
 
 template <typename _Type>
-inline void VertexBuffer::SetData(const std::span<_Type>& data, bool isDynamicUsage)
+void VertexBuffer::SetData(const std::span<_Type>& data, bool isDynamicUsage)
 {
     this->SetData(data.data(), data.size() * sizeof(_Type), isDynamicUsage);
 }

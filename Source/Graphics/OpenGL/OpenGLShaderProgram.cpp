@@ -14,7 +14,6 @@ namespace
 
 GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
 {
-    // Creates an empty program object.
     GLuint programId = 0;
     TGON_GL_ERROR_CHECK(programId = glCreateProgram());
     if (programId == 0)
@@ -22,9 +21,6 @@ GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
         return 0;
     }
 
-    // In order to create a complete shader program, there must be a way to specify the list of things that will be linked together.
-    // Shaders that are to be linked together in a program object must first be attached to that program object.
-    // glAttachShader attaches the shader object to the program object.
     TGON_GL_ERROR_CHECK(glAttachShader(programId, vertexShaderId));
     TGON_GL_ERROR_CHECK(glAttachShader(programId, fragmentShaderId));
     TGON_GL_ERROR_CHECK(glLinkProgram(programId));
@@ -40,11 +36,11 @@ GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
 
 std::u8string GetShaderLog(GLuint shaderId)
 {
-    int32_t infoLogLen;
+    GLint infoLogLen;
     TGON_GL_ERROR_CHECK(glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &infoLogLen));
 
     std::u8string infoLog;
-    infoLog.resize(infoLogLen + 1);
+    infoLog.resize(static_cast<size_t>(infoLogLen) + 1);
     TGON_GL_ERROR_CHECK(glGetShaderInfoLog(shaderId, infoLogLen, nullptr, reinterpret_cast<char*>(&infoLog[0])));
 
     return infoLog;
@@ -77,13 +73,8 @@ GLuint CompileShader(GLenum shaderType, const char* shaderCode)
 
 }
 
-OpenGLShaderProgram::OpenGLShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
-    m_programId([&]()
-    {
-        GLuint vertexShaderId = CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
-        GLuint fragmentShaderId = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
-        return CreateShaderProgram(vertexShaderId, fragmentShaderId);
-    } ())
+OpenGLShaderProgram::OpenGLShaderProgram(GLuint programId) noexcept :
+    m_programId(programId)
 {
 }
 
@@ -95,18 +86,26 @@ OpenGLShaderProgram::OpenGLShaderProgram(OpenGLShaderProgram&& rhs) noexcept :
 
 OpenGLShaderProgram::~OpenGLShaderProgram()
 {
-    if (m_programId != 0)
-    {
-        TGON_GL_ERROR_CHECK(glDeleteProgram(m_programId));
-        m_programId = 0;
-    }
+    TGON_GL_ERROR_CHECK(glDeleteProgram(m_programId));
 }
     
 OpenGLShaderProgram& OpenGLShaderProgram::operator=(OpenGLShaderProgram&& rhs) noexcept
 {
     std::swap(m_programId, rhs.m_programId);
-    
     return *this;
+}
+
+std::optional<ShaderProgram> ShaderProgram::Create(const char* vertexShaderCode, const char* fragmentShaderCode)
+{
+    const auto vertexShaderId = CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
+    const auto fragmentShaderId = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
+    const auto program = CreateShaderProgram(vertexShaderId, fragmentShaderId);
+    if (program == 0)
+    {
+        return {};
+    }
+
+    return ShaderProgram(program);
 }
 
 GLuint OpenGLShaderProgram::GetProgramId() const noexcept
@@ -116,7 +115,7 @@ GLuint OpenGLShaderProgram::GetProgramId() const noexcept
 
 void ShaderProgram::Use()
 {
-    if (g_lastUsedShaderProgram == this)
+    if (m_latelyUsedShaderProgram == this)
     {
         return;
     }
@@ -124,14 +123,14 @@ void ShaderProgram::Use()
     this->ResetUniformCache();
     TGON_GL_ERROR_CHECK(glUseProgram(m_programId));
     
-    g_lastUsedShaderProgram = this;
+    m_latelyUsedShaderProgram = this;
 }
 
-void ShaderProgram::Unuse()
+void ShaderProgram::Disuse()
 {
     TGON_GL_ERROR_CHECK(glUseProgram(0));
     
-    g_lastUsedShaderProgram = nullptr;
+    m_latelyUsedShaderProgram = nullptr;
 }
 
 void ShaderProgram::BindAttributeLocation(const char* name, uint32_t index)
@@ -162,8 +161,8 @@ void ShaderProgram::SetParameter1f(int32_t location, float f)
 
 void ShaderProgram::SetParameter2f(int32_t location, float f1, float f2)
 {
-    auto uniformCache = reinterpret_cast<Vector2*>(&m_uniformCache[location].x);
-    auto v = Vector2(f1, f2);
+    auto* const uniformCache = reinterpret_cast<Vector2*>(&m_uniformCache[location].x);
+    const auto v = Vector2(f1, f2);
     if (*uniformCache == v)
     {
         return;
@@ -176,8 +175,8 @@ void ShaderProgram::SetParameter2f(int32_t location, float f1, float f2)
 
 void ShaderProgram::SetParameter3f(int32_t location, float f1, float f2, float f3)
 {
-    auto uniformCache = reinterpret_cast<Vector3*>(&m_uniformCache[location].x);
-    auto v = Vector3(f1, f2, f3);
+    auto* const uniformCache = reinterpret_cast<Vector3*>(&m_uniformCache[location].x);
+    const auto v = Vector3(f1, f2, f3);
     if (*uniformCache == v)
     {
         return;
@@ -190,8 +189,8 @@ void ShaderProgram::SetParameter3f(int32_t location, float f1, float f2, float f
 
 void ShaderProgram::SetParameter4f(int32_t location, float f1, float f2, float f3, float f4)
 {
-    auto uniformCache = reinterpret_cast<Vector4*>(&m_uniformCache[location].x);
-    auto v = Vector4(f1, f2, f3, f4);
+    auto* const uniformCache = reinterpret_cast<Vector4*>(&m_uniformCache[location].x);
+    const auto v = Vector4(f1, f2, f3, f4);
     if (*uniformCache == v)
     {
         return;

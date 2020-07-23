@@ -115,7 +115,6 @@ public:
     static bool Is64BitProcess();
     static bool Is64BitOperatingSystem();
     [[noreturn]] static void FailFast(const char8_t* message);
-    [[noreturn]] static void FailFast(const char8_t* message, const std::exception& exception);
     static int32_t GetStackTrace(char8_t* destStr, int32_t destStrBufferLen);
     static std::u8string GetStackTrace();
     static std::u8string GetSystemDirectory();

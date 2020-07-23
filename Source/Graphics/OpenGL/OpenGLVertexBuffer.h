@@ -3,13 +3,10 @@
 #if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
-#include "Core/NonCopyable.h"
-
 namespace tg
 {
     
-class OpenGLVertexBuffer :
-    private NonCopyable
+class OpenGLVertexBuffer
 {
 /**@section Constructor */
 public:
@@ -28,12 +25,12 @@ public:
 
 /**@section Method */
 public:
-    [[nodiscard]] static GLuint CreateVertexBufferHandle();
+    [[nodiscard]] static GLuint CreateVertexBufferId();
     [[nodiscard]] GLuint GetVertexBufferHandle() const noexcept;
 
 /**@section Variable */
 protected:
-    GLuint m_vertexBufferHandle;
+    GLuint m_vertexBufferId;
 };
 
 using PlatformVertexBuffer = OpenGLVertexBuffer;

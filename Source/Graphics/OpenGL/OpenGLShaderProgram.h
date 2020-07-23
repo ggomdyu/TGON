@@ -3,35 +3,36 @@
 #if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
-#include "Core/NonCopyable.h"
-
 namespace tg
 {
 
-class OpenGLShaderProgram :
-    private NonCopyable
+class OpenGLShaderProgram
 {
 /**@section Constructor */
 protected:
-    OpenGLShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode);
+    explicit OpenGLShaderProgram(GLuint programId) noexcept;
+
+public:
+    OpenGLShaderProgram(const OpenGLShaderProgram& rhs) = delete;
     OpenGLShaderProgram(OpenGLShaderProgram&& rhs) noexcept;
 
 /**@section Destructor */
-protected:
+public:
     ~OpenGLShaderProgram();
     
 /**@section Operator */
-protected:
+public:
+    OpenGLShaderProgram& operator=(const OpenGLShaderProgram& rhs) = delete;
     OpenGLShaderProgram& operator=(OpenGLShaderProgram&& rhs) noexcept;
     
 /**@section Method */
 public:
-    GLuint GetProgramId() const noexcept;
+    [[nodiscard]] GLuint GetProgramId() const noexcept;
     
 /**@section Variable */
 protected:
     GLuint m_programId;
-    inline static OpenGLShaderProgram* g_lastUsedShaderProgram;
+    inline static OpenGLShaderProgram* m_latelyUsedShaderProgram;
 };
     
 using PlatformShaderProgram = OpenGLShaderProgram;

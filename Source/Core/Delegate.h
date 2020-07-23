@@ -160,14 +160,16 @@ private:
     template <typename _Function>
     [[nodiscard]] static constexpr bool IsLargeFunction() noexcept;
     [[nodiscard]] bool IsDynamicAllocated() const noexcept;
+    void Copy(const Delegate& rhs);
+    void Move(Delegate&& rhs);
     void Destroy();
 
 /**@section Variable */
 private:
     static constexpr size_t StorageCapacity = 7;
 
-    Functor* m_functor = nullptr;
-    std::array<void*, StorageCapacity> m_storage = {};
+    Functor* m_functor{};
+    std::array<void*, StorageCapacity> m_storage{};
 };
 
 template <typename _Function>
@@ -186,31 +188,14 @@ template <typename _Return, typename... _Args>
 Delegate<_Return(_Args...)>::Delegate(const Delegate& rhs) :
     Delegate()
 {
-    if (rhs.m_functor == nullptr)
-    {
-        return;
-    }
-
-    m_functor = static_cast<Functor*>(rhs.IsDynamicAllocated() ? operator new(rhs.m_functor->GetSize()) : &m_storage[0]);
-
-    rhs.m_functor->CopyTo(m_functor);
+    this->Copy(rhs);
 }
 
 template <typename _Return, typename... _Args>
 Delegate<_Return(_Args...)>::Delegate(Delegate&& rhs) noexcept :
     Delegate()
 {
-    if (rhs.IsDynamicAllocated())
-    {
-        m_functor = rhs.m_functor;
-    }
-    else
-    {
-        m_storage = rhs.m_storage;
-        m_functor = reinterpret_cast<Functor*>(&m_storage[0]);
-    }
-
-    rhs.m_functor = nullptr;
+    this->Move(std::move(rhs));
 }
 
 template <typename _Return, typename... _Args>
@@ -278,21 +263,51 @@ template <typename _Return, typename... _Args>
 Delegate<_Return(_Args...)>& Delegate<_Return(_Args...)>::operator=(const Delegate& rhs)
 {
     this->Destroy();
-
-    if (rhs.m_functor == nullptr)
-    {
-        return *this;
-    }
-
-    m_functor = static_cast<Functor*>(rhs.IsDynamicAllocated() ? operator new(rhs.m_functor->GetSize()) : &m_storage[0]);
-
-    rhs.m_functor->CopyTo(m_functor);
+    this->Copy(rhs);
 
     return *this;
 }
 
 template <typename _Return, typename... _Args>
 Delegate<_Return(_Args...)>& Delegate<_Return(_Args...)>::operator=(Delegate&& rhs) noexcept
+{
+    this->Move(std::move(rhs));
+    return *this;
+}
+
+template <typename _Return, typename... _Args>
+constexpr bool Delegate<_Return(_Args...)>::operator==(std::nullptr_t rhs) const noexcept
+{
+    return m_functor == rhs;
+}
+
+template <typename _Return, typename... _Args>
+constexpr bool Delegate<_Return(_Args...)>::operator!=(std::nullptr_t rhs) const noexcept
+{
+    return m_functor != rhs;
+}
+
+template <typename _Return, typename... _Args>
+bool Delegate<_Return(_Args...)>::IsDynamicAllocated() const noexcept
+{
+    return m_functor != reinterpret_cast<const Functor*>(&m_storage[0]);
+}
+
+template <typename _Return, typename ... _Args>
+void Delegate<_Return(_Args...)>::Copy(const Delegate& rhs)
+{
+    if (rhs.m_functor == nullptr)
+    {
+        return;
+    }
+
+    m_functor = static_cast<Functor*>(rhs.IsDynamicAllocated() ? operator new(rhs.m_functor->GetSize()) : &m_storage[0]);
+
+    rhs.m_functor->CopyTo(m_functor);
+}
+
+template <typename _Return, typename ... _Args>
+void Delegate<_Return(_Args...)>::Move(Delegate&& rhs)
 {
     if (IsDynamicAllocated() && rhs.IsDynamicAllocated())
     {
@@ -313,26 +328,6 @@ Delegate<_Return(_Args...)>& Delegate<_Return(_Args...)>::operator=(Delegate&& r
         m_storage = rhs.m_storage;
         m_functor = reinterpret_cast<Functor*>(&m_storage[0]);
     }
-
-    return *this;
-}
-
-template <typename _Return, typename... _Args>
-constexpr bool Delegate<_Return(_Args...)>::operator==(std::nullptr_t rhs) const noexcept
-{
-    return m_functor == rhs;
-}
-
-template <typename _Return, typename... _Args>
-constexpr bool Delegate<_Return(_Args...)>::operator!=(std::nullptr_t rhs) const noexcept
-{
-    return m_functor != rhs;
-}
-
-template <typename _Return, typename... _Args>
-bool Delegate<_Return(_Args...)>::IsDynamicAllocated() const noexcept
-{
-    return m_functor != reinterpret_cast<const Functor*>(&m_storage[0]);
 }
 
 template <typename _Return, typename... _Args>

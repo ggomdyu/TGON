@@ -10,17 +10,15 @@
 #include "InputModule.h"
 #include "TimeModule.h"
 
-#define TGON_ENGINE(className)\
-    namespace tg\
-    {\
-    \
-    std::unique_ptr<Engine> CreateEngine()\
-    {\
-        static_assert(std::is_base_of_v<Engine, className>, "TGON_DECLARE_ENGINE accepts only class that inherited from Engine.");\
-        return std::make_unique<className>();\
-    }\
-    \
-    }
+#if TGON_PLATFORM_WINDOWS
+#include "Windows/WindowsEngine.h"
+#elif TGON_PLATFORM_MACOS
+#include "MacOS/MacOSEngine.h"
+#elif TGON_PLATFORM_ANDROID
+#include "Android/AndroidEngine.h"
+#elif TGON_PLATFORM_IOS
+#include "IOS/IOSEngine.h"
+#endif
 
 namespace tg
 {
@@ -56,6 +54,12 @@ public:
 /**@section Method */
 public:
     /**
+     * @brief   Gets the global instance of the object.
+     * @return  The global instance of the object.
+     */
+    [[nodiscard]] static Engine& GetInstance() noexcept;
+
+    /**
      * @brief   Initializes the object.
      */
     virtual void Initialize();
@@ -70,22 +74,22 @@ public:
      * @param args  Arguments for construct the specified type of module.
      * @return  The added module.
      */
-    template <Modularizable _ModuleType, typename... _ArgTypes>
-    _ModuleType* AddModule(_ArgTypes&&... args);
+    template <Modularizable _Module, typename... _Args>
+    _Module* AddModule(_Args&&... args);
 
     /**
      * @brief   Finds the module of the specified type.
      * @return  The type of module to retrieve or nullptr.
      */
-    template <typename _ModuleType>
-    [[nodiscard]] _ModuleType* FindModule() noexcept;
+    template <Modularizable _Module>
+    [[nodiscard]] _Module* FindModule() noexcept;
 
     /**
      * @brief   Finds the module of the specified type.
      * @return  The type of module to retrieve or nullptr.
      */
-    template <typename _ModuleType>
-    [[nodiscard]] const _ModuleType* FindModule() const noexcept;
+    template <Modularizable _Module>
+    [[nodiscard]] const _Module* FindModule() const noexcept;
 
     /**
      * @brief   Gets the configuration of the engine.
@@ -119,28 +123,28 @@ private:
     float m_targetSecondPerFrame = -1.0f;
 };
     
-template <Modularizable _ModuleType, typename... _ArgTypes>
-_ModuleType* Engine::AddModule(_ArgTypes&&... args)
+template <Modularizable _Module, typename... _Args>
+_Module* Engine::AddModule(_Args&&... args)
 {
-    auto module = std::make_unique<_ModuleType>(std::forward<_ArgTypes>(args)...);
+    auto module = std::make_unique<_Module>(std::forward<_Args>(args)...);
     auto* rawModule = module.get();
-    m_moduleStage[UnderlyingCast(_ModuleType::ModuleStage)].push_back(std::move(module));
+    m_moduleStage[UnderlyingCast(_Module::ModuleStage)].push_back(std::move(module));
 
     rawModule->Initialize();
 
     return rawModule;
 }
 
-template <typename _ModuleType>
-_ModuleType* Engine::FindModule() noexcept
+template <Modularizable _Module>
+_Module* Engine::FindModule() noexcept
 {
     for (auto& modules : m_moduleStage)
     {
         for (auto& module : modules)
         {
-            if (module->GetRtti() == GetRtti<_ModuleType>())
+            if (module->GetRtti() == tg::GetRtti<_Module>())
             {
-                return reinterpret_cast<_ModuleType*>(module.get());
+                return reinterpret_cast<_Module*>(module.get());
             }
         }
     }
@@ -148,10 +152,10 @@ _ModuleType* Engine::FindModule() noexcept
     return nullptr;
 }
 
-template <typename _ModuleType>
-const _ModuleType* Engine::FindModule() const noexcept
+template <Modularizable _Module>
+const _Module* Engine::FindModule() const noexcept
 {
-    return const_cast<Engine*>(this)->FindModule<_ModuleType>();
+    return const_cast<Engine*>(this)->FindModule<_Module>();
 }
 
 }

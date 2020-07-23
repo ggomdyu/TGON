@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Core/NonCopyable.h"
-#include "Platform/Config.h"
 
 namespace tg
 {

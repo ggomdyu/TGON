@@ -5,14 +5,19 @@
 #include "Core/Algorithm.h"
 
 #include "../Application.h"
-#include "../Window.h"
+#include "../Engine.h"
+
+#ifndef NDEBUG
+#define _CRTDBG_MAP_ALLOC
+#define new new (_NORMAL_BLOCK, __FILE__, __LINE__)
+#endif
 
 namespace tg
 {
 namespace
 {
 
-LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     auto* window = reinterpret_cast<Window*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
     if (window == nullptr)
@@ -45,6 +50,9 @@ LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
                         window->OnMaximize();
                     }
                 }
+                break;
+
+            default:
                 break;
             }
         }
@@ -146,16 +154,15 @@ constexpr UINT ConvertMessageBoxIconToNative(MessageBoxIcon messageBoxIcon) noex
 WindowsApplication::WindowsApplication()
 {
     RegisterWindowClass(OnHandleMessage);
+
+#ifndef NDEBUG
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 }
 
 void WindowsApplication::SetCustomMessageCallback(MessageCallback callback)
 {
     m_messageCallback = callback;
-}
-
-void Application::Terminate()
-{
-    PostQuitMessage(0);
 }
 
 void Application::MessageLoop()
@@ -165,7 +172,7 @@ void Application::MessageLoop()
     {
         if (PeekMessageW(&msg, nullptr, 0, 0, PM_REMOVE) == TRUE)
         {
-            ::DispatchMessageW(&msg);
+            DispatchMessageW(&msg);
 
             if (m_messageCallback != nullptr)
             {
@@ -195,7 +202,17 @@ void Application::ShowMessageBox(const char8_t* title, const char8_t* message, M
         return;
     }
 
-    ::MessageBoxW(nullptr, &utf16Message[0], &utf16Title[0], ConvertMessageBoxIconToNative(messageBoxIcon) | MB_OK);
+    MessageBoxW(nullptr, &utf16Message[0], &utf16Title[0], ConvertMessageBoxIconToNative(messageBoxIcon) | MB_OK);
+}
+
+Engine& Application::GetEngine() noexcept
+{
+    return *m_engine;
+}
+
+const Engine& Application::GetEngine() const noexcept
+{
+    return *m_engine;
 }
 
 }

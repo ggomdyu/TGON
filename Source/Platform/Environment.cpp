@@ -95,11 +95,6 @@ std::u8string Environment::GetUserDomainName()
     return {str.data(), static_cast<size_t>(*strLen)};
 }
 
-void Environment::FailFast(const char8_t* message)
-{
-    FailFast(message, {});
-}
-
 std::u8string Environment::GetStackTrace()
 {
     std::array<char8_t, 8192> str{};

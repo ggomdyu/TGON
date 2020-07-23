@@ -2,10 +2,6 @@
 
 #include "RendererModule.h"
 
-#include "Diagnostics/Debug.h"
-#include "Platform/Application.h"
-#include "Platform/Environment.h"
-
 namespace tg
 {
 RendererModule::RendererModule(void* nativeWindow, const VideoMode& videoMode) :

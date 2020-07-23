@@ -36,7 +36,7 @@ void UIElement::InitializeDefaultMaterial()
 {
     static void* callOnce = [&]()
     {
-        m_defaultMaterial = std::make_shared<Material>(g_positionColorUVVert, g_positionColorUVFrag);
+        m_defaultMaterial = Material::Create(g_positionColorUVVert, g_positionColorUVFrag, ReturnPointerTag{});
         return nullptr;
     } ();
 }

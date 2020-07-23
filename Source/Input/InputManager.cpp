@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Platform/Application.h"
+#include "Engine/Application.h"
 
 #include "InputManager.h"
 
@@ -15,7 +15,7 @@ InputManager::InputManager()
     }
 
 #if TGON_PLATFORM_WINDOWS
-    WindowsApplication::SetCustomMessageCallback([](const MSG& msg)
+    Application::GetInstance().GetPlatformDependency().SetCustomMessageCallback([](const MSG& msg)
     {
         m_inputManager->HandleMessage(msg);
     });

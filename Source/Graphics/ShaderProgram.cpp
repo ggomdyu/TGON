@@ -9,12 +9,6 @@
 namespace tg
 {
 
-ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
-    PlatformShaderProgram(vertexShaderCode, fragmentShaderCode)
-{
-    this->UpdateUniformLocationCache();
-}
-
 PlatformShaderProgram& ShaderProgram::GetPlatformDependency() noexcept
 {
     return *this;
@@ -33,9 +27,9 @@ ShaderProgram::ShaderProgram(ShaderProgram&& rhs) noexcept :
 
 ShaderProgram& ShaderProgram::operator=(ShaderProgram&& rhs) noexcept
 {
-    PlatformShaderProgram::operator=(std::move(rhs));
-
     m_uniformLocationCache = rhs.m_uniformLocationCache;
+
+    PlatformShaderProgram::operator=(std::move(rhs));
 
     return *this;
 }
@@ -77,7 +71,7 @@ void ShaderProgram::ResetUniformCache()
 
 void ShaderProgram::SetParameterWVPMatrix4fv(const float* f)
 {
-    auto location = m_uniformLocationCache[(int)PredefinedUniformLocation::MatrixWVP];
+    const auto location = m_uniformLocationCache[UnderlyingCast(PredefinedUniformLocation::MatrixWVP)];
     this->SetParameterMatrix4fv(location, f);
 }
 
