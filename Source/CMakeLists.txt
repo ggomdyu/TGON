@@ -28,10 +28,13 @@ elseif(APPLE)
     set_property(CACHE TGON_PLATFORM PROPERTY STRINGS "macOS" "iOS")
     set(TGON_GRAPHICS "OpenGL" CACHE STRING "")
     set_property(CACHE TGON_GRAPHICS PROPERTY STRINGS "OpenGL" "Metal")
-
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -x objective-c++")
 else()
     message(FATAL_ERROR "Your platform is not supported.")
+endif()
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
 endif()
 
 function(init_tgon)
@@ -130,17 +133,13 @@ function(init_tgon_compile_definitions)
 endfunction()
 
 function(init_tgon_compile_options)
-    if(MSVC)
-        target_compile_options(TGON PRIVATE 
-            /YcPrecompiledHeader.h 
-            /Oi
-            /std:c++latest
-            $<$<CONFIG:Debug>:/Zi>
-        )
-        
-        # CXX_STANDARD 20 doesn't working correctly now, so we will add an option to support c++20.
-        target_compile_options(TGON PUBLIC /std:c++latest)
-    endif()
+    target_compile_options(TGON PRIVATE
+        /YcPrecompiledHeader.h
+        /Oi
+        $<$<CONFIG:Debug>:/Zi>
+    )
+
+    target_compile_options(TGON PUBLIC /std:c++latest)
 endfunction()
 
 function(init_tgon_link_libraries)
