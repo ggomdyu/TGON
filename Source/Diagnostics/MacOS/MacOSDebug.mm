@@ -9,30 +9,30 @@
 namespace tg
 {
 
-void Debug::Write(const std::string_view& message)
+void Debug::Write(const std::u8string_view& message)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-	std::string str(message);
-    str.insert(0, m_indentLevel, '\t');
+	std::u8string str(message);
+    str.insert(0, m_indentLevel, u8'\t');
 
     std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
-    printf(u8"%s", str.c_str());
+    printf("%s", reinterpret_cast<const char*>(str.c_str()));
 #endif
 }
 
-void Debug::WriteLine(const std::string_view& message)
+void Debug::WriteLine(const std::u8string_view& message)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-    std::string str(message);
-    str.insert(0, m_indentLevel, '\t');
+    std::u8string str(message);
+    str.insert(0, m_indentLevel, u8'\t');
     str += u8"\n";
 
     std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
-    printf(u8"%s", str.c_str());
+    printf("%s", reinterpret_cast<const char*>(str.c_str()));
 #endif
 }
 
-void Debug::Assert(bool condition, const std::string_view& message, const std::string_view& detailMessage)
+void Debug::Assert(bool condition, const std::u8string_view& message, const std::u8string_view& detailMessage)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
     if (condition)

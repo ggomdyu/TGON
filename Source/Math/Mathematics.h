@@ -35,19 +35,19 @@ constexpr _Value Lcm(const _Value& first, const _Value& second)
     return (first * second) / Gcd(first, second);
 }
 
-template <std::floating_point _Value>
+template <FloatingPoint _Value>
 constexpr _Value Floor(const _Value& value) noexcept
 {
     return std::floor(value);
 }
 
-template <std::floating_point _Value>
+template <FloatingPoint _Value>
 constexpr _Value Ceil(const _Value& value) noexcept
 {
     return std::ceil(value);
 }
 
-template <std::floating_point _Value>
+template <FloatingPoint _Value>
 constexpr _Value Round(const _Value& value) noexcept
 {
     return std::round(value);
@@ -95,13 +95,13 @@ constexpr _Value Clamp(const _Value& value, const _Value& min, const _Value& max
     return Max(Min(value, max), min);
 }
 	
-template <std::integral _Value>
+template <Integral _Value>
 constexpr bool IsPowerOf2(const _Value& value) noexcept
 {
     return value > 0 && !(value & (value - 1));
 }
 
-template <std::integral _Value>
+template <Integral _Value>
 constexpr bool IsPrimeNumber(const _Value& value) noexcept
 {
     if (value <= 1)

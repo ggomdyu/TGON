@@ -5,20 +5,20 @@
 namespace tg
 {
 
-class UnixPath
+class PosixPath
 {
 /**@section Constructor */
 public:
-    UnixPath() = delete;
+    PosixPath() = delete;
     
 /**@section Variable */
 public:
-    static constexpr char DirectorySeparatorChar = '/';
-    static constexpr char AltDirectorySeparatorChar = '/';
-    static constexpr char VolumeSeparatorChar = '/';
-    static constexpr char PathSeparator = ':';
+    static constexpr char8_t DirectorySeparatorChar = '/';
+    static constexpr char8_t AltDirectorySeparatorChar = '/';
+    static constexpr char8_t VolumeSeparatorChar = '/';
+    static constexpr char8_t PathSeparator = ':';
 };
 
-using PlatformPath = UnixPath;
+using PlatformPath = PosixPath;
 
 }

@@ -7,26 +7,38 @@
 
 @interface AppDelegate : NSObject<NSApplicationDelegate>
 {
+    tg::Application* _app;
 }
+-(id)initWithApp:(tg::Application*)app;
 @end
 
 @implementation AppDelegate
-- (void)applicationWillFinishLaunching:(NSNotification*)aNotification
+-(id)initWithApp:(tg::Application*)app
 {
-    tg::Application::GetInstance().Initialize();
+    self = [super init];
+    if (self != nil)
+    {
+        _app = app;
+    }
+
+    return self;
 }
 
-- (void)applicationWillTerminate:(NSNotification*)aNotification
+-(void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
-    tg::Application::GetInstance().Destroy();
+    _app->Initialize();
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification*)aNotification
+-(void)applicationWillTerminate:(NSNotification*)aNotification
 {
-    tg::Application::GetInstance().MessageLoop();
 }
 
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+-(void)applicationDidFinishLaunching:(NSNotification*)aNotification
+{
+    _app->MessageLoop();
+}
+
+-(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
     return YES;
 }
@@ -38,7 +50,7 @@ int main(int argc, const char* argv[])
     {
         id sharedApplication = [NSApplication sharedApplication];
 
-        id appDelegate = [AppDelegate alloc];
+        id appDelegate = [[AppDelegate alloc] initWithApp:&tg::Application::GetInstance()];
         [sharedApplication setDelegate:appDelegate];
         [sharedApplication setActivationPolicy:NSApplicationActivationPolicyRegular];
         [sharedApplication activateIgnoringOtherApps:YES];

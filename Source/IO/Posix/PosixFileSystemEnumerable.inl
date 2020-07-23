@@ -17,16 +17,16 @@ namespace detail
 {
 
 template <typename _HandlerType>
-inline void InternalEnumerateAllDirectories(const char* path, const char* searchPattern, uint8_t filterType, const _HandlerType& handler)
+inline void InternalEnumerateAllDirectories(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _HandlerType& handler)
 {
-    std::deque<std::string> directories(1, std::string(path));
-    std::array<char, 8192> newPath;
+    std::deque<std::u8string> directories(1, std::u8string(path));
+    std::array<char8_t, 8192> newPath;
     
     do
     {
-        const std::string& currPath = directories.front();
+        const std::u8string& currPath = directories.front();
         
-        DIR* dir = opendir(currPath.data());
+        DIR* dir = opendir(reinterpret_cast<const char*>(currPath.data()));
         if (dir != nullptr)
         {
             struct dirent* ent;
@@ -40,18 +40,18 @@ inline void InternalEnumerateAllDirectories(const char* path, const char* search
                         continue;
                     }
                     
-                    directories.push_back(Path::Combine(currPath, {ent->d_name, ent->d_namlen}));
+                    directories.push_back(Path::Combine(currPath, {reinterpret_cast<const char8_t*>(ent->d_name), ent->d_namlen}));
                 }
                 
                 if (ent->d_type & filterType)
                 {
                     // Check the file name matched with wildcards
-                    if (fnmatch(searchPattern, ent->d_name, FNM_PATHNAME) != 0)
+                    if (fnmatch(reinterpret_cast<const char*>(searchPattern), ent->d_name, FNM_PATHNAME) != 0)
                     {
                         continue;
                     }
                     
-                    int32_t newPathLen = Path::Combine(currPath, {ent->d_name, ent->d_namlen}, newPath.data(), static_cast<int32_t>(newPath.size()));
+                    int32_t newPathLen = Path::Combine(currPath, {reinterpret_cast<const char8_t*>(ent->d_name), ent->d_namlen}, newPath.data(), static_cast<int32_t>(newPath.size()));
                     if constexpr (std::is_same_v<typename FunctionTraits<_HandlerType>::ReturnType, bool>)
                     {
                         if (handler({newPath.data(), static_cast<size_t>(newPathLen)}) == false)
@@ -74,12 +74,12 @@ inline void InternalEnumerateAllDirectories(const char* path, const char* search
 }
 
 template <typename _HandlerType>
-inline void InternalEnumerateTopDirectoryOnly(const char* path, const char* searchPattern, uint8_t filterType, const _HandlerType& handler)
+inline void InternalEnumerateTopDirectoryOnly(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _HandlerType& handler)
 {
-    DIR* dir = opendir(path);
+    DIR* dir = opendir(reinterpret_cast<const char*>(path));
     if (dir != nullptr)
     {
-        std::array<char, 8192> newPath;
+        std::array<char8_t, 8192> newPath;
         
         struct dirent* ent;
         while ((ent = readdir(dir)) != nullptr)
@@ -93,12 +93,12 @@ inline void InternalEnumerateTopDirectoryOnly(const char* path, const char* sear
                 }
                 
                 // Check the file name matched with wildcards
-                if (fnmatch(searchPattern, ent->d_name, FNM_PATHNAME) != 0)
+                if (fnmatch(reinterpret_cast<const char*>(searchPattern), reinterpret_cast<const char*>(ent->d_name), FNM_PATHNAME) != 0)
                 {
                     continue;
                 }
                 
-                int32_t newPathLen = Path::Combine(path, {ent->d_name, ent->d_namlen}, newPath.data(), static_cast<int32_t>(newPath.size()));
+                int32_t newPathLen = Path::Combine(path, {reinterpret_cast<const char8_t*>(ent->d_name), ent->d_namlen}, newPath.data(), static_cast<int32_t>(newPath.size()));
                 if constexpr (std::is_same_v<typename FunctionTraits<_HandlerType>::ReturnType, bool>)
                 {
                     if (handler({newPath.data(), static_cast<size_t>(newPathLen)}) == false)
@@ -119,7 +119,7 @@ inline void InternalEnumerateTopDirectoryOnly(const char* path, const char* sear
 }
 
 template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateDirectories(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler)
+inline void FileSystemEnumerable::EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _HandlerType& handler)
 {
     if (searchOption == SearchOption::AllDirectories)
     {
@@ -132,7 +132,7 @@ inline void FileSystemEnumerable::EnumerateDirectories(const char* path, const c
 }
 
 template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateFiles(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler)
+inline void FileSystemEnumerable::EnumerateFiles(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _HandlerType& handler)
 {
     if (searchOption == SearchOption::AllDirectories)
     {
@@ -145,7 +145,7 @@ inline void FileSystemEnumerable::EnumerateFiles(const char* path, const char* s
 }
 
 template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler)
+inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _HandlerType& handler)
 {
     if (searchOption == SearchOption::AllDirectories)
     {

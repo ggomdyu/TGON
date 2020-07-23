@@ -1,7 +1,6 @@
 #pragma once
 
-#include <concepts>
-
+#include "Core/Concepts.h"
 #include "Core/RuntimeObject.h"
 
 namespace tg
@@ -28,15 +27,15 @@ public:
     virtual void Initialize() {}
 
     /**
-    * @brief   Updates the frame of the object.
-    */
+     * @brief   Updates the frame of the object.
+     */
     virtual void Update() {}
 };
 
 template <typename _Module>
 concept Modularizable = requires(_Module* module)
 {
-    { module } -> std::convertible_to<Module*>;
+    { module } -> ConvertibleTo<Module*>;
     { _Module::ModuleStage };
 };
 

@@ -62,8 +62,8 @@ public:
     static constexpr char8_t VolumeSeparatorChar = PlatformPath::VolumeSeparatorChar;
     
 private:
-    static constexpr char8_t AltDirectorySeparatorStr[] = {AltDirectorySeparatorChar, '\0'};
-    static constexpr char8_t DirectorySeparatorStr[] = {DirectorySeparatorChar, '\0'};
+    static constexpr char8_t AltDirectorySeparatorStr[] = {AltDirectorySeparatorChar, u8'\0'};
+    static constexpr char8_t DirectorySeparatorStr[] = {DirectorySeparatorChar, u8'\0'};
 };
 
 template <int32_t _Length>
@@ -184,6 +184,6 @@ constexpr bool Path::IsValidDriveChar(char8_t ch) noexcept
 
 #if TGON_PLATFORM_WINDOWS
 #include "Windows/WindowsPath.inl"
-#elif TGON_PLATFORM_MACOS
+#elif TGON_SUPPORT_POSIX
 #include "Posix/PosixPath.inl"
 #endif
