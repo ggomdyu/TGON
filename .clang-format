@@ -5,7 +5,8 @@ AccessModifierOffset: -4
 AlignOperands: false
 AlignTrailingComments: false
 AllowAllConstructorInitializersOnNextLine: false
-AllowShortFunctionsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortBlocksOnASingleLine: Empty
 AlwaysBreakTemplateDeclarations: Yes
 BraceWrapping: 
     AfterCaseLabel: true
