@@ -69,15 +69,15 @@ bool InternalRecursiveDelete(const std::wstring_view& path)
                     continue;
                 }
 
-                const size_t fileNameLen = wcslen(findData.cFileName);
-                memcpy(&tempPathStr[pathLen - 1], findData.cFileName, fileNameLen * 2 + sizeof(wchar_t));
+                const size_t fileNameLen = std::char_traits<wchar_t>::length(findData.cFileName);
+                memcpy(&tempPathStr[pathLen - 1], findData.cFileName, fileNameLen * 2 + sizeof(findData.cFileName[0]));
 
                 InternalRecursiveDelete({&tempPathStr[0], pathLen + fileNameLen - 1});
             }
             else
             {
-                const size_t fileNameLen = wcslen(findData.cFileName);
-                memcpy(&tempPathStr[pathLen - 1], findData.cFileName, fileNameLen * 2 + sizeof(wchar_t));
+                const size_t fileNameLen = std::char_traits<wchar_t>::length(findData.cFileName);
+                memcpy(&tempPathStr[pathLen - 1], findData.cFileName, fileNameLen * 2 + sizeof(findData.cFileName[0]));
 
                 _wremove(&tempPathStr[0]);
             }
@@ -127,7 +127,7 @@ std::vector<std::u8string> Directory::GetLogicalDrives()
 
     std::vector<std::u8string> ret;
     char8_t root[] = u8"A:\\";
-    for (DWORD d = driveFlags; d != 0; d >>= 1)
+    for (auto d = driveFlags; d != 0; d >>= 1)
     {
         if ((d & 1) != 0)
         {
