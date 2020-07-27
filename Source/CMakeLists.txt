@@ -97,7 +97,7 @@ function(init_tgon_include_directories)
     set(TGON_INCLUDE_PATHS
         ${CMAKE_CURRENT_SOURCE_DIR}
         ThirdParty/assimp-4.1.0/include
-        ThirdParty/fmt-6.1.2/include
+        ThirdParty/fmt-7.0.1/include
         ThirdParty/gainput-1.0.0/lib/include
         ThirdParty/GSL-2.0.0/include
         ThirdParty/icu4c-64_2/icu/source/common
@@ -173,7 +173,7 @@ function(init_thirdparty_subdirectories)
     option(GAINPUT_SAMPLES "" FALSE)
     add_subdirectory(ThirdParty/gainput-1.0.0)
     
-    add_subdirectory(ThirdParty/fmt-6.1.2)
+    add_subdirectory(ThirdParty/fmt-7.0.1)
     add_subdirectory(ThirdParty/freetype-2.10.1)
     add_subdirectory(ThirdParty/glew-2.1.0)
     add_subdirectory(ThirdParty/icu4c-64_2/icu)
@@ -277,6 +277,9 @@ function(init_thirdparty_unset)
     unset(FMT_PEDANTIC CACHE)
     unset(FMT_TEST CACHE)
     unset(FMT_WERROR CACHE)
+    unset(FMT_DEBUG_POSTFIX CACHE)
+    unset(FMT_INC_DIR CACHE)
+    unset(FMT_OS CACHE)
 
     unset(FT_WITH_BZIP2 CACHE)
     unset(FT_WITH_HARFBUZZ CACHE)
