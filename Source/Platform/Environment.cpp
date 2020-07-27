@@ -39,7 +39,7 @@ std::optional<int32_t> Environment::GetCurrentDirectory(const std::span<char8_t>
 
 std::u8string Environment::GetFolderPath(SpecialFolder folder)
 {
-    std::array<char8_t, 8192> str{};
+    std::array<char8_t, 2048> str{};
     auto strLen = GetFolderPath(folder, str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {
@@ -61,7 +61,7 @@ int32_t Environment::GetProcessorCount()
 
 std::u8string Environment::GetUserName()
 {
-    std::array<char8_t, 4096> str{};
+    std::array<char8_t, 2048> str{};
     auto strLen = GetUserName(str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {
@@ -73,7 +73,7 @@ std::u8string Environment::GetUserName()
 
 std::u8string Environment::GetMachineName()
 {
-    std::array<char8_t, 4096> str{};
+    std::array<char8_t, 2048> str{};
     auto strLen = GetMachineName(str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {
@@ -85,7 +85,7 @@ std::u8string Environment::GetMachineName()
 
 std::u8string Environment::GetUserDomainName()
 {
-    std::array<char8_t, 4096> str{};
+    std::array<char8_t, 2048> str{};
     auto strLen = GetUserDomainName(str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {
@@ -99,6 +99,7 @@ std::u8string Environment::GetStackTrace()
 {
     std::array<char8_t, 8192> str{};
     const auto strLen = GetStackTrace(str.data(), static_cast<int32_t>(str.size()));
+
     return {str.data(), static_cast<size_t>(strLen)};
 }
 

@@ -7,28 +7,8 @@
 namespace tg
 {
 
-FileStream::FileStream(const char8_t* path, FileMode mode) :
-    FileStream(path, mode, (mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite), DefaultShare, DefaultBufferSize, DefaultFileOption)
-{
-}
-
-FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access) :
-    FileStream(path, mode, access, DefaultShare, DefaultBufferSize, DefaultFileOption)
-{
-}
-
-FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share) :
-    FileStream(path, mode, access, share, DefaultBufferSize, DefaultFileOption)
-{
-}
-
-FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize) :
-    FileStream(path, mode, access, share, bufferSize, DefaultFileOption)
-{
-}
-
 FileStream::FileStream(FileStream&& rhs) noexcept :
-    m_nativeHandle(rhs.m_nativeHandle),
+    m_nativeFileHandle(rhs.m_nativeFileHandle),
     m_buffer(std::move(rhs.m_buffer)),
     m_bufferSize(rhs.m_bufferSize),
     m_readPos(rhs.m_readPos),
@@ -38,7 +18,7 @@ FileStream::FileStream(FileStream&& rhs) noexcept :
     m_access(rhs.m_access),
     m_fileName(std::move(rhs.m_fileName))
 {
-    rhs.m_nativeHandle = nullptr;
+    rhs.m_nativeFileHandle = nullptr;
     rhs.m_bufferSize = 0;
     rhs.m_readPos = 0;
     rhs.m_readLen = 0;
@@ -53,7 +33,7 @@ FileStream::~FileStream()
 
 FileStream& FileStream::operator=(FileStream&& rhs) noexcept
 {
-    std::swap(m_nativeHandle, rhs.m_nativeHandle);
+    std::swap(m_nativeFileHandle, rhs.m_nativeFileHandle);
     std::swap(m_buffer, rhs.m_buffer);
     std::swap(m_fileName, rhs.m_fileName);
 
@@ -75,12 +55,32 @@ FileStream& FileStream::operator=(FileStream&& rhs) noexcept
 
 bool FileStream::operator==(const FileStream& rhs) const noexcept
 {
-    return m_nativeHandle == rhs.m_nativeHandle;
+    return m_nativeFileHandle == rhs.m_nativeFileHandle;
 }
 
 bool FileStream::operator!=(const FileStream& rhs) const noexcept
 {
     return !this->operator==(rhs);
+}
+
+std::optional<FileStream> FileStream::Create(const char8_t* path, FileMode mode)
+{
+    return Create(path, mode, (mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite), DefaultShare, DefaultBufferSize, DefaultFileOption);
+}
+
+std::optional<FileStream> FileStream::Create(const char8_t* path, FileMode mode, FileAccess access)
+{
+    return Create(path, mode, access, DefaultShare, DefaultBufferSize, DefaultFileOption);
+}
+
+std::optional<FileStream> FileStream::Create(const char8_t* path, FileMode mode, FileAccess access, FileShare share)
+{
+    return Create(path, mode, access, share, DefaultBufferSize, DefaultFileOption);
+}
+
+std::optional<FileStream> FileStream::Create(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize)
+{
+    return Create(path, mode, access, share, bufferSize, DefaultFileOption);
 }
 
 bool FileStream::CanRead() const

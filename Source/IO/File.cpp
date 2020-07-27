@@ -6,6 +6,7 @@
 #include "Time/TimeZoneInfo.h"
 
 #include "File.h"
+#include "FileStream.h"
 
 namespace tg
 {
@@ -144,58 +145,70 @@ std::optional<std::u8string> File::ReadAllText(const char8_t* path)
 
 std::optional<std::vector<std::u8string>> File::ReadAllLines(const char8_t* path)
 {
-    return {};
-//    std::basic_ifstream<char8_t, std::char_traits<char8_t>> fs;
-//    fs.open(reinterpret_cast<const char*>(path));
-//
-//    if (!fs)
-//    {
-//        return {};
-//    }
-//
-//    std::vector<std::u8string> ret;
-//    std::u8string line;
-//    while (std::getline(fs, line))
-//    {
-//        if (line.empty())
-//        {
-//            continue;
-//        }
-//
-//        ret.push_back(std::move(line));
-//    }
-//
-//    return ret;
+    std::basic_ifstream<char8_t, std::char_traits<char8_t>> fs;
+    fs.open(reinterpret_cast<const char*>(path));
+
+    if (!fs)
+    {
+        return {};
+    }
+
+    std::vector<std::u8string> ret;
+    std::u8string line;
+    while (std::getline(fs, line))
+    {
+        if (line.empty())
+        {
+            continue;
+        }
+
+        ret.push_back(std::move(line));
+    }
+
+    return ret;
 }
 
-FileStream File::Create(const char8_t* path)
+std::optional<FileStream> File::Create(const char8_t* path)
 {
-    return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None);
+    return FileStream::Create(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None);
 }
 
-FileStream File::Create(const char8_t* path, int32_t bufferSize)
+std::optional<FileStream> File::Create(const char8_t* path, int32_t bufferSize)
 {
-    return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize);
+    return FileStream::Create(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize);
 }
 
-FileStream File::Create(const char8_t* path, int32_t bufferSize, FileOptions options)
+std::optional<FileStream> File::Create(const char8_t* path, int32_t bufferSize, FileOptions options)
 {
-    return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize, options);
+    return FileStream::Create(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize, options);
 }
 
-FileStream File::Open(const char8_t* path, FileMode mode)
+std::optional<FileStream> File::Open(const char8_t* path, FileMode mode)
 {
     return Open(path, mode, mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite, FileShare::None);
 }
 
-FileStream File::Open(const char8_t* path, FileMode mode, FileAccess access)
+std::optional<FileStream> File::Open(const char8_t* path, FileMode mode, FileAccess access)
 {
     return Open(path, mode, access, FileShare::None);
 }
 
-FileStream File::Open(const char8_t* path, FileMode mode, FileAccess access, FileShare share)
+std::optional<FileStream> File::Open(const char8_t* path, FileMode mode, FileAccess access, FileShare share)
 {
-    return FileStream(path, mode, access, share);
+    return FileStream::Create(path, mode, access, share);
+}
+
+bool File::WriteAllBytes(const char8_t* path, const std::span<std::byte>& bytes)
+{
+    auto fs = FileStream::Create(path, FileMode::Create, FileAccess::Write, FileShare::Read);
+    if (fs.has_value() == false)
+    {
+        return false;
+    }
+
+    fs->Write(&bytes[0], bytes.size());
+
+    return true;
 }
 
 }

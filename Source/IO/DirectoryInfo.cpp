@@ -12,8 +12,8 @@ DirectoryInfo::DirectoryInfo(const std::u8string_view& path) :
 {
 }
 
-DirectoryInfo::DirectoryInfo(const std::u8string_view& path, FullPathTag) :
-    m_fullPath(path)
+DirectoryInfo::DirectoryInfo(std::u8string path, FullPathTag) :
+    m_fullPath(std::move(path))
 {
 }
 

@@ -5,7 +5,6 @@
 
 #include "Platform/Windows/Windows.h"
 
-#include "../DirectoryInfo.h"
 #include "../Directory.h"
 #include "../Path.h"
 
@@ -28,7 +27,7 @@ std::optional<struct _stat> CreateStat(const char8_t* path, const std::span<wcha
         return {};
     }
 
-    struct _stat s;
+    struct _stat s{};
     if (_wstat(&utf16PathBuffer[0], &s) != 0)
     {
         return {};
@@ -39,7 +38,7 @@ std::optional<struct _stat> CreateStat(const char8_t* path, const std::span<wcha
 
 bool InternalRecursiveDelete(const std::wstring_view& path)
 {
-    std::array<wchar_t, 4096> tempPathStr{};
+    std::array<wchar_t, 2048> tempPathStr{};
     memcpy(&tempPathStr[0], path.data(), path.size() * 2);
 
     size_t pathLen = path.size();
@@ -81,8 +80,7 @@ bool InternalRecursiveDelete(const std::wstring_view& path)
 
                 _wremove(&tempPathStr[0]);
             }
-        }
-        while (FindNextFileW(handle, &findData) == TRUE);
+        } while (FindNextFileW(handle, &findData) == TRUE);
 
         FindClose(handle);
     }
@@ -94,7 +92,7 @@ bool InternalRecursiveDelete(const std::wstring_view& path)
 
 bool Directory::Delete(const char8_t* path, bool recursive)
 {
-    wchar_t utf16Path[4096];
+    std::array<wchar_t, 2048> utf16Path{};
     auto s = CreateStat(path, utf16Path);
     if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
     {
@@ -103,15 +101,15 @@ bool Directory::Delete(const char8_t* path, bool recursive)
 
     if (recursive)
     {
-        return InternalRecursiveDelete(utf16Path);
+        return InternalRecursiveDelete(&utf16Path[0]);
     }
 
-    return _wrmdir(utf16Path) == 0;
+    return _wrmdir(&utf16Path[0]) == 0;
 }
 
 bool Directory::Exists(const char8_t* path)
 {
-    wchar_t utf16Path[4096];
+    std::array<wchar_t, 2048> utf16Path{};
     auto s = CreateStat(path, utf16Path);
     if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
     {
@@ -123,7 +121,7 @@ bool Directory::Exists(const char8_t* path)
 
 std::vector<std::u8string> Directory::GetLogicalDrives()
 {
-    const DWORD driveFlags = ::GetLogicalDrives();
+    const auto driveFlags = ::GetLogicalDrives();
 
     std::vector<std::u8string> ret;
     char8_t root[] = u8"A:\\";
@@ -142,42 +140,42 @@ std::vector<std::u8string> Directory::GetLogicalDrives()
 
 bool Directory::Move(const char8_t* srcPath, const char8_t* destPath)
 {
-    wchar_t utf16SrcPath[4096];
+    std::array<wchar_t, 2048> utf16SrcPath{};
     auto s = CreateStat(srcPath, utf16SrcPath);
     if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
     {
         return false;
     }
 
-    wchar_t utf16DestPath[4096];
-    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(destPath), -1, &utf16DestPath[0], static_cast<int>(std::extent_v<decltype(utf16DestPath)>)) == 0)
+    std::array<wchar_t, 2048> utf16DestPath{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(destPath), -1, &utf16DestPath[0], static_cast<int>(utf16DestPath.size())) == 0)
     {
         return {};
     }
 
-    return _wrename(utf16SrcPath, utf16DestPath) == 0;
+    return _wrename(&utf16SrcPath[0], &utf16DestPath[0]) == 0;
 }
 
 bool Directory::SetCurrentDirectory(const char8_t* path)
 {
-    wchar_t utf16Path[4096];
-    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, utf16Path, std::extent_v<decltype(utf16Path)>) == 0)
+    std::array<wchar_t, 2048> utf16Path{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, &utf16Path[0], utf16Path.size()) == 0)
     {
         return false;
     }
 
-    return _wchdir(utf16Path) == 0;
+    return _wchdir(&utf16Path[0]) == 0;
 }
 
 std::optional<int32_t> Directory::GetCurrentDirectory(char8_t* destStr, int32_t destStrBufferLen)
 {
-    wchar_t utf16Path[4096];
-    if (GetCurrentDirectoryW(static_cast<DWORD>(std::extent_v<decltype(utf16Path)>), &utf16Path[0]) == 0)
+    std::array<wchar_t, 2048> utf16Path{};
+    if (GetCurrentDirectoryW(static_cast<DWORD>(utf16Path.size()), &utf16Path[0]) == 0)
     {
         return {};
     }
 
-    auto utf8PathLen = WideCharToMultiByte(CP_UTF8, 0, utf16Path, -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
+    const auto utf8PathLen = WideCharToMultiByte(CP_UTF8, 0, &utf16Path[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
     if (utf8PathLen == -1)
     {
         return {};
@@ -188,13 +186,13 @@ std::optional<int32_t> Directory::GetCurrentDirectory(char8_t* destStr, int32_t 
 
 bool Directory::InternalCreateDirectory(const char8_t* path)
 {
-    wchar_t utf16Path[4096];
-    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, utf16Path, std::extent_v<decltype(utf16Path)>) == 0)
+    std::array<wchar_t, 2048> utf16Path{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, &utf16Path[0], utf16Path.size() == 0))
     {
         return false;
     }
 
-    return _wmkdir(utf16Path) == 0;
+    return _wmkdir(&utf16Path[0]) == 0;
 }
 
 }

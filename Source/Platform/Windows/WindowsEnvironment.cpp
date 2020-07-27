@@ -13,7 +13,10 @@
 #include <imagehlp.h>
 #pragma pack(pop, before_imagehlp)
 
+#include "Misc/Windows/SafeHandle.h"
+
 #include "../Environment.h"
+#include "../OperatingSystem.h"
 
 #pragma comment(lib, "Secur32.lib")
 #pragma comment(lib, "psapi.lib")
@@ -40,7 +43,7 @@ bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* val
         return false;
     }
 
-    return SetEnvironmentVariableW(&utf16Name[0], &utf16Value[0]) == TRUE;
+    return !!SetEnvironmentVariableW(&utf16Name[0], &utf16Value[0]);
 }
 
 std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen)
@@ -358,9 +361,9 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char8_t* destStr, int32_t de
     const PIMAGE_NT_HEADERS image = ImageNtHeader(baseModuleAddress);
     const DWORD imageType = image->FileHeader.Machine;
 
-    IMAGEHLP_LINE64 line {};
+    IMAGEHLP_LINE64 line{};
     line.SizeOfStruct = sizeof(line);
-    
+
     DWORD64 displacement = 0;
     DWORD offsetFromSymbol = 0;
     std::array<char8_t, 1024> undecoratedName{};
@@ -382,7 +385,7 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char8_t* destStr, int32_t de
             {
                 continue;
             }
-            
+
             // Get the file name and line
             SymGetLineFromAddr64(processHandle, frame.AddrPC.Offset, &offsetFromSymbol, &line);
 
@@ -414,6 +417,29 @@ int32_t Environment::GetStackTrace(char8_t* destStr, int32_t destStrBufferLen)
     return destStrLen;
 }
 
+std::optional<OperatingSystem> Environment::GetOSVersion()
+{
+    OSVERSIONINFOEX osvi
+    {
+        .dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX)
+    };
+
+    if (GetVersionExW(reinterpret_cast<OSVERSIONINFO*>(&osvi)) == FALSE)
+    {
+        return {};
+    }
+
+    std::array<char8_t, 256> csdVersion{};
+    const auto csdVersionLen = WideCharToMultiByte(CP_UTF8, 0, &osvi.szCSDVersion[0], -1, reinterpret_cast<char*>(&csdVersion[0]), csdVersion.size(), nullptr, nullptr) - 1;
+    if (csdVersionLen == -1)
+    {
+        return {};
+    }
+
+    const Version version(osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber, (osvi.wServicePackMajor << 16) | osvi.wServicePackMinor);
+    return OperatingSystem(PlatformID::Win32NT, version, std::u8string(&csdVersion[0], static_cast<size_t>(csdVersionLen)));
+}
+
 bool Environment::GetUserInteractive()
 {
     static HWINSTA cachedWindowStationHandle = 0;
@@ -436,6 +462,19 @@ bool Environment::GetUserInteractive()
     }
 
     return !isUserNonInteractive;
+}
+
+int64_t Environment::GetWorkingSet()
+{
+    PROCESS_MEMORY_COUNTERS_EX pmc;
+    const SafeHandle processHandle(OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, GetCurrentProcessId()));
+
+    if (GetProcessMemoryInfo(processHandle, reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&pmc), sizeof(pmc)) == TRUE)
+    {
+        return pmc.WorkingSetSize;
+    }
+
+    return 0;
 }
 
 }

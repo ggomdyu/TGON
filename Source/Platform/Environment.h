@@ -5,7 +5,7 @@
 #include <optional>
 #include <span>
 
-#include "Version.h"
+#include "OperatingSystem.h"
 
 namespace tg
 {
@@ -15,11 +15,6 @@ enum class EnvironmentVariableTarget
     Process = 0,
     User = 1,
     Machine = 2,
-};
-
-class OperatingSystem final
-{
-
 };
 
 class Environment final
@@ -83,58 +78,49 @@ public:
 
 /**@section Method */
 public:
-    static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value);
-    static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value, EnvironmentVariableTarget target);
-    static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, const std::span<char8_t>& destStr);
-    static std::optional<std::u8string> GetEnvironmentVariable(const char8_t* name);
-    static std::optional<std::u8string> GetEnvironmentVariable(const char8_t* name, EnvironmentVariableTarget target);
-    static std::u8string GetCurrentDirectory();
-    static std::optional<int32_t> GetCurrentDirectory(char8_t* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetCurrentDirectory(const std::span<char8_t>& destStr);
-    static std::u8string GetFolderPath(SpecialFolder folder);
-    static std::optional<int32_t> GetFolderPath(SpecialFolder folder, char8_t* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetFolderPath(SpecialFolder folder, const std::span<char8_t>& destStr);
-    static std::u8string_view GetNewLine();
-    static int32_t GetSystemPageSize();
-    static int32_t GetCurrentManagedThreadId();
-    static std::u8string GetUserName();
-    static std::optional<int32_t> GetUserName(char8_t* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetUserName(const std::span<char8_t>& destStr);
-    static std::u8string GetMachineName();
-    static std::optional<int32_t> GetMachineName(char8_t* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetMachineName(const std::span<char8_t>& destStr);
-    static std::u8string GetUserDomainName();
-    static std::optional<int32_t> GetUserDomainName(char8_t* destStr, int32_t destStrBufferLen);
-    static std::optional<int32_t> GetUserDomainName(const std::span<char8_t>& destStr);
-    static const std::u8string& GetCommandLine();
-    static const std::vector<std::u8string>& GetCommandLineArgs();
+    [[nodiscard]] static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value);
+    [[nodiscard]] static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value, EnvironmentVariableTarget target);
+    [[nodiscard]] static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen);
+    [[nodiscard]] static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, const std::span<char8_t>& destStr);
+    [[nodiscard]] static std::optional<std::u8string> GetEnvironmentVariable(const char8_t* name);
+    [[nodiscard]] static std::optional<std::u8string> GetEnvironmentVariable(const char8_t* name, EnvironmentVariableTarget target);
+    [[nodiscard]] static std::u8string GetCurrentDirectory();
+    [[nodiscard]] static std::optional<int32_t> GetCurrentDirectory(char8_t* destStr, int32_t destStrBufferLen);
+    [[nodiscard]] static std::optional<int32_t> GetCurrentDirectory(const std::span<char8_t>& destStr);
+    [[nodiscard]] static std::u8string GetFolderPath(SpecialFolder folder);
+    [[nodiscard]] static std::optional<int32_t> GetFolderPath(SpecialFolder folder, char8_t* destStr, int32_t destStrBufferLen);
+    [[nodiscard]] static std::optional<int32_t> GetFolderPath(SpecialFolder folder, const std::span<char8_t>& destStr);
+    [[nodiscard]] static std::u8string_view GetNewLine();
+    [[nodiscard]] static int32_t GetSystemPageSize();
+    [[nodiscard]] static int32_t GetCurrentManagedThreadId();
+    [[nodiscard]] static std::u8string GetUserName();
+    [[nodiscard]] static std::optional<int32_t> GetUserName(char8_t* destStr, int32_t destStrBufferLen);
+    [[nodiscard]] static std::optional<int32_t> GetUserName(const std::span<char8_t>& destStr);
+    [[nodiscard]] static std::u8string GetMachineName();
+    [[nodiscard]] static std::optional<int32_t> GetMachineName(char8_t* destStr, int32_t destStrBufferLen);
+    [[nodiscard]] static std::optional<int32_t> GetMachineName(const std::span<char8_t>& destStr);
+    [[nodiscard]] static std::u8string GetUserDomainName();
+    [[nodiscard]] static std::optional<int32_t> GetUserDomainName(char8_t* destStr, int32_t destStrBufferLen);
+    [[nodiscard]] static std::optional<int32_t> GetUserDomainName(const std::span<char8_t>& destStr);
+    [[nodiscard]] static const std::u8string& GetCommandLine();
+    [[nodiscard]] static const std::vector<std::u8string>& GetCommandLineArgs();
     [[noreturn]] static void Exit(int32_t exitCode);
-    static int64_t GetTickCount();
-    static int32_t GetProcessorCount();
-    static bool Is64BitProcess();
-    static bool Is64BitOperatingSystem();
+    [[nodiscard]] static int64_t GetTickCount();
+    [[nodiscard]] static int32_t GetProcessorCount();
+    [[nodiscard]] static bool Is64BitProcess();
+    [[nodiscard]] static bool Is64BitOperatingSystem();
     [[noreturn]] static void FailFast(const char8_t* message);
     static int32_t GetStackTrace(char8_t* destStr, int32_t destStrBufferLen);
-    static std::u8string GetStackTrace();
-    static std::u8string GetSystemDirectory();
+    [[nodiscard]] static std::u8string GetStackTrace();
+    [[nodiscard]] static std::u8string GetSystemDirectory();
     //public static IDictionary GetEnvironmentVariables();
     //public static IDictionary GetEnvironmentVariables(EnvironmentVariableTarget target);
-    //public static void SetEnvironmentVariable(
-    //    string variable,
-    //    string value,
-    //    EnvironmentVariableTarget target);
-    //
     //public static string ExpandEnvironmentVariables(string name);
-    //
-    //public static strPath(
-    //    Environment.SpecialFolder folder,
-    //    Environment.SpecialFolderOption option);
     //public static bool HasShutdownSting GetFolderarted{ get; }
-    //public static OperatingSystem OSVersion{ get; }
-    static bool GetUserInteractive();
-    //public static long WorkingSet{ get; }
-    static std::vector<std::u8string> GetLogicalDrives();
+    [[nodiscard]] static std::optional<OperatingSystem> GetOSVersion();
+    [[nodiscard]] static bool GetUserInteractive();
+    [[nodiscard]] static int64_t GetWorkingSet();
+    [[nodiscard]] static std::vector<std::u8string> GetLogicalDrives();
 };
 
 }

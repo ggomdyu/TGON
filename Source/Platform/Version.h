@@ -1,7 +1,7 @@
 #pragma once
 
-#include <optional>
 #include <string>
+#include <fmt/format.h>
 
 namespace tg
 {
@@ -25,19 +25,16 @@ public:
 
 /**@section Method */
 public:
-    constexpr int32_t GetMajor() const noexcept;
-    constexpr int32_t GetMinor() const noexcept;
-    constexpr int32_t GetBuild() const noexcept;
-    constexpr int32_t GetRevision() const noexcept;
-    constexpr int16_t GetMajorRevision() const noexcept;
-    constexpr int16_t GetMinorRevision() const noexcept;
-    constexpr int32_t GetHashCode() const noexcept;
-    constexpr int32_t CompareTo(const Version& rhs) const noexcept;
-    std::optional<std::string> ToString() const;
-    std::optional<std::string> ToString(int32_t fieldCount) const;
-
-private:
-    static void AppendPositiveNumber(int32_t num, std::string* str);
+    [[nodiscard]] constexpr int32_t GetMajor() const noexcept;
+    [[nodiscard]] constexpr int32_t GetMinor() const noexcept;
+    [[nodiscard]] constexpr int32_t GetBuild() const noexcept;
+    [[nodiscard]] constexpr int32_t GetRevision() const noexcept;
+    [[nodiscard]] constexpr int16_t GetMajorRevision() const noexcept;
+    [[nodiscard]] constexpr int16_t GetMinorRevision() const noexcept;
+    [[nodiscard]] constexpr int32_t GetHashCode() const noexcept;
+    [[nodiscard]] constexpr int32_t CompareTo(const Version& rhs) const noexcept;
+    [[nodiscard]] std::u8string ToString() const;
+    [[nodiscard]] std::u8string ToString(int32_t fieldCount) const;
 
 /**@section Variable */
 private:
@@ -143,56 +140,28 @@ constexpr int32_t Version::CompareTo(const Version& rhs) const noexcept
 {
     if (m_major != rhs.m_major)
     {
-        if (m_major > rhs.m_major)
-        {
-            return 1;
-        }
-        else
-        {
-            return -1;
-        }
+        return m_major > rhs.m_major ? 1 : -1;
     }
 
     if (m_minor != rhs.m_minor)
     {
-        if (m_minor > rhs.m_minor)
-        {
-            return 1;
-        }
-        else
-        {
-            return -1;
-        }
+        return m_minor > rhs.m_minor ? 1 : -1;
     }
 
     if (m_build != rhs.m_build)
     {
-        if (m_build > rhs.m_build)
-        {
-            return 1;
-        }
-        else
-        {
-            return -1;
-        }
+        return m_build > rhs.m_build ? 1 : -1;\
     }
 
     if (m_revision != rhs.m_revision)
     {
-        if (m_revision > rhs.m_revision)
-        {
-            return 1;
-        }
-        else
-        {
-            return -1;
-        }
+        return m_revision > rhs.m_revision ? 1 : -1;
     }
 
     return 0;
 }
 
-inline std::optional<std::string> Version::ToString() const
+inline std::u8string Version::ToString() const
 {
     if (m_build == -1)
     {
@@ -207,23 +176,19 @@ inline std::optional<std::string> Version::ToString() const
     return this->ToString(4);
 }
 
-inline std::optional<std::string> Version::ToString(int32_t fieldCount) const
+inline std::u8string Version::ToString(int32_t fieldCount) const
 {
     switch (fieldCount)
     {
     case 0:
-        return std::string();
+        return {};
     
     case 1:
-        return std::to_string(m_major);
+        return fmt::format(u8"{}", m_major);
 
     case 2:
         {
-            std::string ret;
-            this->AppendPositiveNumber(m_major, &ret);
-            ret.push_back('.');
-            this->AppendPositiveNumber(m_minor, &ret);
-            return ret;
+            return fmt::format(u8"{}.{}", m_major, m_minor);
         }
 
     default:
@@ -235,13 +200,7 @@ inline std::optional<std::string> Version::ToString(int32_t fieldCount) const
 
             if (fieldCount == 3)
             {
-                std::string ret;
-                this->AppendPositiveNumber(m_major, &ret);
-                ret.push_back('.');
-                this->AppendPositiveNumber(m_minor, &ret);
-                ret.push_back('.');
-                this->AppendPositiveNumber(m_build, &ret);
-                return ret;
+                return fmt::format(u8"{}.{}.{}", m_major, m_minor, m_build);
             }
 
             if (m_revision == -1)
@@ -251,31 +210,12 @@ inline std::optional<std::string> Version::ToString(int32_t fieldCount) const
 
             if (fieldCount == 4)
             {
-                std::string ret;
-                this->AppendPositiveNumber(m_major, &ret);
-                ret.push_back('.');
-                this->AppendPositiveNumber(m_minor, &ret);
-                ret.push_back('.');
-                this->AppendPositiveNumber(m_build, &ret);
-                ret.push_back('.');
-                this->AppendPositiveNumber(m_revision, &ret);
-                return ret;
+                return fmt::format(u8"{}.{}.{}.{}", m_major, m_minor, m_build, m_revision);
             }
 
             return {};
         }
     }
-}
-
-inline void Version::AppendPositiveNumber(int32_t num, std::string* str)
-{
-    int32_t reminder;
-    do
-    {
-        reminder = num % 10;
-        num = num / 10;
-        str->push_back('0' + static_cast<char>(reminder));
-    } while (num > 0);
 }
 
 }

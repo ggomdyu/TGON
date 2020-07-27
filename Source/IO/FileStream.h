@@ -50,12 +50,10 @@ class FileStream :
     public Stream
 {
 /**@section Constructor */
+protected:
+    FileStream(void* nativeFileHandle, const char8_t* path, FileAccess access, int32_t bufferSize);
+
 public:
-    FileStream(const char8_t* path, FileMode mode);
-    FileStream(const char8_t* path, FileMode mode, FileAccess access);
-    FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share);
-    FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize);
-    FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options);
     FileStream(const FileStream& rhs) = delete;
     FileStream(FileStream&& rhs) noexcept;
 
@@ -72,6 +70,11 @@ public:
 
 /**@section Method */
 public:
+    [[nodiscard]] static std::optional<FileStream> Create(const char8_t* path, FileMode mode);
+    [[nodiscard]] static std::optional<FileStream> Create(const char8_t* path, FileMode mode, FileAccess access);
+    [[nodiscard]] static std::optional<FileStream> Create(const char8_t* path, FileMode mode, FileAccess access, FileShare share);
+    [[nodiscard]] static std::optional<FileStream> Create(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize);
+    [[nodiscard]] static std::optional<FileStream> Create(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options);
     [[nodiscard]] bool CanRead() const override;
     [[nodiscard]] bool CanSeek() const override;
     [[nodiscard]] bool CanWrite() const override;
@@ -106,7 +109,7 @@ protected:
     static constexpr FileOptions DefaultFileOption = FileOptions::None;
     static constexpr int DefaultBufferSize = 4096;
 
-    void* m_nativeHandle;
+    void* m_nativeFileHandle;
     std::vector<std::byte> m_buffer;
     int32_t m_bufferSize;
     int32_t m_readPos;

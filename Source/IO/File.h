@@ -1,7 +1,7 @@
 #pragma once
 
-#include <optional>
 #include <memory>
+#include <optional>
 
 #include "Core/TagDispatch.h"
 #include "Time/DateTime.h"
@@ -62,22 +62,17 @@ public:
     static std::unique_ptr<std::byte[]> ReadAllBytes(const char8_t* path, ReturnPointerTag);
     static std::optional<std::vector<std::byte>> ReadAllBytes(const char8_t* path, ReturnVectorTag);
     static std::optional<std::vector<std::u8string>> ReadAllLines(const char8_t* path);
-    static FileStream Create(const char8_t* path);
-    static FileStream Create(const char8_t* path, int32_t bufferSize);
-    static FileStream Create(const char8_t* path, int32_t bufferSize, FileOptions options);
-    static FileStream Open(const char8_t* path, FileMode mode);
-    static FileStream Open(const char8_t* path, FileMode mode, FileAccess access);
-    static FileStream Open(const char8_t* path, FileMode mode, FileAccess access, FileShare share);
-
-    //static void SetAttributes(const std::u8string_view& path, FileAttributes fileAttributes);
+    static std::optional<FileStream> Create(const char8_t* path);
+    static std::optional<FileStream> Create(const char8_t* path, int32_t bufferSize);
+    static std::optional<FileStream> Create(const char8_t* path, int32_t bufferSize, FileOptions options);
+    static std::optional<FileStream> Open(const char8_t* path, FileMode mode);
+    static std::optional<FileStream> Open(const char8_t* path, FileMode mode, FileAccess access);
+    static std::optional<FileStream> Open(const char8_t* path, FileMode mode, FileAccess access, FileShare share);
+    static bool SetAttributes(const char8_t* path, FileAttributes fileAttributes);
     //static void AppendAllLines(const std::u8string_view& path, IEnumerable<string> contents);
     //static void AppendAllLines(const std::u8string_view& path, IEnumerable<string> contents, Encoding encoding);
-    //static Task AppendAllLinesAsync(const std::u8string_view& path, IEnumerable<string> contents, CancellationToken cancellationToken = default(CancellationToken));
-    //static Task AppendAllLinesAsync(const std::u8string_view& path, IEnumerable<string> contents, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken));
     //static void AppendAllText(const std::u8string_view& path, string contents);
     //static void AppendAllText(const std::u8string_view& path, string contents, Encoding encoding);
-    //static Task AppendAllTextAsync(const std::u8string_view& path, string contents, CancellationToken cancellationToken = default(CancellationToken));
-    //static Task AppendAllTextAsync(const std::u8string_view& path, string contents, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken));
     //static StreamWriter AppendText(const std::u8string_view& path);
     //static StreamWriter CreateText(const std::u8string_view& path);
     //static FileStream OpenRead(const std::u8string_view& path);
@@ -89,9 +84,8 @@ public:
     //static IEnumerable<string> ReadLines(const std::u8string_view& path, Encoding encoding);
     //static void Replace(const std::u8string_view& sourcePath, string destinationPath, string destinationBackupPath);
     //static void Replace(const std::u8string_view& sourcePath, string destinationPath, string destinationBackupPath, bool ignoreMetadataErrors);
-    //static void WriteAllBytes(const std::u8string_view& path, byte[] bytes);
-    //static void WriteAllLines(const std::u8string_view& path, string[] contents);
-    //static void WriteAllLines(const std::u8string_view& path, IEnumerable<string> contents);
+    static bool WriteAllBytes(const char8_t* path, const std::span<std::byte>& bytes);
+    //static bool WriteAllLines(const char8_t* path, const std::span<std::u8string_view>& contents);
     //static void WriteAllLines(const std::u8string_view& path, string[] contents, Encoding encoding);
     //static void WriteAllLines(const std::u8string_view& path, IEnumerable<string> contents, Encoding encoding);
     //static void WriteAllText(const std::u8string_view& path, string contents);

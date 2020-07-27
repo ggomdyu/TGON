@@ -2,7 +2,7 @@
 
 #include <array>
 
-#include "Misc/Windows/SafeFileHandle.h"
+#include "Misc/Windows/SafeHandle.h"
 #include "Platform/Windows/Windows.h"
 #include "Text/Encoding.h"
 
@@ -120,8 +120,8 @@ bool File::SetCreationTimeUtc(const char8_t* path, const DateTime& creationTimeU
         return {};
     }
 
-    const SafeFileHandle handle = CreateFile2(&utf16Path[0], GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
-    if (handle.IsValid() == false)
+    const SafeHandle handle(CreateFile2(&utf16Path[0], GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr));
+    if (handle == nullptr)
     {
         return false;
     }
@@ -147,8 +147,8 @@ bool File::SetLastAccessTimeUtc(const char8_t* path, const DateTime& lastAccessT
         return {};
     }
 
-    const SafeFileHandle handle = CreateFile2(&utf16Path[0], GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
-    if (handle.IsValid() == false)
+    const SafeHandle handle(CreateFile2(&utf16Path[0], GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr));
+    if (handle == nullptr)
     {
         return false;
     }
@@ -165,20 +165,20 @@ bool File::SetLastAccessTimeUtc(const char8_t* path, const DateTime& lastAccessT
 
 bool File::SetLastWriteTimeUtc(const char8_t* path, const DateTime& lastWriteTimeUtc)
 {
-    wchar_t utf16Path[4096];
-    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, utf16Path, static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
+    std::array<wchar_t, 2048> utf16Path{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, &utf16Path[0], static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
     {
         return {};
     }
 
-    SafeFileHandle handle = CreateFile2(utf16Path, GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
-    if (handle.IsValid() == false)
+    const SafeHandle handle(CreateFile2(&utf16Path[0], GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr));
+    if (handle == nullptr)
     {
         return false;
     }
 
-    int64_t ticks = lastWriteTimeUtc.ToFileTimeUtc();
-    FILETIME fileTime{static_cast<DWORD>(ticks), static_cast<DWORD>(ticks >> 32)};
+    const int64_t ticks = lastWriteTimeUtc.ToFileTimeUtc();
+    const FILETIME fileTime{static_cast<DWORD>(ticks), static_cast<DWORD>(ticks >> 32)};
     if (SetFileTime(handle, nullptr, nullptr, &fileTime) == 0)
     {
         return false;
@@ -189,7 +189,7 @@ bool File::SetLastWriteTimeUtc(const char8_t* path, const DateTime& lastWriteTim
 
 std::optional<DateTime> File::GetCreationTimeUtc(const char8_t* path)
 {
-    wchar_t utf16Path[4096];
+    std::array<wchar_t, 2048> utf16Path{};
     auto s = CreateStat(path, utf16Path);
     if (s.has_value() == false)
     {
@@ -201,14 +201,14 @@ std::optional<DateTime> File::GetCreationTimeUtc(const char8_t* path)
 
 std::optional<FileAttributes> File::GetAttributes(const char8_t* path)
 {
-    wchar_t utf16Path[4096];
-    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, utf16Path, static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
+    std::array<wchar_t, 2048> utf16Path{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, &utf16Path[0], static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
     {
         return {};
     }
 
     WIN32_FILE_ATTRIBUTE_DATA fileAttributeData;
-    if (GetFileAttributesExW(reinterpret_cast<LPCWSTR>(utf16Path), GET_FILEEX_INFO_LEVELS::GetFileExInfoStandard, &fileAttributeData) == FALSE)
+    if (GetFileAttributesExW(reinterpret_cast<LPCWSTR>(&utf16Path[0]), GET_FILEEX_INFO_LEVELS::GetFileExInfoStandard, &fileAttributeData) == FALSE)
     {
         return {};
     }
@@ -218,24 +218,35 @@ std::optional<FileAttributes> File::GetAttributes(const char8_t* path)
 
 bool File::Decrypt(const char8_t* path)
 {
-    wchar_t utf16Path[4096];
-    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, utf16Path, static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
+    std::array<wchar_t, 2048> utf16Path{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, &utf16Path[0], static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
     {
         return {};
     }
 
-    return DecryptFileW(utf16Path, 0) == TRUE;
+    return !!DecryptFileW(&utf16Path[0], 0);
 }
 
 bool File::Encrypt(const char8_t* path)
 {
-    wchar_t utf16Path[4096];
-    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, utf16Path, static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
+    std::array<wchar_t, 2048> utf16Path{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, &utf16Path[0], static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
     {
         return {};
     }
 
-    return EncryptFileW(utf16Path) == TRUE;
+    return !!EncryptFileW(&utf16Path[0]);
+}
+
+bool File::SetAttributes(const char8_t* path, FileAttributes fileAttributes)
+{
+    std::array<wchar_t, 2048> utf16Path{};
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(path), -1, &utf16Path[0], static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
+    {
+        return {};
+    }
+
+    return !!SetFileAttributesW(&utf16Path[0], static_cast<DWORD>(fileAttributes));
 }
 
 }

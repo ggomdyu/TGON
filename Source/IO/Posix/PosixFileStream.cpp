@@ -4,14 +4,14 @@
 
 #include "Diagnostics/Debug.h"
 
-#include "../FileStream.h"
 #include "../File.h"
+#include "../FileStream.h"
 
 namespace tg
 {
 namespace
 {
-    
+
 constexpr const char* ConvertFileModeAccessToNative(FileMode mode, FileAccess access)
 {
     constexpr const char* fileModeTable[][3] = {
@@ -36,7 +36,7 @@ FILE* CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess access
     return fopen(reinterpret_cast<const char*>(path), ConvertFileModeAccessToNative(mode, access));
 }
 
-} /* namespace */
+}
 
 FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access)),
@@ -58,13 +58,13 @@ bool FileStream::IsClosed() const noexcept
 int64_t FileStream::Length() const
 {
     FILE* nativeHandle = reinterpret_cast<FILE*>(m_nativeHandle);
-    
-    auto prevSeekOffset = ftell(nativeHandle);
+
+    const auto prevSeekOffset = ftell(nativeHandle);
     fseek(nativeHandle, 0, SEEK_END);
-    
+
     auto length = ftell(nativeHandle);
     fseek(nativeHandle, prevSeekOffset, SEEK_SET);
-    
+
     if (m_filePos + m_writePos > length)
     {
         length = m_filePos + m_writePos;
@@ -105,7 +105,7 @@ int32_t FileStream::InternalRead(std::byte* buffer, int32_t count)
     {
         return 0;
     }
-    
+
     m_filePos += readBytes;
     return static_cast<int32_t>(readBytes);
 }
@@ -136,7 +136,7 @@ int64_t FileStream::InternalSeek(int64_t offset, SeekOrigin origin)
     {
         return 0;
     }
-    
+
     m_filePos = newFilePos;
 
     return static_cast<int32_t>(newFilePos);

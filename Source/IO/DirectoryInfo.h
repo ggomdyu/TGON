@@ -15,8 +15,9 @@ class DirectoryInfo final
 /**@section Constructor */
 public:
     explicit DirectoryInfo(const std::u8string_view& path);
-    DirectoryInfo(const std::u8string_view& path, FullPathTag);
+    DirectoryInfo(std::u8string path, FullPathTag);
     
+/**@section Method */
 public:
     void Create() const;
     [[nodiscard]] DirectoryInfo CreateSubdirectory(const std::u8string_view& path) const;

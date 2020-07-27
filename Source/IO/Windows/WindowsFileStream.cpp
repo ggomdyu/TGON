@@ -1,23 +1,20 @@
 #include "PrecompiledHeader.h"
 
-#include "Diagnostics/Debug.h"
-#include "Text/Encoding.h"
 #include "Core/Algorithm.h"
 #include "Platform/Windows/Windows.h"
+#include "Text/Encoding.h"
 
 #include "../FileStream.h"
 
 namespace tg
 {
-
-thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
-
 namespace
 {
 
 HANDLE CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(std::char_traits<char8_t>::length(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    std::array<wchar_t, 2048> utf16Path{};
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(std::char_traits<char8_t>::length(path)), reinterpret_cast<std::byte*>(&utf16Path[0]), static_cast<int32_t>(utf16Path.size())) == -1)
     {
         return INVALID_HANDLE_VALUE;
     }
@@ -39,13 +36,13 @@ HANDLE CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess acces
     // So we have to add the below flags because of this security vulnerability.
     const DWORD flagsAndAttributes = UnderlyingCast(options) | SECURITY_SQOS_PRESENT | SECURITY_ANONYMOUS;
 
-    return CreateFileW(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
+    return CreateFileW(reinterpret_cast<LPCWSTR>(&utf16Path[0]), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
 }
 
 }
 
-FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
-    m_nativeHandle(CreateFileOpenHandle(path, mode, access, share, options)),
+FileStream::FileStream(void* nativeFileHandle, const char8_t* path, FileAccess access, int32_t bufferSize) :
+    m_nativeFileHandle(nativeFileHandle),
     m_bufferSize(bufferSize),
     m_readPos(0),
     m_readLen(0),
@@ -54,27 +51,33 @@ FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access, Fi
     m_access(access),
     m_fileName(path)
 {
-    if (m_nativeHandle == INVALID_HANDLE_VALUE)
+}
+
+std::optional<FileStream> FileStream::Create(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options)
+{
+    auto* nativeFileHandle = CreateFileOpenHandle(path, mode, access, share, options);
+    if (nativeFileHandle == INVALID_HANDLE_VALUE)
     {
-        Debug::WriteLine(u8"Could not create the file handle.");
-        return;
+        return {};
     }
 
-    if (GetFileType(m_nativeHandle) != FILE_TYPE_DISK)
+    if (GetFileType(nativeFileHandle) != FILE_TYPE_DISK)
     {
-        Debug::WriteLine(u8"The FileStream instance is not a file.");
+        return {};
     }
+
+    return FileStream(nativeFileHandle, path, access, bufferSize);
 }
 
 bool FileStream::IsClosed() const noexcept
 {
-    return m_nativeHandle == INVALID_HANDLE_VALUE;
+    return m_nativeFileHandle == INVALID_HANDLE_VALUE;
 }
 
 int64_t FileStream::Length() const
 {
     LARGE_INTEGER li;
-    if (GetFileSizeEx(m_nativeHandle, &li) == FALSE)
+    if (GetFileSizeEx(m_nativeFileHandle, &li) == FALSE)
     {
         return -1;
     }
@@ -108,7 +111,7 @@ void FileStream::FlushWriteBuffer()
 int32_t FileStream::InternalRead(std::byte* buffer, int32_t count)
 {
     DWORD readBytes = 0;
-    if (ReadFile(m_nativeHandle, buffer, count, &readBytes, nullptr) == FALSE)
+    if (ReadFile(m_nativeFileHandle, buffer, count, &readBytes, nullptr) == FALSE)
     {
         return 0;
     }
@@ -120,7 +123,7 @@ int32_t FileStream::InternalRead(std::byte* buffer, int32_t count)
 int32_t FileStream::InternalWrite(const std::byte* buffer, int32_t bufferBytes)
 {
     DWORD writtenBytes = 0;
-    if (WriteFile(m_nativeHandle, buffer, bufferBytes, &writtenBytes, nullptr) == FALSE)
+    if (WriteFile(m_nativeFileHandle, buffer, bufferBytes, &writtenBytes, nullptr) == FALSE)
     {
         return 0;
     }
@@ -135,7 +138,7 @@ int64_t FileStream::InternalSeek(int64_t offset, SeekOrigin origin)
     distanceToMove.QuadPart = offset;
 
     LARGE_INTEGER newFilePointer;
-    if (SetFilePointerEx(m_nativeHandle, distanceToMove, &newFilePointer, static_cast<DWORD>(origin)) == FALSE)
+    if (SetFilePointerEx(m_nativeFileHandle, distanceToMove, &newFilePointer, static_cast<DWORD>(origin)) == FALSE)
     {
         return 0;
     }
@@ -149,10 +152,10 @@ void FileStream::InternalClose()
 {
     this->FlushWriteBuffer();
 
-    if (m_nativeHandle != INVALID_HANDLE_VALUE)
+    if (m_nativeFileHandle != INVALID_HANDLE_VALUE)
     {
-        CloseHandle(m_nativeHandle);
-        m_nativeHandle = INVALID_HANDLE_VALUE;
+        CloseHandle(m_nativeFileHandle);
+        m_nativeFileHandle = INVALID_HANDLE_VALUE;
     }
 }
 
@@ -167,7 +170,7 @@ bool FileStream::InternalSetLength(int64_t value)
         }
     }
 
-    if (SetEndOfFile(m_nativeHandle) == FALSE)
+    if (SetEndOfFile(m_nativeFileHandle) == FALSE)
     {
         return false;
     }
@@ -196,7 +199,7 @@ bool FileStream::InternalSetLength(int64_t value)
 
 void FileStream::InternalFlush()
 {
-    FlushFileBuffers(m_nativeHandle);
+    FlushFileBuffers(m_nativeFileHandle);
 }
 
 }
