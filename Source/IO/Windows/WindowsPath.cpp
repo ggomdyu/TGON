@@ -5,8 +5,6 @@
 namespace tg
 {
 
-thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
-
 std::span<const char8_t> Path::GetInvalidFileNameChars() noexcept
 {
     constexpr char8_t invalidFileNameChars[] = {

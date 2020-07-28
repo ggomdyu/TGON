@@ -1,26 +1,24 @@
 #pragma once
 
-#include <unistd.h>
+#include <array>
+#include <deque>
 #include <dirent.h>
 #include <fnmatch.h>
-#include <deque>
-#include <array>
+#include <unistd.h>
 
 #include "Core/TypeTraits.h"
 
 #include "../Path.h"
-#include "../FileSystemEnumerable.h"
 
 namespace tg
 {
 namespace detail
 {
 
-template <typename _HandlerType>
-inline void InternalEnumerateAllDirectories(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _HandlerType& handler)
+template <typename _Callback>
+void InternalEnumerateAllDirectories(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _Callback& handler)
 {
     std::deque<std::u8string> directories(1, std::u8string(path));
-    std::array<char8_t, 8192> newPath;
     
     do
     {
@@ -51,17 +49,17 @@ inline void InternalEnumerateAllDirectories(const char8_t* path, const char8_t* 
                         continue;
                     }
                     
-                    int32_t newPathLen = Path::Combine(currPath, {reinterpret_cast<const char8_t*>(ent->d_name), ent->d_namlen}, newPath.data(), static_cast<int32_t>(newPath.size()));
-                    if constexpr (std::is_same_v<typename FunctionTraits<_HandlerType>::ReturnType, bool>)
+                    auto newPath = Path::Combine(currPath, {reinterpret_cast<const char8_t*>(ent->d_name), ent->d_namlen});
+                    if constexpr (std::is_same_v<typename FunctionTraits<_Callback>::ReturnType, bool>)
                     {
-                        if (handler({newPath.data(), static_cast<size_t>(newPathLen)}) == false)
+                        if (handler(std::move(newPath)) == false)
                         {
                             return;
                         }
                     }
                     else
                     {
-                        handler({newPath.data(), static_cast<size_t>(newPathLen)});
+                        handler(std::move(newPath));
                     }
                 }
             }
@@ -73,14 +71,12 @@ inline void InternalEnumerateAllDirectories(const char8_t* path, const char8_t* 
     while (directories.empty() == false);
 }
 
-template <typename _HandlerType>
-inline void InternalEnumerateTopDirectoryOnly(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _HandlerType& handler)
+template <typename _Callback>
+void InternalEnumerateTopDirectoryOnly(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _Callback& handler)
 {
     DIR* dir = opendir(reinterpret_cast<const char*>(path));
     if (dir != nullptr)
     {
-        std::array<char8_t, 8192> newPath;
-        
         struct dirent* ent;
         while ((ent = readdir(dir)) != nullptr)
         {
@@ -98,17 +94,17 @@ inline void InternalEnumerateTopDirectoryOnly(const char8_t* path, const char8_t
                     continue;
                 }
                 
-                int32_t newPathLen = Path::Combine(path, {reinterpret_cast<const char8_t*>(ent->d_name), ent->d_namlen}, newPath.data(), static_cast<int32_t>(newPath.size()));
-                if constexpr (std::is_same_v<typename FunctionTraits<_HandlerType>::ReturnType, bool>)
+                auto newPath = Path::Combine(path, {reinterpret_cast<const char8_t*>(ent->d_name), ent->d_namlen});
+                if constexpr (std::is_same_v<typename FunctionTraits<_Callback>::ReturnType, bool>)
                 {
-                    if (handler({newPath.data(), static_cast<size_t>(newPathLen)}) == false)
+                    if (handler(std::move(newPath)) == false)
                     {
                         break;
                     }
                 }
                 else
                 {
-                    handler({newPath.data(), static_cast<size_t>(newPathLen)});
+                    handler(std::move(newPath));
                 }
             }
         }
@@ -118,8 +114,8 @@ inline void InternalEnumerateTopDirectoryOnly(const char8_t* path, const char8_t
 
 }
 
-template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _HandlerType& handler)
+template <typename _Callback>
+void FileSystemEnumerable::EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& handler)
 {
     if (searchOption == SearchOption::AllDirectories)
     {
@@ -131,8 +127,8 @@ inline void FileSystemEnumerable::EnumerateDirectories(const char8_t* path, cons
     }
 }
 
-template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateFiles(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _HandlerType& handler)
+template <typename _Callback>
+void FileSystemEnumerable::EnumerateFiles(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& handler)
 {
     if (searchOption == SearchOption::AllDirectories)
     {
@@ -144,8 +140,8 @@ inline void FileSystemEnumerable::EnumerateFiles(const char8_t* path, const char
     }
 }
 
-template <typename _HandlerType>
-inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _HandlerType& handler)
+template <typename _Callback>
+void FileSystemEnumerable::EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& handler)
 {
     if (searchOption == SearchOption::AllDirectories)
     {
