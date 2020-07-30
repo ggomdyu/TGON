@@ -55,7 +55,7 @@ DirectoryInfo Directory::GetParent(const std::u8string_view& path)
 
 std::u8string Directory::GetCurrentDirectory()
 {
-    std::array<char8_t, 8192> str;
+    std::array<char8_t, 8192> str{};
     auto strLen = GetCurrentDirectory(str.data(), static_cast<int32_t>(str.size()));
     if (strLen.has_value() == false)
     {

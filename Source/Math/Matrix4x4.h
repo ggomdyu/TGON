@@ -453,7 +453,7 @@ inline float& Matrix4x4::operator[](int32_t index)
 
 inline float Matrix4x4::operator[](int32_t index) const
 {
-    return const_cast<Matrix4x4*>(this)->operator[](index);
+    return const_cast<decltype(this)>(this)->operator[](index);
 }
 
 inline Matrix4x4 Matrix4x4::Translate(float x, float y, float z) noexcept

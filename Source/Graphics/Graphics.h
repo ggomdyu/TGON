@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Math/Rect.h"
 #include "Math/Color.h"
+#include "Math/Rect.h"
 
 #if TGON_GRAPHICS_OPENGL
 #include "OpenGL/OpenGLGraphics.h"
@@ -29,22 +29,24 @@ enum class FillMode
 
 enum class CullMode
 {
-    CW,
-    CCW,
+    Off,
+    Front,
+    Back,
 };
 
 enum class BlendMode
 {
-    Normal,
-    Alpha,
-    Additive,
-    Subtractive,
-    Darken,
-    Multiply,
-    Divide,
-    Subtract,
-    SoftLight,
-    HardLight,
+    Zero,
+    One,
+    DstColor,
+    SrcColor,
+    OneMinusDstColor,
+    SrcAlpha,
+    OneMinusSrcColor,
+    DstAlpha,
+    OneMinusDstAlpha,
+    SrcAlphaSaturate,
+    OneMinusSrcAlpha,
 };
 
 class Graphics final :
@@ -63,15 +65,11 @@ public:
     void SetFillMode(FillMode fillMode);
     void SetCullMode(CullMode cullMode);
     void SetViewport(int32_t x, int32_t y, int32_t width, int32_t height);
-    void SetBlendMode(BlendMode blendMode);
-    void EnableCullFace();
-    void EnableBlend();
-    void EnableDepthTest();
-    void EnableScissorTest();
-    void DisableCullFace();
-    void DisableBlend();
-    void DisableDepthTest();
-    void DisableScissorTest();
+    void SetBlendMode(BlendMode srcFactor, BlendMode destFactor);
+    void SetEnableZWrite(bool enable);
+    void SetEnableZTest(bool enable);
+    void SetEnableBlend(bool enable);
+    void SetEnableScissorTest(bool enable);
     void ClearColorBuffer();
     void ClearColorDepthBuffer();
     void SwapBuffer();

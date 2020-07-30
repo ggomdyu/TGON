@@ -1,7 +1,7 @@
 #pragma once
 
-#include <type_traits>
 #include <string>
+#include <type_traits>
 
 namespace tg::detail
 {
@@ -111,11 +111,5 @@ constexpr bool IsAny = std::bool_constant<(std::is_same_v<_Type, _Types> || ...)
 
 template <typename _Type>
 constexpr bool IsChar = IsAny<_Type, char, char16_t, char32_t, wchar_t>;
-    
-template <typename _Type>
-constexpr bool IsCharPointer = IsChar<RawType<_Type>> && std::is_pointer_v<_Type>;
-
-template <typename _Type>
-constexpr bool IsCharReference = IsChar<RawType<_Type>> && std::is_reference_v<_Type>;
 
 }

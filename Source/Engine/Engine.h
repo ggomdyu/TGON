@@ -1,11 +1,11 @@
 #pragma once
 
-#include <vector>
 #include <array>
+#include <vector>
 
 #include "Core/Algorithm.h"
-#include "Platform/WindowStyle.h"
 #include "Graphics/VideoMode.h"
+#include "Platform/WindowStyle.h"
 
 #include "InputModule.h"
 #include "TimeModule.h"

@@ -3,14 +3,14 @@
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #ifdef _MSC_VER
-#   define STBI_MSC_SECURE_CRT
+#define STBI_MSC_SECURE_CRT
 #endif
 #include <stb_image.h>
 #include <stb_image_write.h>
 
-#include "IO/File.h"
 #include "Core/Algorithm.h"
 #include "Core/Simd.h"
+#include "IO/File.h"
 
 #include "Image.h"
 
@@ -28,14 +28,17 @@ constexpr int32_t ConvertPixelFormatToChannelCount(PixelFormat pixelFormat)
         4, // RGBA4444
         1, // R8
     };
-    
+
     return channelCountTable[UnderlyingCast(pixelFormat)];
 }
 
 template <int32_t _BytesPerPixel>
 void FlipImageX(std::byte* imageData, int32_t width, int32_t height)
 {
-    using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
+    using ColorRef = struct
+    {
+        std::byte _[_BytesPerPixel];
+    }*;
 
     if (imageData == nullptr)
     {
@@ -88,7 +91,10 @@ void FlipImageX(std::byte* imageData, int32_t width, int32_t height)
 template <int32_t _BytesPerPixel>
 void FlipImageXY(std::byte* imageData, int32_t width, int32_t height)
 {
-    using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
+    using ColorRef = struct
+    {
+        std::byte _[_BytesPerPixel];
+    }*;
 
     if (imageData == nullptr)
     {
@@ -112,7 +118,7 @@ void FlipImageXY(std::byte* imageData, int32_t width, int32_t height)
 
     auto* frontIt = reinterpret_cast<__m128i*>(imageData);
     auto* backIt = (reinterpret_cast<__m128i*>(&imageData[width * height * 4 - static_cast<int32_t>(sizeof(__m128i))]));
-    
+
     for (; frontIt < backIt; ++frontIt, --backIt)
     {
         const auto r1 = _mm_shuffle_epi32(_mm_loadu_si128(frontIt), _MM_SHUFFLE(0, 1, 2, 3));
@@ -160,7 +166,10 @@ void RotateImageRight90Degrees(std::byte* imageData, int32_t width, int32_t heig
         return;
     }
 
-    using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
+    using ColorRef = struct
+    {
+        std::byte _[_BytesPerPixel];
+    }*;
     const auto imageDataSize = static_cast<int64_t>(width) * height * _BytesPerPixel;
     const auto tempBuffer = std::make_unique<std::byte[]>(imageDataSize);
 
@@ -186,7 +195,10 @@ void RotateImageLeft90Degrees(std::byte* imageData, int32_t width, int32_t heigh
         return;
     }
 
-    using ColorRef = struct { std::byte _[_BytesPerPixel]; }*;
+    using ColorRef = struct
+    {
+        std::byte _[_BytesPerPixel];
+    }*;
     const auto imageDataSize = width * height * _BytesPerPixel;
     const auto tempBuffer = std::make_unique<std::byte[]>(imageDataSize);
 

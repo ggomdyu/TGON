@@ -11,19 +11,11 @@ namespace tg
 template <typename>
 class BasicStringHash;
 
-namespace detail
-{
-
 template <typename>
-struct IsBasicStringHash : std::false_type {};
-
-template <typename _String>
-struct IsBasicStringHash<BasicStringHash<_String>> : std::true_type {};
-
-}
+constexpr bool IsBasicStringHash = std::false_type::value;
 
 template <typename _Type>
-concept IsBasicStringHash = detail::IsBasicStringHash<_Type>::value;
+constexpr bool IsBasicStringHash<BasicStringHash<_Type>> = std::true_type::value;
 
 template <typename _String>
 class BasicStringHash
@@ -31,7 +23,7 @@ class BasicStringHash
 /**@section Type */
 public:
     using ValueType = std::remove_cvref_t<decltype(_String()[0])>;
-    using StringType = std::conditional_t<IsCharPointer<_String>, std::basic_string_view<ValueType>, _String>;
+    using StringType = std::conditional_t<IsChar<RawType<_String>> && std::is_pointer_v<_String>, std::basic_string_view<ValueType>, _String>;
 
 /**@section Constructor */
 public:

@@ -6,16 +6,10 @@
 
 #include "Vector3.h"
 
-#if _MSC_VER
-#   define TGON_SPRINTF sprintf_s
-#else
-#   define TGON_SPRINTF snprintf
-#endif
-
 namespace tg
 {
 
-struct alignas(64) Matrix3x4
+struct alignas(16) Matrix3x4
 {
 /**@section Constructor */
 public:
@@ -35,27 +29,27 @@ public:
     Matrix3x4& operator*=(const Matrix3x4&) noexcept;
     constexpr bool operator==(const Matrix3x4&) const noexcept;
     constexpr bool operator!=(const Matrix3x4&) const noexcept;
-    float* operator[](std::size_t index);
-    const float* operator[](std::size_t index) const;
+    float& operator[](std::size_t index);
+    float operator[](std::size_t index) const;
 
 /**@section Method */
 public:
-    static constexpr const Matrix3x4 Identity() noexcept;
-    static constexpr const Matrix3x4 Zero() noexcept;
-    static constexpr const Matrix3x4 Translate(float x, float y, float z) noexcept;
-    static const Matrix3x4 Rotate(float yaw, float pitch, float roll) noexcept;
-    static const Matrix3x4 RotateX(float radian) noexcept;
-    static const Matrix3x4 RotateY(float radian) noexcept;
-    static const Matrix3x4 RotateZ(float radian) noexcept;
-    static constexpr const Matrix3x4 Scale(float x, float y, float z) noexcept;
+    [[nodiscard]] static constexpr Matrix3x4 Identity() noexcept;
+    [[nodiscard]] static constexpr Matrix3x4 Zero() noexcept;
+    [[nodiscard]] static constexpr Matrix3x4 Translate(float x, float y, float z) noexcept;
+    [[nodiscard]] static Matrix3x4 Rotate(float yaw, float pitch, float roll) noexcept;
+    [[nodiscard]] static Matrix3x4 RotateX(float radian) noexcept;
+    [[nodiscard]] static Matrix3x4 RotateY(float radian) noexcept;
+    [[nodiscard]] static Matrix3x4 RotateZ(float radian) noexcept;
+    [[nodiscard]] static constexpr  Matrix3x4 Scale(float x, float y, float z) noexcept;
     //static constexpr const Matrix4x3 Transposed(const Matrix3x4& matrix) noexcept;
-    static constexpr const Matrix3x4 Inverse();
-    static Matrix3x4 LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept;
-    static Matrix3x4 LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept;
-    static Matrix3x4 PerspectiveLH(float fovy, float aspect, float nearZ, float farZ) noexcept;
-    static Matrix3x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ) noexcept;
-    static constexpr Matrix3x4 OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept;
-    static constexpr Matrix3x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept;
+    [[nodiscard]] static constexpr Matrix3x4 Inverse();
+    [[nodiscard]] static Matrix3x4 LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept;
+    [[nodiscard]] static Matrix3x4 LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept;
+    [[nodiscard]] static Matrix3x4 PerspectiveLH(float fovy, float aspect, float nearZ, float farZ) noexcept;
+    [[nodiscard]] static Matrix3x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ) noexcept;
+    [[nodiscard]] static constexpr Matrix3x4 OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept;
+    [[nodiscard]] static constexpr Matrix3x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept;
     int32_t ToString(const std::span<char>& destStr) const;
     int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
     [[nodiscard]] std::string ToString() const;
@@ -178,8 +172,8 @@ inline Matrix3x4 Matrix3x4::LookAtRH(const Vector3& eyePt, const Vector3& lookAt
 
 inline Matrix3x4 Matrix3x4::PerspectiveLH(float fovy, float aspect, float nearZ, float farZ) noexcept
 {
-    float scaleY = 1.0f / std::tan(fovy * 0.5f);
-    float scaleX = scaleY / aspect;
+    const auto scaleY = 1.0f / std::tan(fovy * 0.5f);
+    const auto scaleX = scaleY / aspect;
 
     return Matrix3x4(
         scaleX, 0.0f,   0.0f,
@@ -191,8 +185,8 @@ inline Matrix3x4 Matrix3x4::PerspectiveLH(float fovy, float aspect, float nearZ,
 
 inline Matrix3x4 Matrix3x4::PerspectiveRH(float fovy, float aspect, float nearZ, float farZ) noexcept
 {
-    float scaleY = 1.0f / std::tan(fovy * 0.5f);
-    float scaleX = scaleY / aspect;
+    const auto scaleY = 1.0f / std::tan(fovy * 0.5f);
+    const auto scaleX = scaleY / aspect;
 
     return Matrix3x4(
         scaleX, 0.0f,   0.0f,
@@ -204,9 +198,9 @@ inline Matrix3x4 Matrix3x4::PerspectiveRH(float fovy, float aspect, float nearZ,
     
 constexpr Matrix3x4 Matrix3x4::OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept
 {
-    float width = right - left;
-    float height = bottom - top;
-    float depth = farZ - nearZ;
+    const auto width = right - left;
+    const auto height = bottom - top;
+    const auto depth = farZ - nearZ;
     
     return Matrix3x4(
         2 / width,  0.0f,           0.0f,
@@ -218,8 +212,8 @@ constexpr Matrix3x4 Matrix3x4::OrthographicRH(float left, float right, float top
 
 constexpr Matrix3x4 Matrix3x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept
 {
-    float halfWidth = width * 0.5f;
-    float halfHeight = height * 0.5f;
+    const auto halfWidth = width * 0.5f;
+    const auto halfHeight = height * 0.5f;
 
     return Matrix3x4(
         halfWidth,      0.0f,           0.0f,
@@ -247,7 +241,7 @@ inline Matrix3x4& Matrix3x4::operator*=(const Matrix3x4& rhs) noexcept
 
 constexpr bool Matrix3x4::operator==(const Matrix3x4& rhs) const noexcept
 {
-    for (int i = 0; i < 12; ++i)
+    for (int32_t i = 0; i < 12; ++i)
     {
         if ((&(m00))[i] != (&(rhs.m00))[i])
         {
@@ -262,18 +256,17 @@ constexpr bool Matrix3x4::operator!=(const Matrix3x4& rhs) const noexcept
     return !this->operator==(rhs);
 }
 
-inline float* Matrix3x4::operator[](std::size_t index)
+inline float& Matrix3x4::operator[](std::size_t index)
+{
+    return *(&m00 + index);
+}
+
+inline float Matrix3x4::operator[](std::size_t index) const
 {
     return const_cast<decltype(this)>(this)->operator[](index);
 }
 
-inline const float* Matrix3x4::operator[](std::size_t index) const
-{
-    assert((index < 4 || index > -1) && "Matrix3x4 index out of range");
-    return &m00 + (index * 4);
-}
-
-constexpr const Matrix3x4 Matrix3x4::Translate(float x, float y, float z) noexcept
+constexpr Matrix3x4 Matrix3x4::Translate(float x, float y, float z) noexcept
 {
     return Matrix3x4(
         1.0f,   0.0f,   0.0f,
@@ -283,7 +276,7 @@ constexpr const Matrix3x4 Matrix3x4::Translate(float x, float y, float z) noexce
     );
 }
 
-constexpr const Matrix3x4 Matrix3x4::Identity() noexcept
+constexpr Matrix3x4 Matrix3x4::Identity() noexcept
 {
     return Matrix3x4(
         1.0f,   0.0f,   0.0f,
@@ -293,7 +286,7 @@ constexpr const Matrix3x4 Matrix3x4::Identity() noexcept
     );
 }
 
-constexpr const Matrix3x4 Matrix3x4::Zero() noexcept
+constexpr Matrix3x4 Matrix3x4::Zero() noexcept
 {
     return Matrix3x4(
         0.0f,   0.0f,   0.0f,
@@ -303,16 +296,16 @@ constexpr const Matrix3x4 Matrix3x4::Zero() noexcept
     );
 }
 
-inline const Matrix3x4 Matrix3x4::Rotate(float yaw, float pitch, float roll) noexcept
+inline Matrix3x4 Matrix3x4::Rotate(float yaw, float pitch, float roll) noexcept
 {
-    float cosA = std::cos(yaw);
-    float sinA = std::sin(yaw);
+    const auto cosA = std::cos(yaw);
+    const auto sinA = std::sin(yaw);
     
-    float cosB = std::cos(pitch);
-    float sinB = std::sin(pitch);
+    const auto cosB = std::cos(pitch);
+    const auto sinB = std::sin(pitch);
     
-    float cosC = std::cos(roll);
-    float sinC = std::sin(roll);
+    const auto cosC = std::cos(roll);
+    const auto sinC = std::sin(roll);
     
     return Matrix3x4(
         cosB * cosC,                            cosB * -sinC,                           sinB,
@@ -322,10 +315,10 @@ inline const Matrix3x4 Matrix3x4::Rotate(float yaw, float pitch, float roll) noe
     );
 }
 
-inline const Matrix3x4 Matrix3x4::RotateX(float radian) noexcept
+inline Matrix3x4 Matrix3x4::RotateX(float radian) noexcept
 {
-    float cosA = std::cos(radian);
-    float sinA = std::sin(radian);
+    const auto cosA = std::cos(radian);
+    const auto sinA = std::sin(radian);
 
     return Matrix3x4(
         1.0f,   0.0f,   0.0f,
@@ -335,10 +328,10 @@ inline const Matrix3x4 Matrix3x4::RotateX(float radian) noexcept
     );
 }
 
-inline const Matrix3x4 Matrix3x4::RotateY(float radian) noexcept
+inline Matrix3x4 Matrix3x4::RotateY(float radian) noexcept
 {
-    float cosA = std::cos(radian);
-    float sinA = std::sin(radian);
+    const auto cosA = std::cos(radian);
+    const auto sinA = std::sin(radian);
 
     return Matrix3x4(
         cosA,   0.0f,   sinA,
@@ -348,10 +341,10 @@ inline const Matrix3x4 Matrix3x4::RotateY(float radian) noexcept
     );
 }
 
-inline const Matrix3x4 Matrix3x4::RotateZ(float radian) noexcept
+inline Matrix3x4 Matrix3x4::RotateZ(float radian) noexcept
 {
-    float cosA = std::cos(radian);
-    float sinA = std::sin(radian);
+    const auto cosA = std::cos(radian);
+    const auto sinA = std::sin(radian);
 
     return Matrix3x4(
         cosA,   -sinA,   0.0f,
@@ -361,7 +354,7 @@ inline const Matrix3x4 Matrix3x4::RotateZ(float radian) noexcept
     );
 }
 
-constexpr const Matrix3x4 Matrix3x4::Scale(float x, float y, float z) noexcept
+constexpr Matrix3x4 Matrix3x4::Scale(float x, float y, float z) noexcept
 {
     return Matrix3x4(
         x,      0.0f,   0.0f,
@@ -378,16 +371,18 @@ inline int32_t Matrix3x4::ToString(const std::span<char>& destStr) const
 
 inline int32_t Matrix3x4::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f\t%f\t%f\n%f\t%f\t%f\n%f\t%f\t%f\n%f\t%f\t%f", m00, m01, m02, m10, m11, m12, m20, m21, m22, m30, m31, m32);
+    const auto destStrLen = fmt::format_to_n(destStr, sizeof(destStr[0]) * (destStrBufferLen - 1), "{}\t\t{}\t\t{}\n{}\t\t{}\t\t{}\n{}\t\t{}\t\t{}\n{}\t\t{}\t\t{}", m00, m01, m02, m10, m11, m12, m20, m21, m22, m30, m31, m32).size;
+    destStr[destStrLen] = u8'\0';
+
+    return static_cast<int32_t>(destStrLen);
 }
 
 inline std::string Matrix3x4::ToString() const
 {
-    std::array<char, 2048> str;
-    int32_t strLen = this->ToString(str);
+    std::array<char, 2048> str{};
+    const auto strLen = this->ToString(str);
+
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
 }
-
-#undef TGON_SPRINTF

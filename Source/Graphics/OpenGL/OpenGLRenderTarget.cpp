@@ -1,8 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#if TGON_GRAPHICS_OPENGL
-#include <stdexcept>
-
 #include "Diagnostics/Debug.h"
 
 #include "../RenderTarget.h"
@@ -132,4 +129,3 @@ void RenderTarget::Disuse()
 }
 
 }
-#endif

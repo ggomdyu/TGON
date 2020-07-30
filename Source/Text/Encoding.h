@@ -6,8 +6,6 @@
 #include <unordered_map>
 #include <span>
 
-#include "Core/RuntimeObject.h"
-
 struct UConverter;
 
 namespace tg

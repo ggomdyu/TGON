@@ -27,8 +27,6 @@
 namespace tg
 {
 
-thread_local std::array<wchar_t, 16383> g_tempUtf16Buffer;
-
 bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* value)
 {
     std::array<wchar_t, 2048> utf16Name{};
@@ -37,7 +35,7 @@ bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* val
         return false;
     }
 
-    std::array<wchar_t, 4096> utf16Value{};
+    std::array<wchar_t, 2048> utf16Value{};
     if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(value), -1, &utf16Value[0], static_cast<int>(utf16Value.size())) == 0)
     {
         return false;
@@ -54,7 +52,7 @@ std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, 
         return {};
     }
 
-    std::array<wchar_t, 4096> utf16Value{};
+    std::array<wchar_t, 2048> utf16Value{};
     if (GetEnvironmentVariableW(&utf16Name[0], &utf16Value[0], static_cast<DWORD>(utf16Value.size())) == 0)
     {
         return {};
@@ -164,12 +162,16 @@ bool Environment::Is64BitOperatingSystem()
 
 void Environment::FailFast(const char8_t* message)
 {
-    std::array<wchar_t, 4096> utf16Message{};
-    const auto utf16MessageLen = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(message), -1, &utf16Message[0], std::extent_v<decltype(utf16Message)>) - 1;
-    utf16Message[utf16MessageLen] = '\n';
+    const auto utf16MessageLen = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(message), -1, nullptr, 0) - 1;
+    if (utf16MessageLen != -1)
+    {
+        std::wstring utf16Message;
+        utf16Message.resize(decltype(utf16Message)::size_type(utf16MessageLen));
+        MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(message), -1, &utf16Message[0], utf16MessageLen);
 
-    OutputDebugStringW(L"FailFast:\n");
-    OutputDebugStringW(&utf16Message[0]);
+        OutputDebugStringW(L"FailFast:\n");
+        OutputDebugStringW(&utf16Message[0]);
+    }
 
     assert(false);
 }

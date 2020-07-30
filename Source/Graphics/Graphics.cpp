@@ -10,11 +10,10 @@ Graphics::Graphics(void* nativeWindow, const VideoMode& videoMode) :
     m_nativeWindow(nativeWindow)
 {
     this->SetClearColor(videoMode.clearColor);
-    this->SetCullMode(CullMode::CW);
-    this->SetBlendMode(BlendMode::Alpha);
-    this->EnableCullFace();
-    this->EnableDepthTest();
-    this->EnableBlend();
+    this->SetCullMode(CullMode::Back);
+    this->SetBlendMode(BlendMode::One, BlendMode::One);
+    this->SetEnableZTest(true);
+    this->SetEnableBlend(true);
 }
 
 PlatformGraphics& Graphics::GetPlatformDependency() noexcept

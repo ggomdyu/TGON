@@ -25,7 +25,7 @@ public:
     
 /**@section Method */
 public:
-    [[nodiscard]] static GLuint CreateIndexBufferHandle();
+    [[nodiscard]] static GLuint CreateIndexBufferId();
     [[nodiscard]] GLuint GetIndexBufferHandle() const noexcept;
 
 /**@section Variable */

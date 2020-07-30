@@ -49,10 +49,10 @@ OpenGLVertexBuffer& OpenGLVertexBuffer::operator=(OpenGLVertexBuffer&& rhs) noex
 
 GLuint OpenGLVertexBuffer::CreateVertexBufferId()
 {
-    GLuint vertexBufferHandle;
-    TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));
+    GLuint vertexBufferId;
+    TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferId));
 
-    return vertexBufferHandle;
+    return vertexBufferId;
 }
 
 GLuint OpenGLVertexBuffer::GetVertexBufferHandle() const noexcept

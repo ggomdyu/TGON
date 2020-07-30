@@ -48,7 +48,7 @@ function(init_tgon)
 endfunction()
 
 function(init_tgon_subdirectories)
-    set(GLOB_AGRUMENTS *.cpp *c *.h *.mm)
+    set(GLOB_AGRUMENTS *.cpp *c *.h *.mm *.inl)
     file(GLOB_RECURSE ALL_SRC_PATHS ${GLOB_AGRUMENTS})
 
     set(SRC_PATHS)

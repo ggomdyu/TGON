@@ -1,6 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#if TGON_GRAPHICS_OPENGL
 #include <cassert>
 
 #include "OpenGLDebug.h"
@@ -24,16 +23,15 @@ OpenGLIndexBuffer::OpenGLIndexBuffer(OpenGLIndexBuffer&& rhs) noexcept :
 OpenGLIndexBuffer& OpenGLIndexBuffer::operator=(OpenGLIndexBuffer&& rhs) noexcept
 {
     std::swap(m_indexBufferHandle, rhs.m_indexBufferHandle);
-
     return *this;
 }
 
-GLuint OpenGLIndexBuffer::CreateIndexBufferHandle()
+GLuint OpenGLIndexBuffer::CreateIndexBufferId()
 {
-    GLuint vertexBufferHandle;
-    TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));
+    GLuint indexBufferId;
+    TGON_GL_ERROR_CHECK(glGenBuffers(1, &indexBufferId));
 
-    return vertexBufferHandle;
+    return indexBufferId;
 }
 
 GLuint OpenGLIndexBuffer::GetIndexBufferHandle() const noexcept
@@ -42,7 +40,7 @@ GLuint OpenGLIndexBuffer::GetIndexBufferHandle() const noexcept
 }
 
 IndexBuffer::IndexBuffer() :
-    OpenGLIndexBuffer(CreateIndexBufferHandle())
+    OpenGLIndexBuffer(CreateIndexBufferId())
 {
 }
 
@@ -69,4 +67,3 @@ void IndexBuffer::Unuse()
 }
 
 }
-#endif

@@ -1,24 +1,23 @@
 #include "PrecompiledHeader.h"
 
-#if TGON_GRAPHICS_OPENGL
-#include "Platform/Window.h"
+#include "Core/Algorithm.h"
 
 #include "OpenGLDebug.h"
 
 #include "../Graphics.h"
 
 #ifdef _MSC_VER
-#   pragma comment(lib, "OpenGL32.Lib")
+#pragma comment(lib, "OpenGL32.Lib")
 #endif
 
 namespace tg
 {
 namespace
 {
-    
-constexpr GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType) noexcept
+
+[[nodiscard]] constexpr GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType) noexcept
 {
-    constexpr GLenum nativePrimitiveTypes[] = {
+    constexpr GLenum primitiveTable[] = {
         GL_POINTS,
         GL_LINES,
         GL_LINE_STRIP,
@@ -26,36 +25,58 @@ constexpr GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType) noexc
         GL_TRIANGLE_STRIP,
         GL_TRIANGLE_FAN,
     };
-    
-    return nativePrimitiveTypes[static_cast<int>(primitiveType)];
+
+    return primitiveTable[UnderlyingCast(primitiveType)];
 }
-    
-constexpr GLenum ConvertFillModeToNative(FillMode fillMode) noexcept
+
+[[nodiscard]] constexpr GLenum ConvertBlendModeToNative(BlendMode blendMode) noexcept
 {
-    constexpr GLenum nativeFillModes[] = {
+    constexpr GLenum blendModeTable[] = {
+        GL_ZERO,
+        GL_ONE,
+        GL_DST_COLOR,
+        GL_SRC_COLOR,
+        GL_ONE_MINUS_DST_COLOR,
+        GL_SRC_ALPHA,
+        GL_ONE_MINUS_SRC_COLOR,
+        GL_DST_ALPHA,
+        GL_ONE_MINUS_DST_ALPHA,
+        GL_SRC_ALPHA_SATURATE,
+        GL_ONE_MINUS_SRC_ALPHA,
+    };
+
+    return blendModeTable[UnderlyingCast(blendMode)];
+}
+
+[[nodiscard]] constexpr GLenum ConvertFillModeToNative(FillMode fillMode) noexcept
+{
+    constexpr GLenum fillModeTable[] = {
         GL_POINT,
         GL_LINE,
         GL_FILL,
     };
-    
-    return nativeFillModes[static_cast<int>(fillMode)];
+
+    return fillModeTable[UnderlyingCast(fillMode)];
 }
-    
-constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
+
+[[nodiscard]] constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
 {
-    constexpr GLenum nativeCullModes[] = {
-        GL_CW,
-        GL_CCW,
+    constexpr GLenum cullModeTable[] = {
+        0,
+        GL_FRONT,
+        GL_BACK,
     };
-    
-    return nativeCullModes[static_cast<int>(cullMode)];
+
+    return cullModeTable[static_cast<int>(cullMode)];
 }
-    
+
 }
 
 OpenGLGraphics::OpenGLGraphics(void* nativeWindow, const VideoMode& videoMode) :
     m_context(nativeWindow, videoMode)
 {
+    TGON_GL_ERROR_CHECK(glFrontFace(GL_CW));
+
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
 }
@@ -69,12 +90,8 @@ OpenGLGraphics::OpenGLGraphics(OpenGLGraphics&& rhs) noexcept :
 
 OpenGLGraphics::~OpenGLGraphics()
 {
-    if (m_vertexArrayHandle != 0)
-    {
-        TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
-        TGON_GL_ERROR_CHECK(glDeleteVertexArrays(1, &m_vertexArrayHandle));
-        m_vertexArrayHandle = 0;
-    }
+    TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
+    TGON_GL_ERROR_CHECK(glDeleteVertexArrays(1, &m_vertexArrayHandle));
 }
 
 OpenGLGraphics& OpenGLGraphics::operator=(OpenGLGraphics&& rhs) noexcept
@@ -102,78 +119,73 @@ void Graphics::SetFillMode(FillMode fillMode)
 
 void Graphics::SetCullMode(CullMode cullMode)
 {
-    TGON_GL_ERROR_CHECK(glFrontFace(ConvertCullModeToNative(cullMode)));
+    if (cullMode == CullMode::Off)
+    {
+        TGON_GL_ERROR_CHECK(glDisable(GL_CULL_FACE));
+    }
+    else
+    {
+        TGON_GL_ERROR_CHECK(glEnable(GL_CULL_FACE));
+        TGON_GL_ERROR_CHECK(glCullFace(ConvertCullModeToNative(cullMode)));
+    }
 }
 
 void Graphics::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
 {
     TGON_GL_ERROR_CHECK(glViewport(static_cast<GLint>(x), static_cast<GLint>(y), static_cast<GLsizei>(width), static_cast<GLsizei>(height)));
 }
-    
-void Graphics::SetBlendMode(BlendMode blendMode)
+
+void Graphics::SetBlendMode(BlendMode srcFactor, BlendMode destFactor)
 {
-    switch (blendMode)
+    TGON_GL_ERROR_CHECK(glBlendFunc(ConvertBlendModeToNative(srcFactor), ConvertBlendModeToNative(destFactor)));
+}
+
+void Graphics::SetEnableZWrite(bool enable)
+{
+    if (enable)
     {
-    case BlendMode::Normal:
-        TGON_GL_ERROR_CHECK(glBlendFunc(GL_ONE, GL_ZERO));
-        TGON_GL_ERROR_CHECK(glBlendEquation(GL_FUNC_ADD));
-        break;
-            
-    case BlendMode::Alpha:
-        TGON_GL_ERROR_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-//        TGON_GL_ERROR_CHECK(glBlendEquation(GL_FUNC_ADD));
-        break;
-            
-    case BlendMode::Additive:
-        TGON_GL_ERROR_CHECK(glBlendFunc(GL_ONE, GL_ONE));
-        TGON_GL_ERROR_CHECK(glBlendEquation(GL_FUNC_ADD));
-        break;
-            
-    case BlendMode::Subtractive:
-        TGON_GL_ERROR_CHECK(glBlendFunc(GL_ONE, GL_ONE));
-        TGON_GL_ERROR_CHECK(glBlendEquation(GL_FUNC_REVERSE_SUBTRACT));
-        break;
+        TGON_GL_ERROR_CHECK(glDepthMask(GL_TRUE));
+    }
+    else
+    {
+        TGON_GL_ERROR_CHECK(glDepthMask(GL_FALSE));
     }
 }
 
-void Graphics::EnableCullFace()
+void Graphics::SetEnableZTest(bool enable)
 {
-    TGON_GL_ERROR_CHECK(glEnable(GL_CULL_FACE));
-}
-    
-void Graphics::EnableBlend()
-{
-    TGON_GL_ERROR_CHECK(glEnable(GL_BLEND));
-}
-
-void Graphics::EnableDepthTest()
-{
-    TGON_GL_ERROR_CHECK(glEnable(GL_DEPTH_TEST));
+    if (enable)
+    {
+        TGON_GL_ERROR_CHECK(glEnable(GL_DEPTH_TEST));
+    }
+    else
+    {
+        TGON_GL_ERROR_CHECK(glDisable(GL_DEPTH_TEST));
+    }
 }
 
-void Graphics::EnableScissorTest()
+void Graphics::SetEnableBlend(bool enable)
 {
-    TGON_GL_ERROR_CHECK(glEnable(GL_SCISSOR_TEST));
-}
-    
-void Graphics::DisableCullFace()
-{
-    TGON_GL_ERROR_CHECK(glDisable(GL_CULL_FACE));
-}
-
-void Graphics::DisableBlend()
-{
-    TGON_GL_ERROR_CHECK(glDisable(GL_BLEND));
+    if (enable)
+    {
+        TGON_GL_ERROR_CHECK(glEnable(GL_BLEND));
+    }
+    else
+    {
+        TGON_GL_ERROR_CHECK(glDisable(GL_BLEND));
+    }
 }
 
-void Graphics::DisableDepthTest()
+void Graphics::SetEnableScissorTest(bool enable)
 {
-    TGON_GL_ERROR_CHECK(glDisable(GL_DEPTH_TEST));
-}
-
-void Graphics::DisableScissorTest()
-{
-    TGON_GL_ERROR_CHECK(glDisable(GL_SCISSOR_TEST));
+    if (enable)
+    {
+        TGON_GL_ERROR_CHECK(glEnable(GL_SCISSOR_TEST));
+    }
+    else
+    {
+        TGON_GL_ERROR_CHECK(glDisable(GL_SCISSOR_TEST));
+    }
 }
 
 void Graphics::ClearColorBuffer()
@@ -195,11 +207,10 @@ void Graphics::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexStartOf
 {
     TGON_GL_ERROR_CHECK(glDrawArrays(ConvertPrimitiveTypeToNative(primitiveType), static_cast<int32_t>(vertexStartOffset), vertexCount));
 }
-    
+
 void Graphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount)
 {
     TGON_GL_ERROR_CHECK(glDrawElements(ConvertPrimitiveTypeToNative(primitiveType), indexCount, GL_UNSIGNED_INT, nullptr));
 }
 
 }
-#endif

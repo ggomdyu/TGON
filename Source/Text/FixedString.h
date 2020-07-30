@@ -1,9 +1,7 @@
 #pragma once
 
-#include <type_traits>
 #include <array>
-#include <string_view>
-#include <span>
+#include <type_traits>
 
 #include "StringTraits.h"
 
@@ -80,19 +78,11 @@ protected:
 template <typename _Char, int32_t _CharBufferSize, typename _StringTraits = BasicStringTraits<_Char>>
 BasicFixedString(const _Char(&)[_CharBufferSize]) -> BasicFixedString<_Char, _CharBufferSize, _StringTraits>;
 
-namespace detail
-{
-
 template <typename>
-struct IsBasicFixedString : std::false_type {};
+constexpr bool IsBasicFixedString = std::false_type::value;
 
 template <typename _Char, int32_t _CharBufferSize, typename _StringTraits>
-struct IsBasicFixedString<BasicFixedString<_Char, _CharBufferSize, _StringTraits>> : std::true_type {};
-
-}
-
-template <typename _Type>
-constexpr bool IsBasicFixedString = detail::IsBasicFixedString<_Type>::value;
+constexpr bool IsBasicFixedString<BasicFixedString<_Char, _CharBufferSize, _StringTraits>> = std::true_type::value;
 
 using FixedString8 = BasicFixedString<char, 8>;
 using FixedString16 = BasicFixedString<char, 16>;

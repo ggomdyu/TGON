@@ -78,8 +78,8 @@ public:
 
 /**@section Method */
 public:
-    [[nodiscard]] static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value);
-    [[nodiscard]] static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value, EnvironmentVariableTarget target);
+    static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value);
+    static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value, EnvironmentVariableTarget target);
     [[nodiscard]] static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen);
     [[nodiscard]] static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, const std::span<char8_t>& destStr);
     [[nodiscard]] static std::optional<std::u8string> GetEnvironmentVariable(const char8_t* name);

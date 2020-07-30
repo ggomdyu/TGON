@@ -1,6 +1,5 @@
 #pragma once
 
-#if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
 #include "OpenGLContext.h"
@@ -34,4 +33,3 @@ protected:
 using PlatformGraphics = OpenGLGraphics;
 
 }
-#endif

@@ -96,7 +96,7 @@ void InternalEnumerateTopDirectoryOnly(const char8_t* path, const char8_t* searc
     auto* handle = FindFirstFileW(reinterpret_cast<const wchar_t*>(&utf16Path[0]), &findData);
     if (handle != INVALID_HANDLE_VALUE)
     {
-        std::array<char8_t, MAX_PATH> utf8FileName;
+        std::array<char8_t, MAX_PATH> utf8FileName{};
 
         do
         {
@@ -153,7 +153,6 @@ void FileSystemEnumerable::EnumerateFiles(const char8_t* path, const char8_t* se
 {
     if (searchOption == SearchOption::AllDirectories)
     {
-        constexpr size_t p = ~FILE_ATTRIBUTE_DIRECTORY;
         detail::InternalEnumerateAllDirectories(path, searchPattern, FILE_ATTRIBUTE_ARCHIVE | FILE_ATTRIBUTE_NORMAL, callback);
     }
     else

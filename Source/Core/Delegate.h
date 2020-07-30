@@ -1,7 +1,7 @@
 #pragma once
 
-#include <type_traits>
 #include <array>
+#include <type_traits>
 
 #include "TypeTraits.h"
 
@@ -56,11 +56,11 @@ public:
         std::tuple<_Function, void*>,
         std::tuple<_Function>
     >;
-    
+
 /**@section Constructor */
 public:
     explicit FunctorImpl(Storage storage) noexcept;
-    
+
 /**@section Method */
 public:
     _Return Invoke(_Args... args) const override;
@@ -161,7 +161,7 @@ private:
     [[nodiscard]] static constexpr bool IsLargeFunction() noexcept;
     [[nodiscard]] bool IsDynamicAllocated() const noexcept;
     void Copy(const Delegate& rhs);
-    void Move(Delegate&& rhs);
+    void Move(Delegate&& rhs) noexcept;
     void Destroy();
 
 /**@section Variable */
@@ -293,7 +293,7 @@ bool Delegate<_Return(_Args...)>::IsDynamicAllocated() const noexcept
     return m_functor != reinterpret_cast<const Functor*>(&m_storage[0]);
 }
 
-template <typename _Return, typename ... _Args>
+template <typename _Return, typename... _Args>
 void Delegate<_Return(_Args...)>::Copy(const Delegate& rhs)
 {
     if (rhs.m_functor == nullptr)
@@ -306,8 +306,8 @@ void Delegate<_Return(_Args...)>::Copy(const Delegate& rhs)
     rhs.m_functor->CopyTo(m_functor);
 }
 
-template <typename _Return, typename ... _Args>
-void Delegate<_Return(_Args...)>::Move(Delegate&& rhs)
+template <typename _Return, typename... _Args>
+void Delegate<_Return(_Args...)>::Move(Delegate&& rhs) noexcept
 {
     if (IsDynamicAllocated() && rhs.IsDynamicAllocated())
     {
@@ -315,7 +315,7 @@ void Delegate<_Return(_Args...)>::Move(Delegate&& rhs)
     }
     else if (rhs.IsDynamicAllocated())
     {
-        std::swap(m_functor, rhs.m_functor);
+        m_functor = rhs.m_functor;
         rhs.m_functor = nullptr;
     }
     else

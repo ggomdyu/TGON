@@ -12,7 +12,7 @@ namespace tg
 namespace
 {
 
-GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
+[[nodiscard]] GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
 {
     GLuint programId = 0;
     TGON_GL_ERROR_CHECK(programId = glCreateProgram());
@@ -34,7 +34,7 @@ GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
     return programId;
 }
 
-std::u8string GetShaderLog(GLuint shaderId)
+[[nodiscard]] std::u8string GetShaderLog(GLuint shaderId)
 {
     GLint infoLogLen;
     TGON_GL_ERROR_CHECK(glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &infoLogLen));
@@ -46,7 +46,7 @@ std::u8string GetShaderLog(GLuint shaderId)
     return infoLog;
 }
 
-bool IsShaderCompileSucceed(GLuint shaderId)
+[[nodiscard]] bool IsShaderCompileSucceed(GLuint shaderId)
 {
     GLint shaderCompileStatus;
     TGON_GL_ERROR_CHECK(glGetShaderiv(shaderId, GL_COMPILE_STATUS, &shaderCompileStatus));
@@ -54,7 +54,7 @@ bool IsShaderCompileSucceed(GLuint shaderId)
     return shaderCompileStatus == GL_TRUE;
 }
 
-GLuint CompileShader(GLenum shaderType, const char* shaderCode)
+[[nodiscard]] GLuint CompileShader(GLenum shaderType, const char* shaderCode)
 {
     GLuint shaderId = 0;
     TGON_GL_ERROR_CHECK(shaderId = glCreateShader(shaderType));

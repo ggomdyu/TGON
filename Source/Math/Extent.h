@@ -1,10 +1,10 @@
 #pragma once
 
-#include <type_traits>
 #include <cstdint>
-#include <string>
-#include <span>
 #include <fmt/format.h>
+#include <span>
+#include <string>
+#include <type_traits>
 
 #include "Core/Concepts.h"
 #include "Core/ExpressionTemplates.h"
@@ -118,7 +118,7 @@ constexpr ExpressionTemplates<Divide, _Value, BasicExtent2D<_Value>> operator*(c
 template <Arithmetic _Value>
 constexpr BasicExtent2D<_Value> BasicExtent2D<_Value>::operator-() const noexcept
 {
-	return BasicExtent2D(-width, -height);
+    return BasicExtent2D(-width, -height);
 }
 
 template <Arithmetic _Value>
@@ -127,7 +127,7 @@ BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator+=(const BasicExtent2D& rh
     width += rhs.width;
     height += rhs.height;
 
-	return *this;
+    return *this;
 }
 
 template <Arithmetic _Value>
@@ -136,7 +136,7 @@ BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator-=(const BasicExtent2D& rh
     width -= rhs.width;
     height -= rhs.height;
 
-	return *this;
+    return *this;
 }
 
 template <Arithmetic _Value>
@@ -145,7 +145,7 @@ BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator*=(const _Value& rhs) noex
     width *= rhs;
     height *= rhs;
 
-	return *this;
+    return *this;
 }
 
 template <Arithmetic _Value>
@@ -154,7 +154,7 @@ BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator/=(const _Value& rhs)
     width /= rhs;
     height /= rhs;
 
-	return *this;
+    return *this;
 }
 
 template <Arithmetic _Value>
@@ -170,7 +170,7 @@ BasicExtent2D<_Value>& BasicExtent2D<_Value>::operator=(const BasicExtent2D<_Val
 template <Arithmetic _Value>
 constexpr bool BasicExtent2D<_Value>::operator==(const BasicExtent2D& rhs) const noexcept
 {
-	return (width == rhs.width && height == rhs.height);
+    return (width == rhs.width && height == rhs.height);
 }
 
 template <Arithmetic _Value>
