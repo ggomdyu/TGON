@@ -41,7 +41,7 @@ void FontAtlas::Initialize(std::shared_ptr<Font>&& font)
     m_font = std::move(font);
 }
 
-std::optional<FRect> FontAtlas::GetTextureRect(char32_t ch, int32_t fontSize) const
+std::optional<Rect> FontAtlas::GetTextureRect(char32_t ch, int32_t fontSize) const
 {
     auto textureAtlasKey = FontAtlas::CreateTextureAtlasKey(ch, fontSize);
     return m_textureAtlas.GetTextureRect(textureAtlasKey);
@@ -72,7 +72,7 @@ const GlyphData* FontAtlas::GetGlyphData(char32_t ch, int32_t fontSize) const
     return glyphData;
 }
 
-I32Vector2 FontAtlas::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const
+IntVector2 FontAtlas::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const
 {
     return m_font->GetFontFace(fontSize)->GetKerning(lhs, rhs);
 }

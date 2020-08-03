@@ -15,8 +15,8 @@ namespace tg
 struct GlyphMetrics final
 {
     I32Extent2D size;
-    I32Vector2 bearing;
-    I32Vector2 advance;
+    IntVector2 bearing;
+    IntVector2 advance;
 };
 
 struct GlyphData final
@@ -54,7 +54,7 @@ public:
      * @param rhs   Right side character.
      * @return  Size of kerning.
      */
-    I32Vector2 GetKerning(char32_t lhs, char32_t rhs) const;
+    IntVector2 GetKerning(char32_t lhs, char32_t rhs) const;
 
 /**@section Variable */
 private:
