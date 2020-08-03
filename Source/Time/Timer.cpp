@@ -6,12 +6,12 @@
 
 namespace tg
 {
-    
+
 Timer::Timer() noexcept :
     Timer(false)
 {
 }
-    
+
 Timer::Timer(bool isAutoReset) noexcept :
     Timer(0, isAutoReset)
 {
@@ -24,7 +24,7 @@ Timer::Timer(int64_t interval, bool isAutoReset) noexcept :
     m_isEnabled(false)
 {
 }
-    
+
 void Timer::Start()
 {
     m_isEnabled = true;
@@ -62,7 +62,7 @@ void Timer::Update()
     {
         return;
     }
-    
+
     const auto currentTime = Environment::GetTickCount();
     if ((currentTime - m_prevTime) > m_interval)
     {
@@ -70,7 +70,7 @@ void Timer::Update()
         {
             OnTimeElapsed();
         }
-        
+
         if (m_isAutoReset)
         {
             m_prevTime = currentTime;

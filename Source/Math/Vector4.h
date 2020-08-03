@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Vector3.h"
 #include "Matrix4x4.h"
+#include "Vector3.h"
 
 namespace tg
 {
@@ -59,16 +59,16 @@ public:
 
 /**@section Variable */
 public:
-	_Value x{}, y{}, z{}, w{};
+    _Value x{}, y{}, z{}, w{};
 };
     
 using Vector4 = BasicVector4<float>;
-using DVector4 = BasicVector4<double>;
-using I32Vector4 = BasicVector4<int32_t>;
-using I64Vector4 = BasicVector4<int64_t>;
+using DoubleVector4 = BasicVector4<double>;
+using IntVector4 = BasicVector4<int32_t>;
+using Int64Vector4 = BasicVector4<int64_t>;
 
-template <Arithmetic... _Args>
-BasicVector4(_Args...) -> BasicVector4<std::common_type_t<_Args...>>;
+template <Arithmetic... _Types>
+BasicVector4(_Types...) -> BasicVector4<std::common_type_t<_Types...>>;
 
 template <Arithmetic _Value>
     constexpr BasicVector4<_Value>::BasicVector4(_Value scalar) noexcept :

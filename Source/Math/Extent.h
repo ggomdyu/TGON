@@ -60,8 +60,8 @@ using DExtent2D = BasicExtent2D<double>;
 using I32Extent2D = BasicExtent2D<int32_t>;
 using I64Extent2D = BasicExtent2D<int64_t>;
 
-template <Arithmetic... _Args>
-BasicExtent2D(_Args...) -> BasicExtent2D<std::common_type_t<_Args...>>;
+template <Arithmetic... _Types>
+BasicExtent2D(_Types...) -> BasicExtent2D<std::common_type_t<_Types...>>;
 
 template <Arithmetic _Value>
 constexpr BasicExtent2D<_Value>::BasicExtent2D(const _Value& width, const _Value& height) noexcept :

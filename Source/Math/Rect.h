@@ -1,10 +1,10 @@
 #pragma once
 
-#include <type_traits>
 #include <cstdint>
-#include <string>
-#include <span>
 #include <fmt/format.h>
+#include <span>
+#include <string>
+#include <type_traits>
 
 #include "Core/Concepts.h"
 
@@ -45,13 +45,13 @@ public:
     _Value x{}, y{}, width{}, height{};
 };
 
-using FRect = BasicRect<float>;
-using DRect = BasicRect<double>;
-using I32Rect = BasicRect<int32_t>;
-using I64Rect = BasicRect<int64_t>;
+using Rect = BasicRect<float>;
+using DoubleRect = BasicRect<double>;
+using IntRect = BasicRect<int32_t>;
+using Int64Rect = BasicRect<int64_t>;
 
-template <Arithmetic... _Args>
-BasicRect(_Args...) -> BasicRect<std::common_type_t<_Args...>>;
+template <Arithmetic... _Types>
+BasicRect(_Types...) -> BasicRect<std::common_type_t<_Types...>>;
 
 template <Arithmetic _Value>
 constexpr BasicRect<_Value>::BasicRect(const _Value& x, const _Value& y, const _Value& width, const _Value& height) noexcept :

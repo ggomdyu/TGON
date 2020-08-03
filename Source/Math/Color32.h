@@ -1,8 +1,8 @@
 #pragma once
 
-#include <span>
 #include <array>
 #include <fmt/format.h>
+#include <span>
 
 namespace tg
 {

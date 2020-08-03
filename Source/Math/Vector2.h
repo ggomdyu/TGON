@@ -1,15 +1,15 @@
 #pragma once
 
-#include <cstdint>
+#include <array>
 #include <cassert>
 #include <cmath>
-#include <string>
-#include <span>
-#include <array>
+#include <cstdint>
 #include <fmt/format.h>
+#include <span>
+#include <string>
 
-#include "Core/ExpressionTemplates.h"
 #include "Core/Concepts.h"
+#include "Core/ExpressionTemplates.h"
 
 namespace tg
 {
@@ -66,16 +66,16 @@ public:
 
 /**@section Variable */
 public:
-	_Value x{}, y{};
+    _Value x{}, y{};
 };
 
 using Vector2 = BasicVector2<float>;
-using DVector2 = BasicVector2<double>;
-using I32Vector2 = BasicVector2<int32_t>;
-using I64Vector2 = BasicVector2<int64_t>;
+using DoubleVector2 = BasicVector2<double>;
+using IntVector2 = BasicVector2<int32_t>;
+using Int64Vector2 = BasicVector2<int64_t>;
 
-template <Arithmetic... _Args>
-BasicVector2(_Args...) -> BasicVector2<std::common_type_t<_Args...>>;
+template <Arithmetic... _Types>
+BasicVector2(_Types...) -> BasicVector2<std::common_type_t<_Types...>>;
 
 template <Arithmetic _Value>
 constexpr BasicVector2<_Value>::BasicVector2(_Value scalar) noexcept :

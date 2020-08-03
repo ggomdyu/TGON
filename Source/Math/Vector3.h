@@ -64,12 +64,12 @@ public:
 };
     
 using Vector3 = BasicVector3<float>;
-using DVector3 = BasicVector3<double>;
-using I32Vector3 = BasicVector3<int32_t>;
-using I64Vector3 = BasicVector3<int64_t>;
+using DoubleVector3 = BasicVector3<double>;
+using IntVector3 = BasicVector3<int32_t>;
+using Int64Vector3 = BasicVector3<int64_t>;
 
-template <Arithmetic... _Args>
-BasicVector3(_Args...) -> BasicVector3<std::common_type_t<_Args...>>;
+template <Arithmetic... _Types>
+BasicVector3(_Types...) -> BasicVector3<std::common_type_t<_Types...>>;
 
 template <Arithmetic _Value>
 constexpr BasicVector3<_Value>::BasicVector3(_Value scalar) noexcept :

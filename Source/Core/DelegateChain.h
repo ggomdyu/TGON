@@ -10,12 +10,12 @@ namespace tg
 template <typename>
 class DelegateChain;
     
-template <typename _Return, typename... _Args>
-class DelegateChain<_Return(_Args...)> final
+template <typename _Return, typename... _Types>
+class DelegateChain<_Return(_Types...)> final
 {
 /**@section Type */
 public:
-    using DelegateType = Delegate<_Return(_Args...)>;
+    using DelegateType = Delegate<_Return(_Types...)>;
     using ReturnType = _Return;
 
 /**@section Constructor */
@@ -46,23 +46,23 @@ private:
     std::vector<DelegateType> m_invocationList;
 };
 
-template <typename _Return, typename... _Args>
+template <typename _Return, typename... _Types>
 template <typename _Container>
-DelegateChain<_Return(_Args...)>::DelegateChain(_Container container) :
+DelegateChain<_Return(_Types...)>::DelegateChain(_Container container) :
     m_invocationList(std::move(container))
 {
 }
 
-template <typename _Return, typename... _Args>
+template <typename _Return, typename... _Types>
 template <typename _Delegate>
-DelegateChain<_Return(_Args...)>& DelegateChain<_Return(_Args...)>::operator+=(_Delegate&& rhs)
+DelegateChain<_Return(_Types...)>& DelegateChain<_Return(_Types...)>::operator+=(_Delegate&& rhs)
 {
     m_invocationList.push_back(std::forward<_Delegate>(rhs));
     return *this;
 }
     
-template <typename _Return, typename... _Args>
-DelegateChain<_Return(_Args...)>& DelegateChain<_Return(_Args...)>::operator-=(const DelegateType& rhs)
+template <typename _Return, typename... _Types>
+DelegateChain<_Return(_Types...)>& DelegateChain<_Return(_Types...)>::operator-=(const DelegateType& rhs)
 {
     auto it = std::find_if(m_invocationList.begin(), m_invocationList.end(), [&](const DelegateType& item)
     {
@@ -78,35 +78,35 @@ DelegateChain<_Return(_Args...)>& DelegateChain<_Return(_Args...)>::operator-=(c
     return *this;
 }
 
-template <typename _Return, typename... _Args>
-DelegateChain<_Return(_Args...)>& DelegateChain<_Return(_Args...)>::operator=(std::nullptr_t rhs) noexcept
+template <typename _Return, typename... _Types>
+DelegateChain<_Return(_Types...)>& DelegateChain<_Return(_Types...)>::operator=(std::nullptr_t rhs) noexcept
 {
     m_invocationList.clear();
     return *this;
 }
 
-template <typename _Return, typename... _Args>
-bool DelegateChain<_Return(_Args...)>::operator==(std::nullptr_t) const noexcept
+template <typename _Return, typename... _Types>
+bool DelegateChain<_Return(_Types...)>::operator==(std::nullptr_t) const noexcept
 {
     return m_invocationList.empty();
 }
 
-template <typename _Return, typename... _Args>
-bool DelegateChain<_Return(_Args...)>::operator!=(std::nullptr_t rhs) const noexcept
+template <typename _Return, typename... _Types>
+bool DelegateChain<_Return(_Types...)>::operator!=(std::nullptr_t rhs) const noexcept
 {
     return !this->operator==(rhs);
 }
     
-template <typename _Return, typename... _Args>
+template <typename _Return, typename... _Types>
 template <typename... _Args2>
-_Return DelegateChain<_Return(_Args...)>::operator()(_Args2&&... args)
+_Return DelegateChain<_Return(_Types...)>::operator()(_Args2&&... args)
 {
     return this->Invoke(std::forward<_Args2>(args)...);
 }
 
-template <typename _Return, typename... _Args>
+template <typename _Return, typename... _Types>
 template <typename... _Args2>
-_Return DelegateChain<_Return(_Args...)>::Invoke(_Args2&&... args)
+_Return DelegateChain<_Return(_Types...)>::Invoke(_Args2&&... args)
 {
     if (m_invocationList.empty() == true)
     {
@@ -122,8 +122,8 @@ _Return DelegateChain<_Return(_Args...)>::Invoke(_Args2&&... args)
     return (*it)(std::forward<_Args2>(args)...);
 }
 
-template <typename _Return, typename... _Args>
-const std::vector<Delegate<_Return(_Args...)>>& DelegateChain<_Return(_Args...)>::GetInvocationList() const noexcept
+template <typename _Return, typename... _Types>
+const std::vector<Delegate<_Return(_Types...)>>& DelegateChain<_Return(_Types...)>::GetInvocationList() const noexcept
 {
     return m_invocationList;
 }

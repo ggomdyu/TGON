@@ -20,7 +20,7 @@ struct IsDelegate : std::false_type {};
 template <typename _Type>
 struct IsDelegate<Delegate<_Type>> : std::true_type {};
 
-template <typename _Return, typename... _Args>
+template <typename _Return, typename... _Types>
 class Functor
 {
 /**@section Constructor */
@@ -40,15 +40,15 @@ public:
 
 /**@section Method */
 public:
-    virtual _Return Invoke(_Args... args) const = 0;
+    virtual _Return Invoke(_Types... args) const = 0;
     virtual void CopyTo(Functor* functor) const = 0;
     virtual void Destroy() = 0;
     [[nodiscard]] virtual size_t GetSize() const noexcept = 0;
 };
 
-template <typename _Function, typename _Return, typename... _Args>
+template <typename _Function, typename _Return, typename... _Types>
 class FunctorImpl final :
-    public Functor<_Return, _Args...>
+    public Functor<_Return, _Types...>
 {
 /**@section Type */
 public:
@@ -63,8 +63,8 @@ public:
 
 /**@section Method */
 public:
-    _Return Invoke(_Args... args) const override;
-    void CopyTo(Functor<_Return, _Args...>* functor) const override;
+    _Return Invoke(_Types... args) const override;
+    void CopyTo(Functor<_Return, _Types...>* functor) const override;
     void Destroy() override;
     [[nodiscard]] size_t GetSize() const noexcept override;
 
@@ -73,20 +73,20 @@ private:
     Storage m_storage;
 };
 
-template <typename _Function, typename _Return, typename... _Args>
-FunctorImpl<_Function, _Return, _Args...>::FunctorImpl(Storage storage) noexcept :
+template <typename _Function, typename _Return, typename... _Types>
+FunctorImpl<_Function, _Return, _Types...>::FunctorImpl(Storage storage) noexcept :
     m_storage(std::move(storage))
 {
 }
 
-template <typename _Function, typename _Return, typename... _Args>
-void FunctorImpl<_Function, _Return, _Args...>::CopyTo(Functor<_Return, _Args...>* functor) const
+template <typename _Function, typename _Return, typename... _Types>
+void FunctorImpl<_Function, _Return, _Types...>::CopyTo(Functor<_Return, _Types...>* functor) const
 {
-    new (functor) FunctorImpl<_Function, _Return, _Args...>(m_storage);
+    new (functor) FunctorImpl<_Function, _Return, _Types...>(m_storage);
 }
 
-template <typename _Function, typename _Return, typename... _Args>
-_Return FunctorImpl<_Function, _Return, _Args...>::Invoke(_Args... args) const
+template <typename _Function, typename _Return, typename... _Types>
+_Return FunctorImpl<_Function, _Return, _Types...>::Invoke(_Types... args) const
 {
     if constexpr (FunctionTraits<_Function>::IsMemberFunction)
     {
@@ -99,8 +99,8 @@ _Return FunctorImpl<_Function, _Return, _Args...>::Invoke(_Args... args) const
     }
 }
 
-template <typename _Function, typename _Return, typename... _Args>
-void FunctorImpl<_Function, _Return, _Args...>::Destroy()
+template <typename _Function, typename _Return, typename... _Types>
+void FunctorImpl<_Function, _Return, _Types...>::Destroy()
 {
     if constexpr (FunctionTraits<_Function>::IsFunctor)
     {
@@ -108,8 +108,8 @@ void FunctorImpl<_Function, _Return, _Args...>::Destroy()
     }
 }
 
-template <typename _Function, typename _Return, typename... _Args>
-size_t FunctorImpl<_Function, _Return, _Args...>::GetSize() const noexcept
+template <typename _Function, typename _Return, typename... _Types>
+size_t FunctorImpl<_Function, _Return, _Types...>::GetSize() const noexcept
 {
     return sizeof(*this);
 }
@@ -119,8 +119,8 @@ size_t FunctorImpl<_Function, _Return, _Args...>::GetSize() const noexcept
 template <typename _Type>
 constexpr bool IsDelegate = detail::IsDelegate<_Type>::value;
 
-template <typename _Return, typename... _Args>
-class Delegate<_Return(_Args...)> final
+template <typename _Return, typename... _Types>
+class Delegate<_Return(_Types...)> final
 {
 /**@section Type */
 public:
@@ -128,8 +128,8 @@ public:
 
 private:
     template <typename _Function>
-    using FunctorImpl = detail::FunctorImpl<_Function, _Return, _Args...>;
-    using Functor = detail::Functor<_Return, _Args...>;
+    using FunctorImpl = detail::FunctorImpl<_Function, _Return, _Types...>;
+    using Functor = detail::Functor<_Return, _Types...>;
 
 /**@section Constructor */
 public:
@@ -178,29 +178,29 @@ Delegate(_Function function) -> Delegate<typename FunctionTraits<std::remove_cvr
 template <typename _Function>
 Delegate(_Function function, void* receiver) -> Delegate<typename FunctionTraits<std::remove_cvref_t<_Function>>::FunctionType>;
 
-template <typename _Return, typename... _Args>
-constexpr Delegate<_Return(_Args...)>::Delegate(std::nullptr_t) noexcept :
+template <typename _Return, typename... _Types>
+constexpr Delegate<_Return(_Types...)>::Delegate(std::nullptr_t) noexcept :
     Delegate()
 {
 }
 
-template <typename _Return, typename... _Args>
-Delegate<_Return(_Args...)>::Delegate(const Delegate& rhs) :
+template <typename _Return, typename... _Types>
+Delegate<_Return(_Types...)>::Delegate(const Delegate& rhs) :
     Delegate()
 {
     this->Copy(rhs);
 }
 
-template <typename _Return, typename... _Args>
-Delegate<_Return(_Args...)>::Delegate(Delegate&& rhs) noexcept :
+template <typename _Return, typename... _Types>
+Delegate<_Return(_Types...)>::Delegate(Delegate&& rhs) noexcept :
     Delegate()
 {
     this->Move(std::move(rhs));
 }
 
-template <typename _Return, typename... _Args>
+template <typename _Return, typename... _Types>
 template <typename _Function>
-Delegate<_Return(_Args...)>::Delegate(_Function function) :
+Delegate<_Return(_Types...)>::Delegate(_Function function) :
     Delegate()
 {
     using FunctionType = std::decay_t<_Function>;
@@ -216,9 +216,9 @@ Delegate<_Return(_Args...)>::Delegate(_Function function) :
     new (m_functor) FunctorImpl<FunctionType>(typename FunctorImpl<FunctionType>::Storage{std::move(function)});
 }
 
-template <typename _Return, typename... _Args>
+template <typename _Return, typename... _Types>
 template <typename _Function>
-Delegate<_Return(_Args...)>::Delegate(_Function function, void* receiver) :
+Delegate<_Return(_Types...)>::Delegate(_Function function, void* receiver) :
     Delegate()
 {
     using FunctionType = std::decay_t<_Function>;
@@ -234,15 +234,15 @@ Delegate<_Return(_Args...)>::Delegate(_Function function, void* receiver) :
     new (m_functor) FunctorImpl<FunctionType>(typename FunctorImpl<FunctionType>::Storage{std::move(function), receiver});
 }
 
-template <typename _Return, typename... _Args>
-Delegate<_Return(_Args...)>::~Delegate()
+template <typename _Return, typename... _Types>
+Delegate<_Return(_Types...)>::~Delegate()
 {
     this->Destroy();
 }
 
-template <typename _Return, typename... _Args>
+template <typename _Return, typename... _Types>
 template <typename... _Args2>
-_Return Delegate<_Return(_Args...)>::operator()(_Args2&&... args) const
+_Return Delegate<_Return(_Types...)>::operator()(_Args2&&... args) const
 {
     if (m_functor == nullptr)
     {
@@ -252,15 +252,15 @@ _Return Delegate<_Return(_Args...)>::operator()(_Args2&&... args) const
     return m_functor->Invoke(std::forward<_Args2>(args)...);
 }
 
-template <typename _Return, typename... _Args>
+template <typename _Return, typename... _Types>
 template <typename _Function>
-constexpr bool Delegate<_Return(_Args...)>::IsLargeFunction() noexcept
+constexpr bool Delegate<_Return(_Types...)>::IsLargeFunction() noexcept
 {
     return sizeof(FunctorImpl<_Function>) > (sizeof(m_storage) - sizeof(m_storage[0]));
 }
 
-template <typename _Return, typename... _Args>
-Delegate<_Return(_Args...)>& Delegate<_Return(_Args...)>::operator=(const Delegate& rhs)
+template <typename _Return, typename... _Types>
+Delegate<_Return(_Types...)>& Delegate<_Return(_Types...)>::operator=(const Delegate& rhs)
 {
     this->Destroy();
     this->Copy(rhs);
@@ -268,33 +268,33 @@ Delegate<_Return(_Args...)>& Delegate<_Return(_Args...)>::operator=(const Delega
     return *this;
 }
 
-template <typename _Return, typename... _Args>
-Delegate<_Return(_Args...)>& Delegate<_Return(_Args...)>::operator=(Delegate&& rhs) noexcept
+template <typename _Return, typename... _Types>
+Delegate<_Return(_Types...)>& Delegate<_Return(_Types...)>::operator=(Delegate&& rhs) noexcept
 {
     this->Move(std::move(rhs));
     return *this;
 }
 
-template <typename _Return, typename... _Args>
-constexpr bool Delegate<_Return(_Args...)>::operator==(std::nullptr_t rhs) const noexcept
+template <typename _Return, typename... _Types>
+constexpr bool Delegate<_Return(_Types...)>::operator==(std::nullptr_t rhs) const noexcept
 {
     return m_functor == rhs;
 }
 
-template <typename _Return, typename... _Args>
-constexpr bool Delegate<_Return(_Args...)>::operator!=(std::nullptr_t rhs) const noexcept
+template <typename _Return, typename... _Types>
+constexpr bool Delegate<_Return(_Types...)>::operator!=(std::nullptr_t rhs) const noexcept
 {
     return m_functor != rhs;
 }
 
-template <typename _Return, typename... _Args>
-bool Delegate<_Return(_Args...)>::IsDynamicAllocated() const noexcept
+template <typename _Return, typename... _Types>
+bool Delegate<_Return(_Types...)>::IsDynamicAllocated() const noexcept
 {
     return m_functor != reinterpret_cast<const Functor*>(&m_storage[0]);
 }
 
-template <typename _Return, typename... _Args>
-void Delegate<_Return(_Args...)>::Copy(const Delegate& rhs)
+template <typename _Return, typename... _Types>
+void Delegate<_Return(_Types...)>::Copy(const Delegate& rhs)
 {
     if (rhs.m_functor == nullptr)
     {
@@ -306,8 +306,8 @@ void Delegate<_Return(_Args...)>::Copy(const Delegate& rhs)
     rhs.m_functor->CopyTo(m_functor);
 }
 
-template <typename _Return, typename... _Args>
-void Delegate<_Return(_Args...)>::Move(Delegate&& rhs) noexcept
+template <typename _Return, typename... _Types>
+void Delegate<_Return(_Types...)>::Move(Delegate&& rhs) noexcept
 {
     if (IsDynamicAllocated() && rhs.IsDynamicAllocated())
     {
@@ -330,8 +330,8 @@ void Delegate<_Return(_Args...)>::Move(Delegate&& rhs) noexcept
     }
 }
 
-template <typename _Return, typename... _Args>
-void Delegate<_Return(_Args...)>::Destroy()
+template <typename _Return, typename... _Types>
+void Delegate<_Return(_Types...)>::Destroy()
 {
     if (m_functor == nullptr)
     {
