@@ -63,7 +63,7 @@ constexpr std::tuple<DWORD, DWORD> ConvertWindowStyleToNative(const WindowStyle&
 
 HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr)
 {
-    I32Vector2 windowPos(windowStyle.x, windowStyle.y);
+    IntVector2 windowPos(windowStyle.x, windowStyle.y);
     if (windowStyle.showMiddle)
     {
         // Set window position to the middle of the screen.
@@ -192,7 +192,7 @@ void Window::Flash()
     FlashWindowEx(&fwi);
 }
 
-I32Vector2 Window::GetPosition() const
+IntVector2 Window::GetPosition() const
 {
     RECT rt;
     GetWindowRect(m_wndHandle, &rt);

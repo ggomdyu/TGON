@@ -37,7 +37,7 @@ public:
     void Initialize(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, int32_t paddingOffset = DefaultPaddingOffset);
     bool Insert(const _KeyType& key, const std::byte* imageData, const I32Extent2D& size);
     bool Contains(const _KeyType& key);
-    std::optional<FRect> GetTextureRect(const _KeyType& key) const;
+    std::optional<Rect> GetTextureRect(const _KeyType& key) const;
     int32_t GetTextureCount() const noexcept;
     int32_t GetPaddingOffset() const noexcept;
     std::shared_ptr<const Texture> GetAtlasTexture() const noexcept;
@@ -49,7 +49,7 @@ private:
     stbrp_context m_context {};
     std::array<stbrp_node, 4096> m_nodes {};
     std::array<stbrp_rect, 4096> m_nodeRects {};
-    mutable std::unordered_map<_KeyType, FRect> m_packedTextureInfos;
+    mutable std::unordered_map<_KeyType, Rect> m_packedTextureInfos;
     int32_t m_paddingOffset = 0;
 };
 
@@ -116,7 +116,7 @@ inline bool BasicTextureAtlas<_KeyType>::Insert(const _KeyType& key, const std::
     if (isPackingSucceed)
     {
         m_atlasTexture->SetData(imageData, Vector2(rect.x, rect.y), size, m_atlasTexture->GetPixelFormat());
-        m_packedTextureInfos.emplace(key, FRect(static_cast<float>(rect.x), static_cast<float>(rect.y), static_cast<float>(rect.w - m_paddingOffset), static_cast<float>(rect.h - m_paddingOffset)));
+        m_packedTextureInfos.emplace(key, Rect(static_cast<float>(rect.x), static_cast<float>(rect.y), static_cast<float>(rect.w - m_paddingOffset), static_cast<float>(rect.h - m_paddingOffset)));
     }
 
     return isPackingSucceed;
@@ -129,7 +129,7 @@ inline bool BasicTextureAtlas<_KeyType>::Contains(const _KeyType& key)
 }
 
 template <typename _KeyType>
-inline std::optional<FRect> BasicTextureAtlas<_KeyType>::GetTextureRect(const _KeyType& key) const
+inline std::optional<Rect> BasicTextureAtlas<_KeyType>::GetTextureRect(const _KeyType& key) const
 {
     auto it = m_packedTextureInfos.find(key);
     if (it == m_packedTextureInfos.end())

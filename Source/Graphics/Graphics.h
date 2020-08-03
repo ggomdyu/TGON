@@ -60,7 +60,7 @@ public:
 public:
     [[nodiscard]] PlatformGraphics& GetPlatformDependency() noexcept;
     [[nodiscard]] const PlatformGraphics& GetPlatformDependency() const noexcept;
-    void SetScissorRect(const FRect& scissorRect);
+    void SetScissorRect(const Rect& scissorRect);
     void SetClearColor(const Color& color);
     void SetFillMode(FillMode fillMode);
     void SetCullMode(CullMode cullMode);

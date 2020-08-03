@@ -59,12 +59,12 @@ const GlyphData* FontFace::GetGlyphData(char32_t ch) const
         bitmap[i + 3] = std::byte(m_fontFace->glyph->bitmap.buffer[j]);
     }
 
-    const auto bearing = I32Vector2(static_cast<int32_t>(m_fontFace->glyph->bitmap_left), static_cast<int32_t>(m_fontFace->glyph->bitmap_top));
-    const auto advance = I32Vector2(static_cast<int32_t>(m_fontFace->glyph->advance.x >> 6), static_cast<int32_t>(m_fontFace->glyph->advance.y >> 6));
+    const auto bearing = IntVector2(static_cast<int32_t>(m_fontFace->glyph->bitmap_left), static_cast<int32_t>(m_fontFace->glyph->bitmap_top));
+    const auto advance = IntVector2(static_cast<int32_t>(m_fontFace->glyph->advance.x >> 6), static_cast<int32_t>(m_fontFace->glyph->advance.y >> 6));
     return &m_glyphData.insert(it, {ch, GlyphData{ch, GlyphMetrics{bitmapExtent, bearing, advance}, std::move(bitmap)}})->second;
 }
 
-I32Vector2 FontFace::GetKerning(char32_t lhs, char32_t rhs) const
+IntVector2 FontFace::GetKerning(char32_t lhs, char32_t rhs) const
 {
     const auto lhsIndex = FT_Get_Char_Index(m_fontFace.get(), lhs);
     const auto rhsIndex = FT_Get_Char_Index(m_fontFace.get(), rhs);
@@ -75,7 +75,7 @@ I32Vector2 FontFace::GetKerning(char32_t lhs, char32_t rhs) const
         return {};
     }
 
-    return I32Vector2(static_cast<int32_t>(kerning.x >> 6), static_cast<int32_t>(kerning.y >> 6));
+    return IntVector2(static_cast<int32_t>(kerning.x >> 6), static_cast<int32_t>(kerning.y >> 6));
 }
 
 }
