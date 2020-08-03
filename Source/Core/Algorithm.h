@@ -6,6 +6,8 @@
 #include <array>
 #include <algorithm>
 
+#include "Core/Concepts.h"
+
 namespace tg
 {
 
@@ -28,20 +30,44 @@ constexpr bool IsPalindrome(const _Char* str, size_t strLen)
     return true;
 }
 
-template <size_t _TupleIndex = 0, typename _Callback, typename... _Args> requires (_TupleIndex == sizeof...(_Args))
-void ForEach(std::tuple<_Args...>& tuple, const _Callback& callback) noexcept
+template <Integral _Value>
+constexpr bool IsPrimeNumber(const _Value& value) noexcept
+{
+    if (value <= 1)
+    {
+        return false;
+    }
+
+    if (value % 2 == 0)
+    {
+        return (value == 2);
+    }
+
+    for (decltype(value) i = 3; i < value; ++i)
+    {
+        if (value % i == 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+template <size_t _TupleIndex = 0, typename _Callback, typename... _Types> requires (_TupleIndex == sizeof...(_Types))
+void ForEach(std::tuple<_Types...>& tuple, const _Callback& callback) noexcept
 {
 }
 
-template <size_t _TupleIndex = 0, typename _Callback, typename... _Args> requires (_TupleIndex < sizeof...(_Args))
-void ForEach(std::tuple<_Args...>& tuple, const _Callback& callback) noexcept
+template <size_t _TupleIndex = 0, typename _Callback, typename... _Types> requires (_TupleIndex < sizeof...(_Types))
+void ForEach(std::tuple<_Types...>& tuple, const _Callback& callback) noexcept
 {
     callback(std::get<_TupleIndex>(tuple));
-    ForEach<_TupleIndex + 1, _Callback, _Args...>(tuple, callback);
+    ForEach<_TupleIndex + 1, _Callback, _Types...>(tuple, callback);
 }
 
-template <typename... _Args, typename _Callback>
-void ForEach(std::pair<_Args...>& pair, const _Callback& callback)
+template <typename... _Types, typename _Callback>
+void ForEach(std::pair<_Types...>& pair, const _Callback& callback)
 {
     callback(pair.first);
     callback(pair.second);
@@ -110,10 +136,10 @@ constexpr size_t GetArraySize(const std::array<_ArrayElem, _ArraySize>&) noexcep
     return _ArraySize;
 }
 
-template <typename... _Args>
-constexpr std::array<std::decay_t<std::common_type_t<_Args...>>, sizeof...(_Args)> MakeArray(_Args&&... args) noexcept
+template <typename... _Types>
+constexpr std::array<std::decay_t<std::common_type_t<_Types...>>, sizeof...(_Types)> MakeArray(_Types&&... args) noexcept
 {
-    return {std::forward<_Args>(args)...};
+    return {std::forward<_Types>(args)...};
 }
 
 template <typename _Enum> requires std::is_enum_v<_Enum>
