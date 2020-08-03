@@ -11,10 +11,6 @@ class Component :
 public:
     TGON_RTTI(Component)
 
-/**@section Constructor */
-public:
-    explicit Component(GameObject* gameObject = nullptr) noexcept;
-
 /**@section Method */
 public:
     virtual void Initialize() {}
@@ -27,7 +23,7 @@ public:
 
 /**@section Variable */
 protected:
-    GameObject* m_gameObject;
+    GameObject* m_gameObject{};
     bool m_isActive = true;
 };
 

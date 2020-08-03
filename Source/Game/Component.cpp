@@ -5,11 +5,6 @@
 namespace tg
 {
 
-Component::Component(GameObject* gameObject) noexcept :
-    m_gameObject(gameObject)
-{
-}
-
 void Component::SetGameObject(GameObject* gameObject) noexcept
 {
     m_gameObject = gameObject;

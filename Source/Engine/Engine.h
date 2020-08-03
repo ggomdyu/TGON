@@ -74,8 +74,8 @@ public:
      * @param args  Arguments for construct the specified type of module.
      * @return  The added module.
      */
-    template <Modularizable _Module, typename... _Args>
-    _Module* AddModule(_Args&&... args);
+    template <Modularizable _Module, typename... _Types>
+    _Module* AddModule(_Types&&... args);
 
     /**
      * @brief   Finds the module of the specified type.
@@ -123,10 +123,10 @@ private:
     float m_targetSecondPerFrame = -1.0f;
 };
     
-template <Modularizable _Module, typename... _Args>
-_Module* Engine::AddModule(_Args&&... args)
+template <Modularizable _Module, typename... _Types>
+_Module* Engine::AddModule(_Types&&... args)
 {
-    auto module = std::make_unique<_Module>(std::forward<_Args>(args)...);
+    auto module = std::make_unique<_Module>(std::forward<_Types>(args)...);
     auto* rawModule = module.get();
     m_moduleStage[UnderlyingCast(_Module::ModuleStage)].push_back(std::move(module));
 

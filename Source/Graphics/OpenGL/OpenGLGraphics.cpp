@@ -102,7 +102,7 @@ OpenGLGraphics& OpenGLGraphics::operator=(OpenGLGraphics&& rhs) noexcept
     return *this;
 }
 
-void Graphics::SetScissorRect(const FRect& scissorRect)
+void Graphics::SetScissorRect(const Rect& scissorRect)
 {
     TGON_GL_ERROR_CHECK(glScissor(static_cast<GLint>(scissorRect.x), static_cast<GLint>(scissorRect.y), static_cast<GLint>(scissorRect.width), static_cast<GLint>(scissorRect.height)));
 }

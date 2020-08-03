@@ -34,19 +34,19 @@ const PlatformTexture& Texture::GetPlatformDependency() const noexcept
 
 void Texture::Use()
 {
-    if (g_lastUsedTexture == this)
+    if (m_latelyUsedTexture == this)
     {
         return;
     }
 
     PlatformTexture::Use();
-    g_lastUsedTexture = this;
+    m_latelyUsedTexture = this;
 }
 
 void Texture::Unuse()
 {
     PlatformTexture::Unuse();
-    g_lastUsedTexture = nullptr;
+    m_latelyUsedTexture = nullptr;
 }
 
 void Texture::SetFilterMode(FilterMode filterMode)

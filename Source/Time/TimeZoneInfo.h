@@ -12,26 +12,24 @@ class TimeZoneInfo final
 /**@section Constructor */
 public:
     TimeZoneInfo() = default;
-    
-    template <typename _StringType1, typename _StringType2, typename _StringType3, typename _StringType4>
-    TimeZoneInfo(_StringType1&& id, const TimeSpan& baseUtcOffset, _StringType2&& displayName, _StringType3&& standardDisplayName, _StringType4&& daylightDisplayName, bool supportsDaylightSavingTime);
+    TimeZoneInfo(std::string id, const TimeSpan& baseUtcOffset, std::string displayName, std::string standardDisplayName, std::string daylightDisplayName, bool supportsDaylightSavingTime);
 
 /**@section Method */
 public:
-    static const TimeZoneInfo& Local();
-    static const TimeZoneInfo& Utc();
-    static DateTime ConvertTime(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone);
-    static DateTime ConvertTimeFromUtc(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone);
-    static DateTime ConvertTimeToUtc(const DateTime& dateTime);
-    const std::string& GetId() const noexcept;
-    const TimeSpan& GetBaseUtcOffset() const noexcept;
-    const std::string& GetStandardDisplayName() const noexcept;
-    const std::string& GetDaylightDisplayName() const noexcept;
-    bool IsSupportDaylightSavingTime() const noexcept;
+    [[nodiscard]] static const TimeZoneInfo& Local();
+    [[nodiscard]] static const TimeZoneInfo& Utc();
+    [[nodiscard]] static DateTime ConvertTime(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone);
+    [[nodiscard]] static DateTime ConvertTimeFromUtc(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone);
+    [[nodiscard]] static DateTime ConvertTimeToUtc(const DateTime& dateTime);
+    [[nodiscard]] const std::string& GetId() const noexcept;
+    [[nodiscard]] const TimeSpan& GetBaseUtcOffset() const noexcept;
+    [[nodiscard]] const std::string& GetStandardDisplayName() const noexcept;
+    [[nodiscard]] const std::string& GetDaylightDisplayName() const noexcept;
+    [[nodiscard]] bool IsSupportDaylightSavingTime() const noexcept;
     
 private:
-    static DateTimeKind GetCorrespondingKind(const TimeZoneInfo& timeZone);
-    static DateTime ConvertTime(const DateTime& dateTime, const TimeZoneInfo& sourceTimeZone, const TimeZoneInfo& destinationTimeZone);
+    [[nodiscard]] static DateTimeKind GetCorrespondingKind(const TimeZoneInfo& timeZone);
+    [[nodiscard]] static DateTime ConvertTime(const DateTime& dateTime, const TimeZoneInfo& sourceTimeZone, const TimeZoneInfo& destinationTimeZone);
 
 /**@section Variable */
 private:
@@ -43,13 +41,12 @@ private:
     bool m_supportsDaylightSavingTime = false;
 };
 
-template <typename _StringType1, typename _StringType2, typename _StringType3, typename _StringType4>
-inline TimeZoneInfo::TimeZoneInfo(_StringType1&& id, const TimeSpan& baseUtcOffset, _StringType2&& displayName, _StringType3&& standardDisplayName, _StringType4&& daylightDisplayName, bool supportsDaylightSavingTime) :
-    m_id(std::forward<std::string>(id)),
+inline TimeZoneInfo::TimeZoneInfo(std::string id, const TimeSpan& baseUtcOffset, std::string displayName, std::string standardDisplayName, std::string daylightDisplayName, bool supportsDaylightSavingTime) :
+    m_id(std::move(id)),
     m_baseUtcOffset(baseUtcOffset),
-    m_displayName(std::forward<std::string>(displayName)),
-    m_standardDisplayName(std::forward<std::string>(standardDisplayName)),
-    m_daylightDisplayName(std::forward<std::string>(daylightDisplayName)),
+    m_displayName(std::move(displayName)),
+    m_standardDisplayName(std::move(standardDisplayName)),
+    m_daylightDisplayName(std::move(daylightDisplayName)),
     m_supportsDaylightSavingTime(supportsDaylightSavingTime)
 {
 }
@@ -58,7 +55,7 @@ inline const TimeZoneInfo& TimeZoneInfo::Utc()
 {
     static auto timeZoneInfo = []()
     {
-        std::string id = "UTC";
+        const std::string id = "UTC";
         return TimeZoneInfo(id, TimeSpan(0), id, id, id, false);
     } ();
     return timeZoneInfo;
@@ -127,30 +124,27 @@ inline DateTimeKind TimeZoneInfo::GetCorrespondingKind(const TimeZoneInfo& timeZ
 inline DateTime TimeZoneInfo::ConvertTime(const DateTime& dateTime, const TimeZoneInfo& sourceTimeZone, const TimeZoneInfo& destinationTimeZone)
 {
     // The kind of dateTime and sourceTimeZone must be the same.
-    DateTimeKind sourceKind = GetCorrespondingKind(sourceTimeZone);
+    const auto sourceKind = GetCorrespondingKind(sourceTimeZone);
     if (dateTime.GetKind() != sourceKind)
     {
         return dateTime;
     }
 
     // Filter the special case like UTC->UTC or Local->Local
-    DateTimeKind destinationKind = GetCorrespondingKind(destinationTimeZone);
+    const auto destinationKind = GetCorrespondingKind(destinationTimeZone);
     if (sourceKind != DateTimeKind::Unspecified && destinationKind != DateTimeKind::Unspecified && sourceKind == destinationKind)
     {
         return dateTime;
     }
 
     // Convert the dateTime utc offset to 0.
-    int64_t ticks = dateTime.GetTicks() - sourceTimeZone.GetBaseUtcOffset().GetTicks();
-
+    const auto ticks = dateTime.GetTicks() - sourceTimeZone.GetBaseUtcOffset().GetTicks();
     if (destinationKind == DateTimeKind::Local)
     {
         return DateTime(ticks + destinationTimeZone.GetBaseUtcOffset().GetTicks(), DateTimeKind::Local);
     }
-    else
-    {
-        return DateTime(ticks, destinationKind);
-    }
+
+    return DateTime(ticks, destinationKind);
 }
 
 }

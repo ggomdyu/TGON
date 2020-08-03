@@ -8,11 +8,11 @@ namespace tg
 {
 
 class RectTransform :
-    public Transform
+    public TransformComponent
 {
 /**@section Constructor */
 public:
-    using Transform::Transform;
+    using TransformComponent::Transform;
 
 /**@section Method */
 public:

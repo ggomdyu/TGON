@@ -62,7 +62,7 @@ protected:
     FilterMode m_filterMode = FilterMode::Linear;
     WrapMode m_wrapMode = WrapMode::Clamp;
     I32Extent2D m_size;
-    inline static Texture* g_lastUsedTexture;
+    inline static Texture* m_latelyUsedTexture;
 };
     
 }

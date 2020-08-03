@@ -1,10 +1,12 @@
 #pragma once
 
-#include <span>
 #include <array>
 #include <fmt/format.h>
+#include <span>
 
 #include "Core/ExpressionTemplates.h"
+
+#include "Mathf.h"
 
 namespace tg
 {
@@ -48,6 +50,7 @@ public:
     [[nodiscard]] static constexpr Color White() noexcept;
     [[nodiscard]] static constexpr Color Yellow() noexcept;
     [[nodiscard]] constexpr float Grayscale() const noexcept;
+    [[nodiscard]] constexpr float GetMaxColorComponent() const noexcept;
     int32_t ToString(const std::span<char8_t>& destStr) const;
     int32_t ToString(char8_t* destStr, size_t destStrBufferLen) const;
     [[nodiscard]] std::u8string ToString() const;
@@ -150,7 +153,7 @@ constexpr Color Color::Gray() noexcept
 
 constexpr Color Color::Grey() noexcept
 {
-    return {0.5f, 0.5f, 0.5f, 1.0f};
+    return Gray();
 }
 
 constexpr Color Color::Green() noexcept
@@ -181,6 +184,11 @@ constexpr Color Color::Yellow() noexcept
 constexpr float Color::Grayscale() const noexcept
 {
     return static_cast<float>(0.29899999499321 * static_cast<double>(r) + 0.587000012397766 * static_cast<double>(g) + 57.0 / 500.0 * static_cast<double>(b));
+}
+
+constexpr float Color::GetMaxColorComponent() const noexcept
+{
+    return Mathf::Max(r, g, b, a);
 }
 
 inline Color& Color::operator+=(const Color& rhs) noexcept

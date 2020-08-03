@@ -32,8 +32,8 @@ public:
      * @param args  Arguments for construct the specified type of component.
      * @return  The added component.
      */
-    template <typename _Component, typename... _Args>
-    _Component* AddComponent(_Args&&... args);
+    template <typename _Component, typename... _Types>
+    _Component* AddComponent(_Types&&... args);
 
     /**
      * @brief   Finds the component of the specified type.
@@ -81,10 +81,10 @@ protected:
     std::vector<std::unique_ptr<Component>> m_components;
 };
 
-template <typename _Component, typename... _Args>
-_Component* GameObject::AddComponent(_Args&&... args)
+template <typename _Component, typename... _Types>
+_Component* GameObject::AddComponent(_Types&&... args)
 {
-    auto component = std::make_unique<_Component>(std::forward<_Args>(args)...);
+    auto component = std::make_unique<_Component>(std::forward<_Types>(args)...);
     auto rawComponent = component.get();
     component->SetGameObject(this);
     component->Initialize();

@@ -24,10 +24,10 @@ public:
 public:
     static void Append(const _Char* srcStr, int32_t srcStrLen, _Char* destStr, int32_t destStrLen, int32_t destStrBufferLen);
     template <size_t _DestStrBufferLen>
-    static void Append(const _Char* srcStr, int32_t srcStrLen, _Char (&destStr)[_DestStrBufferLen], int32_t destStrLen);
+    static void Append(const _Char* srcStr, int32_t srcStrLen, _Char(&destStr)[_DestStrBufferLen], int32_t destStrLen);
     static void Append(_Char ch, int32_t chCount, _Char* destStr, int32_t destStrLen, int32_t destStrBufferLen);
     template <size_t _DestStrBufferLen>
-    static void Append(_Char ch, int32_t chCount, _Char (&destStr)[_DestStrBufferLen], int32_t destStrLen);
+    static void Append(_Char ch, int32_t chCount, _Char(&destStr)[_DestStrBufferLen], int32_t destStrLen);
     static int32_t IndexOf(const _Char* str, int32_t strLen, const _Char* subStr, int32_t subStrLen);
     template <typename _Predicate>
     static int32_t IndexOfAny(const _Char* str, int32_t strLen, const _Predicate& predicate);
@@ -38,9 +38,9 @@ public:
     static constexpr int32_t Length(const _Char* str) noexcept;
     static void Swap(_Char* srcStr, int32_t srcStrLen, _Char* destStr, int32_t destStrLen);
     template <size_t _DestStrBufferLen>
-    static void ToLower(const _Char* srcStr, int32_t srcStrLen, _Char (&destStr)[_DestStrBufferLen]);
+    static void ToLower(const _Char* srcStr, int32_t srcStrLen, _Char(&destStr)[_DestStrBufferLen]);
     template <size_t _DestStrBufferLen>
-    static void ToUpper(const _Char* srcStr, int32_t srcStrLen, _Char (&destStr)[_DestStrBufferLen]);
+    static void ToUpper(const _Char* srcStr, int32_t srcStrLen, _Char(&destStr)[_DestStrBufferLen]);
 };
 
 using StringTraits = BasicStringTraits<char>;
@@ -50,7 +50,7 @@ using WStringTraits = BasicStringTraits<wchar_t>;
 
 template <typename _Char>
 template <std::size_t _DestStrBufferLen>
-void BasicStringTraits<_Char>::Append(const _Char* srcStr, int32_t srcStrLen, _Char (&destStr)[_DestStrBufferLen], int32_t destStrLen)
+void BasicStringTraits<_Char>::Append(const _Char* srcStr, int32_t srcStrLen, _Char(&destStr)[_DestStrBufferLen], int32_t destStrLen)
 {
     Append(srcStr, srcStrLen, destStr, destStrLen, _DestStrBufferLen);
 }
@@ -58,7 +58,7 @@ void BasicStringTraits<_Char>::Append(const _Char* srcStr, int32_t srcStrLen, _C
 template <typename _Char>
 void BasicStringTraits<_Char>::Append(const _Char* srcStr, int32_t srcStrLen, _Char* destStr, int32_t destStrLen, int32_t destStrBufferLen)
 {
-    assert(destStrBufferLen > srcStrLen + destStrLen && "String buffer overflowed!");
+    assert(destStrBufferLen > srcStrLen + destStrLen);
 
     memcpy(&destStr[destStrLen], srcStr, sizeof(_Char) * srcStrLen);
     destStr[srcStrLen + destStrLen] = {};
@@ -66,7 +66,7 @@ void BasicStringTraits<_Char>::Append(const _Char* srcStr, int32_t srcStrLen, _C
 
 template <typename _Char>
 template <std::size_t _DestStrBufferLen>
-void BasicStringTraits<_Char>::Append(_Char ch, int32_t chCount, _Char (&destStr)[_DestStrBufferLen], int32_t destStrLen)
+void BasicStringTraits<_Char>::Append(_Char ch, int32_t chCount, _Char(&destStr)[_DestStrBufferLen], int32_t destStrLen)
 {
     Append(destStr, destStrLen, _DestStrBufferLen, ch, chCount);
 }
@@ -74,7 +74,7 @@ void BasicStringTraits<_Char>::Append(_Char ch, int32_t chCount, _Char (&destStr
 template <typename _Char>
 void BasicStringTraits<_Char>::Append(_Char ch, int32_t chCount, _Char* destStr, int32_t destStrLen, int32_t destStrBufferLen)
 {
-    assert(destStrBufferLen > chCount + destStrLen && "String buffer overflowed!");
+    assert(destStrBufferLen > chCount + destStrLen);
 
     chCount += destStrLen;
     while (destStrLen < chCount)
@@ -172,18 +172,18 @@ void BasicStringTraits<_Char>::Swap(_Char* srcStr, int32_t srcStrLen, _Char* des
 
 template <typename _Char>
 template <std::size_t _DestStrBufferLen>
-void BasicStringTraits<_Char>::ToLower(const _Char* srcStr, int32_t srcStrLen, _Char (&destStr)[_DestStrBufferLen])
+void BasicStringTraits<_Char>::ToLower(const _Char* srcStr, int32_t srcStrLen, _Char(&destStr)[_DestStrBufferLen])
 {
-    assert(_DestStrBufferLen > srcStrLen && "String buffer overflowed!");
+    assert(_DestStrBufferLen > srcStrLen);
 
     std::transform(srcStr, srcStr + srcStrLen, destStr, ::tolower);
 }
 
 template <typename _Char>
 template <std::size_t _DestStrBufferLen>
-void BasicStringTraits<_Char>::ToUpper(const _Char* srcStr, int32_t srcStrLen, _Char (&destStr)[_DestStrBufferLen])
+void BasicStringTraits<_Char>::ToUpper(const _Char* srcStr, int32_t srcStrLen, _Char(&destStr)[_DestStrBufferLen])
 {
-    assert(_DestStrBufferLen > srcStrLen && "String buffer overflowed!");
+    assert(_DestStrBufferLen > srcStrLen);
 
     std::transform(srcStr, srcStr + srcStrLen, destStr, ::toupper);
 }

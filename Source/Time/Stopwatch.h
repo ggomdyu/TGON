@@ -26,16 +26,16 @@ public:
      * @brief   Gets a value indicating whether the timer is running.
      * @return  True if the instance is currently running and measuring elapsed time; otherwise, false.
      */
-    bool IsRunning() const noexcept;
+    [[nodiscard]] bool IsRunning() const noexcept;
 
     /**@brief   Gets the total elapsed time measured by the current instance in seconds. */
-    int64_t GetElapsedSeconds() const;
+    [[nodiscard]] int64_t GetElapsedSeconds() const;
 
     /**@brief   Gets the total elapsed time measured by the current instance in milliseconds. */
-    int64_t GetElapsedMilliseconds() const;
+    [[nodiscard]] int64_t GetElapsedMilliseconds() const;
 
     /**@brief   Gets the total elapsed time measured by the current instance in nanoseconds. */
-    int64_t GetElapsedNanoseconds() const;
+    [[nodiscard]] int64_t GetElapsedNanoseconds() const;
 
 /**@section Variable */
 private:

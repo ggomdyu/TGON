@@ -49,7 +49,7 @@ public:
 public:
     void Update();
     static void GetPosition(int32_t* x, int32_t* y);
-    static I32Vector2 GetPosition();
+    static IntVector2 GetPosition();
     [[nodiscard]] bool IsMouseDown(MouseCode mouseCode) const;
     [[nodiscard]] bool IsMouseHold(MouseCode mouseCode) const;
     [[nodiscard]] bool IsMouseUp(MouseCode mouseCode) const;

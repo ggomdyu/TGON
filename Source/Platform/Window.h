@@ -55,7 +55,7 @@ public:
     void SetTitle(const char8_t* title);
     void SetTopMost(bool setTopMost);
     void SetTransparency(float transparency);
-    [[nodiscard]] I32Vector2 GetPosition() const;
+    [[nodiscard]] IntVector2 GetPosition() const;
     [[nodiscard]] I32Extent2D GetWindowSize() const;
     [[nodiscard]] I32Extent2D GetClientSize() const;
     int32_t GetTitle(char8_t* destStr, int32_t destStrBufferLen) const;

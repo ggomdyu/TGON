@@ -1,50 +1,49 @@
 #include "PrecompiledHeader.h"
 
-#include "Math/Mathematics.h"
+#include "Math/Mathf.h"
 #include "Game/GameObject.h"
 
-#include "Transform.h"
+#include "TransformComponent.h"
 
 namespace tg
 {
 
-void Transform::SetLocalPosition(const Vector3& localPosition) noexcept
+void TransformComponent::SetLocalPosition(const Vector3& localPosition) noexcept
 {
     m_localPosition = localPosition;
     m_isDirty = true;
 }
 
-
-void Transform::SetLocalRotation(const Vector3& localRotation) noexcept
+void TransformComponent::SetLocalRotation(const Vector3& localRotation) noexcept
 {
     m_localRotation = localRotation;
     m_isDirty = true;
 }
 
-void Transform::SetLocalScale(const Vector3& localScale) noexcept
+void TransformComponent::SetLocalScale(const Vector3& localScale) noexcept
 {
     m_localScale = localScale;
     m_isDirty = true;
 }
 
-const Vector3& Transform::GetLocalPosition() const noexcept
+const Vector3& TransformComponent::GetLocalPosition() const noexcept
 {
     return m_localPosition;
 }
 
-const Vector3& Transform::GetLocalRotation() const noexcept
+const Vector3& TransformComponent::GetLocalRotation() const noexcept
 {
     return m_localRotation;
 }
 
-const Vector3& Transform::GetLocalScale() const noexcept
+const Vector3& TransformComponent::GetLocalScale() const noexcept
 {
     return m_localScale;
 }
 
-const Matrix4x4& Transform::GetWorldMatrix() const noexcept
+const Matrix4x4& TransformComponent::GetWorldMatrix() const noexcept
 {
-    if (m_isDirty == true)
+    if (m_isDirty)
     {
         this->UpdateWorldMatrix();
         m_isDirty = false;
@@ -53,19 +52,19 @@ const Matrix4x4& Transform::GetWorldMatrix() const noexcept
     return m_matWorld;
 }
 
-void Transform::Update()
+void TransformComponent::Update()
 {
-    if (m_isDirty == true)
+    if (m_isDirty)
     {
         this->UpdateWorldMatrix();
         m_isDirty = false;
     }
 }
 
-void Transform::UpdateWorldMatrix() const
+void TransformComponent::UpdateWorldMatrix() const
 {
     m_matWorld = Matrix4x4::Scale(m_localScale.x, m_localScale.y, m_localScale.z);
-    m_matWorld *= Matrix4x4::Rotate(m_localRotation.x * Deg2Rad, m_localRotation.y * Deg2Rad, m_localRotation.z * Deg2Rad);
+    m_matWorld *= Matrix4x4::Rotate(m_localRotation.x * Mathf::Deg2Rad, m_localRotation.y * Mathf::Deg2Rad, m_localRotation.z * Mathf::Deg2Rad);
     m_matWorld *= Matrix4x4::Translate(m_localPosition.x, m_localPosition.y, m_localPosition.z);
 
    /* if (auto owner = this->GetGameObject().lock(); owner != nullptr)
@@ -80,11 +79,6 @@ void Transform::UpdateWorldMatrix() const
             child->GetTransform()->m_isDirty = true;
         }
     }*/
-}
-
-bool Transform::IsDirty() const noexcept
-{
-    return m_isDirty;
 }
 
 }

@@ -8,7 +8,7 @@ namespace tg
 {
 
 class RendererComponent :
-	public Component
+    public Component
 {
 public:
     TGON_RTTI(RendererComponent)
@@ -20,8 +20,8 @@ public:
 /**@section Method */
 public:
     void SetMaterial(const std::shared_ptr<Material>& material);
-    std::shared_ptr<Material> GetMaterial() noexcept;
-    std::shared_ptr<const Material> GetMaterial() const noexcept;
+    [[nodiscard]] std::shared_ptr<Material> GetMaterial() noexcept;
+    [[nodiscard]] std::shared_ptr<const Material> GetMaterial() const noexcept;
     
 /**@section Variable */
 protected:

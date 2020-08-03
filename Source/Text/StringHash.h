@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "Core/TypeTraits.h"
+
 #include "Hash.h"
 #include "FixedString.h"
 
@@ -18,7 +20,7 @@ template <typename _Type>
 constexpr bool IsBasicStringHash<BasicStringHash<_Type>> = std::true_type::value;
 
 template <typename _String>
-class BasicStringHash
+class BasicStringHash final
 {
 /**@section Type */
 public:
@@ -83,7 +85,7 @@ public:
 
 /**@section Variable */
 public:
-    StringType m_str;
+    StringType m_str{};
     size_t m_hashCode = 0;
 };
 

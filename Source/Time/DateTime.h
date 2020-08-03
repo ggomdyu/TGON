@@ -1,7 +1,7 @@
 #pragma once
 
-#include <cstdint>
 #include <chrono>
+#include <cstdint>
 #include <ctime>
 #include <tuple>
 
@@ -55,46 +55,46 @@ public:
 
 /**@section Method */
 public:
-    static constexpr int32_t Compare(const DateTime& lhs, const DateTime& rhs) noexcept;
-    constexpr int32_t CompareTo(const DateTime& value) const noexcept;
-    static DateTime Now();
-    static DateTime UtcNow();
-    static DateTime Today();
-    static constexpr bool IsLeapYear(int32_t year) noexcept;
-    static constexpr int32_t DaysInMonth(int32_t year, int32_t month) noexcept;
-    constexpr DateTime AddYears(int32_t value) const noexcept;
-    constexpr DateTime AddMonths(int32_t value) const noexcept;
-    constexpr DateTime AddDays(double value) const noexcept;
-    constexpr DateTime AddHours(double value) const noexcept;
-    constexpr DateTime AddMinutes(double value) const noexcept;
-    constexpr DateTime AddSeconds(double value) const noexcept;
-    constexpr int32_t GetYear() const noexcept;
-    constexpr int32_t GetMonth() const noexcept;
-    constexpr int32_t GetDay() const noexcept;
-    constexpr int32_t GetHour() const noexcept;
-    constexpr int32_t GetMinute() const noexcept;
-    constexpr int32_t GetSecond() const noexcept;
-    constexpr int64_t GetTicks() const noexcept;
-    constexpr TimeSpan GetTimeOfDay() const noexcept;
-    constexpr DateTime GetDate() const noexcept;
-    constexpr DayOfWeek GetDayOfWeek() const noexcept;
-    static constexpr DayOfWeek GetDayOfWeek(int32_t year, int32_t month, int32_t day);
-    constexpr int32_t GetDayOfYear() const noexcept;
-    constexpr DateTimeKind GetKind() const noexcept;
-    static constexpr DateTime GetMaxValue() noexcept;
-    static constexpr DateTime GetMinValue() noexcept;
-    static constexpr DateTime GetUnixEpoch() noexcept;
-    DateTime ToLocalTime() const;
-    DateTime ToUniversalTime() const;
-    int64_t ToFileTime() const;
-    int64_t ToFileTimeUtc() const;
+    [[nodiscard]] static constexpr int32_t Compare(const DateTime& lhs, const DateTime& rhs) noexcept;
+    [[nodiscard]] constexpr int32_t CompareTo(const DateTime& value) const noexcept;
+    [[nodiscard]] static DateTime Now();
+    [[nodiscard]] static DateTime UtcNow();
+    [[nodiscard]] static DateTime Today();
+    [[nodiscard]] static constexpr bool IsLeapYear(int32_t year) noexcept;
+    [[nodiscard]] static constexpr int32_t DaysInMonth(int32_t year, int32_t month) noexcept;
+    [[nodiscard]] constexpr DateTime AddYears(int32_t value) const noexcept;
+    [[nodiscard]] constexpr DateTime AddMonths(int32_t value) const noexcept;
+    [[nodiscard]] constexpr DateTime AddDays(double value) const noexcept;
+    [[nodiscard]] constexpr DateTime AddHours(double value) const noexcept;
+    [[nodiscard]] constexpr DateTime AddMinutes(double value) const noexcept;
+    [[nodiscard]] constexpr DateTime AddSeconds(double value) const noexcept;
+    [[nodiscard]] constexpr int32_t GetYear() const noexcept;
+    [[nodiscard]] constexpr int32_t GetMonth() const noexcept;
+    [[nodiscard]] constexpr int32_t GetDay() const noexcept;
+    [[nodiscard]] constexpr int32_t GetHour() const noexcept;
+    [[nodiscard]] constexpr int32_t GetMinute() const noexcept;
+    [[nodiscard]] constexpr int32_t GetSecond() const noexcept;
+    [[nodiscard]] constexpr int64_t GetTicks() const noexcept;
+    [[nodiscard]] constexpr TimeSpan GetTimeOfDay() const noexcept;
+    [[nodiscard]] constexpr DateTime GetDate() const noexcept;
+    [[nodiscard]] constexpr DayOfWeek GetDayOfWeek() const noexcept;
+    [[nodiscard]] static constexpr DayOfWeek GetDayOfWeek(int32_t year, int32_t month, int32_t day);
+    [[nodiscard]] constexpr int32_t GetDayOfYear() const noexcept;
+    [[nodiscard]] constexpr DateTimeKind GetKind() const noexcept;
+    [[nodiscard]] static constexpr DateTime GetMaxValue() noexcept;
+    [[nodiscard]] static constexpr DateTime GetMinValue() noexcept;
+    [[nodiscard]] static constexpr DateTime GetUnixEpoch() noexcept;
+    [[nodiscard]] DateTime ToLocalTime() const;
+    [[nodiscard]] DateTime ToUniversalTime() const;
+    [[nodiscard]] int64_t ToFileTime() const;
+    [[nodiscard]] int64_t ToFileTimeUtc() const;
 
 private:
-    static constexpr int64_t DateToTicks(int32_t year, int32_t month, int32_t day) noexcept;
-    static constexpr int64_t TimeToTicks(int32_t hour, int32_t minute, int32_t second) noexcept;
-    constexpr int32_t GetDatePart(int32_t part) const noexcept;
-    constexpr std::tuple<int32_t, int32_t, int32_t> GetDateParts() const noexcept;
-    static int64_t GetTimeSinceUnixEpoch();
+    [[nodiscard]] static constexpr int64_t DateToTicks(int32_t year, int32_t month, int32_t day) noexcept;
+    [[nodiscard]] static constexpr int64_t TimeToTicks(int32_t hour, int32_t minute, int32_t second) noexcept;
+    [[nodiscard]] constexpr int32_t GetDatePart(int32_t part) const noexcept;
+    [[nodiscard]] constexpr std::tuple<int32_t, int32_t, int32_t> GetDateParts() const noexcept;
+    [[nodiscard]] static int64_t GetTimeSinceUnixEpoch();
 
 /**@section Variable */
 private:
@@ -215,7 +215,8 @@ constexpr int32_t DateTime::CompareTo(const DateTime& value) const noexcept
     {
         return 1;
     }
-    else if (this->GetTicks() < value.GetTicks())
+
+    if (this->GetTicks() < value.GetTicks())
     {
         return -1;
     }
@@ -229,16 +230,16 @@ inline DateTime DateTime::Now()
     time(&utcTime);
 
 #ifdef _MSC_VER
-    tm localTimeInfo {};
+    tm localTimeInfo{};
     gmtime_s(&localTimeInfo, &utcTime);
-    
-    time_t localTime = mktime(&localTimeInfo);
-    int64_t utcOffset = static_cast<int64_t>((difftime(utcTime, localTime) / 3600.0) * TimeSpan::TicksPerHour);
+
+    const auto localTime = mktime(&localTimeInfo);
+    const auto utcOffset = static_cast<int64_t>((difftime(utcTime, localTime) / 3600.0) * TimeSpan::TicksPerHour);
 #else
-    const tm* localTimeInfo = localtime(&utcTime);
+    const auto* localTimeInfo = localtime(&utcTime);
     int64_t utcOffset = (localTimeInfo->tm_gmtoff / 3600) * TimeSpan::TicksPerHour;
 #endif
-    
+
     return DateTime(GetUnixEpoch().GetTicks() + GetTimeSinceUnixEpoch() + utcOffset, DateTimeKind::Local);
 }
 
@@ -263,10 +264,8 @@ constexpr int32_t DateTime::DaysInMonth(int32_t year, int32_t month) noexcept
     {
         return IsLeapYear(year) ? DaysToMonth366[month] - DaysToMonth366[month - 1] : DaysToMonth365[month] - DaysToMonth365[month - 1];
     }
-    else
-    {
-        return DaysToMonth365[month] - DaysToMonth365[month - 1];
-    }
+
+    return DaysToMonth365[month] - DaysToMonth365[month - 1];
 }
 
 constexpr DateTime DateTime::AddYears(int32_t value) const noexcept
@@ -288,7 +287,7 @@ constexpr DateTime DateTime::AddMonths(int32_t value) const noexcept
 
     auto [year, month, day] = this->GetDateParts();
 
-    int32_t i = month + value;
+    const auto i = month + value;
     if (i >= 0)
     {
         month = ((i - 1) % 12) + 1;
@@ -305,7 +304,7 @@ constexpr DateTime DateTime::AddMonths(int32_t value) const noexcept
         return DateTime(0);
     }
 
-    int32_t days = DaysInMonth(year, month);
+    const auto days = DaysInMonth(year, month);
     if (day > days)
     {
         day = days;
@@ -376,7 +375,7 @@ constexpr TimeSpan DateTime::GetTimeOfDay() const noexcept
 
 constexpr DateTime DateTime::GetDate() const noexcept
 {
-    auto ticks = this->GetTicks();
+    const auto ticks = this->GetTicks();
     return DateTime(ticks - (ticks % TimeSpan::TicksPerDay), this->GetKind());
 }
 
@@ -390,7 +389,7 @@ constexpr DayOfWeek DateTime::GetDayOfWeek(int32_t year, int32_t month, int32_t 
     constexpr int32_t termTable[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
 
     year -= month < 3;
-    
+
     return DayOfWeek((year + year / 4 - year / 100 + year / 400 + termTable[month - 1] + day) % 7);
 }
 
@@ -426,8 +425,8 @@ constexpr int64_t DateTime::DateToTicks(int32_t year, int32_t month, int32_t day
         const int* daysToMonth = IsLeapYear(year) ? DaysToMonth366 : DaysToMonth365;
         if (1 <= day && day <= daysToMonth[month])
         {
-            int y = year - 1;
-            int n = y * 365 + y / 4 - y / 100 + y / 400 + daysToMonth[month - 1] + day - 1;
+            const auto y = year - 1;
+            const auto n = y * 365 + y / 4 - y / 100 + y / 400 + daysToMonth[month - 1] + day - 1;
             return n * TimeSpan::TicksPerDay;
         }
     }
@@ -437,45 +436,45 @@ constexpr int64_t DateTime::DateToTicks(int32_t year, int32_t month, int32_t day
 
 constexpr int64_t DateTime::TimeToTicks(int32_t hour, int32_t minute, int32_t second) noexcept
 {
-    int64_t totalSeconds = (static_cast<int64_t>(hour) * 3600) + (static_cast<int64_t>(minute) * 60) + static_cast<int64_t>(second);
+    const auto totalSeconds = (static_cast<int64_t>(hour) * 3600) + (static_cast<int64_t>(minute) * 60) + static_cast<int64_t>(second);
     return totalSeconds * TimeSpan::TicksPerSecond;
 }
 
 constexpr int32_t DateTime::GetDatePart(int32_t part) const noexcept
 {
-    int64_t n = this->GetTicks() / TimeSpan::TicksPerDay;
-    int64_t y400 = n / DaysPer400Years;
+    auto n = this->GetTicks() / TimeSpan::TicksPerDay;
+    const auto y400 = n / DaysPer400Years;
     n -= y400 * DaysPer400Years;
-    
-    int64_t y100 = n / DaysPer100Years;
+
+    auto y100 = n / DaysPer100Years;
     if (y100 == 4)
     {
         y100 = 3;
     }
     n -= y100 * DaysPer100Years;
-    
-    int64_t y4 = n / DaysPer4Years;
+
+    const auto y4 = n / DaysPer4Years;
     n -= y4 * DaysPer4Years;
-    int64_t y1 = n / DaysPerYear;
+    auto y1 = n / DaysPerYear;
     if (y1 == 4)
     {
         y1 = 3;
     }
-    
+
     if (part == DatePartYear)
     {
         return static_cast<int32_t>(y400 * 400 + y100 * 100 + y4 * 4 + y1 + 1);
     }
-    
+
     n -= y1 * DaysPerYear;
     if (part == DatePartDayOfYear)
     {
         return static_cast<int32_t>(n + 1);
     }
-    
-    bool isLeapYear = y1 == 3 && (y4 != 24 || y100 == 3);
-    const int* days = isLeapYear ? DaysToMonth366 : DaysToMonth365;
-    int64_t m = (n >> 5) + 1;
+
+    const auto isLeapYear = y1 == 3 && (y4 != 24 || y100 == 3);
+    const auto* days = isLeapYear ? DaysToMonth366 : DaysToMonth365;
+    auto m = (n >> 5) + 1;
     while (n >= days[m])
     {
         ++m;
@@ -484,62 +483,61 @@ constexpr int32_t DateTime::GetDatePart(int32_t part) const noexcept
     {
         return static_cast<int32_t>(m);
     }
-    
+
     return static_cast<int32_t>(n - days[m - 1] + 1);
 }
 
 constexpr std::tuple<int32_t, int32_t, int32_t> DateTime::GetDateParts() const noexcept
 {
-    int64_t n = this->GetTicks() / TimeSpan::TicksPerDay;
-    int64_t y400 = n / DaysPer400Years;
+    auto n = this->GetTicks() / TimeSpan::TicksPerDay;
+    const auto y400 = n / DaysPer400Years;
     n -= y400 * DaysPer400Years;
-    
-    int64_t y100 = n / DaysPer100Years;
+
+    auto y100 = n / DaysPer100Years;
     if (y100 == 4)
     {
         y100 = 3;
     }
     n -= y100 * DaysPer100Years;
-    
-    int64_t y4 = n / DaysPer4Years;
+
+    const auto y4 = n / DaysPer4Years;
     n -= y4 * DaysPer4Years;
-    int64_t y1 = n / DaysPerYear;
+    auto y1 = n / DaysPerYear;
     if (y1 == 4)
     {
         y1 = 3;
     }
-    
-    int32_t year = static_cast<int32_t>(y400 * 400 + y100 * 100 + y4 * 4 + y1 + 1);
-    
+
+    const auto year = static_cast<int32_t>(y400 * 400 + y100 * 100 + y4 * 4 + y1 + 1);
+
     n -= y1 * DaysPerYear;
-    
-    bool isLeapYear = y1 == 3 && (y4 != 24 || y100 == 3);
-    const int* days = isLeapYear ? DaysToMonth366 : DaysToMonth365;
-    int64_t m = (n >> 5) + 1;
+
+    const auto isLeapYear = y1 == 3 && (y4 != 24 || y100 == 3);
+    const auto* days = isLeapYear ? DaysToMonth366 : DaysToMonth365;
+    auto m = (n >> 5) + 1;
     while (n >= days[m])
     {
         ++m;
     }
-    
-    int32_t month = static_cast<int32_t>(m);
-    int32_t day = static_cast<int32_t>(n - days[m - 1] + 1);
-    
+
+    const auto month = static_cast<int32_t>(m);
+    const auto day = static_cast<int32_t>(n - days[m - 1] + 1);
+
     return {year, month, day};
 }
 
 inline int64_t DateTime::GetTimeSinceUnixEpoch()
 {
     auto timeSinceEpoch = std::chrono::system_clock::now().time_since_epoch();
-    
+
     using DurationType = decltype(timeSinceEpoch);
-    if constexpr(DurationType::period::den == 10000000)
+    if constexpr (DurationType::period::den == 10000000)
     {
         return timeSinceEpoch.count();
     }
     else
     {
-        auto castedTimeSinceEpoch = std::chrono::duration_cast<std::chrono::duration<int64_t, std::ratio<1, 10000000>>>(timeSinceEpoch);
-        return castedTimeSinceEpoch.count();
+        return std::chrono::duration_cast<std::chrono::duration<int64_t, std::ratio<1, 10000000>>>(timeSinceEpoch).count();
     }
 }
 
@@ -552,6 +550,5 @@ inline int64_t DateTime::ToFileTimeUtc() const
 {
     return this->ToUniversalTime().GetTicks() - FileTimeOffset;
 }
-
 
 }

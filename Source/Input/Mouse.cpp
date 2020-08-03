@@ -23,9 +23,9 @@ void Mouse::Update()
 {
 }
 
-I32Vector2 Mouse::GetPosition()
+IntVector2 Mouse::GetPosition()
 {
-    I32Vector2 pt;
+    IntVector2 pt;
     GetPosition(&pt.x, &pt.y);
 
     return pt;

@@ -9,12 +9,11 @@
 namespace tg
 {
 
-class Transform :
-    public Component,
-    public std::enable_shared_from_this<Transform>
+class TransformComponent :
+    public Component
 {
 public:
-    TGON_RTTI(Transform)
+    TGON_RTTI(TransformComponent)
 
 /**@section Constructor */
 public:
@@ -25,11 +24,10 @@ public:
     void SetLocalPosition(const Vector3& localPosition) noexcept;
     void SetLocalRotation(const Vector3& localRotation) noexcept;
     void SetLocalScale(const Vector3& localScale) noexcept;
-    const Vector3& GetLocalPosition() const noexcept;
-    const Vector3& GetLocalRotation() const noexcept;
-    const Vector3& GetLocalScale() const noexcept;
-    const Matrix4x4& GetWorldMatrix() const noexcept;
-    bool IsDirty() const noexcept;
+    [[nodiscard]] const Vector3& GetLocalPosition() const noexcept;
+  [nodisd]] const Vector3& GetLocalRotation() const noexcept;
+    [[nodiscard]] const Vector3& GetLocalScale() const noexcept;
+    [[nodiscard]] const Matrix4x4& GetWorldMatrix() const noexcept;
     void Update() override;
 
 private:

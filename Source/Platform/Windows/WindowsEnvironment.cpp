@@ -26,6 +26,39 @@
 
 namespace tg
 {
+namespace
+{
+
+constexpr int MaxEnvVariableValueLength = 32767;
+constexpr auto MaxSystemEnvVariableLength = 1024;
+constexpr int MaxUserEnvVariableLength = 255;
+
+[[nodiscard]] bool CheckEnvironmentVariableName(const std::u8string_view& name) noexcept
+{
+    if (name.length() == 0)
+    {
+        return false;
+    }
+
+    if (name[0] == '\0')
+    {
+        return false;
+    }
+
+    if (name.length() >= MaxEnvVariableValueLength)
+    {
+        return false;
+    }
+
+    if (name.find(u8'=') != std::u8string_view::npos)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+}
 
 bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* value)
 {
@@ -42,6 +75,86 @@ bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* val
     }
 
     return !!SetEnvironmentVariableW(&utf16Name[0], &utf16Value[0]);
+}
+
+bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* value, EnvironmentVariableTarget target)
+{
+    if (target == EnvironmentVariableTarget::Process)
+    {
+        return SetEnvironmentVariable(name, value);
+    }
+
+    const auto nameLen = std::char_traits<char8_t>::length(name);
+    if (CheckEnvironmentVariableName({name, nameLen}) == false)
+    {
+        return false;
+    }
+
+    // System-wide environment variables stored in the registry are
+    // limited to 1024 chars for the environment variable name.
+    if (nameLen >= MaxSystemEnvVariableLength)
+    {
+        return false;
+    }
+
+//#if FEATURE_WIN32_REGISTRY
+    if (target == EnvironmentVariableTarget::Machine)
+    {
+        HKEY keyHandle{};
+        constexpr auto subKey = L"System\\CurrentControlSet\\Control\\Session Manager\\Environment";
+        if (RegOpenKeyExW(HKEY_LOCAL_MACHINE, subKey, 0, KEY_ALL_ACCESS, &keyHandle) != ERROR_SUCCESS)
+        {
+            return false;
+        }
+
+        if (value == nullptr)
+        {
+            //RegDeleteValueW(keyHandle, name);
+        }
+        else
+        {
+            //const auto valueLen = std::char_traits<char8_t>(value);
+            //RegQueryValueExW(keyHandle, name, nullptr, nullptr, )
+            //RegSetValueExW(keyHandle, name, 0, REG_SZ, )
+        }
+
+        RegCloseKey(keyHandle);
+    }
+//    else if (target == EnvironmentVariableTarget.User)
+//    {
+//        // User-wide environment variables stored in the registry are
+//        // limited to 255 chars for the environment variable name.
+    //        if (variable.Length >= MaxUserEnvVariableLength)
+    //        {
+//            throw new ArgumentException(Environment.GetResourceString("Argument_LongEnvVarValue"));
+//        }
+//        using(RegistryKey environmentKey =
+//                  Registry.CurrentUser.OpenSubKey("Environment", true))
+//        {
+//            Contract.Assert(environmentKey != null, @"HKCU\Environment is missing!");
+//            if (environmentKey != null)
+//            {
+//                if (value == null)
+//                    environmentKey.DeleteValue(variable, false);
+//                else
+//                    environmentKey.SetValue(variable, value);
+//            }
+//        }
+//    }
+//    else
+//    {
+//        throw new ArgumentException(Environment.GetResourceString("Arg_EnumIllegalVal", (int)target));
+//    }
+//    // send a WM_SETTINGCHANGE message to all windows
+//    IntPtr r = Win32Native.SendMessageTimeout(new IntPtr(Win32Native.HWND_BROADCAST), Win32Native.WM_SETTINGCHANGE, IntPtr.Zero, "Environment", 0, 1000, IntPtr.Zero);
+//
+//    if (r == IntPtr.Zero)
+//        BCLDebug.Assert(false, "SetEnvironmentVariable failed: " + Marshal.GetLastWin32Error());
+//
+//#else // FEATURE_WIN32_REGISTRY
+//    throw new ArgumentException(Environment.GetResourceString("Arg_EnumIllegalVal", (int)target));
+//#endif
+    return true;
 }
 
 std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen)
