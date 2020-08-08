@@ -36,13 +36,15 @@ public:
 public:
     [[nodiscard]] static const Encoding* GetEncoding(int32_t codePage);
     [[nodiscard]] static const Encoding* GetEncoding(const char8_t* codePageName);
-    [[nodiscard]] static std::vector<std::byte> Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* bytes, int32_t count);
-    static int32_t Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* srcBytes, int32_t srcByteCount, std::byte* destBytes, int32_t destByteCount);
-    static int32_t Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::span<std::byte>& srcBytes, const std::span<std::byte>& destBytes);
-    [[nodiscard]] std::vector<char32_t> GetChars(const std::byte* bytes, int32_t count) const;
-    [[nodiscard]] std::vector<char32_t> GetChars(const std::span<std::byte>& bytes) const;
-    [[nodiscard]] int32_t GetCharCount(const std::byte* bytes, int32_t count) const;
-    [[nodiscard]] int32_t GetCharCount(const std::span<std::byte>& bytes) const;
+    [[nodiscard]] static std::optional<std::vector<std::byte>> Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* bytes, int32_t count);
+    static std::optional<int32_t> Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* srcBytes, int32_t srcByteCount, std::byte* destBytes, int32_t destByteCount);
+    static std::optional<int32_t> Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::span<std::byte>& srcBytes, const std::span<std::byte>& destBytes);
+    [[nodiscard]] std::optional<std::vector<char32_t>> GetChars(const std::byte* bytes, int32_t count) const;
+    [[nodiscard]] std::optional<std::vector<char32_t>> GetChars(const std::span<std::byte>& bytes) const;
+    [[nodiscard]] std::optional<std::u8string> GetString(const std::byte* bytes, int32_t count) const;
+    [[nodiscard]] std::optional<std::u8string> GetString(const std::span<const std::byte>& bytes) const;
+    [[nodiscard]] std::optional<int32_t> GetCharCount(const std::byte* bytes, int32_t count) const;
+    [[nodiscard]] std::optional<int32_t> GetCharCount(const std::span<std::byte>& bytes) const;
     [[nodiscard]] const std::u8string_view& GetEncodingName() const noexcept;
     [[nodiscard]] int32_t GetCodePage() const noexcept;
     [[nodiscard]] size_t GetHashCode() const noexcept;

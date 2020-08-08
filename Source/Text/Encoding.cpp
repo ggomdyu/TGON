@@ -92,7 +92,7 @@ const Encoding* Encoding::GetEncoding(const char8_t* codePageName)
     return GetEncoding(converterSharedData->staticData->codepage);
 }
 
-std::vector<std::byte> Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* bytes, int32_t count)
+std::optional<std::vector<std::byte>> Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* bytes, int32_t count)
 {
     auto status = U_ZERO_ERROR;
     const icu::UnicodeString str(reinterpret_cast<const char*>(bytes), count, srcEncoding.m_converter, status);
@@ -110,7 +110,7 @@ std::vector<std::byte> Encoding::Convert(const Encoding& srcEncoding, const Enco
     return ret;
 }
 
-int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* srcBytes, int32_t srcByteCount, std::byte* destBytes, int32_t destByteCount)
+std::optional<int32_t> Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* srcBytes, int32_t srcByteCount, std::byte* destBytes, int32_t destByteCount)
 {
     auto status = U_ZERO_ERROR;
     const icu::UnicodeString str(reinterpret_cast<const char*>(srcBytes), srcByteCount, srcEncoding.m_converter, status);
@@ -120,7 +120,7 @@ int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncod
         {
             memset(destBytes, 0, destEncoding.GetMinCharByte());
         }
-        return -1;
+        return {};
     }
 
     const auto encodedStrByteCount = str.extract(nullptr, 0, destEncoding.m_converter, status);
@@ -130,7 +130,7 @@ int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncod
         {
             memset(destBytes, 0, destEncoding.GetMinCharByte());
         }
-        return -1;
+        return {};
     }
 
     status = U_ZERO_ERROR;
@@ -139,12 +139,12 @@ int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncod
     return encodedStrByteCount;
 }
 
-int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::span<std::byte>& srcBytes, const std::span<std::byte>& destBytes)
+std::optional<int32_t> Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::span<std::byte>& srcBytes, const std::span<std::byte>& destBytes)
 {
     return Convert(srcEncoding, destEncoding, &srcBytes[0], static_cast<int32_t>(srcBytes.size()), &destBytes[0], static_cast<int32_t>(destBytes.size()));
 }
 
-std::vector<char32_t> Encoding::GetChars(const std::byte* bytes, int32_t count) const
+std::optional<std::vector<char32_t>> Encoding::GetChars(const std::byte* bytes, int32_t count) const
 {
     std::vector<char32_t> ret;
 
@@ -153,29 +153,53 @@ std::vector<char32_t> Encoding::GetChars(const std::byte* bytes, int32_t count) 
     const auto* endIt = reinterpret_cast<const char*>(bytes + count);
     while (currentIt < endIt)
     {
-        const auto ch = ucnv_getNextUChar(m_converter, &currentIt, currentIt + count, &status);
+        const auto c = ucnv_getNextUChar(m_converter, &currentIt, currentIt + count, &status);
         if (U_FAILURE(status))
         {
             return {};
         }
 
-        if (ch == 0)
+        if (c == 0)
         {
             break;
         }
 
-        ret.push_back(static_cast<char32_t>(ch));
+        ret.push_back(static_cast<char32_t>(c));
     }
 
-    return ret;
+    return std::move(ret);
 }
 
-std::vector<char32_t> Encoding::GetChars(const std::span<std::byte>& bytes) const
+std::optional<std::vector<char32_t>> Encoding::GetChars(const std::span<std::byte>& bytes) const
 {
     return GetChars(&bytes[0], static_cast<int32_t>(bytes.size()));
 }
 
-int32_t Encoding::GetCharCount(const std::byte* bytes, int32_t count) const
+std::optional<std::u8string> Encoding::GetString(const std::byte* bytes, int32_t count) const
+{
+    auto status = U_ZERO_ERROR;
+    const icu::UnicodeString str(reinterpret_cast<const char*>(bytes), count, m_converter, status);
+    if (U_FAILURE(status))
+    {
+        return {};
+    }
+
+    std::u8string ret;
+    const auto encodedStrLen = str.extract(nullptr, 0, UTF8().m_converter, status);
+    ret.resize(encodedStrLen);
+
+    status = U_ZERO_ERROR;
+    str.extract(reinterpret_cast<char*>(ret.data()), static_cast<int32_t>(ret.size() + 1), UTF8().m_converter, status);
+
+    return std::move(ret);
+}
+
+std::optional<std::u8string> Encoding::GetString(const std::span<const std::byte>& bytes) const
+{
+    return GetString(bytes.data(), bytes.size());
+}
+
+std::optional<int32_t> Encoding::GetCharCount(const std::byte* bytes, int32_t count) const
 {
     int32_t ret = 0;
 
@@ -184,13 +208,13 @@ int32_t Encoding::GetCharCount(const std::byte* bytes, int32_t count) const
     const auto* endIt = reinterpret_cast<const char*>(bytes + count);
     while (currentIt < endIt)
     {
-        const auto ch = ucnv_getNextUChar(m_converter, &currentIt, currentIt + count, &status);
+        const auto c = ucnv_getNextUChar(m_converter, &currentIt, currentIt + count, &status);
         if (U_FAILURE(status))
         {
-            return -1;
+            return {};
         }
 
-        if (ch == 0)
+        if (c == 0)
         {
             break;
         }
@@ -201,7 +225,7 @@ int32_t Encoding::GetCharCount(const std::byte* bytes, int32_t count) const
     return ret;
 }
 
-int32_t Encoding::GetCharCount(const std::span<std::byte>& bytes) const
+std::optional<int32_t> Encoding::GetCharCount(const std::span<std::byte>& bytes) const
 {
     return GetCharCount(&bytes[0], static_cast<int32_t>(bytes.size()));
 }
