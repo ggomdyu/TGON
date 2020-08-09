@@ -10,7 +10,7 @@ namespace tg
 {
 
 template <typename _Char>
-class BasicStringTraits
+class BasicStringTraits final
 {
 /**@section Type */
 public:
@@ -25,17 +25,17 @@ public:
     static void Append(const _Char* srcStr, int32_t srcStrLen, _Char* destStr, int32_t destStrLen, int32_t destStrBufferLen);
     template <size_t _DestStrBufferLen>
     static void Append(const _Char* srcStr, int32_t srcStrLen, _Char(&destStr)[_DestStrBufferLen], int32_t destStrLen);
-    static void Append(_Char ch, int32_t chCount, _Char* destStr, int32_t destStrLen, int32_t destStrBufferLen);
+    static void Append(_Char c, int32_t count, _Char* destStr, int32_t destStrLen, int32_t destStrBufferLen);
     template <size_t _DestStrBufferLen>
-    static void Append(_Char ch, int32_t chCount, _Char(&destStr)[_DestStrBufferLen], int32_t destStrLen);
-    static int32_t IndexOf(const _Char* str, int32_t strLen, const _Char* subStr, int32_t subStrLen);
+    static void Append(_Char c, int32_t count, _Char(&destStr)[_DestStrBufferLen], int32_t destStrLen);
+    [[nodiscard]] static int32_t IndexOf(const _Char* str, int32_t strLen, const _Char* subStr, int32_t subStrLen);
     template <typename _Predicate>
-    static int32_t IndexOfAny(const _Char* str, int32_t strLen, const _Predicate& predicate);
-    static int32_t LastIndexOf(const _Char* str, int32_t strLen, const _Char* subStr, int32_t subStrLen);
+    [[nodiscard]] static int32_t IndexOfAny(const _Char* str, int32_t strLen, const _Predicate& predicate);
+    [[nodiscard]] static int32_t LastIndexOf(const _Char* str, int32_t strLen, const _Char* subStr, int32_t subStrLen);
     template <typename _Predicate>
-    static constexpr int32_t LastIndexOfAny(const _Char* str, int32_t strLen, const _Predicate& predicate);
-    static constexpr int32_t Compare(const _Char* lhsStr, int32_t lhsStrLen, const _Char* rhsStr, int32_t rhsStrLen);
-    static constexpr int32_t Length(const _Char* str) noexcept;
+    [[nodiscard]] static constexpr int32_t LastIndexOfAny(const _Char* str, int32_t strLen, const _Predicate& predicate);
+    [[nodiscard]] static constexpr int32_t Compare(const _Char* lhsStr, int32_t lhsStrLen, const _Char* rhsStr, int32_t rhsStrLen);
+    [[nodiscard]] static constexpr int32_t Length(const _Char* str) noexcept;
     static void Swap(_Char* srcStr, int32_t srcStrLen, _Char* destStr, int32_t destStrLen);
     template <size_t _DestStrBufferLen>
     static void ToLower(const _Char* srcStr, int32_t srcStrLen, _Char(&destStr)[_DestStrBufferLen]);
@@ -66,20 +66,20 @@ void BasicStringTraits<_Char>::Append(const _Char* srcStr, int32_t srcStrLen, _C
 
 template <typename _Char>
 template <std::size_t _DestStrBufferLen>
-void BasicStringTraits<_Char>::Append(_Char ch, int32_t chCount, _Char(&destStr)[_DestStrBufferLen], int32_t destStrLen)
+void BasicStringTraits<_Char>::Append(_Char c, int32_t count, _Char(&destStr)[_DestStrBufferLen], int32_t destStrLen)
 {
-    Append(destStr, destStrLen, _DestStrBufferLen, ch, chCount);
+    Append(destStr, destStrLen, _DestStrBufferLen, c, count);
 }
 
 template <typename _Char>
-void BasicStringTraits<_Char>::Append(_Char ch, int32_t chCount, _Char* destStr, int32_t destStrLen, int32_t destStrBufferLen)
+void BasicStringTraits<_Char>::Append(_Char c, int32_t count, _Char* destStr, int32_t destStrLen, int32_t destStrBufferLen)
 {
-    assert(destStrBufferLen > chCount + destStrLen);
+    assert(destStrBufferLen > count + destStrLen);
 
-    chCount += destStrLen;
-    while (destStrLen < chCount)
+    count += destStrLen;
+    while (destStrLen < count)
     {
-        destStr[destStrLen++] = ch;
+        destStr[destStrLen++] = c;
     }
 
     destStr[destStrLen] = {};

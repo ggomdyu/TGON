@@ -1,9 +1,10 @@
 #pragma once
 
-#include <string>
-#include <vector>
+#include <map>
 #include <optional>
 #include <span>
+#include <string>
+#include <vector>
 
 #include "OperatingSystem.h"
 
@@ -80,16 +81,18 @@ public:
 public:
     static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value);
     static bool SetEnvironmentVariable(const char8_t* name, const char8_t* value, EnvironmentVariableTarget target);
-    [[nodiscard]] static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen);
-    [[nodiscard]] static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, const std::span<char8_t>& destStr);
+    static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, const std::span<char8_t>& destStr);
     [[nodiscard]] static std::optional<std::u8string> GetEnvironmentVariable(const char8_t* name);
+    static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, EnvironmentVariableTarget target, char8_t* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetEnvironmentVariable(const char8_t* name, EnvironmentVariableTarget target, const std::span<char8_t>& destStr);
     [[nodiscard]] static std::optional<std::u8string> GetEnvironmentVariable(const char8_t* name, EnvironmentVariableTarget target);
+    static std::optional<int32_t> GetCurrentDirectory(char8_t* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetCurrentDirectory(const std::span<char8_t>& destStr);
     [[nodiscard]] static std::u8string GetCurrentDirectory();
-    [[nodiscard]] static std::optional<int32_t> GetCurrentDirectory(char8_t* destStr, int32_t destStrBufferLen);
-    [[nodiscard]] static std::optional<int32_t> GetCurrentDirectory(const std::span<char8_t>& destStr);
+    static std::optional<int32_t> GetFolderPath(SpecialFolder folder, char8_t* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetFolderPath(SpecialFolder folder, const std::span<char8_t>& destStr);
     [[nodiscard]] static std::u8string GetFolderPath(SpecialFolder folder);
-    [[nodiscard]] static std::optional<int32_t> GetFolderPath(SpecialFolder folder, char8_t* destStr, int32_t destStrBufferLen);
-    [[nodiscard]] static std::optional<int32_t> GetFolderPath(SpecialFolder folder, const std::span<char8_t>& destStr);
     [[nodiscard]] static std::u8string_view GetNewLine();
     [[nodiscard]] static int32_t GetSystemPageSize();
     [[nodiscard]] static int32_t GetCurrentManagedThreadId();
@@ -113,10 +116,9 @@ public:
     static int32_t GetStackTrace(char8_t* destStr, int32_t destStrBufferLen);
     [[nodiscard]] static std::u8string GetStackTrace();
     [[nodiscard]] static std::u8string GetSystemDirectory();
-    //public static IDictionary GetEnvironmentVariables();
-    //public static IDictionary GetEnvironmentVariables(EnvironmentVariableTarget target);
+    [[nodiscard]] static std::map<std::u8string, std::u8string> GetEnvironmentVariables();
+    //[[nodiscard]] static std::map<std::u8string, std::u8string> GetEnvironmentVariables(EnvironmentVariableTarget target);
     //public static string ExpandEnvironmentVariables(string name);
-    //public static bool HasShutdownSting GetFolderarted{ get; }
     [[nodiscard]] static std::optional<OperatingSystem> GetOSVersion();
     [[nodiscard]] static bool GetUserInteractive();
     [[nodiscard]] static int64_t GetWorkingSet();

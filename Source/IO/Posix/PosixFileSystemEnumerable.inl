@@ -16,11 +16,11 @@ namespace detail
 {
 
 template <typename _Callback>
-void InternalEnumerateAllDirectories(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _Callback& handler)
+void InternalEnumerateAllDirectories(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _Predicate& handler)
 {
     std::deque<std::u8string> directories(1, std::u8string(path));
     
-    do
+    while (directories.empty() == false)
     {
         const std::u8string& currPath = directories.front();
         
@@ -50,7 +50,7 @@ void InternalEnumerateAllDirectories(const char8_t* path, const char8_t* searchP
                     }
                     
                     auto newPath = Path::Combine(currPath, {reinterpret_cast<const char8_t*>(ent->d_name), ent->d_namlen});
-                    if constexpr (std::is_same_v<typename FunctionTraits<_Callback>::ReturnType, bool>)
+                    if constexpr (std::is_same_v<typename FunctionTraits<_Predicate>::ReturnType, bool>)
                     {
                         if (handler(std::move(newPath)) == false)
                         {
@@ -68,11 +68,10 @@ void InternalEnumerateAllDirectories(const char8_t* path, const char8_t* searchP
         
         directories.pop_front();
     }
-    while (directories.empty() == false);
 }
 
-template <typename _Callback>
-void InternalEnumerateTopDirectoryOnly(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _Callback& handler)
+template <typename _Predicate>
+void InternalEnumerateTopDirectoryOnly(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _Predicate& handler)
 {
     DIR* dir = opendir(reinterpret_cast<const char*>(path));
     if (dir != nullptr)
@@ -95,7 +94,7 @@ void InternalEnumerateTopDirectoryOnly(const char8_t* path, const char8_t* searc
                 }
                 
                 auto newPath = Path::Combine(path, {reinterpret_cast<const char8_t*>(ent->d_name), ent->d_namlen});
-                if constexpr (std::is_same_v<typename FunctionTraits<_Callback>::ReturnType, bool>)
+                if constexpr (std::is_same_v<typename FunctionTraits<_Predicate>::ReturnType, bool>)
                 {
                     if (handler(std::move(newPath)) == false)
                     {
@@ -114,8 +113,8 @@ void InternalEnumerateTopDirectoryOnly(const char8_t* path, const char8_t* searc
 
 }
 
-template <typename _Callback>
-void FileSystemEnumerable::EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& handler)
+template <typename _Predicate>
+void FileSystemEnumerable::EnumerateDirectories(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Predicate& handler)
 {
     if (searchOption == SearchOption::AllDirectories)
     {
@@ -127,8 +126,8 @@ void FileSystemEnumerable::EnumerateDirectories(const char8_t* path, const char8
     }
 }
 
-template <typename _Callback>
-void FileSystemEnumerable::EnumerateFiles(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& handler)
+template <typename _Predicate>
+void FileSystemEnumerable::EnumerateFiles(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Predicate& handler)
 {
     if (searchOption == SearchOption::AllDirectories)
     {
@@ -140,8 +139,8 @@ void FileSystemEnumerable::EnumerateFiles(const char8_t* path, const char8_t* se
     }
 }
 
-template <typename _Callback>
-void FileSystemEnumerable::EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Callback& handler)
+template <typename _Predicate>
+void FileSystemEnumerable::EnumerateFileSystemEntries(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption, const _Predicate& handler)
 {
     if (searchOption == SearchOption::AllDirectories)
     {

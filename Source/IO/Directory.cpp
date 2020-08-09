@@ -10,9 +10,11 @@
 namespace tg
 {
 
+extern thread_local std::array<char8_t, 32768> g_tempUtf8StrBuffer;
+
 DirectoryInfo Directory::CreateDirectory(const std::u8string_view& path)
 {
-    std::u8string fullPath = Path::GetFullPath(path);
+    auto fullPath = Path::GetFullPath(path);
     if (fullPath.length() > 0 && Path::IsDirectorySeparator(fullPath.back()) == false)
     {
         fullPath += Path::DirectorySeparatorChar;
@@ -20,7 +22,7 @@ DirectoryInfo Directory::CreateDirectory(const std::u8string_view& path)
     
     for (size_t i = Path::IsDirectorySeparator(fullPath.front()) ? 1 : 0; i < fullPath.length(); ++i)
     {
-        auto c = fullPath[i];
+        const auto c = fullPath[i];
         if (Path::IsDirectorySeparator(c))
         {
             fullPath[i] = 0;
@@ -55,14 +57,8 @@ DirectoryInfo Directory::GetParent(const std::u8string_view& path)
 
 std::u8string Directory::GetCurrentDirectory()
 {
-    std::array<char8_t, 8192> str{};
-    auto strLen = GetCurrentDirectory(str.data(), static_cast<int32_t>(str.size()));
-    if (strLen.has_value() == false)
-    {
-        return {};
-    }
-
-    return {str.data(), static_cast<size_t>(*strLen)};
+    auto strLen = GetCurrentDirectory(g_tempUtf8StrBuffer.data(), static_cast<int32_t>(g_tempUtf8StrBuffer.size()));
+    return {g_tempUtf8StrBuffer.data(), static_cast<size_t>(*strLen)};
 }
 
 bool Directory::SetCreationTime(const char8_t* path, const DateTime& creationTime)
@@ -139,33 +135,33 @@ std::u8string Directory::GetDirectoryRoot(const std::u8string_view& path)
 std::vector<std::u8string> Directory::GetDirectories(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption)
 {
     std::vector<std::u8string> ret;
-    
     EnumerateDirectories(path, searchPattern, searchOption, [&](const std::u8string_view& str)
     {
         ret.emplace_back(str);
     });
+
     return ret;
 }
 
 std::vector<std::u8string> Directory::GetFiles(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption)
 {
     std::vector<std::u8string> ret;
-    
     EnumerateFiles(path, searchPattern, searchOption, [&](const std::u8string_view& str)
     {
         ret.emplace_back(str);
     });
+
     return ret;
 }
 
 std::vector<std::u8string> Directory::GetFileSystemEntries(const char8_t* path, const char8_t* searchPattern, SearchOption searchOption)
 {
     std::vector<std::u8string> ret;
-    
     EnumerateFileSystemEntries(path, searchPattern, searchOption, [&](const std::u8string_view& str)
     {
         ret.emplace_back(str);
     });
+
     return ret;
 }
 

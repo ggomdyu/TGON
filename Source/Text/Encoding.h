@@ -18,6 +18,8 @@ public:
     explicit Encoding(const char8_t* codePageName);
     explicit Encoding(int32_t codePage);
     explicit Encoding(UConverter* converter) noexcept;
+
+public:
     Encoding(const Encoding& rhs) = delete;
     Encoding(Encoding&& rhs) = delete;
 
@@ -43,6 +45,7 @@ public:
     [[nodiscard]] std::optional<std::vector<char32_t>> GetChars(const std::span<std::byte>& bytes) const;
     [[nodiscard]] std::optional<std::u8string> GetString(const std::byte* bytes, int32_t count) const;
     [[nodiscard]] std::optional<std::u8string> GetString(const std::span<const std::byte>& bytes) const;
+    [[nodiscard]] virtual std::span<const std::byte> GetPreamble() const noexcept;
     [[nodiscard]] std::optional<int32_t> GetCharCount(const std::byte* bytes, int32_t count) const;
     [[nodiscard]] std::optional<int32_t> GetCharCount(const std::span<std::byte>& bytes) const;
     [[nodiscard]] const std::u8string_view& GetEncodingName() const noexcept;

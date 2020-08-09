@@ -2,7 +2,7 @@
 
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
-#include "Game/Transform.h"
+#include "Game/TransformComponent.h"
 
 namespace tg
 {
@@ -12,7 +12,7 @@ class RectTransform :
 {
 /**@section Constructor */
 public:
-    using TransformComponent::Transform;
+    using TransformComponent::TransformComponent;
 
 /**@section Method */
 public:

@@ -245,16 +245,4 @@ constexpr float Mathf::SmoothStep(float from, float to, float time) noexcept
     return t * t * (3.0f - (2.0f * t));
 }
 
-template <FloatingPoint _Value>
-constexpr _Value Ceil(const _Value& value) noexcept
-{
-    return std::ceil(value);
-}
-
-template <FloatingPoint _Value>
-constexpr _Value Round(const _Value& value) noexcept
-{
-    return std::round(value);
-}
-
 }

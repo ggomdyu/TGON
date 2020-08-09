@@ -37,7 +37,7 @@ public:
     template <typename _String2> requires(!IsBasicStringHash<_String2>)
     constexpr BasicStringHash(const _String2& str) noexcept;
 
-/**@section Constructor */
+/**@section Destructor */
 public:
     ~BasicStringHash() = default;
 
@@ -68,13 +68,13 @@ public:
 public:
     [[nodiscard]] int32_t CompareTo(const std::basic_string_view<ValueType>& str) noexcept;
     [[nodiscard]] int32_t IndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex = 0) const;
-    [[nodiscard]] int32_t IndexOf(ValueType ch, int32_t startIndex = 0) const;
+    [[nodiscard]] int32_t IndexOf(ValueType c, int32_t startIndex = 0) const;
     template <typename _Predicate>
     [[nodiscard]] int32_t IndexOfAny(const _Predicate& predicate, int32_t startIndex = 0) const;
     [[nodiscard]] int32_t LastIndexOf(const std::basic_string_view<ValueType>& str) const;
     [[nodiscard]] int32_t LastIndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex) const;
-    [[nodiscard]] int32_t LastIndexOf(ValueType ch) const;
-    [[nodiscard]] int32_t LastIndexOf(ValueType ch, int32_t startIndex) const;
+    [[nodiscard]] int32_t LastIndexOf(ValueType c) const;
+    [[nodiscard]] int32_t LastIndexOf(ValueType c, int32_t startIndex) const;
     template <typename _Predicate>
     [[nodiscard]] int32_t LastIndexOfAny(const _Predicate& predicate) const;
     template <typename _Predicate>
@@ -196,9 +196,9 @@ constexpr size_t BasicStringHash<_String>::GetHashCode() const noexcept
 }
 
 template <typename _String>
-int32_t BasicStringHash<_String>::IndexOf(ValueType ch, int32_t startIndex) const
+int32_t BasicStringHash<_String>::IndexOf(ValueType c, int32_t startIndex) const
 {
-    ValueType str[] = {ch, 0};
+    ValueType str[] = {c, 0};
     return BasicStringTraits<ValueType>::IndexOf(this->Data() + startIndex, this->Length() - startIndex, str, 1) + startIndex;
 
 }
@@ -223,9 +223,9 @@ int32_t BasicStringHash<_String>::IndexOfAny(const _Predicate& predicate, int32_
 }
 
 template <typename _String>
-int32_t BasicStringHash<_String>::LastIndexOf(ValueType ch, int32_t startIndex) const
+int32_t BasicStringHash<_String>::LastIndexOf(ValueType c, int32_t startIndex) const
 {
-    ValueType str[] = {ch, ValueType(0)};
+    ValueType str[] = {c, ValueType(0)};
     return BasicStringTraits<ValueType>::LastIndexOf(this->Data(), startIndex + 1, str, 1);
 }
 
@@ -242,9 +242,9 @@ int32_t BasicStringHash<_String>::LastIndexOf(const std::basic_string_view<Value
 }
 
 template <typename _String>
-int32_t BasicStringHash<_String>::LastIndexOf(ValueType ch) const
+int32_t BasicStringHash<_String>::LastIndexOf(ValueType c) const
 {
-    return BasicStringTraits<ValueType>::LastIndexOf(this->Data(), this->Length(), &ch, 1);
+    return BasicStringTraits<ValueType>::LastIndexOf(this->Data(), this->Length(), &c, 1);
 }
 
 template <typename _String>

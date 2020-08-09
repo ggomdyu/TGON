@@ -7,22 +7,22 @@
 namespace tg
 {
 
-template <typename _CharType, typename std::enable_if_t<IsChar<_CharType>>* = nullptr>
-constexpr size_t X65599Hash(_CharType ch) noexcept
+template <typename _Char> requires IsChar<_Char>
+constexpr int32_t X65599Hash(_Char c) noexcept
 {
-    return ch ^ (ch >> 16);
+    return c ^ (c >> 16);
 }
     
-template <typename _CharType>
-constexpr size_t X65599Hash(const _CharType* str) noexcept
+template <typename _Char> requires IsChar<_Char>
+constexpr int32_t X65599Hash(const _Char* str) noexcept
 {
     if (str == nullptr)
     {
         return 0;
     }
     
-    size_t hashValue = 0;
-    for (size_t i = 0; str[i] != 0; ++i)
+    int32_t hashValue = 0;
+    for (int32_t i = 0; str[i] != 0; ++i)
     {
         hashValue = 65599 * hashValue + str[i];
     }

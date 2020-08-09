@@ -199,6 +199,11 @@ std::optional<std::u8string> Encoding::GetString(const std::span<const std::byte
     return GetString(bytes.data(), bytes.size());
 }
 
+std::span<const std::byte> Encoding::GetPreamble() const noexcept
+{
+    return {};
+}
+
 std::optional<int32_t> Encoding::GetCharCount(const std::byte* bytes, int32_t count) const
 {
     int32_t ret = 0;

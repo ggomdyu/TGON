@@ -21,7 +21,7 @@ struct GlyphMetrics final
 
 struct GlyphData final
 {
-    char32_t ch;
+    char32_t character;
     GlyphMetrics metrics;
     std::unique_ptr<std::byte[]> bitmap;
 };
@@ -43,10 +43,10 @@ public:
 
     /**
      * @brief   Gets the glyph data of the specified character.
-     * @param ch    Glyph identifier character.
+     * @param c    Glyph identifier character.
      * @return  The character glyph data or nullptr.
      */
-    const GlyphData* GetGlyphData(char32_t ch) const;
+    const GlyphData* GetGlyphData(char32_t c) const;
 
     /**
      * @brief   Gets the size of kerning between two characters.

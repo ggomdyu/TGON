@@ -25,7 +25,7 @@ public:
     void SetLocalRotation(const Vector3& localRotation) noexcept;
     void SetLocalScale(const Vector3& localScale) noexcept;
     [[nodiscard]] const Vector3& GetLocalPosition() const noexcept;
-  [nodisd]] const Vector3& GetLocalRotation() const noexcept;
+    [[nodiscard]] const Vector3& GetLocalRotation() const noexcept;
     [[nodiscard]] const Vector3& GetLocalScale() const noexcept;
     [[nodiscard]] const Matrix4x4& GetWorldMatrix() const noexcept;
     void Update() override;

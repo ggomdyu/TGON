@@ -41,9 +41,9 @@ void FontAtlas::Initialize(std::shared_ptr<Font>&& font)
     m_font = std::move(font);
 }
 
-std::optional<Rect> FontAtlas::GetTextureRect(char32_t ch, int32_t fontSize) const
+std::optional<Rect> FontAtlas::GetTextureRect(char32_t c, int32_t fontSize) const
 {
-    auto textureAtlasKey = FontAtlas::CreateTextureAtlasKey(ch, fontSize);
+    const auto textureAtlasKey = CreateTextureAtlasKey(c, fontSize);
     return m_textureAtlas.GetTextureRect(textureAtlasKey);
 }
 
@@ -57,12 +57,12 @@ std::shared_ptr<Texture> FontAtlas::GetAtlasTexture() noexcept
     return m_textureAtlas.GetAtlasTexture();
 }
 
-const GlyphData* FontAtlas::GetGlyphData(char32_t ch, int32_t fontSize) const
+const GlyphData* FontAtlas::GetGlyphData(char32_t c, int32_t fontSize) const
 {
-    auto glyphData = m_font->GetFontFace(fontSize)->GetGlyphData(ch);
+    const auto glyphData = m_font->GetFontFace(fontSize)->GetGlyphData(c);
     if (glyphData != nullptr)
     {
-        auto textureAtlasKey = FontAtlas::CreateTextureAtlasKey(ch, fontSize);
+        const auto textureAtlasKey = CreateTextureAtlasKey(c, fontSize);
         if (m_textureAtlas.Contains(textureAtlasKey) == false)
         {
             m_textureAtlas.Insert(textureAtlasKey, &glyphData->bitmap[0], glyphData->metrics.size);
@@ -77,9 +77,9 @@ IntVector2 FontAtlas::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) c
     return m_font->GetFontFace(fontSize)->GetKerning(lhs, rhs);
 }
 
-FontAtlas::TextureAtlasKey FontAtlas::CreateTextureAtlasKey(char32_t ch, int32_t fontSize) noexcept
+FontAtlas::TextureAtlasKey FontAtlas::CreateTextureAtlasKey(char32_t c, int32_t fontSize) noexcept
 {
-    return static_cast<TextureAtlasKey>(ch) << 32 | fontSize;
+    return static_cast<TextureAtlasKey>(c) << 32 | fontSize;
 }
 
 }

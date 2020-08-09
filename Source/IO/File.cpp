@@ -10,6 +10,45 @@
 
 namespace tg
 {
+namespace
+{
+
+[[nodiscard]] const Encoding* DetectEncoding(const std::byte* bytes, int32_t count) noexcept
+{
+    // TODO: Not tested at all!!
+
+    if (bytes != nullptr && count > 2)
+    {
+        if (bytes[0] == std::byte(0xff) && bytes[1] == std::byte(0xFE))
+        {
+            if (count < 4 || bytes[2] != std::byte(0) || bytes[3] != std::byte(0))
+            {
+                return &Encoding::Unicode();
+            }
+
+            return &Encoding::UTF32();
+        }
+
+        if (bytes[0] == std::byte(0xfe) && bytes[1] == std::byte(0xff))
+        {
+            return &Encoding::BigEndianUnicode();
+        }
+        
+        if (count >= 3 && bytes[0] == std::byte(0xef) && bytes[1] == std::byte(0xbb) && bytes[2] == std::byte(0xbf))
+        {
+            return &Encoding::UTF8();
+        }
+
+        if (count >= 4 && bytes[0] == std::byte(0) && bytes[1] == std::byte(0) && bytes[2] == std::byte(0xfe) && bytes[3] == std::byte(0xff))
+        {
+            return Encoding::GetEncoding(u8"UTF32BE");
+        }
+    }
+
+    return &Encoding::UTF8();
+}
+
+}
 
 std::optional<DateTime> File::GetCreationTime(const char8_t* path)
 {
@@ -140,32 +179,60 @@ std::optional<std::u8string> File::ReadAllText(const char8_t* path)
 #endif
 
     fclose(fp);
+
+    const auto* encoding = DetectEncoding(reinterpret_cast<const std::byte*>(fileData.c_str()), fileData.length());
+    if (encoding != &Encoding::UTF8())
+    {
+        return encoding->GetString(reinterpret_cast<const std::byte*>(fileData.data()), static_cast<int32_t>(fileData.size()));
+    }
+
+    return fileData;
+}
+
+std::optional<std::u8string> File::ReadAllText(const char8_t* path, const Encoding& encoding)
+{
+#ifdef _MSC_VER
+    FILE* fp = nullptr;
+    fopen_s(&fp, reinterpret_cast<const char*>(path), "r");
+#else
+    FILE* fp = fopen(reinterpret_cast<const char*>(path), "r");
+#endif
+    if (fp == nullptr)
+    {
+        return {};
+    }
+
+    fseek(fp, 0, SEEK_END);
+    const auto fileSize = static_cast<size_t>(ftell(fp));
+    fseek(fp, 0, SEEK_SET);
+
+    std::u8string fileData(fileSize, '\0');
+#ifdef _MSC_VER
+    fread_s(&fileData[0], fileSize, 1, fileSize, fp);
+#else
+    fread(&fileData[0], 1, fileSize, fp);
+#endif
+
+    fclose(fp);
+
+    if (encoding != Encoding::UTF8())
+    {
+        return encoding.GetString(reinterpret_cast<const std::byte*>(fileData.data()), static_cast<int32_t>(fileData.size()));
+    }
+
     return fileData;
 }
 
 std::optional<std::vector<std::u8string>> File::ReadAllLines(const char8_t* path)
 {
-    std::basic_ifstream<char8_t, std::char_traits<char8_t>> fs;
-    fs.open(reinterpret_cast<const char*>(path));
-
-    if (!fs)
-    {
-        return {};
-    }
-
     std::vector<std::u8string> ret;
-    std::u8string line;
-    while (std::getline(fs, line))
+    ReadLines(path, [&](std::u8string&& item)
     {
-        if (line.empty())
-        {
-            continue;
-        }
+        ret.push_back(std::move(item));
+        return true;
+    });
 
-        ret.push_back(std::move(line));
-    }
-
-    return ret;
+    return std::move(ret);
 }
 
 std::optional<FileStream> File::Create(const char8_t* path)

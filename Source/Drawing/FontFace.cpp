@@ -36,15 +36,15 @@ std::shared_ptr<FontFace> FontFace::Create(const std::shared_ptr<std::remove_poi
     }));
 }
 
-const GlyphData* FontFace::GetGlyphData(char32_t ch) const
+const GlyphData* FontFace::GetGlyphData(char32_t c) const
 {
-    const auto it = m_glyphData.find(ch);
+    const auto it = m_glyphData.find(c);
     if (it != m_glyphData.cend())
     {
         return &it->second;
     }
 
-    if (FT_Load_Char(m_fontFace.get(), ch, FT_LOAD_RENDER))
+    if (FT_Load_Char(m_fontFace.get(), c, FT_LOAD_RENDER))
     {
         return nullptr;
     }
@@ -61,7 +61,7 @@ const GlyphData* FontFace::GetGlyphData(char32_t ch) const
 
     const auto bearing = IntVector2(static_cast<int32_t>(m_fontFace->glyph->bitmap_left), static_cast<int32_t>(m_fontFace->glyph->bitmap_top));
     const auto advance = IntVector2(static_cast<int32_t>(m_fontFace->glyph->advance.x >> 6), static_cast<int32_t>(m_fontFace->glyph->advance.y >> 6));
-    return &m_glyphData.insert(it, {ch, GlyphData{ch, GlyphMetrics{bitmapExtent, bearing, advance}, std::move(bitmap)}})->second;
+    return &m_glyphData.insert(it, {c, GlyphData{c, GlyphMetrics{bitmapExtent, bearing, advance}, std::move(bitmap)}})->second;
 }
 
 IntVector2 FontFace::GetKerning(char32_t lhs, char32_t rhs) const

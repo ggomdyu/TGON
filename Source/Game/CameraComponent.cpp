@@ -84,18 +84,6 @@ const Matrix4x4& CameraComponent::GetViewProjectionMatrix() const noexcept
     return m_matViewProj;
 }
 
-void CameraComponent::Update()
-{
-    if (m_isDirty == true)
-    {
-        m_matProj = Matrix4x4::PerspectiveRH(m_fieldOfView, 1, m_nearClipPlane, m_farClipPlane);
-        m_matViewProj = Matrix4x4::LookAtRH(m_eyePt, m_lookAt, {0.0f, 1.0f, 0.0f});
-        m_matViewProj *= m_matProj;
-
-        m_isDirty = false;
-    }
-}
-
 void CameraComponent::SetEyePt(const Vector3& eyePt) noexcept
 {
     m_eyePt = eyePt;
@@ -133,7 +121,16 @@ void CameraComponent::Update()
 {
     if (m_isDirty == true)
     {
-        m_matProj = Matrix4x4::OrthographicRH(m_pixelRect.x, m_pixelRect.x + m_pixelRect.width, m_pixelRect.y, m_pixelRect.y + m_pixelRect.height, m_nearClipPlane, m_farClipPlane);
+        if (m_projectionMode == ProjectionMode::Perspective)
+        {
+            m_matProj = Matrix4x4::PerspectiveRH(m_fieldOfView, 1, m_nearClipPlane, m_farClipPlane);
+            m_matViewProj = Matrix4x4::LookAtRH(m_eyePt, m_lookAt, {0.0f, 1.0f, 0.0f});
+        }
+        else
+        {
+            m_matProj = Matrix4x4::OrthographicRH(m_pixelRect.x, m_pixelRect.x + m_pixelRect.width, m_pixelRect.y, m_pixelRect.y + m_pixelRect.height, m_nearClipPlane, m_farClipPlane);
+        }
+
         m_matViewProj *= m_matProj;
         
         m_isDirty = false;

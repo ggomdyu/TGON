@@ -14,6 +14,9 @@
 
 namespace tg
 {
+
+extern thread_local std::array<wchar_t, 32768> g_tempUtf16StrBuffer;
+
 namespace
 {
 
@@ -188,21 +191,21 @@ void Application::MessageLoop()
 
 void Application::ShowMessageBox(const char8_t* title, const char8_t* message, MessageBoxIcon messageBoxIcon)
 {
-    std::array<wchar_t, 2048> utf16Title{};
+    const auto utf16Title = std::span(g_tempUtf16StrBuffer).subspan(0, g_tempUtf16StrBuffer.size() / 2);
     const auto utf16TitleLen = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(title), -1, &utf16Title[0], utf16Title.size());
     if (utf16TitleLen == 0)
     {
         return;
     }
 
-    std::array<wchar_t, 2048> utf16Message{};
+    const auto utf16Message = std::span(g_tempUtf16StrBuffer).subspan(g_tempUtf16StrBuffer.size() / 2, g_tempUtf16StrBuffer.size() / 2);
     const auto utf16MessageLen = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(message), -1, &utf16Message[0], static_cast<int>(utf16Message.size()));
     if (utf16MessageLen == 0)
     {
         return;
     }
 
-    MessageBoxW(nullptr, &utf16Message[0], &utf16Title[0], ConvertMessageBoxIconToNative(messageBoxIcon) | MB_OK);
+    MessageBoxW(nullptr, utf16Message.data(), utf16Title.data(), ConvertMessageBoxIconToNative(messageBoxIcon) | MB_OK);
 }
 
 Engine& Application::GetEngine() noexcept

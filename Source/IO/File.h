@@ -4,34 +4,16 @@
 #include <optional>
 
 #include "Core/TagDispatch.h"
+#include "Text/Encoding.h"
 #include "Time/DateTime.h"
 
+#include "FileAttributes.h"
 #include "FileStream.h"
 
 namespace tg
 {
 
-enum class FileAttributes
-{
-    Archive = 0x20,
-    Compressed = 0x800,
-    Device = 0x40,
-    Directory = 0x10,
-    Encrypted = 0x4000,
-    Hidden = 0x2,
-    IntegrityStream = 0x8000,
-    Normal = 0x80,
-    NoScrubData = 0x20000,
-    NotContentIndexed = 0x2000,
-    Offline = 0x1000,
-    ReadOnly = 0x1,
-    ReparsePoint = 0x400,
-    SparseFile = 0x200,
-    System = 0x4,
-    Temporary = 0x100
-};
-
-class File
+class File final
 {
 /**@section Constructor */
 public:
@@ -49,26 +31,29 @@ public:
     static bool SetLastAccessTimeUtc(const char8_t* path, const DateTime& lastAccessTimeUtc);
     static bool SetLastWriteTime(const char8_t* path, const DateTime& lastWriteTime);
     static bool SetLastWriteTimeUtc(const char8_t* path, const DateTime& lastWriteTimeUtc);
-    static std::optional<DateTime> GetCreationTime(const char8_t* path);
-    static std::optional<DateTime> GetCreationTimeUtc(const char8_t* path);
-    static std::optional<DateTime> GetLastAccessTime(const char8_t* path);
-    static std::optional<DateTime> GetLastAccessTimeUtc(const char8_t* path);
-    static std::optional<DateTime> GetLastWriteTime(const char8_t* path);
-    static std::optional<DateTime> GetLastWriteTimeUtc(const char8_t* path);
-    static std::optional<FileAttributes> GetAttributes(const char8_t* path);
+    [[nodiscard]] static std::optional<DateTime> GetCreationTime(const char8_t* path);
+    [[nodiscard]] static std::optional<DateTime> GetCreationTimeUtc(const char8_t* path);
+    [[nodiscard]] static std::optional<DateTime> GetLastAccessTime(const char8_t* path);
+    [[nodiscard]] static std::optional<DateTime> GetLastAccessTimeUtc(const char8_t* path);
+    [[nodiscard]] static std::optional<DateTime> GetLastWriteTime(const char8_t* path);
+    [[nodiscard]] static std::optional<DateTime> GetLastWriteTimeUtc(const char8_t* path);
+    [[nodiscard]] static std::optional<FileAttributes> GetAttributes(const char8_t* path);
     static bool Decrypt(const char8_t* path);
     static bool Encrypt(const char8_t* path);
-    static std::optional<std::u8string> ReadAllText(const char8_t* path);
-    static std::unique_ptr<std::byte[]> ReadAllBytes(const char8_t* path, ReturnPointerTag);
-    static std::optional<std::vector<std::byte>> ReadAllBytes(const char8_t* path, ReturnVectorTag);
-    static std::optional<std::vector<std::u8string>> ReadAllLines(const char8_t* path);
-    static std::optional<FileStream> Create(const char8_t* path);
-    static std::optional<FileStream> Create(const char8_t* path, int32_t bufferSize);
-    static std::optional<FileStream> Create(const char8_t* path, int32_t bufferSize, FileOptions options);
-    static std::optional<FileStream> Open(const char8_t* path, FileMode mode);
-    static std::optional<FileStream> Open(const char8_t* path, FileMode mode, FileAccess access);
-    static std::optional<FileStream> Open(const char8_t* path, FileMode mode, FileAccess access, FileShare share);
+    [[nodiscard]] static std::optional<FileStream> Create(const char8_t* path);
+    [[nodiscard]] static std::optional<FileStream> Create(const char8_t* path, int32_t bufferSize);
+    [[nodiscard]] static std::optional<FileStream> Create(const char8_t* path, int32_t bufferSize, FileOptions options);
+    [[nodiscard]] static std::optional<FileStream> Open(const char8_t* path, FileMode mode);
+    [[nodiscard]] static std::optional<FileStream> Open(const char8_t* path, FileMode mode, FileAccess access);
+    [[nodiscard]] static std::optional<FileStream> Open(const char8_t* path, FileMode mode, FileAccess access, FileShare share);
     static bool SetAttributes(const char8_t* path, FileAttributes fileAttributes);
+    [[nodiscard]] static std::optional<std::u8string> ReadAllText(const char8_t* path);
+    [[nodiscard]] static std::optional<std::u8string> ReadAllText(const char8_t* path, const Encoding& encoding);
+    [[nodiscard]] static std::unique_ptr<std::byte[]> ReadAllBytes(const char8_t* path, ReturnPointerTag);
+    [[nodiscard]] static std::optional<std::vector<std::byte>> ReadAllBytes(const char8_t* path, ReturnVectorTag);
+    [[nodiscard]] static std::optional<std::vector<std::u8string>> ReadAllLines(const char8_t* path);
+    template <typename _Predicate>
+    static void ReadLines(const char8_t* path, const _Predicate& callback);
     //static void AppendAllLines(const std::u8string_view& path, IEnumerable<string> contents);
     //static void AppendAllLines(const std::u8string_view& path, IEnumerable<string> contents, Encoding encoding);
     //static void AppendAllText(const std::u8string_view& path, string contents);
@@ -80,7 +65,6 @@ public:
     //static FileStream OpenWrite(const std::u8string_view& path);
     //static string[] ReadAllLines(const std::u8string_view& path);
     //static string[] ReadAllLines(const std::u8string_view& path, Encoding encoding);
-    //static IEnumerable<string> ReadLines(const std::u8string_view& path);
     //static IEnumerable<string> ReadLines(const std::u8string_view& path, Encoding encoding);
     //static void Replace(const std::u8string_view& sourcePath, string destinationPath, string destinationBackupPath);
     //static void Replace(const std::u8string_view& sourcePath, string destinationPath, string destinationBackupPath, bool ignoreMetadataErrors);
@@ -91,5 +75,31 @@ public:
     //static void WriteAllText(const std::u8string_view& path, string contents);
     //static void WriteAllText(const std::u8string_view& path, string contents, Encoding encoding);
 };
+
+template <typename _Predicate>
+void File::ReadLines(const char8_t* path, const _Predicate& callback)
+{
+    std::basic_ifstream<char8_t, std::char_traits<char8_t>> fs;
+    fs.open(reinterpret_cast<const char*>(path));
+
+    if (!fs)
+    {
+        return;
+    }
+
+    std::u8string line;
+    while (std::getline(fs, line))
+    {
+        if (line.empty())
+        {
+            continue;
+        }
+        
+        if (callback(std::move(line)) == false)
+        {
+            break;
+        }
+    }
+}
 
 }

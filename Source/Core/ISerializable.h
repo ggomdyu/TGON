@@ -1,22 +1,9 @@
 #pragma once
 
-#include <map>
-#include <string>
+#include "SerializationInfo.h"
 
 namespace tg
 {
-
-class SerializationInfo
-{
-/**@section Method */
-public:
-    template <typename _ValueType>
-    void AddValue(const std::string& name, const _ValueType& value);
-    
-/**@section Variable */
-private:
-    std::map<std::string, std::string> m_variableTable;
-};
 
 template <typename _ValueType>
 void SerializationInfo::AddValue(const std::string& name, const _ValueType& value)

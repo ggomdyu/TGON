@@ -43,7 +43,7 @@ void* Thread::GetNativeHandle()
 
 int32_t Thread::GetHardwareConcurrency() noexcept
 {
-    return static_cast<int32_t>(std::thread::hardware_concurrency());
+    return static_cast<int32_t>(hardware_concurrency());
 }
 
 bool Thread::IsMainThread(ThreadId threadId) noexcept

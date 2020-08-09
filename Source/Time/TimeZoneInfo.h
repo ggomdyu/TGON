@@ -11,20 +11,20 @@ class TimeZoneInfo final
 {
 /**@section Constructor */
 public:
-    TimeZoneInfo() = default;
-    TimeZoneInfo(std::string id, const TimeSpan& baseUtcOffset, std::string displayName, std::string standardDisplayName, std::string daylightDisplayName, bool supportsDaylightSavingTime);
+    TimeZoneInfo() noexcept = default;
+    TimeZoneInfo(std::u8string id, const TimeSpan& baseUtcOffset, std::u8string displayName, std::u8string standardDisplayName, std::u8string daylightDisplayName, bool supportsDaylightSavingTime) noexcept;
 
 /**@section Method */
 public:
     [[nodiscard]] static const TimeZoneInfo& Local();
-    [[nodiscard]] static const TimeZoneInfo& Utc();
+    [[nodiscard]] static const TimeZoneInfo& Utc() noexcept;
     [[nodiscard]] static DateTime ConvertTime(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone);
     [[nodiscard]] static DateTime ConvertTimeFromUtc(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone);
     [[nodiscard]] static DateTime ConvertTimeToUtc(const DateTime& dateTime);
-    [[nodiscard]] const std::string& GetId() const noexcept;
+    [[nodiscard]] const std::u8string& GetId() const noexcept;
     [[nodiscard]] const TimeSpan& GetBaseUtcOffset() const noexcept;
-    [[nodiscard]] const std::string& GetStandardDisplayName() const noexcept;
-    [[nodiscard]] const std::string& GetDaylightDisplayName() const noexcept;
+    [[nodiscard]] const std::u8string& GetStandardDisplayName() const noexcept;
+    [[nodiscard]] const std::u8string& GetDaylightDisplayName() const noexcept;
     [[nodiscard]] bool IsSupportDaylightSavingTime() const noexcept;
     
 private:
@@ -33,15 +33,15 @@ private:
 
 /**@section Variable */
 private:
-    std::string m_id;
+    std::u8string m_id;
     TimeSpan m_baseUtcOffset = TimeSpan(0);
-    std::string m_displayName;
-    std::string m_standardDisplayName;
-    std::string m_daylightDisplayName;
+    std::u8string m_displayName;
+    std::u8string m_standardDisplayName;
+    std::u8string m_daylightDisplayName;
     bool m_supportsDaylightSavingTime = false;
 };
 
-inline TimeZoneInfo::TimeZoneInfo(std::string id, const TimeSpan& baseUtcOffset, std::string displayName, std::string standardDisplayName, std::string daylightDisplayName, bool supportsDaylightSavingTime) :
+inline TimeZoneInfo::TimeZoneInfo(std::u8string id, const TimeSpan& baseUtcOffset, std::u8string displayName, std::u8string standardDisplayName, std::u8string daylightDisplayName, bool supportsDaylightSavingTime) noexcept :
     m_id(std::move(id)),
     m_baseUtcOffset(baseUtcOffset),
     m_displayName(std::move(displayName)),
@@ -51,11 +51,11 @@ inline TimeZoneInfo::TimeZoneInfo(std::string id, const TimeSpan& baseUtcOffset,
 {
 }
 
-inline const TimeZoneInfo& TimeZoneInfo::Utc()
+inline const TimeZoneInfo& TimeZoneInfo::Utc() noexcept
 {
     static auto timeZoneInfo = []()
     {
-        const std::string id = "UTC";
+        const std::u8string id = u8"UTC";
         return TimeZoneInfo(id, TimeSpan(0), id, id, id, false);
     } ();
     return timeZoneInfo;
@@ -81,7 +81,7 @@ inline DateTime TimeZoneInfo::ConvertTimeToUtc(const DateTime& dateTime)
     return ConvertTime(dateTime, TimeZoneInfo::Local(), TimeZoneInfo::Utc());
 }
 
-inline const std::string& TimeZoneInfo::GetId() const noexcept
+inline const std::u8string& TimeZoneInfo::GetId() const noexcept
 {
     return m_id;
 }
@@ -91,12 +91,12 @@ inline const TimeSpan& TimeZoneInfo::GetBaseUtcOffset() const noexcept
     return m_baseUtcOffset;
 }
 
-inline const std::string& TimeZoneInfo::GetStandardDisplayName() const noexcept
+inline const std::u8string& TimeZoneInfo::GetStandardDisplayName() const noexcept
 {
     return m_standardDisplayName;
 }
 
-inline const std::string& TimeZoneInfo::GetDaylightDisplayName() const noexcept
+inline const std::u8string& TimeZoneInfo::GetDaylightDisplayName() const noexcept
 {
     return m_daylightDisplayName;
 }

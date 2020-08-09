@@ -98,9 +98,6 @@ template <typename _Type>
 using RemoveAllPointers = typename detail::RemoveAllPointers<_Type>::Type;
 
 template <typename _Type>
-using RemoveCvref = std::remove_cv_t<std::remove_reference_t<_Type>>;
-
-template <typename _Type>
 using RawType = std::remove_cv_t<RemoveAllPointers<std::decay_t<_Type>>>;
 
 template <typename _Type>
@@ -113,6 +110,6 @@ template <typename _Type, typename... _Types>
 constexpr bool IsAnyOf = std::bool_constant<(std::is_same_v<_Type, _Types> || ...)>::value;
 
 template <typename _Type>
-concept IsChar = IsAnyOf<_Type, char, char8_t, char16_t, char32_t, wchar_t>;
+constexpr bool IsChar = IsAnyOf<_Type, char, char8_t, char16_t, char32_t, wchar_t>;
 
 }

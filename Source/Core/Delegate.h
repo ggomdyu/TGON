@@ -14,12 +14,6 @@ class Delegate;
 namespace detail
 {
 
-template <typename>
-struct IsDelegate : std::false_type {};
-
-template <typename _Type>
-struct IsDelegate<Delegate<_Type>> : std::true_type {};
-
 template <typename _Return, typename... _Types>
 class Functor
 {
@@ -116,8 +110,11 @@ size_t FunctorImpl<_Function, _Return, _Types...>::GetSize() const noexcept
 
 }
 
+template <typename>
+constexpr bool IsDelegate = std::false_type::value;
+
 template <typename _Type>
-constexpr bool IsDelegate = detail::IsDelegate<_Type>::value;
+constexpr bool IsDelegate<Delegate<_Type>> = std::true_type::value;
 
 template <typename _Return, typename... _Types>
 class Delegate<_Return(_Types...)> final
@@ -262,8 +259,10 @@ constexpr bool Delegate<_Return(_Types...)>::IsLargeFunction() noexcept
 template <typename _Return, typename... _Types>
 Delegate<_Return(_Types...)>& Delegate<_Return(_Types...)>::operator=(const Delegate& rhs)
 {
-    this->Destroy();
-    this->Copy(rhs);
+    if (this != &rhs)
+    {
+        this->Copy(rhs);
+    }
 
     return *this;
 }
@@ -271,7 +270,11 @@ Delegate<_Return(_Types...)>& Delegate<_Return(_Types...)>::operator=(const Dele
 template <typename _Return, typename... _Types>
 Delegate<_Return(_Types...)>& Delegate<_Return(_Types...)>::operator=(Delegate&& rhs) noexcept
 {
-    this->Move(std::move(rhs));
+    if (this != &rhs)
+    {
+        this->Move(std::move(rhs));
+    }
+
     return *this;
 }
 
@@ -296,6 +299,8 @@ bool Delegate<_Return(_Types...)>::IsDynamicAllocated() const noexcept
 template <typename _Return, typename... _Types>
 void Delegate<_Return(_Types...)>::Copy(const Delegate& rhs)
 {
+    this->Destroy();
+
     if (rhs.m_functor == nullptr)
     {
         return;

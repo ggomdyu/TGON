@@ -8,13 +8,15 @@
 
 namespace tg
 {
+
+extern thread_local std::array<wchar_t, 32768> g_tempUtf16StrBuffer;
+
 namespace
 {
 
 HANDLE CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
 {
-    std::array<wchar_t, 2048> utf16Path{};
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(std::char_traits<char8_t>::length(path)), reinterpret_cast<std::byte*>(&utf16Path[0]), static_cast<int32_t>(utf16Path.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(std::char_traits<char8_t>::length(path)), reinterpret_cast<std::byte*>(g_tempUtf16StrBuffer.data()), static_cast<int32_t>(g_tempUtf16StrBuffer.size())).has_value() == false)
     {
         return INVALID_HANDLE_VALUE;
     }
@@ -22,7 +24,7 @@ HANDLE CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess acces
     const auto desiredAccess = (access == FileAccess::Read) ? GENERIC_READ : (access == FileAccess::Write) ? GENERIC_WRITE : GENERIC_READ | GENERIC_WRITE;
 
     const bool useSecurityAttributes = UnderlyingCast(share) & UnderlyingCast(FileShare::Inheritable);
-    SECURITY_ATTRIBUTES securityAttributes {};
+    SECURITY_ATTRIBUTES securityAttributes{};
     if (useSecurityAttributes)
     {
         if ((UnderlyingCast(share) & UnderlyingCast(FileShare::Inheritable)) != 0)
@@ -31,12 +33,12 @@ HANDLE CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess acces
             securityAttributes.bInheritHandle = TRUE;
         }
     }
-    
+
     // The named pipe on Windows allows the server to impersonate the client.
     // So we have to add the below flags because of this security vulnerability.
     const DWORD flagsAndAttributes = UnderlyingCast(options) | SECURITY_SQOS_PRESENT | SECURITY_ANONYMOUS;
 
-    return CreateFileW(reinterpret_cast<LPCWSTR>(&utf16Path[0]), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
+    return CreateFileW(reinterpret_cast<LPCWSTR>(g_tempUtf16StrBuffer.data()), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
 }
 
 }

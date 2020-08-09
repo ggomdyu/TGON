@@ -1,19 +1,20 @@
 #include "PrecompiledHeader.h"
 
-#include <sstream>
 #include <array>
 #include <Platform/Windows/Windows.h>
 #ifndef SECURITY_WIN32
-#   define SECURITY_WIN32
+#define SECURITY_WIN32
 #endif
+#include <Psapi.h>
 #include <security.h>
 #include <shlobj.h>
-#include <Psapi.h>
+#include <sstream>
 #pragma pack(push, before_imagehlp, 8)
 #include <imagehlp.h>
 #pragma pack(pop, before_imagehlp)
 
-#include "Misc/Windows/SafeHandle.h"
+#include "SafeHandle.h"
+#include "SafeRegistryHandle.h"
 
 #include "../Environment.h"
 #include "../OperatingSystem.h"
@@ -26,6 +27,10 @@
 
 namespace tg
 {
+
+extern thread_local std::array<char8_t, 32768> g_tempUtf8StrBuffer;
+thread_local std::array<wchar_t, 32768> g_tempUtf16StrBuffer;
+
 namespace
 {
 
@@ -58,23 +63,102 @@ constexpr int MaxUserEnvVariableLength = 255;
     return true;
 }
 
+[[nodiscard]] std::optional<std::wstring> Utf8ToUtf16(const std::u8string_view& str)
+{
+    const auto utf16StrLen = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(str.data()), static_cast<int>(str.length()) + 1, nullptr, 0) - 1;
+    if (utf16StrLen == -1)
+    {
+        return {};
+    }
+
+    std::wstring utf16Str;
+    utf16Str.resize(utf16StrLen);
+    MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(str.data()), static_cast<int>(str.length()) + 1, utf16Str.data(), static_cast<int>(utf16Str.size()) == 0);
+
+    return std::move(utf16Str);
+};
+
+[[nodiscard]] std::optional<std::u8string> Utf16ToUtf8(const std::wstring_view& str)
+{
+    const auto utf8StrLen = WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.length()) + 1, nullptr, 0, nullptr, nullptr) - 1;
+    if (utf8StrLen == -1)
+    {
+        return {};
+    }
+
+    std::u8string utf8Str;
+    utf8Str.resize(utf8StrLen);
+    WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.length()) + 1, reinterpret_cast<char*>(utf8Str.data()), static_cast<int>(utf8Str.size()), nullptr, nullptr);
+
+    return std::move(utf8Str);
+};
+
+bool InternalSetEnvironmentVariable(HKEY predefinedKey, LPCWSTR subKey, const std::u8string_view& name, const char8_t* value)
+{
+    SafeRegistryHandle keyHandle;
+    if (RegOpenKeyExW(predefinedKey, subKey, 0, KEY_READ | KEY_WRITE, keyHandle) != ERROR_SUCCESS)
+    {
+        return false;
+    }
+
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(name.data()), static_cast<int>(name.length()) + 1, g_tempUtf16StrBuffer.data(), g_tempUtf16StrBuffer.size()) == 0)
+    {
+        return {};
+    }
+
+    if (value == nullptr)
+    {
+        RegDeleteValueW(keyHandle, g_tempUtf16StrBuffer.data());
+    }
+    else if (RegSetValueExW(keyHandle, g_tempUtf16StrBuffer.data(), 0, REG_SZ, reinterpret_cast<const BYTE*>(value), std::char_traits<char8_t>::length(value) + 1) != ERROR_SUCCESS)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+std::optional<int32_t> InternalGetEnvironmentVariable(HKEY predefinedKey, LPCWSTR subKey, const std::u8string_view& name, char8_t* destStr, int32_t destStrBufferLen)
+{
+    SafeRegistryHandle keyHandle;
+    if (RegOpenKeyExW(predefinedKey, subKey, 0, KEY_READ, keyHandle) != ERROR_SUCCESS)
+    {
+        return {};
+    }
+
+    auto& utf16Name = g_tempUtf16StrBuffer;
+    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(name.data()), static_cast<int>(name.length()) + 1, utf16Name.data(), utf16Name.size()) == 0)
+    {
+        return {};
+    }
+
+    DWORD type = 0;
+    DWORD valueByteCount = destStrBufferLen;
+    if (RegQueryValueExW(keyHandle, utf16Name.data(), nullptr, &type, reinterpret_cast<LPBYTE>(destStr), reinterpret_cast<LPDWORD>(&valueByteCount)) != ERROR_SUCCESS)
+    {
+        return {};
+    }
+
+    return valueByteCount - 1;
+}
+
 }
 
 bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* value)
 {
-    std::array<wchar_t, 2048> utf16Name{};
-    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(name), -1, &utf16Name[0], static_cast<int>(utf16Name.size()) == 0))
+    auto utf16Name = Utf8ToUtf16(name);
+    if (utf16Name.has_value() == false)
     {
         return false;
     }
 
-    std::array<wchar_t, 2048> utf16Value{};
-    if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(value), -1, &utf16Value[0], static_cast<int>(utf16Value.size())) == 0)
+    auto utf16Value = Utf8ToUtf16(value);
+    if (utf16Value.has_value() == false)
     {
         return false;
     }
 
-    return !!SetEnvironmentVariableW(&utf16Name[0], &utf16Value[0]);
+    return !!SetEnvironmentVariableW(utf16Name->data(), utf16Value->data());
 }
 
 bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* value, EnvironmentVariableTarget target)
@@ -90,71 +174,22 @@ bool Environment::SetEnvironmentVariable(const char8_t* name, const char8_t* val
         return false;
     }
 
-    // System-wide environment variables stored in the registry are
-    // limited to 1024 chars for the environment variable name.
-    if (nameLen >= MaxSystemEnvVariableLength)
-    {
-        return false;
-    }
-
-//#if FEATURE_WIN32_REGISTRY
     if (target == EnvironmentVariableTarget::Machine)
     {
-        HKEY keyHandle{};
-        constexpr auto subKey = L"System\\CurrentControlSet\\Control\\Session Manager\\Environment";
-        if (RegOpenKeyExW(HKEY_LOCAL_MACHINE, subKey, 0, KEY_ALL_ACCESS, &keyHandle) != ERROR_SUCCESS)
+        if (nameLen >= MaxSystemEnvVariableLength)
         {
             return false;
         }
 
-        if (value == nullptr)
-        {
-            //RegDeleteValueW(keyHandle, name);
-        }
-        else
-        {
-            //const auto valueLen = std::char_traits<char8_t>(value);
-            //RegQueryValueExW(keyHandle, name, nullptr, nullptr, )
-            //RegSetValueExW(keyHandle, name, 0, REG_SZ, )
-        }
-
-        RegCloseKey(keyHandle);
+        return InternalSetEnvironmentVariable(HKEY_LOCAL_MACHINE, L"System\\CurrentControlSet\\Control\\Session Manager\\Environment", {name, nameLen}, value);
     }
-//    else if (target == EnvironmentVariableTarget.User)
-//    {
-//        // User-wide environment variables stored in the registry are
-//        // limited to 255 chars for the environment variable name.
-    //        if (variable.Length >= MaxUserEnvVariableLength)
-    //        {
-//            throw new ArgumentException(Environment.GetResourceString("Argument_LongEnvVarValue"));
-//        }
-//        using(RegistryKey environmentKey =
-//                  Registry.CurrentUser.OpenSubKey("Environment", true))
-//        {
-//            Contract.Assert(environmentKey != null, @"HKCU\Environment is missing!");
-//            if (environmentKey != null)
-//            {
-//                if (value == null)
-//                    environmentKey.DeleteValue(variable, false);
-//                else
-//                    environmentKey.SetValue(variable, value);
-//            }
-//        }
-//    }
-//    else
-//    {
-//        throw new ArgumentException(Environment.GetResourceString("Arg_EnumIllegalVal", (int)target));
-//    }
-//    // send a WM_SETTINGCHANGE message to all windows
-//    IntPtr r = Win32Native.SendMessageTimeout(new IntPtr(Win32Native.HWND_BROADCAST), Win32Native.WM_SETTINGCHANGE, IntPtr.Zero, "Environment", 0, 1000, IntPtr.Zero);
-//
-//    if (r == IntPtr.Zero)
-//        BCLDebug.Assert(false, "SetEnvironmentVariable failed: " + Marshal.GetLastWin32Error());
-//
-//#else // FEATURE_WIN32_REGISTRY
-//    throw new ArgumentException(Environment.GetResourceString("Arg_EnumIllegalVal", (int)target));
-//#endif
-    return true;
+
+    if (nameLen >= MaxUserEnvVariableLength)
+    {
+        return false;
+    }
+
+    return InternalSetEnvironmentVariable(HKEY_CURRENT_USER, L"Environment", {name, nameLen}, value);
 }
 
 std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, char8_t* destStr, int32_t destStrBufferLen)
@@ -180,17 +215,26 @@ std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, 
     return utf8ValueLen;
 }
 
-std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, const std::span<char8_t>& destStr)
+std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, EnvironmentVariableTarget target, char8_t* destStr, int32_t destStrBufferLen)
 {
-    return GetEnvironmentVariable(name, &destStr[0], static_cast<int32_t>(destStr.size()));
+    if (target == EnvironmentVariableTarget::Process)
+    {
+        return GetEnvironmentVariable(name, destStr, destStrBufferLen);
+    }
+
+    if (target == EnvironmentVariableTarget::Machine)
+    {
+        return InternalGetEnvironmentVariable(HKEY_LOCAL_MACHINE, L"System\\CurrentControlSet\\Control\\Session Manager\\Environment", name, destStr, destStrBufferLen);
+    }
+
+    return InternalGetEnvironmentVariable(HKEY_CURRENT_USER, L"Environment", name, destStr, destStrBufferLen);
 }
 
 std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, char8_t* destStr, int32_t destStrBufferLen)
 {
-    std::array<wchar_t, 2048> utf16FolderPath{};
-    if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, &utf16FolderPath[0]) == S_OK)
+    if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, g_tempUtf16StrBuffer.data()) == S_OK)
     {
-        const auto utf16FolderPathLen = WideCharToMultiByte(CP_UTF8, 0, &utf16FolderPath[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
+        const auto utf16FolderPathLen = WideCharToMultiByte(CP_UTF8, 0, g_tempUtf16StrBuffer.data(), -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
         if (utf16FolderPathLen >= 0)
         {
             return utf16FolderPathLen;
@@ -219,7 +263,7 @@ const std::u8string& Environment::GetCommandLine()
 
         std::u8string utf8CommandLine;
         utf8CommandLine.resize(static_cast<size_t>(utf16CommandLineByteCount) - 1);
-        if (WideCharToMultiByte(CP_UTF8, 0, utf16CommandLine, -1, reinterpret_cast<char*>(&utf8CommandLine[0]), utf8CommandLine.length() + 1, nullptr, nullptr) == 0)
+        if (WideCharToMultiByte(CP_UTF8, 0, utf16CommandLine, -1, reinterpret_cast<char*>(utf8CommandLine.data()), static_cast<int>(utf8CommandLine.length()) + 1, nullptr, nullptr) == 0)
         {
             return std::u8string();
         }
@@ -279,7 +323,7 @@ void Environment::FailFast(const char8_t* message)
     if (utf16MessageLen != -1)
     {
         std::wstring utf16Message;
-        utf16Message.resize(decltype(utf16Message)::size_type(utf16MessageLen));
+        utf16Message.resize(static_cast<size_t>(utf16MessageLen));
         MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(message), -1, &utf16Message[0], utf16MessageLen);
 
         OutputDebugStringW(L"FailFast:\n");
@@ -310,14 +354,13 @@ int32_t Environment::GetCurrentManagedThreadId()
 
 std::optional<int32_t> Environment::GetUserName(char8_t* destStr, int32_t destStrBufferLen)
 {
-    std::array<wchar_t, 2048> utf16UserName{};
-    auto utf16UserNameBufferLen = static_cast<DWORD>(std::extent_v<decltype(utf16UserName)>);
-    if (GetUserNameW(&utf16UserName[0], &utf16UserNameBufferLen) == FALSE)
+    auto utf16UserNameBufferLen = static_cast<DWORD>(g_tempUtf16StrBuffer.size());
+    if (GetUserNameW(g_tempUtf16StrBuffer.data(), & utf16UserNameBufferLen) == FALSE)
     {
         return {};
     }
 
-    const auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16UserName[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
+    const auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, g_tempUtf16StrBuffer.data(), -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
     if (utf8UserNameLen == -1)
     {
         return {};
@@ -333,14 +376,13 @@ std::optional<int32_t> Environment::GetUserName(const std::span<char8_t>& destSt
 
 std::optional<int32_t> Environment::GetMachineName(char8_t* destStr, int32_t destStrBufferLen)
 {
-    std::array<wchar_t, 2048> utf16ComputerName{};
-    auto utf16ComputerNameBufferLen = static_cast<DWORD>(utf16ComputerName.size());
-    if (GetComputerNameW(&utf16ComputerName[0], &utf16ComputerNameBufferLen) == FALSE)
+    auto utf16ComputerNameBufferLen = static_cast<DWORD>(g_tempUtf16StrBuffer.size());
+    if (GetComputerNameW(g_tempUtf16StrBuffer.data(), &utf16ComputerNameBufferLen) == FALSE)
     {
         return {};
     }
 
-    const auto utf8ComputerNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16ComputerName[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
+    const auto utf8ComputerNameLen = WideCharToMultiByte(CP_UTF8, 0, g_tempUtf16StrBuffer.data(), -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
     if (utf8ComputerNameLen == -1)
     {
         return {};
@@ -356,13 +398,12 @@ std::optional<int32_t> Environment::GetMachineName(const std::span<char8_t>& des
 
 std::optional<int32_t> Environment::GetUserDomainName(char8_t* destStr, int32_t destStrBufferLen)
 {
-    std::array<wchar_t, 2048> utf16UserName{};
-    auto utf16UserNameBufferLen = static_cast<DWORD>(utf16UserName.size());
-    if (GetUserNameExW(NameSamCompatible, &utf16UserName[0], &utf16UserNameBufferLen) == TRUE)
+    auto utf16UserNameBufferLen = static_cast<DWORD>(g_tempUtf16StrBuffer.size());
+    if (GetUserNameExW(NameSamCompatible, g_tempUtf16StrBuffer.data(), &utf16UserNameBufferLen) == TRUE)
     {
-        if (const wchar_t* str = wcschr(&utf16UserName[0], L'\\'); str != nullptr)
+        if (const wchar_t* str = wcschr(g_tempUtf16StrBuffer.data(), L'\\'); str != nullptr)
         {
-            const auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16UserName[0], str - &utf16UserName[0], reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr);
+            const auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, g_tempUtf16StrBuffer.data(), str - g_tempUtf16StrBuffer.data(), reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr);
             if (utf8UserNameLen == 0)
             {
                 return {};
@@ -373,16 +414,16 @@ std::optional<int32_t> Environment::GetUserDomainName(char8_t* destStr, int32_t 
         }
     }
 
-    utf16UserNameBufferLen = static_cast<DWORD>(utf16UserName.size());
+    utf16UserNameBufferLen = static_cast<DWORD>(g_tempUtf16StrBuffer.size());
 
-    if (GetUserNameW(&utf16UserName[0], &utf16UserNameBufferLen) == TRUE)
+    if (GetUserNameW(g_tempUtf16StrBuffer.data(), &utf16UserNameBufferLen) == TRUE)
     {
         SID_NAME_USE peUse;
         std::array<wchar_t, 1024> sid{};
         auto sidLen = static_cast<DWORD>(sid.size());
         std::array<wchar_t, 2048> utf16AccountName{};
-        auto utf16AccountNameBufferLen = static_cast<DWORD>(utf16UserName.size());
-        if (LookupAccountNameW(nullptr, &utf16UserName[0], &sid[0], &sidLen, &utf16AccountName[0], &utf16AccountNameBufferLen, &peUse) == TRUE)
+        auto utf16AccountNameBufferLen = static_cast<DWORD>(g_tempUtf16StrBuffer.size());
+        if (LookupAccountNameW(nullptr, g_tempUtf16StrBuffer.data(), &sid[0], &sidLen, &utf16AccountName[0], &utf16AccountNameBufferLen, &peUse) == TRUE)
         {
             const auto utf8UserNameLen = WideCharToMultiByte(CP_UTF8, 0, &utf16AccountName[0], -1, reinterpret_cast<char*>(destStr), destStrBufferLen, nullptr, nullptr) - 1;
             if (utf8UserNameLen == -1)
@@ -532,35 +573,92 @@ int32_t Environment::GetStackTrace(char8_t* destStr, int32_t destStrBufferLen)
     return destStrLen;
 }
 
+std::map<std::u8string, std::u8string> Environment::GetEnvironmentVariables()
+{
+    const std::unique_ptr<WCHAR[], void(*)(LPWCH)> strings(GetEnvironmentStringsW(), [](LPWCH strings)
+    {
+        FreeEnvironmentStringsW(strings);
+    });
+    std::map<std::u8string, std::u8string> ret;
+
+    for (size_t i = 0;; ++i)
+    {
+        if (strings[i] == L'\0' && strings[i + 1] == L'\0')
+        {
+            break;
+        }
+
+        const auto startKey = i;
+        while (strings[i] != '=' && strings[i] != '\0')
+        {
+            ++i;
+        }
+
+        if (strings[i] == '\0')
+        {
+            continue;
+        }
+
+        if (i - startKey == 0)
+        {
+            while (strings[i] != 0)
+            {
+                i++;
+            }
+            continue;
+        }
+
+        auto key = Utf16ToUtf8({&strings[startKey], i - startKey});
+        if (key.has_value() == false)
+        {
+            continue;
+        }
+
+        const auto startValue = ++i;
+        while (strings[i] != L'\0')
+        {
+            ++i;
+        }
+
+        auto value = Utf16ToUtf8({&strings[startValue], i - startValue});
+        if (value.has_value() == false)
+        {
+            continue;
+        }
+
+        ret[std::move(*key)] = std::move(*value);
+    }
+
+    return ret;
+}
+
 std::optional<OperatingSystem> Environment::GetOSVersion()
 {
     OSVERSIONINFOEX osvi
     {
         .dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX)
     };
-
     if (GetVersionExW(reinterpret_cast<OSVERSIONINFO*>(&osvi)) == FALSE)
     {
         return {};
     }
 
-    std::array<char8_t, 256> csdVersion{};
-    const auto csdVersionLen = WideCharToMultiByte(CP_UTF8, 0, &osvi.szCSDVersion[0], -1, reinterpret_cast<char*>(&csdVersion[0]), csdVersion.size(), nullptr, nullptr) - 1;
+    const auto csdVersionLen = WideCharToMultiByte(CP_UTF8, 0, &osvi.szCSDVersion[0], -1, reinterpret_cast<char*>(g_tempUtf8StrBuffer.data()), g_tempUtf8StrBuffer.size(), nullptr, nullptr) - 1;
     if (csdVersionLen == -1)
     {
         return {};
     }
 
     const Version version(osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber, (osvi.wServicePackMajor << 16) | osvi.wServicePackMinor);
-    return OperatingSystem(PlatformID::Win32NT, version, std::u8string(&csdVersion[0], static_cast<size_t>(csdVersionLen)));
+    return OperatingSystem(PlatformID::Win32NT, version, std::u8string(g_tempUtf8StrBuffer.data(), static_cast<size_t>(csdVersionLen)));
 }
 
 bool Environment::GetUserInteractive()
 {
-    static HWINSTA cachedWindowStationHandle = 0;
+    static HWINSTA cachedWindowStationHandle = nullptr;
     static bool isUserNonInteractive = false;
 
-    auto* windowStationHandle = GetProcessWindowStation();
+    auto* const windowStationHandle = GetProcessWindowStation();
     if (windowStationHandle != nullptr && windowStationHandle != cachedWindowStationHandle)
     {
         USEROBJECTFLAGS flags;

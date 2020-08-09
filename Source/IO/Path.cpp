@@ -2,31 +2,31 @@
 
 #include <array>
 
-#include "Random/Random.h"
 #include "Platform/Environment.h"
+#include "Random/Random.h"
 
-#include "Path.h"
 #include "Directory.h"
+#include "Path.h"
 
 namespace tg
 {
 
+extern thread_local std::array<char8_t, 32768> g_tempUtf8StrBuffer;
+
 std::u8string Path::Combine(const std::u8string_view& path1, const std::u8string_view& path2)
 {
-    std::array<char8_t, 8192> str{};
-    const auto strLen = Combine(path1, path2, str.data(), static_cast<int32_t>(str.size()));
-
-    return {str.data(), static_cast<size_t>(strLen)};
+    const auto strLen = Combine(path1, path2, g_tempUtf8StrBuffer.data(), static_cast<int32_t>(g_tempUtf8StrBuffer.size()));
+    return {g_tempUtf8StrBuffer.data(), static_cast<size_t>(*strLen)};
 }
 
-int32_t Path::Combine(const std::u8string_view& path1, const std::u8string_view& path2, char8_t* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Path::Combine(const std::u8string_view& path1, const std::u8string_view& path2, char8_t* destStr, int32_t destStrBufferLen)
 {
     if (path2.length() == 0)
     {
         const auto destStrLen = static_cast<int32_t>(path1.length());
         if (destStrLen + 1 > destStrBufferLen)
         {
-            return 0;
+            return {};
         }
 
         memcpy(destStr, path1.data(), static_cast<size_t>(destStrLen) + 1);
@@ -37,7 +37,7 @@ int32_t Path::Combine(const std::u8string_view& path1, const std::u8string_view&
     {
         if (static_cast<int32_t>(path2.length() + 1) > destStrBufferLen)
         {
-            return 0;
+            return {};
         }
 
         memcpy(destStr, path2.data(), path2.length() + 1);
@@ -53,7 +53,7 @@ int32_t Path::Combine(const std::u8string_view& path1, const std::u8string_view&
     {
         if (index + 1 + static_cast<int32_t>(path2.length()) > destStrBufferLen)
         {
-            return 0;
+            return {};
         }
 
         destStr[index] = DirectorySeparatorChar;
@@ -63,7 +63,7 @@ int32_t Path::Combine(const std::u8string_view& path1, const std::u8string_view&
     {
         if (index + static_cast<int32_t>(path2.length()) > destStrBufferLen)
         {
-            return 0;
+            return {};
         }
     }
     
@@ -75,13 +75,11 @@ int32_t Path::Combine(const std::u8string_view& path1, const std::u8string_view&
 
 std::u8string Path::ChangeExtension(const std::u8string_view& path, const std::u8string_view& extension)
 {
-    std::array<char8_t, 8192> str{};
-    const auto strLen = ChangeExtension(path, extension, str.data(), static_cast<int32_t>(str.size()));
-
-    return {str.data(), static_cast<size_t>(strLen)};
+    const auto strLen = ChangeExtension(path, extension, g_tempUtf8StrBuffer.data(), static_cast<int32_t>(g_tempUtf8StrBuffer.size()));
+    return {g_tempUtf8StrBuffer.data(), static_cast<size_t>(*strLen)};
 }
 
-int32_t Path::ChangeExtension(const std::u8string_view& path, const std::u8string_view& extension, char8_t* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Path::ChangeExtension(const std::u8string_view& path, const std::u8string_view& extension, char8_t* destStr, int32_t destStrBufferLen)
 {
     if (path.length() == 0)
     {
@@ -89,11 +87,11 @@ int32_t Path::ChangeExtension(const std::u8string_view& path, const std::u8strin
         {
             destStr[0] = '\0';
         }
-        return 0;
+        return {};
     }
     
     auto extensionStartIndex = static_cast<int32_t>(path.length());
-    for (int32_t i = extensionStartIndex - 1; i >= 0; --i)
+    for (auto i = extensionStartIndex - 1; i >= 0; --i)
     {
         if (path[i] == '.')
         {
@@ -102,16 +100,16 @@ int32_t Path::ChangeExtension(const std::u8string_view& path, const std::u8strin
         }
     }
     
-    const bool extensionHasDot = extension.length() > 0 && extension[0] == '.';
-    const int32_t requiredDestStrBufferLen = extensionStartIndex + static_cast<int32_t>(extensionHasDot ? extension.length() + 1 : extension.length() + 2);
+    const auto extensionHasDot = extension.length() > 0 && extension[0] == '.';
+    const auto requiredDestStrBufferLen = extensionStartIndex + static_cast<int32_t>(extensionHasDot ? extension.length() + 1 : extension.length() + 2);
     if (requiredDestStrBufferLen > destStrBufferLen)
     {
-        return 0;
+        return {};
     }
 
     memcpy(destStr, path.data(), extensionStartIndex);
     
-    int32_t strLen = 0;
+    auto strLen = 0;
     if (extensionHasDot)
     {
         memcpy(&destStr[extensionStartIndex], extension.data(), extension.size());
@@ -138,9 +136,13 @@ std::u8string Path::GetFullPath(const std::u8string_view& path)
     std::u8string collapsedString;
     if (!IsPathRooted(path))
     {
-        std::array<char8_t, 8192> str{};
-        const auto collapsedStringLen = Combine(Directory::GetCurrentDirectory(), path, str.data(), static_cast<int32_t>(str.size()));
-        collapsedString = RemoveRelativeSegments(std::u8string_view(&str[0], collapsedStringLen));
+        const auto collapsedStringLen = Combine(Directory::GetCurrentDirectory(), path, g_tempUtf8StrBuffer.data(), static_cast<int32_t>(g_tempUtf8StrBuffer.size()));
+        if (collapsedStringLen.has_value() == false)
+        {
+            return {};
+        }
+
+        collapsedString = RemoveRelativeSegments(std::u8string_view(g_tempUtf8StrBuffer.data(), *collapsedStringLen));
     }
     else
     {
@@ -152,26 +154,20 @@ std::u8string Path::GetFullPath(const std::u8string_view& path)
 
 std::u8string Path::GetFullPath(const std::u8string_view& path, const std::u8string_view& basePath)
 {
-    auto combinedPath = Combine(basePath, path);
-    if (combinedPath.length() == 0)
-    {
-        return combinedPath;
-    }
-    
-    return GetFullPath(combinedPath);
+    return GetFullPath(Combine(basePath, path));
 }
 
-int32_t Path::GetRandomFileName(char8_t* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Path::GetRandomFileName(char8_t* destStr, int32_t destStrBufferLen)
 {
-    constexpr int32_t requiredDestStrBufferLen = 13;
+    constexpr auto requiredDestStrBufferLen = 13;
     if (destStrBufferLen < requiredDestStrBufferLen)
     {
-        return 0;
+        return {};
     }
     
     auto r = Random();
-    const int32_t strLen = requiredDestStrBufferLen - 1;
-    for (int32_t i = 0; i < strLen; ++i)
+    const auto strLen = requiredDestStrBufferLen - 1;
+    for (auto i = 0; i < strLen; ++i)
     {
         destStr[i] = static_cast<char8_t>(r.Next(0, 1) == 0 ? r.Next('a', 'z') : r.Next('0', '9'));
     }
@@ -184,25 +180,17 @@ int32_t Path::GetRandomFileName(char8_t* destStr, int32_t destStrBufferLen)
 
 std::u8string Path::GetRandomFileName()
 {
-    std::array<char8_t, 8192> str{};
-    const auto strLen = GetRandomFileName(str.data(), static_cast<int32_t>(str.size()));
-
-    return {str.data(), static_cast<size_t>(strLen)};
+    const auto strLen = GetRandomFileName(g_tempUtf8StrBuffer.data(), static_cast<int32_t>(g_tempUtf8StrBuffer.size()));
+    return {g_tempUtf8StrBuffer.data(), static_cast<size_t>(*strLen)};
 }
 
 std::u8string Path::GetTempPath()
 {
-    std::array<char8_t, 8192> str{};
-    const auto strLen = GetTempPath(str.data(), static_cast<int32_t>(str.size()));
-    if (strLen == -1)
-    {
-        return {};
-    }
-
-    return {str.data(), static_cast<size_t>(strLen)};
+    const auto strLen = GetTempPath(g_tempUtf8StrBuffer.data(), static_cast<int32_t>(g_tempUtf8StrBuffer.size()));
+    return {g_tempUtf8StrBuffer.data(), static_cast<size_t>(*strLen)};
 }
 
-int32_t Path::GetTempPath(char8_t* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Path::GetTempPath(char8_t* destStr, int32_t destStrBufferLen)
 {
     const char8_t tempEnvVarName[] = u8"TMPDIR";
 
@@ -212,7 +200,7 @@ int32_t Path::GetTempPath(char8_t* destStr, int32_t destStrBufferLen)
         const char8_t defaultTempPath[] = u8"/tmp/";
         if (static_cast<int32_t>(std::extent_v<decltype(defaultTempPath)>) > destStrBufferLen)
         {
-            return 0;
+            return {};
         }
         
         memcpy(destStr, defaultTempPath, std::extent_v<decltype(defaultTempPath)>);
@@ -223,7 +211,7 @@ int32_t Path::GetTempPath(char8_t* destStr, int32_t destStrBufferLen)
     {
         if (static_cast<int32_t>(tempEnvVarValue->length()) + 1 > destStrBufferLen)
         {
-            return 0;
+            return {};
         }
         
         memcpy(destStr, tempEnvVarValue->data(), tempEnvVarValue->size());
@@ -231,19 +219,17 @@ int32_t Path::GetTempPath(char8_t* destStr, int32_t destStrBufferLen)
         
         return static_cast<int32_t>(tempEnvVarValue->size());
     }
-    else
+
+    if (static_cast<int32_t>(tempEnvVarValue->length()) + 2 > destStrBufferLen)
     {
-        if (static_cast<int32_t>(tempEnvVarValue->length()) + 2 > destStrBufferLen)
-        {
-            return 0;
-        }
-        
-        memcpy(destStr, tempEnvVarValue->data(), tempEnvVarValue->size());
-        destStr[tempEnvVarValue->size()] = DirectorySeparatorChar;
-        destStr[tempEnvVarValue->size() + 1] = '\0';
-        
-        return static_cast<int32_t>(tempEnvVarValue->size());
+        return {};
     }
+    
+    memcpy(destStr, tempEnvVarValue->data(), tempEnvVarValue->size());
+    destStr[tempEnvVarValue->size()] = DirectorySeparatorChar;
+    destStr[tempEnvVarValue->size() + 1] = '\0';
+    
+    return static_cast<int32_t>(tempEnvVarValue->size());
 }
 
 std::u8string Path::RemoveRelativeSegments(const std::u8string_view& path)
@@ -251,7 +237,7 @@ std::u8string Path::RemoveRelativeSegments(const std::u8string_view& path)
     std::u8string ret;
     for (decltype(path.length()) i = 0; i < path.length(); ++i)
     {
-        char8_t c = path[i];
+        auto c = path[i];
         if (IsDirectorySeparator(c) && i + 1 < path.length())
         {
             // Ignore the '/'
@@ -269,7 +255,7 @@ std::u8string Path::RemoveRelativeSegments(const std::u8string_view& path)
             
             if (i + 3 < path.length() && IsDirectorySeparator(path[i + 3]) && path[i + 2] == '.' && path[i + 1] == '.')
             {
-                int32_t j = ret.length() == 0 ? 0 : static_cast<int32_t>(ret.length()) - 1;
+                auto j = ret.length() == 0 ? 0 : static_cast<int32_t>(ret.length()) - 1;
                 for (; j >= 0; --j)
                 {
                     if (IsDirectorySeparator(ret[j]))
