@@ -637,7 +637,7 @@ static const UConverterStaticData _UTF16BEStaticData={
     sizeof(UConverterStaticData),
     "UTF-16BE",
     1200, UCNV_IBM, UCNV_UTF16_BigEndian, 2, 2,
-    { 0xff, 0xfd, 0, 0 },2,FALSE,FALSE,
+    { 0xfe, 0xff, 0, 0 },2,FALSE,FALSE,
     0,
     0,
     { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 } /* reserved */
@@ -1239,7 +1239,7 @@ static const UConverterStaticData _UTF16LEStaticData={
     sizeof(UConverterStaticData),
     "UTF-16LE",
     1202, UCNV_IBM, UCNV_UTF16_LittleEndian, 2, 2,
-    { 0xfd, 0xff, 0, 0 },2,FALSE,FALSE,
+    { 0xff, 0xfe, 0, 0 },2,FALSE,FALSE,
     0,
     0,
     { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 } /* reserved */

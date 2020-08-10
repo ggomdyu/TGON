@@ -494,7 +494,7 @@ static const UConverterStaticData _UTF32BEStaticData = {
     "UTF-32BE",
     1232,
     UCNV_IBM, UCNV_UTF32_BigEndian, 4, 4,
-    { 0, 0, 0xff, 0xfd }, 4, FALSE, FALSE,
+    { 0, 0, 0xfe, 0xff }, 4, FALSE, FALSE,
     0,
     0,
     { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 } /* reserved */
@@ -989,7 +989,7 @@ static const UConverterStaticData _UTF32LEStaticData = {
     "UTF-32LE",
     1234,
     UCNV_IBM, UCNV_UTF32_LittleEndian, 4, 4,
-    { 0xfd, 0xff, 0, 0 }, 4, FALSE, FALSE,
+    { 0xff, 0xfe, 0, 0 }, 4, FALSE, FALSE,
     0,
     0,
     { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 } /* reserved */
@@ -1237,9 +1237,9 @@ static const UConverterStaticData _UTF32StaticData = {
     1236,
     UCNV_IBM, UCNV_UTF32, 4, 4,
 #if U_IS_BIG_ENDIAN
-    { 0, 0, 0xff, 0xfd }, 4,
+    { 0, 0, 0xfe, 0xff }, 4,
 #else
-    { 0xfd, 0xff, 0, 0 }, 4,
+    { 0xff, 0xfe, 0, 0 }, 4,
 #endif
     FALSE, FALSE,
     0,
