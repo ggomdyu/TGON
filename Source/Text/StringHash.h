@@ -9,6 +9,22 @@
 
 namespace tg
 {
+namespace detail
+{
+
+template <typename>
+constexpr bool IsBasicString = false;
+
+template <typename _Char, typename _Traits, typename _Allocator>
+constexpr bool IsBasicString<std::basic_string<_Char, _Traits, _Allocator>> = true;
+
+template <typename>
+constexpr bool IsBasicStringView = false;
+
+template <typename _Char>
+constexpr bool IsBasicStringView<std::basic_string_view<_Char>> = true;
+
+}
 
 template <typename>
 class BasicStringHash;
@@ -264,7 +280,7 @@ int32_t BasicStringHash<_String>::LastIndexOfAny(const _Predicate& predicate, in
 template <typename _String>
 constexpr const typename BasicStringHash<_String>::ValueType* BasicStringHash<_String>::Data() const noexcept
 {
-    if constexpr (IsBasicString<StringType> || IsBasicStringView<StringType>)
+    if constexpr (detail::IsBasicString<StringType> || detail::IsBasicStringView<StringType>)
     {
         return m_str.data();
     }
@@ -277,7 +293,7 @@ constexpr const typename BasicStringHash<_String>::ValueType* BasicStringHash<_S
 template <typename _String>
 constexpr int32_t BasicStringHash<_String>::Length() const noexcept
 {
-    if constexpr (IsBasicString<StringType> || IsBasicStringView<StringType>)
+    if constexpr (detail::IsBasicString<StringType> || detail::IsBasicStringView<StringType>)
     {
         return static_cast<int32_t>(m_str.length());
     }

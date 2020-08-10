@@ -9,17 +9,11 @@ namespace tg
 
 class Rtti final
 {
-/* @section Constructor */
+/**@section Constructor */
 public:
     Rtti(const std::type_info& typeInfo, const Rtti* superRtti) noexcept;
 
-/* @section Method */
-public:
-    [[nodiscard]] size_t GetHashCode() const noexcept;
-    [[nodiscard]] const char* GetName() const noexcept;
-    [[nodiscard]] const Rtti* GetSuperRtti() const noexcept;
-
-/* @section Operator */
+/**@section Operator */
 public:
     bool operator==(const Rtti& rhs) const noexcept;
     bool operator!=(const Rtti& rhs) const noexcept;
@@ -28,7 +22,13 @@ public:
     bool operator>(const Rtti& rhs) const noexcept;
     bool operator<=(const Rtti& rhs) const noexcept;
 
-/* @section Variable */
+/**@section Method */
+public:
+    [[nodiscard]] size_t GetHashCode() const noexcept;
+    [[nodiscard]] const char* GetName() const noexcept;
+    [[nodiscard]] const Rtti* GetSuperRtti() const noexcept;
+
+/**@section Variable */
 private:
     const std::type_info* m_typeInfo;
     const Rtti* m_superRtti;
@@ -114,8 +114,6 @@ namespace std
 template <>
 struct hash<tg::Rtti>
 {
-/* @section Method */
-public:
     size_t operator()(const tg::Rtti& rhs) const noexcept;
 };
 
