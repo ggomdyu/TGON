@@ -201,7 +201,8 @@ std::optional<std::u8string> Encoding::GetString(const std::span<const std::byte
 
 std::span<const std::byte> Encoding::GetPreamble() const noexcept
 {
-    return {};
+    const auto* converterData = m_converter->sharedData->staticData;
+    return std::span(reinterpret_cast<const std::byte*>(converterData->subChar), converterData->subCharLen);
 }
 
 std::optional<int32_t> Encoding::GetCharCount(const std::byte* bytes, int32_t count) const

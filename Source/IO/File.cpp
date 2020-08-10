@@ -13,39 +13,59 @@ namespace tg
 namespace
 {
 
-[[nodiscard]] const Encoding* DetectEncoding(const std::byte* bytes, int32_t count) noexcept
+[[nodiscard]] const Encoding& DetectEncoding(const std::byte* bytes, int32_t count) noexcept
 {
-    // TODO: Not tested at all!!
-
     if (bytes != nullptr && count > 2)
     {
         if (bytes[0] == std::byte(0xff) && bytes[1] == std::byte(0xFE))
         {
             if (count < 4 || bytes[2] != std::byte(0) || bytes[3] != std::byte(0))
             {
-                return &Encoding::Unicode();
+                return Encoding::Unicode();
             }
 
-            return &Encoding::UTF32();
+            return Encoding::UTF32();
         }
 
         if (bytes[0] == std::byte(0xfe) && bytes[1] == std::byte(0xff))
         {
-            return &Encoding::BigEndianUnicode();
+            return Encoding::BigEndianUnicode();
         }
         
         if (count >= 3 && bytes[0] == std::byte(0xef) && bytes[1] == std::byte(0xbb) && bytes[2] == std::byte(0xbf))
         {
-            return &Encoding::UTF8();
+            return Encoding::UTF8();
         }
 
         if (count >= 4 && bytes[0] == std::byte(0) && bytes[1] == std::byte(0) && bytes[2] == std::byte(0xfe) && bytes[3] == std::byte(0xff))
         {
-            return Encoding::GetEncoding(u8"UTF32BE");
+            return *Encoding::GetEncoding(u8"UTF32BE");
         }
     }
 
-    return &Encoding::UTF8();
+    return Encoding::UTF8();
+}
+
+void RemoveByteOrderMark(std::u8string& str, const Encoding& encoding)
+{
+    const auto byteOrderMark = encoding.GetPreamble();
+    if (byteOrderMark.size() > str.length())
+    {
+        return;
+    }
+
+    size_t removeCount = 0;
+    for (size_t i = 0; i < byteOrderMark.size(); ++i)
+    {
+        if (byteOrderMark[i] != std::byte(str[i]))
+        {
+            break;
+        }
+
+        ++removeCount;
+    }
+
+    str.erase(str.begin(), str.begin() + removeCount);
 }
 
 }
@@ -180,12 +200,14 @@ std::optional<std::u8string> File::ReadAllText(const char8_t* path)
 
     fclose(fp);
 
-    const auto* encoding = DetectEncoding(reinterpret_cast<const std::byte*>(fileData.c_str()), fileData.length());
-    if (encoding != &Encoding::UTF8())
-    {
-        return encoding->GetString(reinterpret_cast<const std::byte*>(fileData.data()), static_cast<int32_t>(fileData.size()));
-    }
+    const auto& encoding = DetectEncoding(reinterpret_cast<const std::byte*>(fileData.c_str()), fileData.length());
+    RemoveByteOrderMark(fileData, encoding);
 
+    if (encoding != Encoding::UTF8())
+    {
+        return encoding.GetString(reinterpret_cast<const std::byte*>(fileData.data()), static_cast<int32_t>(fileData.length()));
+    }
+    
     return fileData;
 }
 
@@ -215,11 +237,13 @@ std::optional<std::u8string> File::ReadAllText(const char8_t* path, const Encodi
 
     fclose(fp);
 
+    RemoveByteOrderMark(fileData, encoding);
+
     if (encoding != Encoding::UTF8())
     {
-        return encoding.GetString(reinterpret_cast<const std::byte*>(fileData.data()), static_cast<int32_t>(fileData.size()));
+        return encoding.GetString(reinterpret_cast<const std::byte*>(fileData.data()), static_cast<int32_t>(fileData.length()));
     }
-
+    
     return fileData;
 }
 
