@@ -1,22 +1,9 @@
 #pragma once
 
-#include <string>
 #include <type_traits>
 
 namespace tg::detail
 {
-
-template <typename>
-struct IsBasicString : std::false_type {};
-
-template <typename _Char, typename _Traits, typename _Allocator>
-struct IsBasicString<std::basic_string<_Char, _Traits, _Allocator>> : std::true_type {};
-
-template <typename>
-struct IsBasicStringView : std::false_type {};
-
-template <typename _Char>
-struct IsBasicStringView<std::basic_string_view<_Char>> : std::true_type {};
 
 template <typename _Type>
 struct RemoveAllPointers
@@ -89,12 +76,6 @@ public:
 };
 
 template <typename _Type>
-constexpr bool IsBasicString = detail::IsBasicString<_Type>::value;
-
-template <typename _Type>
-constexpr bool IsBasicStringView = detail::IsBasicStringView<_Type>::value;
-
-template <typename _Type>
 using RemoveAllPointers = typename detail::RemoveAllPointers<_Type>::Type;
 
 template <typename _Type>
@@ -111,5 +92,17 @@ constexpr bool IsAnyOf = std::bool_constant<(std::is_same_v<_Type, _Types> || ..
 
 template <typename _Type>
 constexpr bool IsChar = IsAnyOf<_Type, char, char8_t, char16_t, char32_t, wchar_t>;
+
+template <typename _Type, typename = std::void_t<>>
+constexpr bool IsHashable = false;
+
+template <typename _Type>
+constexpr bool IsHashable<_Type, std::void_t<decltype(std::hash<_Type>().operator()(std::declval<_Type>()))>> = true;
+
+template <typename _Type, typename = std::void_t<>>
+constexpr bool IsIndexable = false;
+
+template <typename _Type>
+constexpr bool IsIndexable<_Type, std::void_t<decltype(std::declval<_Type>().operator[](0))>> = true;
 
 }

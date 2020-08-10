@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <type_traits>
 
 namespace tg
 {
@@ -28,7 +29,10 @@ public:
     virtual bool Equals(const IComparable* rhs) const;
     virtual int32_t CompareTo(const IComparable* rhs) const = 0;
 };
-    
+
+template <typename _Type>
+concept Comparable = std::is_convertible_v<_Type, IComparable*>;
+
 inline bool IComparable::operator==(const IComparable* rhs) const
 {
     return this->Equals(rhs);

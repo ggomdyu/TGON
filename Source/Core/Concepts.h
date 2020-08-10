@@ -18,15 +18,9 @@ template <typename _From, typename _To>
 concept ConvertibleTo = std::is_convertible<_From, _To>::value;
 
 template <typename _Type>
-concept Hashable = requires(_Type value)
-{
-    { std::hash<_Type>{}(value) } -> ConvertibleTo<size_t>;
-};
+concept Hashable = IsHashable<_Type>;
 
 template <typename _Type>
-concept Indexable = requires(_Type value) { value[0]; };
-
-template <typename _Type>
-concept Cloneable = requires(_Type* value) { value->Clone(); };
+concept Indexable = IsIndexable<_Type>;
 
 }
