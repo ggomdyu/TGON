@@ -84,7 +84,7 @@ namespace tg
 namespace
 {
 
-constexpr NSWindowStyleMask ConvertWindowStyleToNative(const WindowStyle& windowStyle) noexcept
+[[nodiscard]] constexpr NSWindowStyleMask ConvertWindowStyleToNative(const WindowStyle& windowStyle) noexcept
 {
     NSWindowStyleMask nativeWindowStyleMask = {};
     
@@ -110,18 +110,18 @@ constexpr NSWindowStyleMask ConvertWindowStyleToNative(const WindowStyle& window
     return nativeWindowStyleMask;
 }
 
-NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
+[[nodiscard]] NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
 {
     NSScreen* mainScreen = [NSScreen mainScreen];
     
-    // Create a window
+    // Create a window.
     NSWindow* window = [[NSWindow alloc] initWithContentRect:NSMakeRect(0.0, 0.0, 100.0, 100.0)
                                                    styleMask:ConvertWindowStyleToNative(windowStyle)
                                                      backing:NSBackingStoreBuffered
                                                        defer:NO
                                                       screen:mainScreen];
     
-    // Set window attribute
+    // Set window attributes.
     [window setAcceptsMouseMovedEvents:YES];
     [window makeKeyAndOrderFront:[NSApplication sharedApplication]];
     [window setBackgroundColor:[NSColor whiteColor]];
@@ -134,10 +134,10 @@ NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
         [[window standardWindowButton:NSWindowZoomButton] setEnabled:NO];
     }
     
-    // Set window content size
+    // Set the window content size.
     [window setContentSize:NSMakeSize(CGFloat(windowStyle.width), CGFloat(windowStyle.height))];
     
-    // Set window position
+    // Set the window position.
     NSRect windowRect = [window frame];
     NSRect mainScreenRect = [[NSScreen mainScreen] visibleFrame];
     NSPoint windowPosition;
@@ -154,13 +154,12 @@ NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
     return window;
 }
     
-} /* namespace */
+}
 
-MacOSWindow::MacOSWindow(const WindowStyle& windowStyle) noexcept :
-    m_window(CreateNativeWindow(windowStyle)),
-    m_windowDelegate([[WindowDelegate alloc] initWithWindow:reinterpret_cast<Window*>(this)])
+MacOSWindow::MacOSWindow(NSWindow* window, WindowDelegate* windowDelegate) noexcept :
+    m_window(window),
+    m_windowDelegate(windowDelegate)
 {
-    m_window.delegate = m_windowDelegate;
 }
 
 MacOSWindow::MacOSWindow(MacOSWindow&& rhs) noexcept :
@@ -180,6 +179,11 @@ MacOSWindow& MacOSWindow::operator=(MacOSWindow&& rhs) noexcept
     rhs.m_windowDelegate = nullptr;
     
     return *this;
+}
+
+Window::Window(const WindowStyle& windowStyle) :
+    MacOSWindow(CreateNativeWindow(windowStyle), [[WindowDelegate alloc] initWithWindow:reinterpret_cast<Window*>(this)])
+{
 }
 
 void Window::Show()
@@ -256,7 +260,7 @@ void Window::SetTransparency(float transparency)
     [m_window setAlphaValue:transparency];
 }
 
-I32Vector2 Window::GetPosition() const
+IntVector2 Window::GetPosition() const
 {
     NSRect mainScreenRect = [[NSScreen mainScreen] visibleFrame];
     NSRect windowRect = [m_window frame];

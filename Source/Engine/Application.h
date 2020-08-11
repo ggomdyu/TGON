@@ -3,7 +3,6 @@
 #include <memory>
 
 #include "Platform/Window.h"
-
 #if TGON_PLATFORM_WINDOWS
 #include "Windows/WindowsApplication.h"
 #elif TGON_PLATFORM_MACOS
@@ -14,15 +13,11 @@
 #include "IOS/IOSApplication.h"
 #endif
 
+#include "Engine.h"
+#include "MessageBoxIcon.h"
+
 namespace tg
 {
-
-enum class MessageBoxIcon
-{
-    No,
-    Informational,
-    Warning,
-};
 
 class Application final :
     private PlatformApplication

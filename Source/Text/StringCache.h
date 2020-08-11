@@ -16,7 +16,7 @@ public:
 
 /**@section Constructor */
 public:
-    [[nodiscard]] std::basic_string<_Char>& GetValue(std::basic_string<_Char> str);
+    [[nodiscard]] bool TryGetValue(std::basic_string<_Char> str);
 
 /**@section Variable */
 private:

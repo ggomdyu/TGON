@@ -30,7 +30,7 @@ constexpr bool IsPalindrome(const _Char* str, size_t strLen)
     return true;
 }
 
-template <Integral _Value>
+template <typename _Value> requires Integral<_Value>
 constexpr bool IsPrimeNumber(const _Value& value) noexcept
 {
     if (value <= 1)

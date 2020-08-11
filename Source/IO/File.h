@@ -79,27 +79,27 @@ public:
 template <typename _Predicate>
 void File::ReadLines(const char8_t* path, const _Predicate& callback)
 {
-    std::basic_ifstream<char8_t, std::char_traits<char8_t>> fs;
-    fs.open(reinterpret_cast<const char*>(path));
-
-    if (!fs)
-    {
-        return;
-    }
-
-    std::u8string line;
-    while (std::getline(fs, line))
-    {
-        if (line.empty())
-        {
-            continue;
-        }
-        
-        if (callback(std::move(line)) == false)
-        {
-            break;
-        }
-    }
+//    std::basic_ifstream<char8_t, std::char_traits<char8_t>> fs;
+//    fs.open(reinterpret_cast<const char*>(path));
+//
+//    if (!fs)
+//    {
+//        return;
+//    }
+//
+//    std::u8string line;
+//    while (std::getline(fs, line))
+//    {
+//        if (line.empty())
+//        {
+//            continue;
+//        }
+//        
+//        if (callback(std::move(line)) == false)
+//        {
+//            break;
+//        }
+//    }
 }
 
 }

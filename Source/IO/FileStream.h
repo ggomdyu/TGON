@@ -99,7 +99,6 @@ protected:
     int32_t InternalRead(std::byte* buffer, int32_t count);
     int32_t InternalWrite(const std::byte* buffer, int32_t count);
     int64_t InternalSeek(int64_t offset, SeekOrigin origin);
-    void InternalClose();
     void InternalFlush();
     bool InternalSetLength(int64_t value);
 

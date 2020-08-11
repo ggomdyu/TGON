@@ -7,8 +7,7 @@
 #include "Graphics/VideoMode.h"
 #include "Platform/WindowStyle.h"
 
-#include "InputModule.h"
-#include "TimeModule.h"
+#include "EngineConfiguration.h"
 
 #if TGON_PLATFORM_WINDOWS
 #include "Windows/WindowsEngine.h"
@@ -22,13 +21,6 @@
 
 namespace tg
 {
-
-struct EngineConfiguration final
-{
-    WindowStyle windowStyle;
-    InputMode inputMode;
-    VideoMode videoMode;
-};
 
 class Engine :
     public RuntimeObject
@@ -57,7 +49,7 @@ public:
      * @brief   Gets the global instance of the object.
      * @return  The global instance of the object.
      */
-    [[nodiscard]] static Engine& GetInstance() noexcept;
+    static Engine& GetInstance() noexcept;
 
     /**
      * @brief   Initializes the object.
@@ -74,28 +66,28 @@ public:
      * @param args  Arguments for construct the specified type of module.
      * @return  The added module.
      */
-    template <Modularizable _Module, typename... _Types>
+    template <typename _Module, typename... _Types> requires Modularizable<_Module>
     _Module* AddModule(_Types&&... args);
 
     /**
      * @brief   Finds the module of the specified type.
      * @return  The type of module to retrieve or nullptr.
      */
-    template <Modularizable _Module>
-    [[nodiscard]] _Module* FindModule() noexcept;
+    template <typename _Module> requires Modularizable<_Module>
+    _Module* FindModule() noexcept;
 
     /**
      * @brief   Finds the module of the specified type.
      * @return  The type of module to retrieve or nullptr.
      */
-    template <Modularizable _Module>
-    [[nodiscard]] const _Module* FindModule() const noexcept;
+    template <typename _Module> requires Modularizable<_Module>
+    const _Module* FindModule() const noexcept;
 
     /**
      * @brief   Gets the configuration of the engine.
      * @return  The engine configuration.
      */
-    [[nodiscard]] const EngineConfiguration& GetEngineConfiguration() const noexcept;
+    const EngineConfiguration& GetEngineConfiguration() const noexcept;
 
     /**
      * @brief   Forces the engine to render at a specified frame rate.
@@ -107,7 +99,7 @@ public:
      * @brief   Gets the frame rate of the engine.
      * @return  The frame rate.
      */
-    [[nodiscard]] float GetTargetFrameRate() const noexcept;
+    float GetTargetFrameRate() const noexcept;
 
 private:
     void UpdateModule();
@@ -123,7 +115,7 @@ private:
     float m_targetSecondPerFrame = -1.0f;
 };
     
-template <Modularizable _Module, typename... _Types>
+template <typename _Module, typename... _Types> requires Modularizable<_Module>
 _Module* Engine::AddModule(_Types&&... args)
 {
     auto module = std::make_unique<_Module>(std::forward<_Types>(args)...);
@@ -135,7 +127,7 @@ _Module* Engine::AddModule(_Types&&... args)
     return rawModule;
 }
 
-template <Modularizable _Module>
+template <typename _Module> requires Modularizable<_Module>
 _Module* Engine::FindModule() noexcept
 {
     for (auto& modules : m_moduleStage)
@@ -152,7 +144,7 @@ _Module* Engine::FindModule() noexcept
     return nullptr;
 }
 
-template <Modularizable _Module>
+template <typename _Module> requires Modularizable<_Module>
 const _Module* Engine::FindModule() const noexcept
 {
     return const_cast<Engine*>(this)->FindModule<_Module>();

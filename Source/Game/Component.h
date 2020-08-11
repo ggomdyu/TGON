@@ -1,9 +1,11 @@
 #pragma once
 
-#include "Game/GameObject.h"
+#include "Core/RuntimeObject.h"
 
 namespace tg
 {
+
+class GameObject;
 
 class Component :
     public RuntimeObject

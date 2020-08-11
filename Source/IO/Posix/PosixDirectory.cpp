@@ -45,7 +45,7 @@ bool InternalRecursiveDelete(const std::u8string& path)
     return rmdir(reinterpret_cast<const char*>(path.c_str())) == 0;
 }
 
-} /* namespace */
+}
 
 bool Directory::Exists(const char8_t* path)
 {

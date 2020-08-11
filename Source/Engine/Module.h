@@ -32,11 +32,14 @@ public:
     virtual void Update() {}
 };
 
-template <typename _Module>
-concept Modularizable = requires(_Module* module)
-{
-    { module } -> ConvertibleTo<Module*>;
-    { _Module::ModuleStage };
-};
+
+template <typename _Type, typename = std::void_t<>>
+constexpr bool IsModularizable = false;
+
+template <typename _Type>
+constexpr bool IsModularizable<_Type, std::void_t<decltype(_Type::ModuleStage)>> = true;
+
+template <typename _Type>
+concept Modularizable = IsModularizable<_Type>;
 
 }

@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "Engine/Engine.h"
-
 #include "Application.h"
 
 namespace tg
@@ -49,6 +47,16 @@ void Application::ShowMessageBox(const char8_t* message, MessageBoxIcon messageB
 void Application::ShowMessageBox(const char8_t* title, const char8_t* message)
 {
     ShowMessageBox(title, message, MessageBoxIcon::Informational);
+}
+
+Engine& Application::GetEngine() noexcept
+{
+    return *m_engine.get();
+}
+
+const Engine& Application::GetEngine() const noexcept
+{
+    return *m_engine.get();
 }
 
 std::shared_ptr<Window> Application::GetRootWindow() noexcept

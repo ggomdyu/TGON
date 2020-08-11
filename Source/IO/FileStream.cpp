@@ -7,6 +7,18 @@
 namespace tg
 {
 
+FileStream::FileStream(void* nativeFileHandle, const char8_t* path, FileAccess access, int32_t bufferSize) :
+    m_nativeFileHandle(nativeFileHandle),
+    m_bufferSize(bufferSize),
+    m_readPos(0),
+    m_readLen(0),
+    m_writePos(0),
+    m_filePos(0),
+    m_access(access),
+    m_fileName(path)
+{
+}
+
 FileStream::FileStream(FileStream&& rhs) noexcept :
     m_nativeFileHandle(rhs.m_nativeFileHandle),
     m_buffer(std::move(rhs.m_buffer)),
@@ -28,7 +40,7 @@ FileStream::FileStream(FileStream&& rhs) noexcept :
 
 FileStream::~FileStream()
 {
-    InternalClose();
+    this->Close();
 }
 
 FileStream& FileStream::operator=(FileStream&& rhs) noexcept

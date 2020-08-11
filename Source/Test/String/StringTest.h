@@ -21,12 +21,16 @@ public:
             String s(arr);
             assert(!strcmp(&s[0], arr));
             assert(s.Length() == 4);
+            assert(s[0] == 'a');
+            assert(s[3] == 'd');
             assert(String::IsNullOrEmpty(s) == false);
         }
         {
             String s(c, 5);
             assert(s.Length() == 5);
             assert(!strcmp(&s[0], "ccccc"));
+            assert(s[0] == 'c');
+            assert(s[3] == 'c');
         }
     }
 

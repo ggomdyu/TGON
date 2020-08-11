@@ -5,10 +5,10 @@
 #include "Core/RuntimeObject.h"
 #include "Text/StringHash.h"
 
+#include "Component.h"
+
 namespace tg
 {
-
-class Component;
 
 class GameObject final :
     public RuntimeObject

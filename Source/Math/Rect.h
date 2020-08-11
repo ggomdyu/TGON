@@ -11,7 +11,7 @@
 namespace tg
 {
 
-template <Arithmetic _Value>
+template <typename _Value> requires Arithmetic<_Value>
 struct BasicRect
 {
 /**@section Type */
@@ -22,13 +22,13 @@ public:
 public:
     constexpr BasicRect() noexcept = default;
     constexpr BasicRect(const _Value& x, const _Value& y, const _Value& width, const _Value& height) noexcept;
-    template <Arithmetic _Value2>
+    template <typename _Value2> requires Arithmetic<_Value>
     constexpr BasicRect(const BasicRect<_Value2>& rhs) noexcept;
 
 /**@section Operator */
 public:
     constexpr BasicRect operator-() const noexcept;
-    template <Arithmetic _Value2>
+    template <typename _Value2> requires Arithmetic<_Value>
     BasicRect& operator=(const BasicRect<_Value2>& rhs) noexcept;
     constexpr bool operator==(const BasicRect& rhs) const noexcept;
     constexpr bool operator!=(const BasicRect& rhs) const noexcept;
@@ -50,10 +50,10 @@ using DoubleRect = BasicRect<double>;
 using IntRect = BasicRect<int32_t>;
 using Int64Rect = BasicRect<int64_t>;
 
-template <Arithmetic... _Types>
+template <typename... _Types> requires Arithmetic<_Types...>
 BasicRect(_Types...) -> BasicRect<std::common_type_t<_Types...>>;
 
-template <Arithmetic _Value>
+template <typename _Value> requires Arithmetic<_Value>
 constexpr BasicRect<_Value>::BasicRect(const _Value& x, const _Value& y, const _Value& width, const _Value& height) noexcept :
     x(x),
     y(y),
@@ -62,8 +62,8 @@ constexpr BasicRect<_Value>::BasicRect(const _Value& x, const _Value& y, const _
 {
 }
 
-template <Arithmetic _Value>
-template <Arithmetic _Value2>
+template <typename _Value> requires Arithmetic<_Value>
+template <typename _Value2> requires Arithmetic<_Value>
 constexpr BasicRect<_Value>::BasicRect(const BasicRect<_Value2>& rhs) noexcept :
     x(static_cast<_Value>(rhs.x)),
     y(static_cast<_Value>(rhs.y)),
@@ -72,14 +72,14 @@ constexpr BasicRect<_Value>::BasicRect(const BasicRect<_Value2>& rhs) noexcept :
 {
 }
 
-template <Arithmetic _Value>
+template <typename _Value> requires Arithmetic<_Value>
 constexpr BasicRect<_Value> BasicRect<_Value>::operator-() const noexcept
 {
     return BasicRect(-x, -y, -width, -height);
 }
 
-template <Arithmetic _Value>
-template <Arithmetic _Value2>
+template <typename _Value> requires Arithmetic<_Value>
+template <typename _Value2> requires Arithmetic<_Value>
 BasicRect<_Value>& BasicRect<_Value>::operator=(const BasicRect<_Value2>& rhs) noexcept
 {
     x = static_cast<_Value>(rhs.x);
@@ -90,31 +90,31 @@ BasicRect<_Value>& BasicRect<_Value>::operator=(const BasicRect<_Value2>& rhs) n
     return *this;
 }
 
-template <Arithmetic _Value>
+template <typename _Value> requires Arithmetic<_Value>
 constexpr bool BasicRect<_Value>::operator==(const BasicRect& rhs) const noexcept
 {
     return (x == rhs.x && y == rhs.y && width == rhs.width && height == rhs.height);
 }
 
-template <Arithmetic _Value>
+template <typename _Value> requires Arithmetic<_Value>
 constexpr bool BasicRect<_Value>::operator!=(const BasicRect& rhs) const noexcept
 {
     return !(*this == rhs);
 }
 
-template <Arithmetic _Value>
+template <typename _Value> requires Arithmetic<_Value>
 constexpr bool BasicRect<_Value>::Intersect(const BasicRect& rhs) const noexcept
 {
     return (x <= rhs.width && y <= rhs.height && width >= rhs.x && height >= rhs.y);
 }
 
-template <Arithmetic _Value>
+template <typename _Value> requires Arithmetic<_Value>
 int32_t BasicRect<_Value>::ToString(const std::span<char8_t>& destStr) const
 {
     return this->ToString(&destStr[0], destStr.size());
 }
 
-template <Arithmetic _Value>
+template <typename _Value> requires Arithmetic<_Value>
 std::u8string BasicRect<_Value>::ToString() const
 {
     std::array<char8_t, 1024> str{};
@@ -123,7 +123,7 @@ std::u8string BasicRect<_Value>::ToString() const
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
-template <Arithmetic _Value>
+template <typename _Value> requires Arithmetic<_Value>
 int32_t BasicRect<_Value>::ToString(char8_t* destStr, size_t destStrBufferLen) const
 {
     const auto destStrLen = fmt::format_to_n(destStr, sizeof(destStr[0]) * (destStrBufferLen - 1), u8"{} {} {} {}", x, y, width, height).size;

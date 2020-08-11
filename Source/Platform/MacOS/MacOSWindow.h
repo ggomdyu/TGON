@@ -1,26 +1,28 @@
 #pragma once
 
-#include "Core/NonCopyable.h"
-#include "Platform/Config.h"
-
 @class NSWindow;
 @class WindowDelegate;
 
 namespace tg
 {
 
-class MacOSWindow :
-    private NonCopyable
+class MacOSWindow
 {
 /**@section Constructor */
 protected:
-    MacOSWindow(const struct WindowStyle& windowStyle) noexcept;
+    MacOSWindow(NSWindow* window, WindowDelegate* windowDelegate) noexcept;
+    MacOSWindow(const MacOSWindow& rhs) = delete;
     MacOSWindow(MacOSWindow&& rhs) noexcept;
+
+/**@section Destructor */
+public:
+    ~MacOSWindow() = default;
 
 /**@section Operator */
 public:
+    MacOSWindow& operator=(const MacOSWindow& rhs) = delete;
     MacOSWindow& operator=(MacOSWindow&& rhs) noexcept;
-  
+
 /**@section Variable */
 protected:
     NSWindow* m_window;

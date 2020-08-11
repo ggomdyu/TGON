@@ -15,7 +15,7 @@ namespace tg
 namespace detail
 {
 
-template <typename _Callback>
+template <typename _Predicate>
 void InternalEnumerateAllDirectories(const char8_t* path, const char8_t* searchPattern, uint8_t filterType, const _Predicate& handler)
 {
     std::deque<std::u8string> directories(1, std::u8string(path));

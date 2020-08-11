@@ -1,12 +1,12 @@
 #include "PrecompiledHeader.h"
 
 #include <array>
+#include <execinfo.h>
 #include <Foundation/Foundation.h>
 #include <mach/mach_time.h>
-#include <sys/utsname.h>
-//#include <unistd.h>
 #include <pthread.h>
-#include <execinfo.h>
+#include <sys/utsname.h>
+#include <unistd.h>
 
 #include "../Environment.h"
 
@@ -76,11 +76,11 @@ std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, 
     return static_cast<int32_t>(envValueLen);
 }
 
-std::optional<std::u8string> Environment::GetEnvironmentVariable(const char8_t* name, EnvironmentVariableTarget target)
+std::optional<int32_t> Environment::GetEnvironmentVariable(const char8_t* name, EnvironmentVariableTarget target, char8_t* destStr, int32_t destStrBufferLen)
 {
     if (target == EnvironmentVariableTarget::Process)
     {
-        return GetEnvironmentVariable(name);
+        return GetEnvironmentVariable(name, destStr, destStrBufferLen);
     }
 
     return {};
@@ -214,11 +214,11 @@ int32_t Environment::GetSystemPageSize()
     return static_cast<int32_t>(getpagesize());
 }
 
-void Environment::FailFast(const char8_t* message, const std::exception& exception)
+void Environment::FailFast(const char8_t* message)
 {
     printf("FailFast:\n%s", reinterpret_cast<const char*>(message));
 
-    throw exception;
+    assert(false);
 }
 
 int32_t Environment::GetStackTrace(char8_t* destStr, int32_t destStrBufferLen)

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <span>
 #include <unordered_set>
 #include <string>
+#include <span>
+#include <vector>
 
 #include "StringCache.h"
 #include "StringTraits.h"
@@ -16,9 +17,8 @@ class String final
 {
 /**@section Constructor */
 public:
-    String(const _Char* str);
-    String(const _Char* str, int32_t length);
-    String(const std::span<const _Char>& str);
+    String(const _Char* value);
+    String(const _Char* value, int32_t length);
     String(char c, int32_t count);
 
 /**@section Operator */
@@ -26,8 +26,8 @@ public:
     constexpr bool operator==(const String& rhs) noexcept;
     constexpr bool operator!=(const String& rhs) noexcept;
     constexpr _Char operator[](int32_t index) const noexcept;
-    _Char& operator[](int32_t index) noexcept;
-
+    constexpr _Char& operator[](int32_t index) noexcept;
+    
 /**@section Method */
 public:
     //static string Join(string separator, params string[] value);
@@ -36,10 +36,10 @@ public:
     //bool Equals(string value);
     //static bool Equals(string a, string b);
     //void CopyTo(int32_t sourceIndex, const std::span<char>& destination, int32_t destinationIndex, int32_t count);
-    //std::unique_ptr<char[]> ToCharArray();
-    //char[] ToCharArray(int32_t startIndex, int32_t length);
-    //static bool IsNullOrEmpty(const char* value);
-    //static bool IsNullOrWhiteSpace(const char* value);
+    [[nodiscard]] std::vector<_Char> ToCharArray() const;
+    [[nodiscard]] std::vector<_Char> ToCharArray(int32_t startIndex, int32_t length) const;
+    [[nodiscard]] static bool IsNullOrEmpty(const _Char* value) noexcept;
+    [[nodiscard]] static bool IsNullOrWhiteSpace(const _Char* value) noexcept;
     [[nodiscard]] int32_t GetHashCode() const noexcept;
     [[nodiscard]] int32_t Length() const noexcept;
     //std::vector<String> Split(char[] separator);
@@ -111,13 +111,13 @@ public:
     //static string IsInterned(string str);
     //TypeCode GetTypeCode();
     //bool IConvertible.ToBoolean(IFormatProvider provider);
-    //
-    //
-private:
 
 private:
-    inline static StringCache<_Char> m_strCache;
-    std::string& m_str;
+    static std::string& GetStringFromCache();
+    
+private:
+    inline static std::unordered_set<std::basic_string<_Char>> m_strCache;
+    const std::string& m_str;
 };
 
 inline String::String(const _Char* str) :
@@ -126,26 +126,53 @@ inline String::String(const _Char* str) :
 }
 
 inline String::String(const _Char* str, int32_t length) :
-    m_str(m_strCache.GetValue({str, length}))
+    m_str(&(*m_strCache.insert(std::basic_string_view(str, static_cast<size_t>(length))).first))
 {
 }
 
-inline String::String(const std::span<const _Char>& str)
+inline String::String(char c, int32_t count) :
+    m_str(&(*m_strCache.emplace(c, count)))
 {
 }
 
-inline String::String(char c, int32_t count)
+constexpr bool String::operator==(const String& rhs) noexcept
 {
+    return m_str == rhs.m_str;
 }
 
-inline _Char String::operator[](int32_t index) const noexcept
+constexpr bool String::operator!=(const String& rhs) noexcept
+{
+    return !this->operator==(rhs);
+}
+
+constexpr _Char String::operator[](int32_t index) const noexcept
 {
     return const_cast<String*>(this)->operator[](index);
 }
 
-inline _Char& String::operator[](int32_t index) noexcept
+constexpr _Char& String::operator[](int32_t index) noexcept
 {
     return m_str[index];
+}
+
+std::vector<_Char> String::ToCharArray() const
+{
+    return ToCharArray(0, m_str.length());
+}
+
+std::vector<_Char> String::ToCharArray(int32_t startIndex, int32_t length) const
+{
+    return std::vector<char>(&m_str[startIndex], &m_str[startIndex] + length);
+}
+
+bool String::IsNullOrEmpty(const _Char* str) noexcept
+{
+    return str == nullptr || str[0] == _Char(0);
+}
+
+bool String::IsNullOrWhiteSpace(const _Char* str) noexcept
+{
+    return str == nullptr || str[0] == _Char(' ');
 }
 
 inline int32_t String::GetHashCode() const noexcept
@@ -155,7 +182,12 @@ inline int32_t String::GetHashCode() const noexcept
 
 inline int32_t String::Length() const noexcept
 {
-    return m_strBuffer.size() - 1;
+    return static_cast<int32_t>(m_str.length());
+}
+
+inline std::string& String::GetStringFromCache()
+{
+    return m_
 }
 
 }

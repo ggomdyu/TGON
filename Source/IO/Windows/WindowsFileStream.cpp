@@ -43,18 +43,6 @@ HANDLE CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess acces
 
 }
 
-FileStream::FileStream(void* nativeFileHandle, const char8_t* path, FileAccess access, int32_t bufferSize) :
-    m_nativeFileHandle(nativeFileHandle),
-    m_bufferSize(bufferSize),
-    m_readPos(0),
-    m_readLen(0),
-    m_writePos(0),
-    m_filePos(0),
-    m_access(access),
-    m_fileName(path)
-{
-}
-
 std::optional<FileStream> FileStream::Create(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options)
 {
     auto* nativeFileHandle = CreateFileOpenHandle(path, mode, access, share, options);
@@ -69,6 +57,17 @@ std::optional<FileStream> FileStream::Create(const char8_t* path, FileMode mode,
     }
 
     return FileStream(nativeFileHandle, path, access, bufferSize);
+}
+
+void FileStream::Close()
+{
+    this->FlushWriteBuffer();
+
+    if (m_nativeFileHandle != INVALID_HANDLE_VALUE)
+    {
+        CloseHandle(m_nativeFileHandle);
+        m_nativeFileHandle = INVALID_HANDLE_VALUE;
+    }
 }
 
 bool FileStream::IsClosed() const noexcept
@@ -91,11 +90,6 @@ int64_t FileStream::Length() const
     }
 
     return length;
-}
-
-void FileStream::Close()
-{
-    this->InternalClose();
 }
 
 void FileStream::FlushWriteBuffer()
@@ -148,17 +142,6 @@ int64_t FileStream::InternalSeek(int64_t offset, SeekOrigin origin)
     m_filePos = newFilePointer.QuadPart;
 
     return newFilePointer.QuadPart;
-}
-
-void FileStream::InternalClose()
-{
-    this->FlushWriteBuffer();
-
-    if (m_nativeFileHandle != INVALID_HANDLE_VALUE)
-    {
-        CloseHandle(m_nativeFileHandle);
-        m_nativeFileHandle = INVALID_HANDLE_VALUE;
-    }
 }
 
 bool FileStream::InternalSetLength(int64_t value)

@@ -30,7 +30,7 @@ FILE* CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess access
 {
     if (mode == FileMode::OpenOrCreate && File::Exists(path) == false)
     {
-        FileStream(path, FileMode::CreateNew);
+        FileStream::Create(path, FileMode::CreateNew);
     }
 
     return fopen(reinterpret_cast<const char*>(path), ConvertFileModeAccessToNative(mode, access));
@@ -38,32 +38,42 @@ FILE* CreateFileOpenHandle(const char8_t* path, FileMode mode, FileAccess access
 
 }
 
-FileStream::FileStream(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
-    m_nativeHandle(CreateFileOpenHandle(path, mode, access)),
-    m_bufferSize(bufferSize),
-    m_readPos(0),
-    m_readLen(0),
-    m_writePos(0),
-    m_filePos(0),
-    m_access(access),
-    m_fileName(path)
+std::optional<FileStream> FileStream::Create(const char8_t* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options)
 {
+    auto* nativeFileHandle = CreateFileOpenHandle(path, mode, access);
+    if (nativeFileHandle == nullptr)
+    {
+        return {};
+    }
+    
+    return FileStream(nativeFileHandle, path, access, bufferSize);
+}
+
+void FileStream::Close()
+{
+    this->FlushWriteBuffer();
+
+    if (m_nativeFileHandle != nullptr)
+    {
+        fclose(reinterpret_cast<FILE*>(m_nativeFileHandle));
+        m_nativeFileHandle = nullptr;
+    }
 }
 
 bool FileStream::IsClosed() const noexcept
 {
-    return m_nativeHandle == nullptr;
+    return m_nativeFileHandle == nullptr;
 }
 
 int64_t FileStream::Length() const
 {
-    FILE* nativeHandle = reinterpret_cast<FILE*>(m_nativeHandle);
+    FILE* nativeFileHandle = reinterpret_cast<FILE*>(m_nativeFileHandle);
 
-    const auto prevSeekOffset = ftell(nativeHandle);
-    fseek(nativeHandle, 0, SEEK_END);
+    const auto prevSeekOffset = ftell(nativeFileHandle);
+    fseek(nativeFileHandle, 0, SEEK_END);
 
-    auto length = ftell(nativeHandle);
-    fseek(nativeHandle, prevSeekOffset, SEEK_SET);
+    auto length = ftell(nativeFileHandle);
+    fseek(nativeFileHandle, prevSeekOffset, SEEK_SET);
 
     if (m_filePos + m_writePos > length)
     {
@@ -71,17 +81,6 @@ int64_t FileStream::Length() const
     }
 
     return length;
-}
-
-void FileStream::Close()
-{
-    this->FlushWriteBuffer();
-
-    if (m_nativeHandle != nullptr)
-    {
-        fclose(reinterpret_cast<FILE*>(m_nativeHandle));
-        m_nativeHandle = nullptr;
-    }
 }
 
 void FileStream::FlushWriteBuffer()
@@ -93,14 +92,14 @@ void FileStream::FlushWriteBuffer()
 
     this->InternalWrite(&m_buffer[0], m_writePos);
 
-    fflush(reinterpret_cast<FILE*>(m_nativeHandle));
+    fflush(reinterpret_cast<FILE*>(m_nativeFileHandle));
 
     m_writePos = 0;
 }
 
 int32_t FileStream::InternalRead(std::byte* buffer, int32_t count)
 {
-    auto readBytes = fread(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeHandle));
+    auto readBytes = fread(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeFileHandle));
     if (readBytes == static_cast<decltype(readBytes)>(-1))
     {
         return 0;
@@ -112,7 +111,7 @@ int32_t FileStream::InternalRead(std::byte* buffer, int32_t count)
 
 int32_t FileStream::InternalWrite(const std::byte* buffer, int32_t count)
 {
-    auto writtenBytes = fwrite(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeHandle));
+    auto writtenBytes = fwrite(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeFileHandle));
     if (writtenBytes == static_cast<decltype(writtenBytes)>(-1))
     {
         return 0;
@@ -124,14 +123,14 @@ int32_t FileStream::InternalWrite(const std::byte* buffer, int32_t count)
 
 int64_t FileStream::InternalSeek(int64_t offset, SeekOrigin origin)
 {
-    auto nativeHandle = reinterpret_cast<FILE*>(m_nativeHandle);
-    auto result = fseek(nativeHandle, offset, static_cast<int>(origin));
+    auto nativeFileHandle = reinterpret_cast<FILE*>(m_nativeFileHandle);
+    auto result = fseek(nativeFileHandle, offset, static_cast<int>(origin));
     if (result != 0)
     {
         return 0;
     }
 
-    int64_t newFilePos = ftell(nativeHandle);
+    int64_t newFilePos = ftell(nativeFileHandle);
     if (newFilePos == -1)
     {
         return 0;
@@ -149,7 +148,7 @@ bool FileStream::InternalSetLength(int64_t value)
 
 void FileStream::InternalFlush()
 {
-    fflush(reinterpret_cast<FILE*>(m_nativeHandle));
+    fflush(reinterpret_cast<FILE*>(m_nativeFileHandle));
 }
 
 }

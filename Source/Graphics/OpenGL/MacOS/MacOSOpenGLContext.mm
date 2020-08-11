@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#if TGON_GRAPHICS_OPENGL
+#include <array>
 #include <GL/glew.h>
 #include <AppKit/NSOpenGLView.h>
 #include <AppKit/NSWindow.h>
@@ -14,62 +14,56 @@ namespace tg
 namespace
 {
 
-void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAttribute* attributes, std::size_t attributesBufferSize)
+[[nodiscard]] std::array<NSOpenGLPixelFormatAttribute, 64> QueryGLPixelFormatAttribute(const VideoMode& videoMode)
 {
-    int attributeIndex = 0;
+    std::array<NSOpenGLPixelFormatAttribute, 64> ret{};
+    size_t i = 0;
 
     if (videoMode.enableHardwareAccelerate)
     {
-        attributes[attributeIndex++] = NSOpenGLPFAAccelerated;
+        ret[i++] = NSOpenGLPFAAccelerated;
     }
 
-    attributes[attributeIndex++] = NSOpenGLPFADoubleBuffer;
+    ret[i++] = NSOpenGLPFADoubleBuffer;
 
     if (videoMode.enableMultiSampling)
     {
-        attributes[attributeIndex++] = NSOpenGLPFASampleBuffers;
-        attributes[attributeIndex++] = 1;
-        
-        attributes[attributeIndex++] = NSOpenGLPFASamples;
-        attributes[attributeIndex++] = videoMode.sampleCount;
+        ret[i++] = NSOpenGLPFASampleBuffers;
+        ret[i++] = 1;
+        ret[i++] = NSOpenGLPFASamples;
+        ret[i++] = videoMode.sampleCount;
     }
 
-    attributes[attributeIndex++] = NSOpenGLPFAColorSize;
-    attributes[attributeIndex++] = 32;
+    ret[i++] = NSOpenGLPFAColorSize;
+    ret[i++] = 32;
+    ret[i++] = NSOpenGLPFADepthSize;
+    ret[i++] = 24;
+    ret[i++] = NSOpenGLPFAAlphaSize;
+    ret[i++] = 8;
+    ret[i++] = NSOpenGLPFAOpenGLProfile;
+    ret[i++] = NSOpenGLProfileVersion3_2Core;
 
-    attributes[attributeIndex++] = NSOpenGLPFADepthSize;
-    attributes[attributeIndex++] = 24;
-
-    attributes[attributeIndex++] = NSOpenGLPFAAlphaSize;
-    attributes[attributeIndex++] = 8;
-
-    attributes[attributeIndex++] = NSOpenGLPFAOpenGLProfile;
-    attributes[attributeIndex++] = NSOpenGLProfileVersion3_2Core;
-
-    // Mark end of attribute.
-    attributes[attributeIndex++] = 0;
+    // Mark the end of attributes.
+    ret[i++] = 0;
 }
 
-NSOpenGLPixelFormat* FindSuitablePixelFormat(const VideoMode& videoMode)
+[[nodiscard]] NSOpenGLPixelFormat* FindSuitablePixelFormat(const VideoMode& videoMode)
 {
-    NSOpenGLPixelFormatAttribute pixelFormatAttributes[64];
-    ConvertVideoModeToNative(videoMode, pixelFormatAttributes, std::extent_v<decltype(pixelFormatAttributes)>);
-
-    return [[NSOpenGLPixelFormat alloc] initWithAttributes:pixelFormatAttributes];
+    const auto glPixelFormatAttributes = QueryGLPixelFormatAttribute(videoMode);
+    return [[NSOpenGLPixelFormat alloc] initWithAttributes:glPixelFormatAttributes.data()];
 }
 
-} /* namespace */
+}
 
 OpenGLContext::OpenGLContext(void* nativeWindow, const VideoMode& videoMode) :
     m_context([[NSOpenGLContext alloc] initWithFormat:FindSuitablePixelFormat(videoMode) shareContext:nil])
 {
-    NSWindow* window = (__bridge NSWindow*)nativeWindow;
-    
-    // Create a NSOpenGLView and attach it to the target window.
-    NSOpenGLView* openGLView = [[NSOpenGLView alloc] init];
+    // Create a view and attach it to the target window.
+    auto* openGLView = [[NSOpenGLView alloc] init];
     [openGLView setOpenGLContext: m_context];
-    [[openGLView openGLContext] makeCurrentContext];
-    [window setContentView:openGLView];
+    [m_context makeCurrentContext];
+    
+    [(__bridge NSWindow*)nativeWindow setContentView:openGLView];
     
     glewInit();
 }
@@ -107,4 +101,3 @@ void OpenGLContext::SwapBuffer()
 }
 
 }
-#endif

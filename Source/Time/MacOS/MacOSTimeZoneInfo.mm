@@ -9,21 +9,21 @@ namespace tg
 namespace
 {
 
-TimeZoneInfo CreateLocal()
+[[nodiscard]] TimeZoneInfo CreateLocal()
 {
     NSTimeZone* localTimeZone = [NSTimeZone localTimeZone];
     NSLocale* currentLocale = [NSLocale currentLocale];
     
-    const char* id = [localTimeZone name].UTF8String;
-    const char* standardName = [localTimeZone localizedName:NSTimeZoneNameStyleStandard locale:currentLocale].UTF8String;
-    const char* daylightDisplayName = [localTimeZone localizedName:NSTimeZoneNameStyleDaylightSaving locale:currentLocale].UTF8String;
-    TimeSpan baseUtcOffset(TimeSpan::TicksPerSecond * [localTimeZone secondsFromGMT]);
-    bool supportsDaylightSavingTime = [localTimeZone isDaylightSavingTime];
+    const auto* id = [localTimeZone name].UTF8String;
+    const auto* standardName = [localTimeZone localizedName:NSTimeZoneNameStyleStandard locale:currentLocale].UTF8String;
+    const auto* daylightDisplayName = [localTimeZone localizedName:NSTimeZoneNameStyleDaylightSaving locale:currentLocale].UTF8String;
+    const TimeSpan baseUtcOffset(TimeSpan::TicksPerSecond * [localTimeZone secondsFromGMT]);
+    const bool supportsDaylightSavingTime = [localTimeZone isDaylightSavingTime];
     
-    return TimeZoneInfo(id, baseUtcOffset, standardName, standardName, daylightDisplayName, supportsDaylightSavingTime);
+    return TimeZoneInfo(reinterpret_cast<const char8_t*>(id), baseUtcOffset, reinterpret_cast<const char8_t*>(standardName), reinterpret_cast<const char8_t*>(standardName), reinterpret_cast<const char8_t*>(daylightDisplayName), supportsDaylightSavingTime);
 }
     
-} /* namespace */
+}
 
 const TimeZoneInfo& TimeZoneInfo::Local()
 {

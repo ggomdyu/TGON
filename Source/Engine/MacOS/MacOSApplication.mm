@@ -3,6 +3,7 @@
 #include <AppKit/NSAlert.h>
 
 #include "../Application.h"
+#include "../Engine.h"
 
 namespace tg
 {
@@ -35,7 +36,7 @@ void OnHandleMessage(NSEvent* event)
     }
 }
 
-} /* namespace */
+}
 
 void Application::ShowMessageBox(const char8_t* title, const char8_t* message, MessageBoxIcon messageBoxIcon)
 {
@@ -49,11 +50,6 @@ void Application::ShowMessageBox(const char8_t* title, const char8_t* message, M
     }
 
     [alert runModal];
-}
-
-void Application::Terminate()
-{
-    [NSApp terminate:nil];
 }
     
 void Application::MessageLoop()
