@@ -1,2 +1,2 @@
 # TGON
-The c++17 based game engine
+The C++17 based game engine
